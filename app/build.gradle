@@ -85,4 +85,6 @@ dependencies {
     })
     androidTestImplementation "androidx.test.ext:junit:$rootProject.androidxJunitVersion"
 
+    // Material Design
+    implementation "com.google.android.material:material:$rootProject.materialVersion"
 }
