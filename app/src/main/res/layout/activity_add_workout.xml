@@ -25,6 +25,13 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/editWorkoutDoneFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:backgroundTint="@color/colorAccent"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_check_mark_24"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

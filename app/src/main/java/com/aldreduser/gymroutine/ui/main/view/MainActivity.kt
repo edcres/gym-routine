@@ -10,8 +10,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 // ui
 //edit workout activity
-// todo: toolbar
-// todo: icons
 // todo: activity widgets
 // todo: fab
 //add recyclerview item

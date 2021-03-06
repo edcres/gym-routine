@@ -20,4 +20,11 @@ class EditWorkoutActivity : AppCompatActivity() {
             //todo: handle navigation icon press
         }
     }
+
+    private fun doneFabOnClick() {
+        // saves workout and goes back to the main screen
+        editWorkoutDoneFab.setOnClickListener {
+            // todo: handle fab click
+        }
+    }
 }
