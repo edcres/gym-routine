@@ -3,6 +3,7 @@ package com.aldreduser.gymroutine.ui.main.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.aldreduser.gymroutine.R
+import kotlinx.android.synthetic.main.activity_main.*
 
 // room codelabs https://developer.android.com/codelabs/android-room-with-a-view-kotlin/#3
 
@@ -25,5 +26,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        setUpAppBar()
     }
+
+    private fun setUpAppBar() {
+        mainActivityTopAppBar.title = "Workouts"
+
+        mainActivityTopAppBar.setNavigationOnClickListener {
+            // todo: handle navigation icon press
+        }
+    }
+
 }
