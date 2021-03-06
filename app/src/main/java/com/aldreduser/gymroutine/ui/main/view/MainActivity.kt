@@ -11,7 +11,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 // ui
 //edit workout activity
 // todo: activity widgets
-// todo: fab
 //add recyclerview item
 //navigation tabs
 // todo: add navigation tabs in main activity
@@ -37,6 +36,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 // future
 // have a history of previous workouts
 // section for maxes and history of maxes
+// rn now, max number of sets is 6, make the max way higher
+//  -(maybe have a layout fragment with delete button, set number, reps for the set and weight in a linear layout)
+//  -maybe look into datatables in material.io
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -10,6 +10,8 @@
     <color name="colorAccent">#FFDC00</color>
     <color name="cardviewBackground">#C3EDE3F1</color>
 
+    <color name="transparent">#00EDE3F1</color>
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <!--    <color name="purple_200">#FFBB86FC</color>-->
