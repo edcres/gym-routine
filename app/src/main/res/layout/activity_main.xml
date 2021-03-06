@@ -21,8 +21,8 @@
             app:layout_scrollFlags="scroll|enterAlways|snap"
             app:menu="@menu/main_activity_top_app_bar"
             app:titleTextColor="@color/black"
-            style="@style/Widget.MaterialComponents.Toolbar.Primary"
-            />
+            style="@style/Widget.MaterialComponents.Toolbar.Primary" />
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -30,5 +30,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addWorkoutFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:backgroundTint="@color/colorAccent"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_add_24"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
