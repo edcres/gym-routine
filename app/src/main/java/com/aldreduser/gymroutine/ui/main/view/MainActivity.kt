@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 // todo: choose category widget
 //add recyclerview item
 //navigation tabs
-// todo: add navigation tabs in main activity
+// todo: add navigation tabs in main activity (maybe make the selected one have the secondary color)
 
 // database (room)
 // todo: have the workouts organized in different categories (ie chest, arms, legs)
@@ -32,6 +32,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 // todo: recyclerview displays workouts organized by categories
 
 // Databinding
+
+// Look
+// add more of the secondary color to the main activity
 
 // future
 // have a history of previous workouts
