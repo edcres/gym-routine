@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 // ui
 //edit workout activity
-// todo: activity widgets
+// todo: choose category widget
 //add recyclerview item
 //navigation tabs
 // todo: add navigation tabs in main activity
