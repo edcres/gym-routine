@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Gym Routine</string>
+
+    <string name="tab_layout_all">All</string>
 </resources>

@@ -20,10 +20,29 @@
             android:layout_height="?attr/actionBarSize"
             app:layout_scrollFlags="scroll|enterAlways|snap"
             app:menu="@menu/main_activity_top_app_bar"
-            app:navigationIcon="@drawable/ic_navigation_24dp"
             app:titleTextColor="@color/black"
-            style="@style/Widget.MaterialComponents.Toolbar.Primary" />
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"/>
 
+        <!--if the TabLayout lifts on scroll, try putting it outside the AppBar layout-->
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/mainTabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:background="@color/colorPrimary"
+            app:tabTextColor="@color/colorSecondary"
+            app:tabIndicatorColor="@color/colorSecondary"
+            android:outlineSpotShadowColor="@color/colorSecondary"
+            app:tabSelectedTextColor="@color/colorSecondary"
+            app:tabMode="scrollable"
+            app:tabContentStart="56dp">
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/mainTabLayoutAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_layout_all" />
+
+        </com.google.android.material.tabs.TabLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView

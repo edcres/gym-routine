@@ -3,17 +3,19 @@ package com.aldreduser.gymroutine.ui.main.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.view.size
 import com.aldreduser.gymroutine.R
+import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
 
 // room codelabs https://developer.android.com/codelabs/android-room-with-a-view-kotlin/#3
 
 // ui
-//edit workout activity
-// todo: choose category widget
-//add recyclerview item
-//navigation tabs
+//navigation tabs.
 // todo: add navigation tabs in main activity (maybe make the selected one have the secondary color)
+//  Tabs stay in screen when the user scrolls up, even tho the topAppBar disappears.
+// todo: set up a viewpager2 to make the tabs dynamic
+// todo: add tabs when user adds more categories
 
 // database (room)
 // todo: have the workouts organized in different categories (ie chest, arms, legs)
@@ -28,20 +30,25 @@ import kotlinx.android.synthetic.main.activity_main.*
 //ViewModel
 
 // recyclerview
+// when recycler items are added, the FAB might scroll with the recyclerview, this didn't happen with a scrollview
+// codelabs https://developer.android.com/codelabs/kotlin-android-training-recyclerview-fundamentals#0
 // todo: have 2 columns
 // todo: recyclerview displays workouts organized by categories
 
 // Databinding
+// databinding codelab: https://developer.android.com/codelabs/android-databinding#0
 
-// Look
+// todo: look up how to add categories programmatically to the tablayout
+
+// Prettiness
 // add more of the secondary color to the main activity
 
-// future
+// in the future
 // have a history of previous workouts
 // section for maxes and history of maxes
 // rn now, max number of sets is 6, make the max way higher
 //  -(maybe have a layout fragment with delete button, set number, reps for the set and weight in a linear layout)
-//  -maybe look into datatables in material.io
+//  -maybe look into data tables in material.io
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,10 +56,31 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         setUpAppBar()
+        setUpTabLayout()
 
+        tabCategorySelected()
         fabOnClick()
     }
 
+    // handle tab selection
+    private fun tabCategorySelected() {
+        mainTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                // Handle tab select
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                // Handle tab reselect
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+                // Handle tab unselect
+            }
+        })
+    }
+
+    // handle fab click
     private fun fabOnClick() {
         // add workout
         addWorkoutFab.setOnClickListener {
@@ -68,4 +96,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun setUpTabLayout() {
+
+
+        /* how to customize specific tabs programmatically
+        val tab = tabLayout.getTabAt(index)
+        tab?.icon = drawable
+         */
+    }
 }
