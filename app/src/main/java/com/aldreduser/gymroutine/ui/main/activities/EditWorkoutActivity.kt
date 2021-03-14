@@ -1,4 +1,4 @@
-package com.aldreduser.gymroutine.ui.main.view
+package com.aldreduser.gymroutine.ui.main.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

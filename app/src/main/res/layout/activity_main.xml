@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context=".ui.main.view.MainActivity">
+    tools:context=".ui.main.activities.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/mainActivityAppBarLayout"
@@ -44,6 +44,34 @@
 
         </com.google.android.material.tabs.TabLayout>
     </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <!-- Scrollable content -->
+
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <fragment
+            android:id="@+id/workoutItemsFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </androidx.fragment.app.FragmentContainerView>
+
+
+
+
+
+
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/workoutsRecyclerView"
