@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 //  Tabs stay in screen when the user scrolls up, even tho the topAppBar disappears.
 // todo: make fragments for the tabs
 // todo: set up a viewpager2 to make the tabs dynamic (viewpager2 fragment)
-//  https://www.youtube.com/watch?v=nKkXNB5tvZc  (the view adapter class is in java, try to make it in kotlin)
+//  (doesn't use fragment state adapters) https://www.youtube.com/watch?v=nKkXNB5tvZc  (the view adapter class is in java, try to make it in kotlin)
 //  if that video doesn't work    ->       tutorial for making viewpager2 tabs (no fragments)   https://www.youtube.com/watch?v=h41FnEH91D0  (have to watch the previous video)
 //   -(use a fragment instead of the other layout file)
 // todo: add tabs when user adds more categories
