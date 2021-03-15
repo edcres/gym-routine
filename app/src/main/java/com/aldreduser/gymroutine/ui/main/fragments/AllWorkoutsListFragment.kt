@@ -17,6 +17,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [WorkoutsListFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+
 class WorkoutsListFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -35,7 +36,7 @@ class WorkoutsListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_workouts_list, container, false)
+        return inflater.inflate(R.layout.fragment_all_workouts_list, container, false)
     }
 
     companion object {

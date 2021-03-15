@@ -3,9 +3,11 @@ package com.aldreduser.gymroutine.ui.main.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.PagerAdapter
 
+// this is for the viewpager2 thing
 
 /*
 from google: A TabLayout can be setup with a ViewPager in order to:
