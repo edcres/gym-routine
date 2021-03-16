@@ -2,6 +2,7 @@ package com.aldreduser.gymroutine.ui.main.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.viewpager2.widget.ViewPager2
 import com.aldreduser.gymroutine.R
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
@@ -15,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 //  Tabs stay in screen when the user scrolls up, even tho the topAppBar disappears.
 // todo: make fragments for the tabs
 // todo: set up a viewpager2 to make the tabs dynamic (viewpager2 fragment)
-//  (doesn't use fragment state adapters) https://www.youtube.com/watch?v=nKkXNB5tvZc  (the view adapter class is in java, try to make it in kotlin)
+//  (https://www.youtube.com/watch?v=nKkXNB5tvZc  (the view adapter class is in java, try to make it in kotlin)
 //  if that video doesn't work    ->       tutorial for making viewpager2 tabs (no fragments)   https://www.youtube.com/watch?v=h41FnEH91D0  (have to watch the previous video)
 //   -(use a fragment instead of the other layout file)
 // todo: add tabs when user adds more categories
@@ -61,26 +62,7 @@ class MainActivity : AppCompatActivity() {
         setUpAppBar()
         setUpTabLayout()
 
-        tabCategorySelected()
         fabOnClick()
-    }
-
-    // handle tab selection
-    private fun tabCategorySelected() {
-        mainTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                // Handle tab select
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-                // Handle tab reselect
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-                // Handle tab unselect
-            }
-        })
     }
 
     // handle fab click
@@ -100,7 +82,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpTabLayout() {
-
 
         /* how to customize specific tabs programmatically
         val tab = tabLayout.getTabAt(index)

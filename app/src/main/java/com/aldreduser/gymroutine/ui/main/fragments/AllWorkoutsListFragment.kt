@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.viewpager2.widget.ViewPager2
 import com.aldreduser.gymroutine.R
 import com.aldreduser.gymroutine.ui.main.adapters.MainViewPager2Adapter
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -21,7 +22,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 
-class WorkoutsListFragment : Fragment() {
+class AllWorkoutsListFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private lateinit var mainViewPager2Adapter: MainViewPager2Adapter
     private lateinit var viewPager: ViewPager2
@@ -49,13 +50,18 @@ class WorkoutsListFragment : Fragment() {
         viewPager = view.findViewById(R.id.workoutsListViewPager2)
         viewPager.adapter = mainViewPager2Adapter
         //super.onViewCreated(view, savedInstanceState)     //the tutorial by android didn't have this line (but it's here by default)
+
+        val tabLayout = mainTabLayout
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            tab.text = "OBJECT ${(position + 1)}"
+        }.attach()
     }
 
     // this is not used but it's here by default
     companion object {
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            WorkoutsListFragment().apply {
+            AllWorkoutsListFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
