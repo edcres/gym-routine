@@ -1,4 +1,4 @@
-package com.aldreduser.gymroutine.data.model
+package com.aldreduser.gymroutine.data.model.entities
 
 import androidx.room.Embedded
 import androidx.room.Relation

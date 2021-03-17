@@ -1,15 +1,16 @@
 package com.aldreduser.gymroutine.data.model.room
 
 import androidx.room.*
-import com.aldreduser.gymroutine.data.model.WorkoutGroup
-import com.aldreduser.gymroutine.data.model.WorkoutGroupAndWorkouts
+import com.aldreduser.gymroutine.data.model.entities.WorkoutGroup
+import com.aldreduser.gymroutine.data.model.entities.WorkoutGroupAndWorkouts
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface WorkoutGroupDao {
 
     // getting group names alphabetically
     @Query("SELECT * FROM workout_group_table ORDER BY groupName ASC")
-    fun getAlphabetizedWorkoutGroups(): List<WorkoutGroup>
+    fun getAlphabetizedWorkoutGroups(): Flow<List<WorkoutGroup>>
 
     // insert: when user chooses to create a group when adding or editing a workout.
     @Insert(onConflict = OnConflictStrategy.IGNORE)

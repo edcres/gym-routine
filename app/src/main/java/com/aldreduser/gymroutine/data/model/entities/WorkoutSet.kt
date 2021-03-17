@@ -1,4 +1,4 @@
-package com.aldreduser.gymroutine.data.model
+package com.aldreduser.gymroutine.data.model.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

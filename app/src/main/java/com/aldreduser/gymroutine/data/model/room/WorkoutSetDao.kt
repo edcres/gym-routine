@@ -1,13 +1,14 @@
 package com.aldreduser.gymroutine.data.model.room
 
 import androidx.room.*
-import com.aldreduser.gymroutine.data.model.WorkoutSet
+import com.aldreduser.gymroutine.data.model.entities.WorkoutSet
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface WorkoutSetDao {
     // getting set names alphabetically (ie: "incline bench 1")
     @Query("SELECT * FROM set_table ORDER BY workoutPlusSet ASC")
-    fun getAlphabetizedSets(): List<WorkoutSetDao>
+    fun getAlphabetizedSets(): Flow<List<WorkoutSetDao>>
 
     // Insert
     @Insert(onConflict = OnConflictStrategy.IGNORE)
