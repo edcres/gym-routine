@@ -12,8 +12,6 @@ data class WorkoutGroup (
     @ColumnInfo(name = "groupName")  // the WorkoutGroup will be identified by the group name
     val groupName: String = "",            // chest, legs, back
 
-
-
 //    @ColumnInfo(name = "workoutName")
 //    val workoutName: String = ""
 )
