@@ -1,14 +1,29 @@
 package com.aldreduser.gymroutine.data.model.room
 
-import androidx.room.Dao
-import androidx.room.Query
-import androidx.room.Transaction
+import androidx.room.*
+import com.aldreduser.gymroutine.data.model.Workout
 import com.aldreduser.gymroutine.data.model.WorkoutAndSets
 
 @Dao
 interface WorkoutDao {
 
-    // for relationship between workout and set
+    // getting workout names alphabetically
+    @Query("SELECT * FROM workout_table ORDER BY thisWorkoutName ASC")
+    fun getAlphabetizedWorkouts(): List<Workout>
+
+    // Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insert(workout: Workout)
+
+    // Update Item
+    @Update
+    suspend fun updateWorkout(workout: Workout)
+
+    // Delete item
+    @Delete
+    suspend fun deleteWorkout(workout: Workout)
+
+    // relationship between workout and set
     @Transaction
     @Query("SELECT * FROM workout_table")
     fun getWorkoutWithSets(): List<WorkoutAndSets>

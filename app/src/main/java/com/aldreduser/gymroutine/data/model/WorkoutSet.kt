@@ -5,9 +5,9 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "set_table")
-data class Set (
+data class WorkoutSet (
     @PrimaryKey
-    @ColumnInfo(name = "workoutPluSet")
+    @ColumnInfo(name = "workoutPlusSet")
     val workoutPluSet: String = "",
     @ColumnInfo(name = "workoutName")   // relation to workout group table
     val workoutName: String = "",

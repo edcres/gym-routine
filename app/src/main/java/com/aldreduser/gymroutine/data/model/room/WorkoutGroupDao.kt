@@ -9,7 +9,7 @@ interface WorkoutGroupDao {
 
     // getting group names alphabetically
     @Query("SELECT * FROM workout_group_table ORDER BY groupName ASC")
-    fun getAlphabetizedGroupNames(): List<WorkoutGroup>
+    fun getAlphabetizedWorkoutGroups(): List<WorkoutGroup>
 
     // insert: when user chooses to create a group when adding or editing a workout.
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -19,7 +19,7 @@ interface WorkoutGroupDao {
     @Delete
     suspend fun deleteWorkoutGroup(workoutGroup: WorkoutGroup)
 
-    // for relationship between workoutGroup and workout
+    // relationship between workoutGroup and workout
     // returns all the instances in which the workoutCategory is the same as the categoryName (ie. all legs with legs, and all chest with chest)
     //  -that way i can access all the workouts that are chest by looking up the group name
     @Transaction

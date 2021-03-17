@@ -9,5 +9,5 @@ class WorkoutAndSets (
         parentColumn = "thisWorkoutName",
         entityColumn = "workoutName"
     )
-    val sets: List<Set>
+    val workoutSets: List<WorkoutSet>
 )
