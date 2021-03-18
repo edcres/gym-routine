@@ -3,13 +3,14 @@ package com.aldreduser.gymroutine.data
 import androidx.annotation.WorkerThread
 import com.aldreduser.gymroutine.data.model.entities.Workout
 import com.aldreduser.gymroutine.data.model.entities.WorkoutGroup
+import com.aldreduser.gymroutine.data.model.entities.WorkoutSet
 import com.aldreduser.gymroutine.data.model.room.WorkoutDao
 import com.aldreduser.gymroutine.data.model.room.WorkoutGroupDao
 import com.aldreduser.gymroutine.data.model.room.WorkoutSetDao
 import kotlinx.coroutines.flow.Flow
 
 // Repo only has access to the DAOs, not the database.
-class WorkoutsRepository(
+class WorkoutRepository(
     private val workoutGroupDao: WorkoutGroupDao,
     private val workoutDao: WorkoutDao,
     private val workoutSetDao: WorkoutSetDao) {
@@ -43,7 +44,13 @@ class WorkoutsRepository(
 
     //Workout Set
     // getAlphabetizedSets
+    val allWorkoutSets: Flow<List<WorkoutSet>> = workoutSetDao.getAlphabetizedSets()
     // insert
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun insert(workoutSet: WorkoutSet) {
+        workoutSetDao.insert(workoutSet)
+    }
     // update
     // delete
 }

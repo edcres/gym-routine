@@ -39,7 +39,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 // todo: have 2 columns
 // todo: recyclerview displays workouts organized by categories
 
-// Databinding
+// Databinding (? observer vs flow vs liveData)
 // databinding codelab: https://developer.android.com/codelabs/android-databinding#0
 
 // todo: look up how to add categories programmatically to the tablayout
