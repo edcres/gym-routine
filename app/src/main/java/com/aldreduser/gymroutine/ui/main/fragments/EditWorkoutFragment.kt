@@ -1,19 +1,31 @@
-package com.aldreduser.gymroutine.ui.main.activities
+package com.aldreduser.gymroutine.ui.main.fragments
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.aldreduser.gymroutine.R
-import kotlinx.android.synthetic.main.activity_add_workout.*
+import com.aldreduser.gymroutine.ui.main.activities.MainActivity
+import kotlinx.android.synthetic.main.fragment_edit_workout.*
 
-// todo: add more set ui widgets programmatically
+class EditWorkoutFragment : Fragment() {
 
-class EditWorkoutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_workout)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_edit_workout, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         setUpAppBar()
 
@@ -25,7 +37,7 @@ class EditWorkoutActivity : AppCompatActivity() {
         // todo: change these items and make the the workout categories
         val categories = arrayOf("Choose Department", "Pro Desk", "Flooring",
             "Customer Service", "Appliances", "Millwork")
-        chooseCategorySpinner.adapter = ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,categories)
+        chooseCategorySpinner.adapter = ArrayAdapter<String>(requireContext() ,android.R.layout.simple_spinner_item,categories)
         chooseCategorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 //textForSpinner.text = "Choose Department"
@@ -61,3 +73,4 @@ class EditWorkoutActivity : AppCompatActivity() {
         }
     }
 }
+
