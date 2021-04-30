@@ -9,6 +9,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 // room codelabs https://developer.android.com/codelabs/android-room-with-a-view-kotlin/#3
 
+// todo: instantiate objects
+
 // ui
 // todo: make fragment: workouts list
 //navigation tabs.
@@ -36,6 +38,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 // recyclerview
 // when recycler items are added, the FAB might scroll with the recyclerview, this didn't happen with a scrollview
 // codelabs https://developer.android.com/codelabs/kotlin-android-training-recyclerview-fundamentals#0
+// maybe use a GridLayoutManager instead of linear layout
 // todo: have 2 columns
 // todo: recyclerview displays workouts organized by categories
 

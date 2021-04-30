@@ -1,93 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
-    tools:context=".ui.main.activities.MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/mainActivityAppBarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:liftOnScroll="true">
+    <data>
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="" />-->
+    </data>
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/mainActivityTopAppBar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:layout_scrollFlags="scroll|enterAlways|snap"
-            app:menu="@menu/main_activity_top_app_bar"
-            app:titleTextColor="@color/black"
-            style="@style/Widget.MaterialComponents.Toolbar.Primary"/>
-
-        <!--if the TabLayout lifts on scroll, try putting it outside the AppBar layout-->
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/mainTabLayout"
-            android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:background="@color/colorPrimary"
-            app:tabTextColor="@color/colorSecondary"
-            app:tabIndicatorColor="@color/colorSecondary"
-            android:outlineSpotShadowColor="@color/colorSecondary"
-            app:tabSelectedTextColor="@color/colorSecondary"
-            app:tabMode="scrollable"
-            app:tabContentStart="56dp">
-
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/mainTabLayoutAll"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tab_layout_all" />
-
-
-
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/mainTabLayout1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="chest" />
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/mainTabLayout2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="legs" />
-
-
-
-
-        </com.google.android.material.tabs.TabLayout>
-    </com.google.android.material.appbar.AppBarLayout>
-
-
-
-
-
-    <androidx.core.widget.NestedScrollView
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:background="@color/colorPrimary"
+        tools:context=".ui.main.activities.MainActivity">
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/workoutsListViewPager2"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/mainActivityAppBarLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content"
+            app:liftOnScroll="true">
 
-    </androidx.core.widget.NestedScrollView>
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/mainActivityTopAppBar"
+                style="@style/Widget.MaterialComponents.Toolbar.Primary"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_scrollFlags="scroll|enterAlways|snap"
+                app:menu="@menu/main_activity_top_app_bar"
+                app:titleTextColor="@color/black" />
+
+            <!--if the TabLayout lifts on scroll, try putting it outside the AppBar layout-->
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/mainTabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:background="@color/colorPrimary"
+                android:outlineSpotShadowColor="@color/colorSecondary"
+                app:tabContentStart="56dp"
+                app:tabIndicatorColor="@color/colorSecondary"
+                app:tabMode="scrollable"
+                app:tabSelectedTextColor="@color/colorSecondary"
+                app:tabTextColor="@color/colorSecondary">
+
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/mainTabLayoutAll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tab_layout_all" />
 
 
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/mainTabLayout1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="chest" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/mainTabLayout2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="legs" />
 
 
+            </com.google.android.material.tabs.TabLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addWorkoutFab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
-        android:backgroundTint="@color/colorSecondary"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_add_24"/>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/workoutsListViewPager2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </androidx.core.widget.NestedScrollView>
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addWorkoutFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_margin="16dp"
+            android:backgroundTint="@color/colorSecondary"
+            android:src="@drawable/ic_add_24" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>
