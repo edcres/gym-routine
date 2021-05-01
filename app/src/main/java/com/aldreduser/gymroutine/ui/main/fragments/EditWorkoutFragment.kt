@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.aldreduser.gymroutine.R
-import com.aldreduser.gymroutine.ui.main.activities.MainActivity
 import kotlinx.android.synthetic.main.fragment_edit_workout.*
 
 class EditWorkoutFragment : Fragment() {
