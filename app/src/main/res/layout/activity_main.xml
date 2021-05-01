@@ -31,13 +31,11 @@
                 app:menu="@menu/main_activity_top_app_bar"
                 app:titleTextColor="@color/black" />
 
-            <!--if the TabLayout lifts on scroll, try putting it outside the AppBar layout-->
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/mainTabLayout"
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
                 android:background="@color/colorPrimary"
-                android:outlineSpotShadowColor="@color/colorSecondary"
                 app:tabContentStart="56dp"
                 app:tabIndicatorColor="@color/colorSecondary"
                 app:tabMode="scrollable"
@@ -48,25 +46,23 @@
                     android:id="@+id/mainTabLayoutAll"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/tab_layout_all" />
-
+                    android:text="@string/tab_label_all" />
 
                 <com.google.android.material.tabs.TabItem
                     android:id="@+id/mainTabLayout1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="chest" />
+                    android:text="remove1" />
 
                 <com.google.android.material.tabs.TabItem
                     android:id="@+id/mainTabLayout2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="legs" />
-
+                    android:text="remove2" />
 
             </com.google.android.material.tabs.TabLayout>
-        </com.google.android.material.appbar.AppBarLayout>
 
+        </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -80,14 +76,12 @@
 
         </androidx.core.widget.NestedScrollView>
 
-
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/addWorkoutFab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
             android:layout_margin="16dp"
-            android:backgroundTint="@color/colorSecondary"
             android:src="@drawable/ic_add_24" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

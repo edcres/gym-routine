@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -61,7 +60,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Sets"
+                        android:text="@string/sets_column_label"
                         android:textSize="18sp" />
 
                     <TextView
@@ -69,7 +68,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Reps"
+                        android:text="@string/reps_column_label"
                         android:textSize="18sp" />
 
                     <TextView
@@ -77,7 +76,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Weight"
+                        android:text="@string/weight_column_label"
                         android:textSize="18sp" />
                 </LinearLayout>
 
@@ -90,8 +89,10 @@
                     <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="@color/transparent"
-                        android:src="@drawable/ic_remove_24" />
+                        android:padding="8dp"
+                        android:background="@color/transparent"
+                        android:src="@drawable/ic_remove_24"
+                        tools:ignore="UnusedAttribute" />
 
                     <EditText
                         android:id="@+id/set1Text"
@@ -101,7 +102,8 @@
                         android:clickable="false"
                         android:gravity="center"
                         android:inputType="number"
-                        android:text="1" />
+                        tools:text="1"
+                        android:importantForAutofill="no" />
 
                     <EditText
                         android:id="@+id/set1RepsText"
@@ -110,7 +112,8 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:inputType="number"
-                        android:text="0" />
+                        tools:text="10"
+                        android:importantForAutofill="no" />
 
                     <EditText
                         android:id="@+id/set1WeightText"
@@ -119,7 +122,8 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:inputType="numberDecimal"
-                        android:text="0" />
+                        tools:text="30"
+                        android:importantForAutofill="no" />
 
                     <Space
                         android:layout_width="wrap_content"
@@ -137,7 +141,8 @@
                     <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="@color/transparent"
+                        android:padding="8dp"
+                        android:background="@color/transparent"
                         android:src="@drawable/ic_remove_24" />
 
                     <EditText
@@ -148,7 +153,8 @@
                         android:clickable="false"
                         android:gravity="center"
                         android:inputType="number"
-                        android:text="2" />
+                        tools:text="2"
+                        android:importantForAutofill="no" />
 
                     <EditText
                         android:id="@+id/set2RepsText"
@@ -157,7 +163,8 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:inputType="number"
-                        android:text="0" />
+                        tools:text="8"
+                        android:importantForAutofill="no" />
 
                     <EditText
                         android:id="@+id/set2WeightText"
@@ -166,7 +173,8 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:inputType="numberDecimal"
-                        android:text="0" />
+                        tools:text="40"
+                        android:importantForAutofill="no" />
 
                     <Space
                         android:layout_width="wrap_content"
@@ -183,7 +191,8 @@
                     <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="@color/transparent"
+                        android:padding="8dp"
+                        android:background="@color/transparent"
                         android:src="@drawable/ic_remove_24" />
 
                     <EditText
@@ -194,7 +203,8 @@
                         android:clickable="false"
                         android:gravity="center"
                         android:inputType="number"
-                        android:text="3" />
+                        tools:text="3"
+                        android:importantForAutofill="no" />
 
                     <EditText
                         android:id="@+id/set3RepsText"
@@ -203,7 +213,8 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:inputType="number"
-                        android:text="0" />
+                        tools:text="8"
+                        android:importantForAutofill="no" />
 
                     <EditText
                         android:id="@+id/set3WeightText"
@@ -212,7 +223,8 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:inputType="numberDecimal"
-                        android:text="0" />
+                        tools:text="50"
+                        android:importantForAutofill="no" />
 
                     <Space
                         android:layout_width="wrap_content"
@@ -240,7 +252,7 @@
                         android:clickable="false"
                         android:gravity="center"
                         android:inputType="number"
-                        android:text="4" />
+                        android:importantForAutofill="no" />
 
                     <EditText
                         android:id="@+id/set4RepsText"
@@ -249,7 +261,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:inputType="number"
-                        android:text="0" />
+                        android:importantForAutofill="no" />
 
                     <EditText
                         android:id="@+id/set4WeightText"
@@ -258,7 +270,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:inputType="numberDecimal"
-                        android:text="0" />
+                        android:importantForAutofill="no" />
 
                     <Space
                         android:layout_width="wrap_content"
@@ -286,7 +298,7 @@
                         android:clickable="false"
                         android:gravity="center"
                         android:inputType="number"
-                        android:text="5" />
+                        android:importantForAutofill="no" />
 
                     <EditText
                         android:id="@+id/set5RepsText"
@@ -295,7 +307,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:inputType="number"
-                        android:text="0" />
+                        android:importantForAutofill="no" />
 
                     <EditText
                         android:id="@+id/set5WeightText"
@@ -304,7 +316,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:inputType="numberDecimal"
-                        android:text="0" />
+                        android:importantForAutofill="no" />
 
                     <Space
                         android:layout_width="wrap_content"
@@ -332,7 +344,7 @@
                         android:clickable="false"
                         android:gravity="center"
                         android:inputType="number"
-                        android:text="6" />
+                        android:importantForAutofill="no" />
 
                     <EditText
                         android:id="@+id/set6RepsText"
@@ -341,7 +353,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:inputType="number"
-                        android:text="0" />
+                        android:importantForAutofill="no" />
 
                     <EditText
                         android:id="@+id/set6WeightText"
@@ -350,7 +362,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:inputType="numberDecimal"
-                        android:text="0" />
+                        android:importantForAutofill="no" />
 
                     <Space
                         android:layout_width="wrap_content"
@@ -366,8 +378,8 @@
                     android:layout_marginLeft="32dp"
                     android:layout_marginEnd="32dp"
                     android:layout_marginRight="32dp"
-                    android:backgroundTint="@color/colorSecondary"
-                    android:text="add set"
+                    app:backgroundTint="@color/colorSecondary"
+                    android:text="@string/add_set_label"
                     android:textAllCaps="false"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
@@ -394,9 +406,9 @@
             android:id="@+id/editWorkoutDoneFab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
+            android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
-            android:backgroundTint="@color/colorAccent"
+            app:backgroundTint="@color/colorAccent"
             android:src="@drawable/ic_check_mark_24" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

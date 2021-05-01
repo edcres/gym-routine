@@ -25,4 +25,5 @@
             tools:listitem="@layout/workouts_recycler_item" />
 
     </FrameLayout>
+
 </layout>

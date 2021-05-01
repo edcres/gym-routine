@@ -54,8 +54,10 @@ import kotlinx.android.synthetic.main.activity_main.*
 // have a history of previous workouts
 // section for maxes and history of maxes
 // rn now, max number of sets is 6, make the max way higher
-//  -(maybe have a layout fragment with delete button, set number, reps for the set and weight in a linear layout)
-//  -maybe look into data tables in material.io
+//  -each workout must have at least 1 set, other sets can be added or deleted ()
+//      -maybe look into data tables in material.io
+//      -each set is in a linear layout so that it can be added (as an xml item file) deleted
+// content descriptors
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

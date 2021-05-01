@@ -14,7 +14,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:elevation="5dp"
+        app:cardElevation="5dp"
         android:orientation="vertical"
         app:cardBackgroundColor="@color/cardviewBackground"
         android:layout_margin="2dp">
@@ -23,19 +23,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="8dp"
+            android:padding="8dp">
 
-            >
-
+<!--todo: make sure this can take any inputs, including numbers and characters-->
             <EditText
                 android:id="@+id/specificWorkoutText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:hint="workout name"
+                android:layout_gravity="start"
+                android:hint="@string/workout_name_hint"
                 android:textColor="#000000"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:importantForAutofill="no"
+                android:inputType="text|number" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -47,7 +48,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
-                    android:text="Set"
+                    android:text="@string/sets_column_label"
+                    android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/setsReps"
                     app:layout_constraintStart_toStartOf="parent"
@@ -57,7 +59,8 @@
                     android:id="@+id/setsReps"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Reps"
+                    android:text="@string/reps_column_label"
+                    android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -69,7 +72,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginLeft="16dp"
-                    android:text="Weight"
+                    android:text="@string/weight_column_label"
+                    android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/setsReps"
@@ -91,7 +95,8 @@
                     android:clickable="false"
                     android:gravity="center"
                     android:inputType="number"
-                    android:text="1" />
+                    tools:text="1"
+                    android:importantForAutofill="no" />
 
                 <EditText
                     android:id="@+id/set1RepsText"
@@ -100,7 +105,8 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="number"
-                    android:text="0" />
+                    tools:text="10"
+                    android:importantForAutofill="no" />
 
                 <EditText
                     android:id="@+id/set1WeightText"
@@ -109,7 +115,8 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="numberDecimal"
-                    android:text="0" />
+                    tools:text="30"
+                    android:importantForAutofill="no" />
             </LinearLayout>
 
             <LinearLayout
@@ -126,7 +133,8 @@
                     android:clickable="false"
                     android:gravity="center"
                     android:inputType="number"
-                    android:text="2" />
+                    tools:text="2"
+                    android:importantForAutofill="no" />
 
                 <EditText
                     android:id="@+id/set2RepsText"
@@ -135,7 +143,8 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="number"
-                    android:text="0" />
+                    tools:text="8"
+                    android:importantForAutofill="no" />
 
                 <EditText
                     android:id="@+id/set2WeightText"
@@ -144,7 +153,8 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="numberDecimal"
-                    android:text="0" />
+                    tools:text="40"
+                    android:importantForAutofill="no" />
             </LinearLayout>
 
             <LinearLayout
@@ -161,7 +171,8 @@
                     android:clickable="false"
                     android:gravity="center"
                     android:inputType="number"
-                    android:text="3" />
+                    tools:text="3"
+                    android:importantForAutofill="no" />
 
                 <EditText
                     android:id="@+id/set3RepsText"
@@ -170,7 +181,8 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="number"
-                    android:text="0" />
+                    tools:text="8"
+                    android:importantForAutofill="no" />
 
                 <EditText
                     android:id="@+id/set3WeightText"
@@ -179,7 +191,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="numberDecimal"
-                    android:text="0" />
+                    tools:text="50"/>
             </LinearLayout>
 
             <LinearLayout
@@ -197,7 +209,7 @@
                     android:clickable="false"
                     android:gravity="center"
                     android:inputType="number"
-                    android:text="4" />
+                    android:importantForAutofill="no" />
 
                 <EditText
                     android:id="@+id/set4RepsText"
@@ -206,7 +218,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="number"
-                    android:text="0" />
+                    android:importantForAutofill="no" />
 
                 <EditText
                     android:id="@+id/set4WeightText"
@@ -215,7 +227,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="numberDecimal"
-                    android:text="0" />
+                    android:importantForAutofill="no" />
             </LinearLayout>
 
             <LinearLayout
@@ -233,7 +245,7 @@
                     android:clickable="false"
                     android:gravity="center"
                     android:inputType="number"
-                    android:text="5" />
+                    android:importantForAutofill="no" />
 
                 <EditText
                     android:id="@+id/set5RepsText"
@@ -242,7 +254,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="number"
-                    android:text="0" />
+                    android:importantForAutofill="no" />
 
                 <EditText
                     android:id="@+id/set5WeightText"
@@ -251,7 +263,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="numberDecimal"
-                    android:text="0" />
+                    android:importantForAutofill="no" />
             </LinearLayout>
 
             <LinearLayout
@@ -269,7 +281,7 @@
                     android:clickable="false"
                     android:gravity="center"
                     android:inputType="number"
-                    android:text="6" />
+                    android:importantForAutofill="no" />
 
                 <EditText
                     android:id="@+id/set6RepsText"
@@ -278,7 +290,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="number"
-                    android:text="0" />
+                    android:importantForAutofill="no" />
 
                 <EditText
                     android:id="@+id/set6WeightText"
@@ -287,7 +299,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="numberDecimal"
-                    android:text="0" />
+                    android:importantForAutofill="no" />
             </LinearLayout>
 
         </LinearLayout>
