@@ -57,6 +57,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 //  -each workout must have at least 1 set, other sets can be added or deleted ()
 //      -maybe look into data tables in material.io
 //      -each set is in a linear layout so that it can be added (as an xml item file) deleted
+//      -make text inputs in material design
 // content descriptors
 
 class MainActivity : AppCompatActivity() {

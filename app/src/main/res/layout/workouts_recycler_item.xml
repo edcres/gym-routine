@@ -25,25 +25,29 @@
             android:orientation="vertical"
             android:padding="8dp">
 
-<!--todo: make sure this can take any inputs, including numbers and characters-->
-            <EditText
-                android:id="@+id/specificWorkoutText"
-                android:layout_width="wrap_content"
+<!--            if this does't render in the app, ,ake it an edit text-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/specific_workout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start"
+                android:layout_marginBottom="16dp"
                 android:hint="@string/workout_name_hint"
-                android:textColor="#000000"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:importantForAutofill="no"
-                android:inputType="text|number" />
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/specific_workout_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:inputType="text|number" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/setsText"
+                    android:id="@+id/sets_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
@@ -51,12 +55,12 @@
                     android:text="@string/sets_column_label"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/setsReps"
+                    app:layout_constraintEnd_toStartOf="@id/sets_reps"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/setsReps"
+                    android:id="@+id/sets_reps"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/reps_column_label"
@@ -67,7 +71,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/setsWeight"
+                    android:id="@+id/sets_weight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -76,19 +80,19 @@
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/setsReps"
+                    app:layout_constraintStart_toEndOf="@id/sets_reps"
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
-                android:id="@+id/set1Line"
+                android:id="@+id/set_1_line"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/set1Text"
+                    android:id="@+id/set_1_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -99,7 +103,7 @@
                     android:importantForAutofill="no" />
 
                 <EditText
-                    android:id="@+id/set1RepsText"
+                    android:id="@+id/set_1_reps_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -109,7 +113,7 @@
                     android:importantForAutofill="no" />
 
                 <EditText
-                    android:id="@+id/set1WeightText"
+                    android:id="@+id/set_1_weight_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -120,13 +124,13 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/set2Line"
+                android:id="@+id/set_2_line"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/set2Text"
+                    android:id="@+id/set_2_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -137,7 +141,7 @@
                     android:importantForAutofill="no" />
 
                 <EditText
-                    android:id="@+id/set2RepsText"
+                    android:id="@+id/set_2_reps_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -147,7 +151,7 @@
                     android:importantForAutofill="no" />
 
                 <EditText
-                    android:id="@+id/set2WeightText"
+                    android:id="@+id/set_2_weight_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -158,13 +162,13 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/set3Line"
+                android:id="@+id/set_3_line"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/set3Text"
+                    android:id="@+id/set_3_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -175,7 +179,7 @@
                     android:importantForAutofill="no" />
 
                 <EditText
-                    android:id="@+id/set3RepsText"
+                    android:id="@+id/set_3_reps_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -185,7 +189,7 @@
                     android:importantForAutofill="no" />
 
                 <EditText
-                    android:id="@+id/set3WeightText"
+                    android:id="@+id/set_3_weight_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -195,14 +199,14 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/set4Line"
+                android:id="@+id/set_4_line"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:visibility="gone">
 
                 <EditText
-                    android:id="@+id/set4Text"
+                    android:id="@+id/set_4_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -212,7 +216,7 @@
                     android:importantForAutofill="no" />
 
                 <EditText
-                    android:id="@+id/set4RepsText"
+                    android:id="@+id/set_4_reps_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -221,7 +225,7 @@
                     android:importantForAutofill="no" />
 
                 <EditText
-                    android:id="@+id/set4WeightText"
+                    android:id="@+id/set_4_weight_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -231,14 +235,14 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/set5Line"
+                android:id="@+id/set_5_line"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:visibility="gone">
 
                 <EditText
-                    android:id="@+id/set5Text"
+                    android:id="@+id/set_5_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -248,7 +252,7 @@
                     android:importantForAutofill="no" />
 
                 <EditText
-                    android:id="@+id/set5RepsText"
+                    android:id="@+id/set_5_reps_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -257,7 +261,7 @@
                     android:importantForAutofill="no" />
 
                 <EditText
-                    android:id="@+id/set5WeightText"
+                    android:id="@+id/set_5_weight_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -267,14 +271,14 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/set6Line"
+                android:id="@+id/set_6_line"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:visibility="gone">
 
                 <EditText
-                    android:id="@+id/set6Text"
+                    android:id="@+id/set_6_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -284,7 +288,7 @@
                     android:importantForAutofill="no" />
 
                 <EditText
-                    android:id="@+id/set6RepsText"
+                    android:id="@+id/set_6_reps_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -293,7 +297,7 @@
                     android:importantForAutofill="no" />
 
                 <EditText
-                    android:id="@+id/set6WeightText"
+                    android:id="@+id/set_6_weight_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

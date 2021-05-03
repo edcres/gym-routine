@@ -17,13 +17,13 @@
         tools:context=".ui.main.activities.MainActivity">
 
         <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/mainActivityAppBarLayout"
+            android:id="@+id/main_activity_appbar_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:liftOnScroll="true">
 
             <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/mainActivityTopAppBar"
+                android:id="@+id/main_activity_top_appbar"
                 style="@style/Widget.MaterialComponents.Toolbar.Primary"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
@@ -32,7 +32,7 @@
                 app:titleTextColor="@color/black" />
 
             <com.google.android.material.tabs.TabLayout
-                android:id="@+id/mainTabLayout"
+                android:id="@+id/main_tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
                 android:background="@color/colorPrimary"
@@ -43,19 +43,19 @@
                 app:tabTextColor="@color/colorSecondary">
 
                 <com.google.android.material.tabs.TabItem
-                    android:id="@+id/mainTabLayoutAll"
+                    android:id="@+id/main_tab_layout_all"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/tab_label_all" />
 
                 <com.google.android.material.tabs.TabItem
-                    android:id="@+id/mainTabLayout1"
+                    android:id="@+id/main_tab_layout1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="remove1" />
 
                 <com.google.android.material.tabs.TabItem
-                    android:id="@+id/mainTabLayout2"
+                    android:id="@+id/main_tab_layout2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="remove2" />
@@ -70,14 +70,14 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/workoutsListViewPager2"
+                android:id="@+id/workouts_list_view_pager2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
         </androidx.core.widget.NestedScrollView>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/addWorkoutFab"
+            android:id="@+id/add_workout_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
