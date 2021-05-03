@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Gym Routine</string>
 
+    <string name="toolbar_icon_duplicate">Duplicate</string>
+    <string name="toolbar_icon_delete">Delete</string>
+
     <string name="tab_label_all">All</string>
 
     <string name="sets_column_label">sets</string>
