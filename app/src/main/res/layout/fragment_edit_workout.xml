@@ -63,6 +63,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            style="@style/Widget.TipTime.TextView"
                             android:gravity="center"
                             android:text="@string/sets_column_label"
                             android:textSize="18sp" />
@@ -72,6 +73,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
+                            style="@style/Widget.TipTime.TextView"
                             android:text="@string/reps_column_label"
                             android:textSize="18sp" />
 
@@ -80,6 +82,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
+                            style="@style/Widget.TipTime.TextView"
                             android:text="@string/weight_column_label"
                             android:textSize="18sp" />
                     </LinearLayout>
