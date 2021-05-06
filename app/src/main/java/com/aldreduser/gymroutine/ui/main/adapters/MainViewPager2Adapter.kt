@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.aldreduser.gymroutine.R
-import com.aldreduser.gymroutine.ui.main.fragments.AllWorkoutsListFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -22,21 +21,21 @@ class MainViewPager2Adapter (fragment: Fragment) : FragmentStateAdapter(fragment
     }
 
     override fun createFragment(position: Int): Fragment {
-        val fragment = WorkoutGroupFragment()
-        fragment.arguments = Bundle().apply {
+        val groupFragment = WorkoutListFragment()
+        groupFragment.arguments = Bundle().apply {
             //todo: handle creation
             //ARG_OBJECT is a constant val key
 
             //   putInt(ARG_OBJECT, position + 1)
         }
-        return fragment
+        return groupFragment
     }
 }
 
 // Instances of this class are fragments representing a single
 // object in our collection.
 private const val ARG_OBJECT = "object"
-class WorkoutGroupFragment : Fragment() {
+class WorkoutListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,13 +45,14 @@ class WorkoutGroupFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val tabLayout = main_tab_layout
+        val viewPager: ViewPager2 = view.findViewById(R.id.workouts_list_view_pager2)
+
         arguments?.takeIf { it.containsKey(ARG_OBJECT) }?.apply {
             //todo: handle creation
-            //val textView: TextView = view.findViewById(android.R.id.text1)
-            //textView.text = getInt(ARG_OBJECT).toString()
+//            val textView: TextView = view.findViewById(android.R.id.text1)
+//            textView.text = getInt(ARG_OBJECT).toString()
         }
-        val viewPager: ViewPager2 = view.findViewById(R.id.workoutsListViewPager2)
-        val tabLayout = mainTabLayout
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = "OBJECT ${(position + 1)}"
         }.attach()

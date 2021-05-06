@@ -5,67 +5,53 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.aldreduser.gymroutine.R
+import com.aldreduser.gymroutine.databinding.FragmentAllWorkoutsListBinding
 import com.aldreduser.gymroutine.ui.main.adapters.MainViewPager2Adapter
+import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutsListViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [WorkoutsListFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-
 class AllWorkoutsListFragment : Fragment() {
-    // TODO: Rename and change types of parameters
+
+    private var binding: FragmentAllWorkoutsListBinding? = null
+    private val workoutsListViewModel: WorkoutsListViewModel by activityViewModels()
+    //    private val recyclerviewAdapter: //todo: instantiate the list recyclerview adapter here
+
     private lateinit var mainViewPager2Adapter: MainViewPager2Adapter
     private lateinit var viewPager: ViewPager2
 
-    //the tutorial by android didn't have this function (but it's here by default)
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        arguments?.let {
-//            param1 = it.getString(ARG_PARAM1)
-//            param2 = it.getString(ARG_PARAM2)
-//        }
-//    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_all_workouts_list, container, false)
+        val fragmentBinding = FragmentAllWorkoutsListBinding.inflate(inflater, container,false)
+        binding = fragmentBinding
+        return fragmentBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        mainViewPager2Adapter = MainViewPager2Adapter(this)
-        viewPager = view.findViewById(R.id.workoutsListViewPager2)
-        viewPager.adapter = mainViewPager2Adapter
-        //super.onViewCreated(view, savedInstanceState)     //the tutorial by android didn't have this line (but it's here by default)
+        super.onViewCreated(view, savedInstanceState)
 
-        val tabLayout = mainTabLayout
+        binding?.apply {
+            lifecycleOwner = viewLifecycleOwner
+            viewModel = workoutsListViewModel
+        }
+
+        mainViewPager2Adapter = MainViewPager2Adapter(this)
+        viewPager = view.findViewById(R.id.workouts_list_view_pager2)
+        viewPager.adapter = mainViewPager2Adapter
+
+        val tabLayout = main_tab_layout
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = "OBJECT ${(position + 1)}"
         }.attach()
-    }
-
-    // this is not used but it's here by default
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AllWorkoutsListFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
     }
 }

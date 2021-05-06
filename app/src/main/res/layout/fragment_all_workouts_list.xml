@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-<!--        <variable-->
-<!--            name="viewModel"-->
-<!--            type="" />-->
+        <variable
+            name="viewModel"
+            type="com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutsListViewModel" />
     </data>
 
     <FrameLayout

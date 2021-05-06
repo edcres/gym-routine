@@ -2,8 +2,12 @@ package com.aldreduser.gymroutine.ui.main.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.aldreduser.gymroutine.R
+import com.aldreduser.gymroutine.databinding.ActivityMainBinding
+import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutsListViewModel
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -61,28 +65,36 @@ import kotlinx.android.synthetic.main.activity_main.*
 // content descriptors
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+    private val workoutsListViewModel: WorkoutsListViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding?.apply {
+            lifecycleOwner = this@MainActivity
+            viewModel = workoutsListViewModel
+            addWorkoutFab.setOnClickListener { fabOnClick() }
+        }
 
         setUpAppBar()
         setUpTabLayout()
 
-        fabOnClick()
     }
 
     // handle fab click
     private fun fabOnClick() {
         // add workout
-        addWorkoutFab.setOnClickListener {
-            // todo: handle click
-        }
+        // todo: handle click
     }
 
     private fun setUpAppBar() {
-        mainActivityTopAppBar.title = "Workouts"
+        binding.mainActivityTopAppbar.title = "Workouts"
 
-        mainActivityTopAppBar.setNavigationOnClickListener {
+        binding.mainActivityTopAppbar.setNavigationOnClickListener {
             // todo: handle navigation icon press
         }
     }

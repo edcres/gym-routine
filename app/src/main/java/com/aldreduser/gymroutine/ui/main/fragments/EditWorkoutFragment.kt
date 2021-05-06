@@ -7,10 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import com.aldreduser.gymroutine.R
-import kotlinx.android.synthetic.main.fragment_edit_workout.*
+import androidx.fragment.app.activityViewModels
+import com.aldreduser.gymroutine.databinding.FragmentEditWorkoutBinding
+import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutsListViewModel
 
 class EditWorkoutFragment : Fragment() {
+
+    private var binding: FragmentEditWorkoutBinding? = null
+    private val workoutsListViewModel: WorkoutsListViewModel by activityViewModels()
+    private val simpleSpinnerItem = android.R.layout.simple_spinner_item
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,24 +25,33 @@ class EditWorkoutFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_edit_workout, container, false)
+        val fragmentBinding = FragmentEditWorkoutBinding.inflate(inflater, container, false)
+        binding = fragmentBinding
+        return fragmentBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setUpAppBar()
+        binding?.apply {
+            lifecycleOwner = lifecycleOwner
+            viewModel = workoutsListViewModel
 
-        spinnerOnClick()
-        doneFabOnClick()
+            chooseCategorySpinner.setOnClickListener { spinnerOnClick() }
+            editWorkoutDoneFab.setOnClickListener { doneFabOnClick() }
+        }
+        setUpAppBar()
     }
 
+    // CLICK HANDLERS //
+
     private fun spinnerOnClick() {
-        // todo: change these items and make the the workout categories
+
+        // todo: change these items and make them the workout categories
         val categories = arrayOf("Choose Department", "Pro Desk", "Flooring",
             "Customer Service", "Appliances", "Millwork")
-        chooseCategorySpinner.adapter = ArrayAdapter<String>(requireContext() ,android.R.layout.simple_spinner_item,categories)
-        chooseCategorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        binding?.chooseCategorySpinner?.adapter = ArrayAdapter<String>(requireContext(), simpleSpinnerItem, categories)
+        binding?.chooseCategorySpinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 //textForSpinner.text = "Choose Department"
             }
@@ -58,18 +72,21 @@ class EditWorkoutFragment : Fragment() {
 
     private fun doneFabOnClick() {
         // saves workout and goes back to the main screen
-        editWorkoutDoneFab.setOnClickListener {
-            // todo: handle fab click
-        }
+        // todo: handle fab click
     }
+
+    // SETUP FUNCTIONS //
 
     private fun setUpAppBar() {
         // todo: put the name of the workout in the title
-        editWorkoutTopAppBar.title = "Name of workout"
+        binding?.editWorkoutTopAppbar?.title = "Name of workout"
 
-        editWorkoutTopAppBar.setNavigationOnClickListener {
+        binding?.editWorkoutTopAppbar?.setNavigationOnClickListener {
             //todo: handle navigation icon press
         }
     }
+
+    // HELPER FUNCTIONS //
+
 }
 

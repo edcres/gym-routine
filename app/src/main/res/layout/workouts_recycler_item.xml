@@ -7,8 +7,8 @@
     <data>
         <!--        either the viewmodel or the workout item-->
         <!--        <variable-->
-        <!--            name=""-->
-        <!--            type="" />-->
+        <!--            name="viewmodel"-->
+        <!--            type="com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutsListViewModel" />-->
     </data>
 
     <androidx.cardview.widget.CardView

@@ -42,9 +42,13 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        dataBinding = true
+    }
 }
 
 dependencies {
+    def nav_version = "2.3.1"
 
     //default
 //    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -95,6 +99,7 @@ dependencies {
 
     //Fragment
     implementation "androidx.fragment:fragment-ktx:1.2.0-rc01"
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
 
     //ViewPager2
     implementation "androidx.viewpager2:viewpager2:1.0.0"
