@@ -82,7 +82,6 @@ class MainActivity : AppCompatActivity() {
 
         setUpAppBar()
         setUpTabLayout()
-
     }
 
     // handle fab click
