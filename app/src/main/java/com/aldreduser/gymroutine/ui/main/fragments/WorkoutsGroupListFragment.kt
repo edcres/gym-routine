@@ -37,4 +37,9 @@ class WorkoutsGroupListFragment : Fragment() {
             viewModel = workoutsListViewModel
         }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
 }

@@ -54,4 +54,9 @@ class AllWorkoutsListFragment : Fragment() {
             tab.text = "OBJECT ${(position + 1)}"
         }.attach()
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
 }

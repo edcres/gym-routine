@@ -43,6 +43,11 @@ class EditWorkoutFragment : Fragment() {
         setUpAppBar()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
+
     // CLICK HANDLERS //
 
     private fun spinnerOnClick() {
