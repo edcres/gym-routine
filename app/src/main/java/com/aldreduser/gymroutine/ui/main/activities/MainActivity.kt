@@ -76,10 +76,10 @@ class MainActivity : AppCompatActivity() {
 
         binding?.apply {
             lifecycleOwner = this@MainActivity
-            viewModel = workoutsListViewModel
+//            viewModel = workoutsListViewModel
             addWorkoutFab.setOnClickListener { fabOnClick() }
         }
-
+        
         setUpAppBar()
         setUpTabLayout()
     }
