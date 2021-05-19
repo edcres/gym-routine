@@ -7,13 +7,17 @@ import com.aldreduser.gymroutine.data.model.entities.WorkoutSet
 import com.aldreduser.gymroutine.data.model.room.WorkoutDao
 import com.aldreduser.gymroutine.data.model.room.WorkoutGroupDao
 import com.aldreduser.gymroutine.data.model.room.WorkoutSetDao
+import com.aldreduser.gymroutine.data.model.room.WorkoutsRoomDatabase
 import kotlinx.coroutines.flow.Flow
 
 // Repo only has access to the DAOs, not the database.
 class WorkoutRepository(
-    private val workoutGroupDao: WorkoutGroupDao,
-    private val workoutDao: WorkoutDao,
-    private val workoutSetDao: WorkoutSetDao) {
+    private val mDatabase: WorkoutsRoomDatabase,
+    private val mExecutors: AppExecutors
+//    private val workoutGroupDao: WorkoutGroupDao,
+//    private val workoutDao: WorkoutDao,
+//    private val workoutSetDao: WorkoutSetDao)
+{
 
     // todo: Add all the other DAOs with all their query functions. ()
 
@@ -53,4 +57,21 @@ class WorkoutRepository(
     }
     // update
     // delete
+
+    // to instantiate the repository
+    // (used to pass the repository as an argument to the viewmodel)
+    companion object {
+
+        private var sInstance: ToyRepository? = null
+
+        fun getRepositoryInstance(database: WorkoutsRoomDatabase, executors: AppExecutors): WorkoutsRoomDatabase {
+            return sInstance ?: synchronized(this) {
+                sInstance
+                    ?: WorkoutRepository(
+                        database,
+                        executors
+                    ).also { sInstance = it }
+            }
+        }
+    }
 }

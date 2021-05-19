@@ -37,8 +37,8 @@ class WorkoutsListViewModel(private val repository: WorkoutRepository) : ViewMod
     }
 }
 
-// to send the parameter dependencies to the viewModel
-class MainActivityViewModelFactory(private val repository: WorkoutRepository) : ViewModelProvider.Factory{
+// To send the parameter dependencies to the viewModel.
+class WorkoutsListViewModelFactory(private val repository: WorkoutRepository) : ViewModelProvider.Factory{
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(WorkoutsListViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")

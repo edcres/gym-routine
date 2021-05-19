@@ -27,7 +27,7 @@ public abstract class WorkoutsRoomDatabase: RoomDatabase() {
         @Volatile
         private var INSTANCE: WorkoutsRoomDatabase? = null
 
-        fun getDatabase(context: Context): WorkoutsRoomDatabase {
+        fun getDatabaseInstance(context: Context): WorkoutsRoomDatabase {
             // if the INSTANCE is not null, then return it,
             // if it is, then create the database
             return INSTANCE ?: synchronized(this) {

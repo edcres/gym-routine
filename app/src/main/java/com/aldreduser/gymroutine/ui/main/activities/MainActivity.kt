@@ -8,16 +8,15 @@ import androidx.viewpager2.widget.ViewPager2
 import com.aldreduser.gymroutine.R
 import com.aldreduser.gymroutine.databinding.ActivityMainBinding
 import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutsListViewModel
+import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutsListViewModelFactory
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
 
-// room codelabs https://developer.android.com/codelabs/android-room-with-a-view-kotlin/#3
-
-// todo: instantiate objects
+// Databinding (? observer vs flow vs liveData)
+// todo: do databinding
 
 // ui
-// todo: make fragment: workouts list
-//navigation tabs.
+// navigation tabs.
 // todo: add navigation tabs in main activity (maybe make the selected one have the secondary color)
 //  Tabs stay in screen when the user scrolls up, even tho the topAppBar disappears.
 // todo: make fragments for the tabs
@@ -26,6 +25,13 @@ import kotlinx.android.synthetic.main.activity_main.*
 //  if that video doesn't work    ->       tutorial for making viewpager2 tabs (no fragments)   https://www.youtube.com/watch?v=h41FnEH91D0  (have to watch the previous video)
 //   -(use a fragment instead of the other layout file)
 // todo: add tabs when user adds more categories
+
+// recyclerview
+// when recycler items are added, the FAB might scroll with the recyclerview, this didn't happen with a scrollview
+// codelabs https://developer.android.com/codelabs/kotlin-android-training-recyclerview-fundamentals#0
+// maybe use a GridLayoutManager instead of linear layout
+// todo: have 2 columns
+// todo: recyclerview displays workouts organized by categories
 
 // database (room)
 // todo: have the workouts organized in different categories (ie chest, arms, legs)
@@ -38,16 +44,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 //Database
 //Repo
 //ViewModel
-
-// recyclerview
-// when recycler items are added, the FAB might scroll with the recyclerview, this didn't happen with a scrollview
-// codelabs https://developer.android.com/codelabs/kotlin-android-training-recyclerview-fundamentals#0
-// maybe use a GridLayoutManager instead of linear layout
-// todo: have 2 columns
-// todo: recyclerview displays workouts organized by categories
-
-// Databinding (? observer vs flow vs liveData)
-// databinding codelab: https://developer.android.com/codelabs/android-databinding#0
 
 // todo: look up how to add categories programmatically to the tablayout
 
@@ -67,6 +63,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private val viewmodelFactory: WorkoutsListViewModelFactory(provi)
     private val workoutsListViewModel: WorkoutsListViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,7 +73,8 @@ class MainActivity : AppCompatActivity() {
 
         binding?.apply {
             lifecycleOwner = this@MainActivity
-//            viewModel = workoutsListViewModel
+            viewModel = workoutsListViewModel       // todo: bug here
+            // bug cause: ViewModel is expecting arguments (copy them from the other app, I forgot which one, maybe two-way-databinding)
             addWorkoutFab.setOnClickListener { fabOnClick() }
         }
         
