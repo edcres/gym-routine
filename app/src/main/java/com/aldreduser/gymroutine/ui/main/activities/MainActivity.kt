@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.aldreduser.gymroutine.R
+import com.aldreduser.gymroutine.data.WorkoutRepository
+import com.aldreduser.gymroutine.data.model.room.WorkoutsRoomDatabase
 import com.aldreduser.gymroutine.databinding.ActivityMainBinding
 import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutsListViewModel
 import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutsListViewModelFactory
@@ -63,14 +66,14 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val viewmodelFactory: WorkoutsListViewModelFactory(provi)
-    private val workoutsListViewModel: WorkoutsListViewModel by viewModels()
+    private lateinit var workoutsListViewModel: WorkoutsListViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setUpViewModel()
         binding?.apply {
             lifecycleOwner = this@MainActivity
             viewModel = workoutsListViewModel       // todo: bug here
@@ -86,6 +89,15 @@ class MainActivity : AppCompatActivity() {
     private fun fabOnClick() {
         // add workout
         // todo: handle click
+    }
+
+    private fun setUpViewModel() {
+        val application = requireNotNull(this).application
+        val database = WorkoutsRoomDatabase.getInstance(this)    // maybe not 'this', 'application' instead
+        val repository = WorkoutRepository(database)  // todo: make this as a coroutine
+        val viewModelFactory = WorkoutsListViewModelFactory(repository, application)   //todo : change this to work with coroutines
+        workoutsListViewModel = ViewModelProvider(
+                this, viewModelFactory).get(WorkoutsListViewModel::class.java)
     }
 
     private fun setUpAppBar() {

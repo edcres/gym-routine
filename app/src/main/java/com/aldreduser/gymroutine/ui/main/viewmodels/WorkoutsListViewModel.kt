@@ -1,5 +1,6 @@
 package com.aldreduser.gymroutine.ui.main.viewmodels
 
+import android.app.Application
 import androidx.lifecycle.*
 import com.aldreduser.gymroutine.data.WorkoutRepository
 import com.aldreduser.gymroutine.data.model.entities.Workout
@@ -10,7 +11,9 @@ import java.lang.IllegalArgumentException
 
 // The ViewModel will transform the data from the Repository,
 //  from Flow to LiveData and exposes the list of words as LiveData to the UI.
-class WorkoutsListViewModel(private val repository: WorkoutRepository) : ViewModel() {
+class WorkoutsListViewModel(
+        private val repository: WorkoutRepository,
+        private val application: Application) : ViewModel() {
 
     // Workout Group //
     // get all workout groups
@@ -37,14 +40,14 @@ class WorkoutsListViewModel(private val repository: WorkoutRepository) : ViewMod
     }
 }
 
-// To send the parameter dependencies to the viewModel.
-class WorkoutsListViewModelFactory(private val repository: WorkoutRepository) : ViewModelProvider.Factory{
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(WorkoutsListViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            val mainActivityViewModel = WorkoutsListViewModel(repository)
-            return mainActivityViewModel as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
-    }
-}
+//todo: delete below code
+//class WorkoutsListViewModelFactor(private val repository: WorkoutRepository) : ViewModelProvider.Factory{
+//    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+//        if (modelClass.isAssignableFrom(WorkoutsListViewModel::class.java)) {
+//            @Suppress("UNCHECKED_CAST")
+//            val mainActivityViewModel = WorkoutsListViewModel(repository)
+//            return mainActivityViewModel as T
+//        }
+//        throw IllegalArgumentException("Unknown ViewModel class")
+//    }
+//}

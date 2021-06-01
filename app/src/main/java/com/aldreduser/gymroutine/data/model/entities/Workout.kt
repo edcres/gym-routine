@@ -7,9 +7,9 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "workout_table")
 data class Workout (
     @PrimaryKey
-    @ColumnInfo(name = "thisWorkoutName")
+    @ColumnInfo(name = "this_workout_name")
     val thisWorkoutName: String = "",
-    @ColumnInfo(name = "workoutGroup")  // relation to workout group table
+    @ColumnInfo(name = "workout_group")  // relation to workout group table
     val workoutGroup: String = "",
     @ColumnInfo(name = "sets")
     val sets: Int = 0

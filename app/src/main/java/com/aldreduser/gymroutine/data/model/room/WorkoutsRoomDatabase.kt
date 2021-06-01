@@ -15,7 +15,7 @@ import com.aldreduser.gymroutine.data.model.entities.WorkoutSet
     WorkoutSet::class),
     version = 1,
     exportSchema = false)
-public abstract class WorkoutsRoomDatabase: RoomDatabase() {
+abstract class WorkoutsRoomDatabase: RoomDatabase() {
 
     abstract fun workoutGroupDao(): WorkoutGroupDao
     abstract fun workoutDao(): WorkoutDao
@@ -27,7 +27,7 @@ public abstract class WorkoutsRoomDatabase: RoomDatabase() {
         @Volatile
         private var INSTANCE: WorkoutsRoomDatabase? = null
 
-        fun getDatabaseInstance(context: Context): WorkoutsRoomDatabase {
+        fun getInstance(context: Context): WorkoutsRoomDatabase {
             // if the INSTANCE is not null, then return it,
             // if it is, then create the database
             return INSTANCE ?: synchronized(this) {

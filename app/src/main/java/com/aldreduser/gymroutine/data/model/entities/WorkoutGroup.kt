@@ -10,7 +10,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "workout_group_table")
 data class WorkoutGroup (
     @PrimaryKey
-    @ColumnInfo(name = "groupName")  // the WorkoutGroup will be identified by the group name
+    @ColumnInfo(name = "group_name")  // the WorkoutGroup will be identified by the group name
     val groupName: String = "",            // chest, legs, back
 
 //    @ColumnInfo(name = "workoutName")
