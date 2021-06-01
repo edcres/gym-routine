@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 interface WorkoutGroupDao {
 
     // getting group names alphabetically
-    @Query("SELECT * FROM workout_group_table ORDER BY groupName ASC")
+    @Query("SELECT * FROM workout_group_table ORDER BY group_name ASC")
     fun getAlphabetizedWorkoutGroups(): Flow<List<WorkoutGroup>>
 
     // insert: when user chooses to create a group when adding or editing a workout.

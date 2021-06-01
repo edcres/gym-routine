@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 interface WorkoutDao {
 
     // getting workout names alphabetically
-    @Query("SELECT * FROM workout_table ORDER BY thisWorkoutName ASC")
+    @Query("SELECT * FROM workout_table ORDER BY this_workout_name ASC")
     fun getAlphabetizedWorkouts(): Flow<List<Workout>>
 
     // Insert
