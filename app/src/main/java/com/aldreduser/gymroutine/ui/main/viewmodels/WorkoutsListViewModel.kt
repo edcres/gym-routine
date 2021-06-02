@@ -7,7 +7,8 @@ import com.aldreduser.gymroutine.data.model.entities.Workout
 import com.aldreduser.gymroutine.data.model.entities.WorkoutGroup
 import com.aldreduser.gymroutine.data.model.entities.WorkoutSet
 import kotlinx.coroutines.launch
-import java.lang.IllegalArgumentException
+
+// todo: use 'viewModelScope.launch' when retrieving data from repository
 
 // The ViewModel will transform the data from the Repository,
 //  from Flow to LiveData and exposes the list of words as LiveData to the UI.
@@ -40,14 +41,10 @@ class WorkoutsListViewModel(
     }
 }
 
-//todo: delete below code
-//class WorkoutsListViewModelFactor(private val repository: WorkoutRepository) : ViewModelProvider.Factory{
-//    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-//        if (modelClass.isAssignableFrom(WorkoutsListViewModel::class.java)) {
-//            @Suppress("UNCHECKED_CAST")
-//            val mainActivityViewModel = WorkoutsListViewModel(repository)
-//            return mainActivityViewModel as T
-//        }
-//        throw IllegalArgumentException("Unknown ViewModel class")
+// get data from database concurrently
+// ( from '3(RecyclerViewClickHandler)_SleepQuality' in the 'SleepTrackerViewModel' )
+//private fun initializeTonight() {
+//    viewModelScope.launch {
+//        tonight.value = getTonightFromDatabase()
 //    }
 //}

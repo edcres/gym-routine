@@ -5,6 +5,8 @@ import com.aldreduser.gymroutine.data.model.entities.Workout
 import com.aldreduser.gymroutine.data.model.entities.WorkoutAndSets
 import kotlinx.coroutines.flow.Flow
 
+// todo: make these suspend functions, probably unless it uses livedata
+
 @Dao
 interface WorkoutDao {
 
@@ -27,5 +29,5 @@ interface WorkoutDao {
     // relationship between workout and set
     @Transaction
     @Query("SELECT * FROM workout_table")
-    fun getWorkoutWithSets(): List<WorkoutAndSets>
+    suspend fun getWorkoutWithSets(): List<WorkoutAndSets>
 }

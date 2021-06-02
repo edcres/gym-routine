@@ -25,5 +25,5 @@ interface WorkoutGroupDao {
     //  -that way i can access all the workouts that are chest by looking up the group name
     @Transaction
     @Query("SELECT * FROM workout_group_table")
-    fun getWorkoutGroupsWithWorkouts(): List<WorkoutGroupAndWorkouts>
+    suspend fun getWorkoutGroupsWithWorkouts(): List<WorkoutGroupAndWorkouts>
 }
