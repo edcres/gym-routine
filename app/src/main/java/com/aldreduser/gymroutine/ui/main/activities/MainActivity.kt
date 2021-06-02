@@ -15,6 +15,10 @@ import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutsListViewModelFactory
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
 
+// todo: maybe re-structure (learn how viewpager2 works first)
+// probably have only one fragment that holds the recyclerview
+// editWorkout should be an activity or a pop-up
+
 // Databinding (? observer vs flow vs liveData)
 // todo: do databinding
 

@@ -17,7 +17,6 @@ class WorkoutsListViewModelFactory(
         if (modelClass.isAssignableFrom(WorkoutsListViewModel::class.java)) {
             val mainActivityViewModel = WorkoutsListViewModel(repository, application)
             return mainActivityViewModel as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
+        } else { throw IllegalArgumentException("Unknown ViewModel class") }
     }
 }

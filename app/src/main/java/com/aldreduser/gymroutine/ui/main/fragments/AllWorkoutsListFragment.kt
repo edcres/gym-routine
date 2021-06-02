@@ -6,18 +6,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.aldreduser.gymroutine.R
+import com.aldreduser.gymroutine.data.WorkoutRepository
+import com.aldreduser.gymroutine.data.model.room.WorkoutsRoomDatabase
 import com.aldreduser.gymroutine.databinding.FragmentAllWorkoutsListBinding
 import com.aldreduser.gymroutine.ui.main.adapters.MainViewPager2Adapter
 import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutsListViewModel
+import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutsListViewModelFactory
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
 
 class AllWorkoutsListFragment : Fragment() {
 
     private var binding: FragmentAllWorkoutsListBinding? = null
-    private val workoutsListViewModel: WorkoutsListViewModel by activityViewModels()
+    private lateinit var workoutsListViewModel: WorkoutsListViewModel
     //    private val recyclerviewAdapter: //todo: instantiate the list recyclerview adapter here
 
     private lateinit var mainViewPager2Adapter: MainViewPager2Adapter
@@ -34,6 +38,7 @@ class AllWorkoutsListFragment : Fragment() {
     ): View? {
         val fragmentBinding = FragmentAllWorkoutsListBinding.inflate(inflater, container,false)
         binding = fragmentBinding
+        setUpViewModel()
         return fragmentBinding.root
     }
 
@@ -58,5 +63,15 @@ class AllWorkoutsListFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
+    }
+
+    // SET UP FUNCTIONS //
+    private fun setUpViewModel() {
+        val application = requireNotNull(this.activity).application
+        val database = WorkoutsRoomDatabase.getInstance(application)
+        val repository = WorkoutRepository(database)
+        val viewModelFactory = WorkoutsListViewModelFactory(repository, application)
+        workoutsListViewModel = ViewModelProvider(
+                this, viewModelFactory).get(WorkoutsListViewModel::class.java)
     }
 }

@@ -9,6 +9,8 @@ import com.aldreduser.gymroutine.data.model.entities.WorkoutSet
 import com.aldreduser.gymroutine.data.model.room.WorkoutsRoomDatabase
 import kotlinx.coroutines.flow.Flow
 
+// todo: change the names of wuery functions to make them more specific
+
 // Repo only has access to the DAOs, not the database.
 class WorkoutRepository(private val database: WorkoutsRoomDatabase)
 {
