@@ -22,10 +22,10 @@ abstract class WorkoutsRoomDatabase: RoomDatabase() {
     abstract fun workoutSetDao(): WorkoutSetDao
 
     companion object {
-        // Singleton prevents multiple instances of database opening at the
-        // same time.
+        // Singleton prevents multiple instances of database opening at the same time.
         @Volatile
         private var INSTANCE: WorkoutsRoomDatabase? = null
+        private const val DATABASE_NAME = "workouts_database"
 
         fun getInstance(context: Context): WorkoutsRoomDatabase {
             // if the INSTANCE is not null, then return it,
@@ -34,8 +34,8 @@ abstract class WorkoutsRoomDatabase: RoomDatabase() {
                 val instance= Room.databaseBuilder(
                     context.applicationContext,
                     WorkoutsRoomDatabase::class.java,
-                    "workouts_database"
-                ).build()
+                    DATABASE_NAME
+                ).fallbackToDestructiveMigration().build()
                 INSTANCE = instance
                 // return instance
                 instance
