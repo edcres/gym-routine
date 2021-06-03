@@ -54,6 +54,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 // todo: look up how to add categories programmatically to the tablayout
 
+// todo: clean up unused imports
+
 // Prettiness
 // add more of the secondary color to the main activity
 
@@ -69,13 +71,13 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private var binding: ActivityMainBinding? = null
     private lateinit var workoutsListViewModel: WorkoutsListViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(binding?.root)
 
         setUpViewModel()
         binding?.apply {
@@ -89,6 +91,12 @@ class MainActivity : AppCompatActivity() {
         setUpTabLayout()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
+    }
+
+    // CLICK HANDLERS //
     // handle fab click
     private fun fabOnClick() {
         // add workout
@@ -105,9 +113,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpAppBar() {
-        binding.mainActivityTopAppbar.title = "Workouts"
+        binding?.mainActivityTopAppbar?.title = "Workouts"
 
-        binding.mainActivityTopAppbar.setNavigationOnClickListener {
+        binding?.mainActivityTopAppbar?.setNavigationOnClickListener {
             // todo: handle navigation icon press
         }
     }

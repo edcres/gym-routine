@@ -8,7 +8,6 @@ import java.lang.IllegalArgumentException
 
 // 'WorkoutsListViewModelFactory' returns an instance of the 'WorkoutsListViewModel' class
 // the viewModelFactory will be responsible for instantiating the ScoreViewModel object.
-// To send the parameter dependencies to the viewModel.
 class WorkoutsListViewModelFactory(
         private val repository: WorkoutRepository,
         private val application: Application) : ViewModelProvider.Factory{
