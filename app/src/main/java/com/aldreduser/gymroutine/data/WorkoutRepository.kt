@@ -9,16 +9,14 @@ import com.aldreduser.gymroutine.data.model.entities.WorkoutSet
 import com.aldreduser.gymroutine.data.model.room.WorkoutsRoomDatabase
 import kotlinx.coroutines.flow.Flow
 
-// todo: change the names of wuery functions to make them more specific
+// todo: change the names of query functions to make them more specific
 
 // Repo only has access to the DAOs, not the database.
 class WorkoutRepository(private val database: WorkoutsRoomDatabase)
 {
-    // todo: Access the DAOs through the database
     // todo: Add all the other DAOs with all their query functions. ()
-    //Workout Group
+    // WORKOUT GROUP //
     // getAlphabetizedWorkoutGroups
-
     val allWorkoutGroups: Flow<List<WorkoutGroup>> = database.workoutGroupDao().getAlphabetizedWorkoutGroups()
     // insert
     @Suppress("RedundantSuspendModifier")
@@ -29,7 +27,7 @@ class WorkoutRepository(private val database: WorkoutsRoomDatabase)
     // delete (probably similar to insert)
     // workoutGroup+workout relationship (maybe, idk how this would work)
 
-    //Workout
+    // WORKOUT
     // getAlphabetizedWorkouts
     val allWorkouts: Flow<List<Workout>> = database.workoutDao().getAlphabetizedWorkouts()
     // insert
@@ -42,7 +40,7 @@ class WorkoutRepository(private val database: WorkoutsRoomDatabase)
     // delete
     // workout+workoutSet relationship (maybe, idk how this would work)
 
-    //Workout Set
+    // WORKOUT SET
     // getAlphabetizedSets
     val allWorkoutSets: Flow<List<WorkoutSet>> = database.workoutSetDao().getAlphabetizedSets()
     // insert

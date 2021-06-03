@@ -69,7 +69,7 @@ class AllWorkoutsListFragment : Fragment() {
     private fun setUpViewModel() {
         val application = requireNotNull(this.activity).application
         val database = WorkoutsRoomDatabase.getInstance(application)
-        val repository = WorkoutRepository(database)
+        val repository = WorkoutRepository.getInstance(database)
         val viewModelFactory = WorkoutsListViewModelFactory(repository, application)
         workoutsListViewModel = ViewModelProvider(
                 this, viewModelFactory).get(WorkoutsListViewModel::class.java)

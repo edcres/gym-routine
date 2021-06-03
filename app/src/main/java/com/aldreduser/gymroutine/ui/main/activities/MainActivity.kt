@@ -98,8 +98,8 @@ class MainActivity : AppCompatActivity() {
     private fun setUpViewModel() {
         val application = requireNotNull(this).application
         val database = WorkoutsRoomDatabase.getInstance(this)    // maybe not 'this', 'application' instead
-        val repository = WorkoutRepository(database)  // todo: make this as a coroutine
-        val viewModelFactory = WorkoutsListViewModelFactory(repository, application)   //todo : change this to work with coroutines
+        val repository = WorkoutRepository.getInstance(database)
+        val viewModelFactory = WorkoutsListViewModelFactory(repository, application)
         workoutsListViewModel = ViewModelProvider(
                 this, viewModelFactory).get(WorkoutsListViewModel::class.java)
     }
