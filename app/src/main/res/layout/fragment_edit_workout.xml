@@ -110,6 +110,7 @@
                             android:gravity="center"
                             android:importantForAutofill="no"
                             android:inputType="number"
+                            android:text="@={viewModel.set1}"
                             tools:text="1" />
 
                         <EditText
@@ -120,6 +121,7 @@
                             android:gravity="center"
                             android:importantForAutofill="no"
                             android:inputType="number"
+                            android:text="@={viewModel.set1Reps}"
                             tools:text="10" />
 
                         <EditText
@@ -130,6 +132,7 @@
                             android:gravity="center"
                             android:importantForAutofill="no"
                             android:inputType="numberDecimal"
+                            android:text="@={viewModel.set1Weight}"
                             tools:text="30" />
 
                         <Space
@@ -161,6 +164,7 @@
                             android:gravity="center"
                             android:importantForAutofill="no"
                             android:inputType="number"
+                            android:text="@={viewModel.set2}"
                             tools:text="2" />
 
                         <EditText
@@ -171,6 +175,7 @@
                             android:gravity="center"
                             android:importantForAutofill="no"
                             android:inputType="number"
+                            android:text="@={viewModel.set2Reps}"
                             tools:text="8" />
 
                         <EditText
@@ -181,6 +186,7 @@
                             android:gravity="center"
                             android:importantForAutofill="no"
                             android:inputType="numberDecimal"
+                            android:text="@={viewModel.set2Weight}"
                             tools:text="40" />
 
                         <Space
@@ -211,6 +217,7 @@
                             android:gravity="center"
                             android:importantForAutofill="no"
                             android:inputType="number"
+                            android:text="@={viewModel.set3}"
                             tools:text="3" />
 
                         <EditText
@@ -221,6 +228,7 @@
                             android:gravity="center"
                             android:importantForAutofill="no"
                             android:inputType="number"
+                            android:text="@={viewModel.set3Reps}"
                             tools:text="8" />
 
                         <EditText
@@ -231,6 +239,7 @@
                             android:gravity="center"
                             android:importantForAutofill="no"
                             android:inputType="numberDecimal"
+                            android:text="@={viewModel.set3Weight}"
                             tools:text="50" />
 
                         <Space
@@ -259,6 +268,7 @@
                             android:clickable="false"
                             android:gravity="center"
                             android:importantForAutofill="no"
+                            android:text="@={viewModel.set4}"
                             android:inputType="number" />
 
                         <EditText
@@ -268,6 +278,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:importantForAutofill="no"
+                            android:text="@={viewModel.set4Reps}"
                             android:inputType="number" />
 
                         <EditText
@@ -277,6 +288,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:importantForAutofill="no"
+                            android:text="@={viewModel.set4Weight}"
                             android:inputType="numberDecimal" />
 
                         <Space
@@ -305,6 +317,7 @@
                             android:clickable="false"
                             android:gravity="center"
                             android:importantForAutofill="no"
+                            android:text="@={viewModel.set5}"
                             android:inputType="number" />
 
                         <EditText
@@ -314,6 +327,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:importantForAutofill="no"
+                            android:text="@={viewModel.set5Reps}"
                             android:inputType="number" />
 
                         <EditText
@@ -323,6 +337,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:importantForAutofill="no"
+                            android:text="@={viewModel.set5Weight}"
                             android:inputType="numberDecimal" />
 
                         <Space
@@ -351,6 +366,7 @@
                             android:clickable="false"
                             android:gravity="center"
                             android:importantForAutofill="no"
+                            android:text="@={viewModel.set6}"
                             android:inputType="number" />
 
                         <EditText
@@ -360,6 +376,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:importantForAutofill="no"
+                            android:text="@={viewModel.set6Reps}"
                             android:inputType="number" />
 
                         <EditText
@@ -369,6 +386,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:importantForAutofill="no"
+                            android:text="@={viewModel.set6Weight}"
                             android:inputType="numberDecimal" />
 
                         <Space
@@ -418,7 +436,7 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
             android:src="@drawable/ic_check_mark_24"
-            app:backgroundTint="@color/colorAccent" />
+            app:backgroundTint="@color/colorSecondary" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

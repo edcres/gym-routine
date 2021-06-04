@@ -57,23 +57,22 @@ class WorkoutsListViewModel(
     private val _set6Weight = MutableLiveData<String>()
     val set6Weight: MutableLiveData<String> = _set6Weight
 
-    // Get all workout groups, workouts, and sets
+    // Complete Lists
     val allWorkoutGroups: LiveData<List<WorkoutGroup>> = repository.allWorkoutGroups.asLiveData()
     val allWorkouts: LiveData<List<Workout>> = repository.allWorkouts.asLiveData()
     val allWorkoutSets: LiveData<List<WorkoutSet>> = repository.allWorkoutSets.asLiveData()
 
+    // DATABASE QUERIES //
     // Workout Group //
     // insert
     fun insertWorkoutGroup(workoutGroup: WorkoutGroup) = viewModelScope.launch {
         repository.insert(workoutGroup)
     }
-
     // Workout //
     // insert
     fun insertWorkout(workout: Workout) = viewModelScope.launch {
         repository.insert(workout)
     }
-
     // Workout Set //
     // insert
     fun insertWorkoutSet(workoutSet: WorkoutSet) = viewModelScope.launch {
