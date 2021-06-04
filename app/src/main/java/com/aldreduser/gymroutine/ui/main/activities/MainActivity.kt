@@ -67,9 +67,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 //      -maybe look into data tables in material.io
 //      -each set is in a linear layout so that it can be added (as an xml item file) deleted
 //      -make text inputs in material design
+//      -set up databinding for dynamic # of sets
 // content descriptors
 
 class MainActivity : AppCompatActivity() {
+
+
 
     private var binding: ActivityMainBinding? = null
     private lateinit var workoutsListViewModel: WorkoutsListViewModel
