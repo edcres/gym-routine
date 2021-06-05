@@ -4,6 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+// todo: typo 'workoutPluSet' -> 'workoutPlusSet'
+
 @Entity(tableName = "set_table")
 data class WorkoutSet (
     @PrimaryKey

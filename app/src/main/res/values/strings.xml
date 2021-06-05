@@ -14,4 +14,12 @@
 
     <string name="workout_name_hint">workout name</string>
     <string name="default_workout_input">0</string>
+
+<!--    sets    -->
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="five">5</string>
+    <string name="six">6</string>
 </resources>

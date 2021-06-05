@@ -5,10 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <!--        either the viewmodel or the workout item-->
-        <!--        <variable-->
-        <!--            name="viewmodel"-->
-        <!--            type="com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutsListViewModel" />-->
+        <variable
+            name="workoutGroupEntity"
+            type="com.aldreduser.gymroutine.data.model.entities.WorkoutGroup" />
+        <variable
+            name="workoutEntity"
+            type="com.aldreduser.gymroutine.data.model.entities.Workout" />
+        <variable
+            name="workoutSetEntity"
+            type="com.aldreduser.gymroutine.data.model.entities.WorkoutSet" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -25,7 +30,7 @@
             android:orientation="vertical"
             android:padding="8dp">
 
-<!--            if this does't render in the app, ,ake it an edit text-->
+<!--            if this doesn't render in the app, ,ake it an edit text-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/specific_workout"
                 android:layout_width="match_parent"
@@ -39,6 +44,7 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textSize="18sp"
+                    workoutGroupName="@{workoutGroupEntity}"
                     android:inputType="text|number" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -99,7 +105,7 @@
                     android:clickable="false"
                     android:gravity="center"
                     android:inputType="number"
-                    tools:text="1"
+                    android:text="@string/one"
                     android:importantForAutofill="no" />
 
                 <EditText
@@ -110,6 +116,7 @@
                     android:gravity="center"
                     android:inputType="number"
                     tools:text="10"
+                    workoutReps="@{workoutSetEntity}"
                     android:importantForAutofill="no" />
 
                 <EditText
@@ -120,6 +127,7 @@
                     android:gravity="center"
                     android:inputType="numberDecimal"
                     tools:text="30"
+                    workoutWeight="@{workoutSetEntity}"
                     android:importantForAutofill="no" />
             </LinearLayout>
 
@@ -137,7 +145,7 @@
                     android:clickable="false"
                     android:gravity="center"
                     android:inputType="number"
-                    tools:text="2"
+                    android:text="@string/two"
                     android:importantForAutofill="no" />
 
                 <EditText
@@ -148,6 +156,7 @@
                     android:gravity="center"
                     android:inputType="number"
                     tools:text="8"
+                    workoutReps="@{workoutSetEntity}"
                     android:importantForAutofill="no" />
 
                 <EditText
@@ -158,6 +167,7 @@
                     android:gravity="center"
                     android:inputType="numberDecimal"
                     tools:text="40"
+                    workoutWeight="@{workoutSetEntity}"
                     android:importantForAutofill="no" />
             </LinearLayout>
 
@@ -175,7 +185,7 @@
                     android:clickable="false"
                     android:gravity="center"
                     android:inputType="number"
-                    tools:text="3"
+                    android:text="@string/three"
                     android:importantForAutofill="no" />
 
                 <EditText
@@ -186,6 +196,7 @@
                     android:gravity="center"
                     android:inputType="number"
                     tools:text="8"
+                    workoutReps="@{workoutSetEntity}"
                     android:importantForAutofill="no" />
 
                 <EditText
@@ -195,6 +206,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="numberDecimal"
+                    workoutWeight="@{workoutSetEntity}"
                     tools:text="50"/>
             </LinearLayout>
 
@@ -213,6 +225,7 @@
                     android:clickable="false"
                     android:gravity="center"
                     android:inputType="number"
+                    android:text="@string/four"
                     android:importantForAutofill="no" />
 
                 <EditText
@@ -222,6 +235,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="number"
+                    workoutReps="@{workoutSetEntity}"
                     android:importantForAutofill="no" />
 
                 <EditText
@@ -231,6 +245,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="numberDecimal"
+                    workoutWeight="@{workoutSetEntity}"
                     android:importantForAutofill="no" />
             </LinearLayout>
 
@@ -249,6 +264,7 @@
                     android:clickable="false"
                     android:gravity="center"
                     android:inputType="number"
+                    android:text="@string/five"
                     android:importantForAutofill="no" />
 
                 <EditText
@@ -258,6 +274,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="number"
+                    workoutReps="@{workoutSetEntity}"
                     android:importantForAutofill="no" />
 
                 <EditText
@@ -267,6 +284,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="numberDecimal"
+                    workoutWeight="@{workoutSetEntity}"
                     android:importantForAutofill="no" />
             </LinearLayout>
 
@@ -285,6 +303,7 @@
                     android:clickable="false"
                     android:gravity="center"
                     android:inputType="number"
+                    android:text="@string/six"
                     android:importantForAutofill="no" />
 
                 <EditText
@@ -294,6 +313,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="number"
+                    workoutReps="@{workoutSetEntity}"
                     android:importantForAutofill="no" />
 
                 <EditText
@@ -303,6 +323,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="numberDecimal"
+                    workoutWeight="@{workoutSetEntity}"
                     android:importantForAutofill="no" />
             </LinearLayout>
 
