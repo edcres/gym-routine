@@ -18,14 +18,14 @@ fun TextView.setWorkoutGroupName(item: Workout) {
 @BindingAdapter("workoutReps")
 fun TextView.setWorkoutReps(item: WorkoutSet) {
     item?.let {
-        text = convertIntToString(item.reps)
+        text = item.reps.toString()
     }
 }
 
 @BindingAdapter("workoutWeight")
 fun TextView.setWorkoutWeight(item: WorkoutSet) {
     item?.let {
-        text = convertDoubleToString(item.weight)
+        text = item.weight.toString()
     }
 }
 

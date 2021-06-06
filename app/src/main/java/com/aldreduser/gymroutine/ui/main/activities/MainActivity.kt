@@ -15,44 +15,28 @@ import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutsListViewModelFactory
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
 
-// todo: maybe re-structure (learn how viewpager2 works first)
-// probably have only one fragment that holds the recyclerview
-// editWorkout should be an activity or a pop-up
+// todo: recyclerview
+// Adapter:
+// -create it
+// -dataBinding
+// DataBinding in the recycler items might be wrong.
+// codelabs https://developer.android.com/codelabs/kotlin-android-training-recyclerview-fundamentals#0
+// display workouts by categories in the recyclerViews
 
-// Databinding (? observer vs flow vs liveData)
-// todo: do databinding
-
-// ui
-// navigation tabs.
-// todo: add navigation tabs in main activity (maybe make the selected one have the secondary color)
-//  Tabs stay in screen when the user scrolls up, even tho the topAppBar disappears.
-// todo: make fragments for the tabs
-// todo: set up a viewpager2 to make the tabs dynamic (viewpager2 fragment)
+// todo: ViewPager2
+// set up a viewpager2 to make the tabs dynamic (viewpager2 fragment)
 //  (https://www.youtube.com/watch?v=nKkXNB5tvZc  (the view adapter class is in java, try to make it in kotlin)
 //  if that video doesn't work    ->       tutorial for making viewpager2 tabs (no fragments)   https://www.youtube.com/watch?v=h41FnEH91D0  (have to watch the previous video)
-//   -(use a fragment instead of the other layout file)
-// todo: add tabs when user adds more categories
+// add tabs when user adds more categories
 
-// recyclerview
-// when recycler items are added, the FAB might scroll with the recyclerview, this didn't happen with a scrollview
-// codelabs https://developer.android.com/codelabs/kotlin-android-training-recyclerview-fundamentals#0
-// maybe use a GridLayoutManager instead of linear layout
-// todo: have 2 columns
-// todo: recyclerview displays workouts organized by categories
+// todo: Room Database
+// learn about databases multiple entities with relations
 
-// database (room)
-// todo: have the workouts organized in different categories (ie chest, arms, legs)
-//  -user can add, delete, edit categories. Can change the names
-//Entity
-// todo: workout group
-// todo: workout
-// todo: set
-//DAO
-//Database
-//Repo
-//ViewModel
+// todo: EditWorkoutFragment should probably be an activity.
 
-// todo: look up how to add categories programmatically to the tablayout
+// todo: tab onclick dataBinding bug:
+// -solution: try to fix after making the viewpager, or don't use dataBinding and set the click listener through the kotlin file
+// When user clicks a tab, the recyclerview with that category is displayed
 
 // todo: clean up unused imports
 
