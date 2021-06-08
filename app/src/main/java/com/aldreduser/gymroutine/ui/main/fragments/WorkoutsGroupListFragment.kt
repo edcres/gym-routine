@@ -20,10 +20,6 @@ class WorkoutsGroupListFragment : Fragment() {
     private lateinit var workoutsListViewModel: WorkoutsListViewModel
 //    private val recyclerviewAdapter: //todo: instantiate the list recyclerview adapter here
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

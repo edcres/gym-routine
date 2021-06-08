@@ -12,6 +12,7 @@ import com.aldreduser.gymroutine.R
 import com.aldreduser.gymroutine.data.WorkoutRepository
 import com.aldreduser.gymroutine.data.model.room.WorkoutsRoomDatabase
 import com.aldreduser.gymroutine.databinding.FragmentAllWorkoutsListBinding
+import com.aldreduser.gymroutine.ui.main.adapters.AllWorkoutsListAdapter
 import com.aldreduser.gymroutine.ui.main.adapters.MainViewPager2Adapter
 import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutsListViewModel
 import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutsListViewModelFactory
@@ -26,10 +27,6 @@ class AllWorkoutsListFragment : Fragment() {
 
     private lateinit var mainViewPager2Adapter: MainViewPager2Adapter
     private lateinit var viewPager: ViewPager2
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -58,6 +55,8 @@ class AllWorkoutsListFragment : Fragment() {
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = "OBJECT ${(position + 1)}"
         }.attach()
+
+        setUpRecyclerView()
     }
 
     override fun onDestroyView() {
@@ -73,5 +72,10 @@ class AllWorkoutsListFragment : Fragment() {
         val viewModelFactory = WorkoutsListViewModelFactory(repository, application)
         workoutsListViewModel = ViewModelProvider(
                 this, viewModelFactory).get(WorkoutsListViewModel::class.java)
+    }
+
+    private fun setUpRecyclerView() {
+        val adapter = AllWorkoutsListAdapter()
+        binding?.workoutsRecyclerview?.adapter = adapter
     }
 }

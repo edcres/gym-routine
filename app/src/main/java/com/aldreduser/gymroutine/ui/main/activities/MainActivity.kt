@@ -39,6 +39,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 // When user clicks a tab, the recyclerview with that category is displayed
 
 // todo: clean up unused imports
+// todo: take care of warnings
+// todo: clean up comments
 
 // Prettiness
 // add more of the secondary color to the main activity
@@ -55,8 +57,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 // content descriptors
 
 class MainActivity : AppCompatActivity() {
-
-
 
     private var binding: ActivityMainBinding? = null
     private lateinit var workoutsListViewModel: WorkoutsListViewModel
