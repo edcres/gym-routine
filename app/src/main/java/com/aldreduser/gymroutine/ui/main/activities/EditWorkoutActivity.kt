@@ -1,61 +1,50 @@
-package com.aldreduser.gymroutine.ui.main.fragments
+package com.aldreduser.gymroutine.ui.main.activities
 
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.aldreduser.gymroutine.data.WorkoutRepository
 import com.aldreduser.gymroutine.data.model.room.WorkoutsRoomDatabase
-import com.aldreduser.gymroutine.databinding.FragmentEditWorkoutBinding
+import com.aldreduser.gymroutine.databinding.ActivityEditWorkoutBinding
 import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutsListViewModel
 import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutsListViewModelFactory
 
-class EditWorkoutFragment : Fragment() {
+class EditWorkoutActivity : AppCompatActivity() {
 
-    private var binding: FragmentEditWorkoutBinding? = null
+    private var binding: ActivityEditWorkoutBinding? = null
     private lateinit var workoutsListViewModel: WorkoutsListViewModel
     private val simpleSpinnerItem = android.R.layout.simple_spinner_item
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val fragmentBinding = FragmentEditWorkoutBinding.inflate(inflater, container, false)
-        binding = fragmentBinding
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityEditWorkoutBinding.inflate(layoutInflater)
+        setContentView(binding?.root)
+
         setUpViewModel()
-        return fragmentBinding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
         binding?.apply {
-            lifecycleOwner = lifecycleOwner
+            lifecycleOwner = this@EditWorkoutActivity
             viewModel = workoutsListViewModel
-
             chooseCategorySpinner.setOnClickListener { spinnerOnClick() }
             editWorkoutDoneFab.setOnClickListener { doneFabOnClick() }
         }
         setUpAppBar()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onDestroy() {
+        super.onDestroy()
         binding = null
     }
 
-    // CLICK HANDLERS //
+    // CLICK LISTENERS //
     private fun spinnerOnClick() {
 
         // todo: change these items and make them the workout categories
         val categories = arrayOf("Choose Department", "Pro Desk", "Flooring",
             "Customer Service", "Appliances", "Millwork")
-        binding?.chooseCategorySpinner?.adapter = ArrayAdapter<String>(requireContext(), simpleSpinnerItem, categories)
+        binding?.chooseCategorySpinner?.adapter = ArrayAdapter<String>(this, simpleSpinnerItem, categories)
         binding?.chooseCategorySpinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 //textForSpinner.text = "Choose Department"
@@ -92,15 +81,13 @@ class EditWorkoutFragment : Fragment() {
 
     // SET UP FUNCTIONS //
     private fun setUpViewModel() {
-        val application = requireNotNull(this.activity).application
+        val application = requireNotNull(this).application
         val database = WorkoutsRoomDatabase.getInstance(application)
         val repository = WorkoutRepository.getInstance(database)
         val viewModelFactory = WorkoutsListViewModelFactory(repository, application)
         workoutsListViewModel = ViewModelProvider(
-                this, viewModelFactory).get(WorkoutsListViewModel::class.java)
+            this, viewModelFactory).get(WorkoutsListViewModel::class.java)
     }
 
     // HELPER FUNCTIONS //
-
 }
-
