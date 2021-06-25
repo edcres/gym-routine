@@ -41,27 +41,7 @@
                 app:tabIndicatorColor="@color/colorSecondary"
                 app:tabMode="scrollable"
                 app:tabSelectedTextColor="@color/colorSecondary"
-                app:tabTextColor="@color/colorSecondary">
-
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/main_tab_layout_all"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tab_label_all" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/main_tab_layout1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="remove1" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/main_tab_layout2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="remove2" />
-
-            </com.google.android.material.tabs.TabLayout>
+                app:tabTextColor="@color/colorSecondary" />
 
         </com.google.android.material.appbar.AppBarLayout>
 

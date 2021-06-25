@@ -40,7 +40,6 @@ android {
     packagingOptions {
         exclude 'META-INF/atomicfu.kotlin_module'
     }
-
     buildFeatures {
         dataBinding = true
         viewBinding = true
@@ -54,6 +53,7 @@ dependencies {
     implementation "com.google.android.material:material:$rootProject.materialVersion"
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
     testImplementation "junit:junit:$rootProject.junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$rootProject.androidxJunitVersion"
 //    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

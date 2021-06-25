@@ -2,17 +2,12 @@ package com.aldreduser.gymroutine.ui.main.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.viewModels
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.viewpager2.widget.ViewPager2
-import com.aldreduser.gymroutine.R
 import com.aldreduser.gymroutine.data.WorkoutRepository
 import com.aldreduser.gymroutine.data.model.room.WorkoutsRoomDatabase
 import com.aldreduser.gymroutine.databinding.ActivityMainBinding
 import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutsListViewModel
 import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutsListViewModelFactory
-import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
 
 // todo: ViewPager2
@@ -21,13 +16,20 @@ import kotlinx.android.synthetic.main.activity_main.*
 //  if that video doesn't work    ->       tutorial for making viewpager2 tabs (no fragments)   https://www.youtube.com/watch?v=h41FnEH91D0  (have to watch the previous video)
 // add tabs when user adds more categories
 
-// todo: EditWorkoutFragment should probably be an activity.
-// todo: There should probably only be one fragment that holds the list (just organized differently)
+//todo: get rid of allWorkouts fragment
+//todo: get rid of 'MainViewPager2Adapter'
+
+// todo: edit viewModel and fragment views connected to it
+// - each viewModel variable will correspond to each view widget (make more variables)
+// - make livedata lists. Hold sets, reps, and weight (maybe look at old app for reference)
 
 // todo: Room Database
 // learn about databases multiple entities with relations
 
 // todo: set up all the queries
+
+// todo: every time the activity is created, populate 'tabTitles' and 'titlesOrdinals' (located in the viewModel) with each workout group
+// todo: when the app is started, if 'allWorkoutGroups' in the database is empty: add 'All Workouts'
 
 // todo: recyclerview
 // DataBinding in the recycler items might be wrong.
@@ -58,6 +60,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 //      -set up databinding for dynamic # of sets
 //  -maybe have reusable layouts, databind it, and make it work with the remote and local repos
 // content descriptors
+// reuse the same fragment to add more tabs, maybe cap the maxNumOfTabs
 
 class MainActivity : AppCompatActivity() {
 
@@ -76,7 +79,7 @@ class MainActivity : AppCompatActivity() {
             // bug cause: ViewModel is expecting arguments (copy them from the other app, I forgot which one, maybe two-way-databinding)
             addWorkoutFab.setOnClickListener { fabOnClick() }
         }
-        
+
         setUpAppBar()
         setUpTabLayout()
     }

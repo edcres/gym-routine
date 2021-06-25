@@ -6,6 +6,7 @@ import com.aldreduser.gymroutine.data.WorkoutRepository
 import com.aldreduser.gymroutine.data.model.entities.Workout
 import com.aldreduser.gymroutine.data.model.entities.WorkoutGroup
 import com.aldreduser.gymroutine.data.model.entities.WorkoutSet
+import com.aldreduser.gymroutine.utils.FIRST_TAB_TITLE
 import kotlinx.coroutines.launch
 
 // todo: use 'viewModelScope.launch' when retrieving data from repository
@@ -15,6 +16,15 @@ import kotlinx.coroutines.launch
 class WorkoutsListViewModel(
         private val repository: WorkoutRepository,
         private val application: Application) : ViewModel() {
+
+    // ViewPager2 variables
+    // Complete Lists
+    val allWorkoutGroups: LiveData<List<WorkoutGroup>> = repository.allWorkoutGroups.asLiveData()
+    val allWorkouts: LiveData<List<Workout>> = repository.allWorkouts.asLiveData()
+    val allWorkoutSets: LiveData<List<WorkoutSet>> = repository.allWorkoutSets.asLiveData()
+
+    private val tabTitles: MutableList<String> = mutableListOf(FIRST_TAB_TITLE)
+    private val tabTitlesOrdinals: MutableMap<String, Int> = mutableMapOf(FIRST_TAB_TITLE to 0)
 
     // DataBound Variables ()
     // In the future, user can add maybe infinite sets and these variables will be lists: sets, reps, weight
@@ -56,11 +66,6 @@ class WorkoutsListViewModel(
     val set5Weight: MutableLiveData<String> = _set5Weight
     private val _set6Weight = MutableLiveData<String>()
     val set6Weight: MutableLiveData<String> = _set6Weight
-
-    // Complete Lists
-    val allWorkoutGroups: LiveData<List<WorkoutGroup>> = repository.allWorkoutGroups.asLiveData()
-    val allWorkouts: LiveData<List<Workout>> = repository.allWorkouts.asLiveData()
-    val allWorkoutSets: LiveData<List<WorkoutSet>> = repository.allWorkoutSets.asLiveData()
 
     // DATABASE QUERIES //
     // Workout Group //
