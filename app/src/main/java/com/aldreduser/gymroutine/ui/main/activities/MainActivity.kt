@@ -6,18 +6,19 @@ import androidx.lifecycle.ViewModelProvider
 import com.aldreduser.gymroutine.data.WorkoutRepository
 import com.aldreduser.gymroutine.data.model.room.WorkoutsRoomDatabase
 import com.aldreduser.gymroutine.databinding.ActivityMainBinding
+import com.aldreduser.gymroutine.ui.main.adapters.TabsViewPager2Adapter
 import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutsListViewModel
 import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutsListViewModelFactory
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
 
 // todo: ViewPager2
-// set up a viewpager2 to make the tabs dynamic (viewpager2 fragment)
-//  (https://www.youtube.com/watch?v=nKkXNB5tvZc  (the view adapter class is in java, try to make it in kotlin)
-//  if that video doesn't work    ->       tutorial for making viewpager2 tabs (no fragments)   https://www.youtube.com/watch?v=h41FnEH91D0  (have to watch the previous video)
-// add tabs when user adds more categories
+// do: adapter, fragment, activity
+// add/remove tabs from 'EditWorkoutFragment'
 
 //todo: get rid of allWorkouts fragment
 //todo: get rid of 'MainViewPager2Adapter'
+//todo: get rid of 'AllWorkoutsListAdapter'
 
 // todo: edit viewModel and fragment views connected to it
 // - each viewModel variable will correspond to each view widget (make more variables)
@@ -30,6 +31,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 // todo: every time the activity is created, populate 'tabTitles' and 'titlesOrdinals' (located in the viewModel) with each workout group
 // todo: when the app is started, if 'allWorkoutGroups' in the database is empty: add 'All Workouts'
+// todo: when all the workouts in a workout group are removed, remove the group and the tab
 
 // todo: recyclerview
 // DataBinding in the recycler items might be wrong.
@@ -66,6 +68,9 @@ class MainActivity : AppCompatActivity() {
 
     private var binding: ActivityMainBinding? = null
     private lateinit var workoutsListViewModel: WorkoutsListViewModel
+    private val activityViewPager2Adapter: TabsViewPager2Adapter by lazy {
+        TabsViewPager2Adapter(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,9 +84,8 @@ class MainActivity : AppCompatActivity() {
             // bug cause: ViewModel is expecting arguments (copy them from the other app, I forgot which one, maybe two-way-databinding)
             addWorkoutFab.setOnClickListener { fabOnClick() }
         }
-
         setUpAppBar()
-        setUpTabLayout()
+        setUpTabs()
     }
 
     override fun onDestroy() {
@@ -95,6 +99,7 @@ class MainActivity : AppCompatActivity() {
         // todo: handle click
     }
 
+    // SETUP FUNCTIONS //
     private fun setUpViewModel() {
         val application = requireNotNull(this).application
         val database = WorkoutsRoomDatabase.getInstance(this)    // maybe not 'this', 'application' instead
@@ -112,11 +117,20 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setUpTabLayout() {
+    private fun setUpTabs() {
+        binding!!.workoutsListViewPager2.adapter = activityViewPager2Adapter
 
-        /* how to customize specific tabs programmatically
-        val tab = tabLayout.getTabAt(index)
-        tab?.icon = drawable
-         */
+        TabLayoutMediator(binding!!.mainTabLayout, binding!!.workoutsListViewPager2) { tab, position ->
+            tab.text = workoutsListViewModel.tabTitles[position]
+        }.attach()
+    }
+
+    // HELPER FUNCTIONS //
+    fun getViewModel(): WorkoutsListViewModel {
+        return workoutsListViewModel
+    }
+
+    fun getViewPager2Adapter(): TabsViewPager2Adapter {
+        return activityViewPager2Adapter
     }
 }

@@ -2,6 +2,7 @@ package com.aldreduser.gymroutine.ui.main.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.aldreduser.gymroutine.data.model.entities.Workout
@@ -34,5 +35,16 @@ class WorkoutCategoryListAdapter() :
                 return ViewHolder(binding)
             }
         }
+    }
+}
+
+class WorkoutDiffCallback : DiffUtil.ItemCallback<Workout>() {
+
+    override fun areItemsTheSame(oldItem: Workout, newItem: Workout): Boolean {
+        return oldItem.thisWorkoutName == newItem.thisWorkoutName
+    }
+
+    override fun areContentsTheSame(oldItem: Workout, newItem: Workout): Boolean {
+        return oldItem == newItem
     }
 }

@@ -23,8 +23,9 @@ class WorkoutsListViewModel(
     val allWorkouts: LiveData<List<Workout>> = repository.allWorkouts.asLiveData()
     val allWorkoutSets: LiveData<List<WorkoutSet>> = repository.allWorkoutSets.asLiveData()
 
-    private val tabTitles: MutableList<String> = mutableListOf(FIRST_TAB_TITLE)
-    private val tabTitlesOrdinals: MutableMap<String, Int> = mutableMapOf(FIRST_TAB_TITLE to 0)
+    // todo: Maybe make these private. Then make a getter to get their value.
+    val tabTitles: MutableList<String> = mutableListOf(FIRST_TAB_TITLE)
+    val tabTitlesOrdinals: MutableMap<String, Int> = mutableMapOf(FIRST_TAB_TITLE to 0)
 
     // DataBound Variables ()
     // In the future, user can add maybe infinite sets and these variables will be lists: sets, reps, weight
