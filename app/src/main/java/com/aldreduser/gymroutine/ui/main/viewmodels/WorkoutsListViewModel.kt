@@ -1,12 +1,19 @@
 package com.aldreduser.gymroutine.ui.main.viewmodels
 
 import android.app.Application
+import android.content.Context
+import android.util.Log
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.*
 import com.aldreduser.gymroutine.data.WorkoutRepository
 import com.aldreduser.gymroutine.data.model.entities.Workout
 import com.aldreduser.gymroutine.data.model.entities.WorkoutGroup
 import com.aldreduser.gymroutine.data.model.entities.WorkoutSet
+import com.aldreduser.gymroutine.ui.main.activities.MainActivity
+import com.aldreduser.gymroutine.ui.main.adapters.TabsViewPager2Adapter
+import com.aldreduser.gymroutine.ui.main.fragments.WorkoutsGroupListFragment
 import com.aldreduser.gymroutine.utils.FIRST_TAB_TITLE
+import com.aldreduser.gymroutine.utils.MY_LOG
 import kotlinx.coroutines.launch
 
 // todo: use 'viewModelScope.launch' when retrieving data from repository
@@ -23,9 +30,11 @@ class WorkoutsListViewModel(
     val allWorkouts: LiveData<List<Workout>> = repository.allWorkouts.asLiveData()
     val allWorkoutSets: LiveData<List<WorkoutSet>> = repository.allWorkoutSets.asLiveData()
 
-    // todo: Maybe make these private. Then make a getter to get their value.
+//    private val currentCategoryFragment: WorkoutsGroupListFragment? = null
     val tabTitles: MutableList<String> = mutableListOf(FIRST_TAB_TITLE)
     val tabTitlesOrdinals: MutableMap<String, Int> = mutableMapOf(FIRST_TAB_TITLE to 0)
+    var activityViewPager2Adapter: TabsViewPager2Adapter? = null
+
 
     // DataBound Variables ()
     // In the future, user can add maybe infinite sets and these variables will be lists: sets, reps, weight
@@ -83,6 +92,36 @@ class WorkoutsListViewModel(
     // insert
     fun insertWorkoutSet(workoutSet: WorkoutSet) = viewModelScope.launch {
         repository.insert(workoutSet)
+    }
+
+    // HELPER FUNCTIONS //
+    fun setViewPager2Adapter(context: Context) {
+        // todo: possible bug: context might not turn into FragmentActivity
+        activityViewPager2Adapter = TabsViewPager2Adapter(context as FragmentActivity)
+    }
+    fun getViewPager2Adapter(): TabsViewPager2Adapter {
+        return activityViewPager2Adapter!!
+    }
+
+    // QUERY TABS //
+    private fun addTab(titleToAdd: String) {
+        val nextTitlePosition = tabTitles.size - 1
+        val nextOrdinalId = tabTitlesOrdinals.size - 1
+
+        // todo: if 'tabTitles' contains 'nextTitle', don't add it, pop-up dialog to replace the title
+
+        if(!tabTitles.contains(titleToAdd)) {
+            activityViewPager2Adapter!!.addTab(nextOrdinalId+1, titleToAdd)
+        } else {
+            Log.d("${MY_LOG}Activity", "\t\t titles contains next title " +
+                    "\t\t \${$tabTitles} $titleToAdd")
+        }
+    }
+    private fun removeTab(titleToRemove: String) {
+        val numOfTabs = tabTitles.size
+        if (numOfTabs > 1 && titleToRemove != FIRST_TAB_TITLE) {
+            activityViewPager2Adapter!!.removeTab(titleToRemove)
+        }
     }
 }
 

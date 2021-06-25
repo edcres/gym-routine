@@ -1,19 +1,21 @@
 package com.aldreduser.gymroutine.ui.main.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.aldreduser.gymroutine.data.WorkoutRepository
 import com.aldreduser.gymroutine.data.model.room.WorkoutsRoomDatabase
 import com.aldreduser.gymroutine.databinding.FragmentEditWorkoutBinding
 import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutsListViewModel
 import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutsListViewModelFactory
+import com.aldreduser.gymroutine.utils.FIRST_TAB_TITLE
+import com.aldreduser.gymroutine.utils.MY_LOG
 
 class EditWorkoutFragment : Fragment() {
 
@@ -41,7 +43,6 @@ class EditWorkoutFragment : Fragment() {
             chooseCategorySpinner.setOnClickListener { spinnerOnClick() }
             editWorkoutDoneFab.setOnClickListener { doneFabOnClick() }
         }
-        setUpAppBar()
     }
 
     override fun onDestroyView() {
@@ -78,6 +79,9 @@ class EditWorkoutFragment : Fragment() {
     private fun doneFabOnClick() {
         // saves workout and goes back to the main screen
         // todo: handle fab click
+
+        // if there are no more workouts in this category, remove tab
+        // else if this is a new category, make new tab
     }
 
     // SETUP FUNCTIONS //
@@ -99,8 +103,4 @@ class EditWorkoutFragment : Fragment() {
         workoutsListViewModel = ViewModelProvider(
                 this, viewModelFactory).get(WorkoutsListViewModel::class.java)
     }
-
-    // HELPER FUNCTIONS //
-
 }
-

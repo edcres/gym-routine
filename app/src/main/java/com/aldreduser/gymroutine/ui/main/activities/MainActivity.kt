@@ -68,9 +68,6 @@ class MainActivity : AppCompatActivity() {
 
     private var binding: ActivityMainBinding? = null
     private lateinit var workoutsListViewModel: WorkoutsListViewModel
-    private val activityViewPager2Adapter: TabsViewPager2Adapter by lazy {
-        TabsViewPager2Adapter(this)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -118,7 +115,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpTabs() {
-        binding!!.workoutsListViewPager2.adapter = activityViewPager2Adapter
+        workoutsListViewModel.setViewPager2Adapter(this)
+        binding!!.workoutsListViewPager2.adapter = workoutsListViewModel.getViewPager2Adapter()
 
         TabLayoutMediator(binding!!.mainTabLayout, binding!!.workoutsListViewPager2) { tab, position ->
             tab.text = workoutsListViewModel.tabTitles[position]
@@ -128,9 +126,5 @@ class MainActivity : AppCompatActivity() {
     // HELPER FUNCTIONS //
     fun getViewModel(): WorkoutsListViewModel {
         return workoutsListViewModel
-    }
-
-    fun getViewPager2Adapter(): TabsViewPager2Adapter {
-        return activityViewPager2Adapter
     }
 }

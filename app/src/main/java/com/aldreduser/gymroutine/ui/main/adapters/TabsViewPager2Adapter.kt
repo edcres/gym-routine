@@ -6,7 +6,6 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.aldreduser.gymroutine.ui.main.activities.MainActivity
 import com.aldreduser.gymroutine.ui.main.fragments.WorkoutsGroupListFragment
-import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutsListViewModel
 import com.aldreduser.gymroutine.utils.MY_LOG
 
 class TabsViewPager2Adapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
