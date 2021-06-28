@@ -12,21 +12,15 @@ import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutsListViewModelFactory
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
 
-// todo: ViewPager2
-// do: adapter, fragment, activity
-// add/remove tabs from 'EditWorkoutFragment'
-
-//todo: get rid of allWorkouts fragment
-//todo: get rid of 'MainViewPager2Adapter'
-//todo: get rid of 'AllWorkoutsListAdapter'
-
 // todo: edit viewModel and fragment views connected to it
 // - each viewModel variable will correspond to each view widget (make more variables)
 // - make livedata lists. Hold sets, reps, and weight (maybe look at old app for reference)
 
+// todo: delete 'EditWorkoutFragment.kt'
+// todo: delete 'fragment_edit_workout_fragment.xml'
+
 // todo: Room Database
 // learn about databases multiple entities with relations
-
 // todo: set up all the queries
 
 // todo: every time the activity is created, populate 'tabTitles' and 'titlesOrdinals' (located in the viewModel) with each workout group

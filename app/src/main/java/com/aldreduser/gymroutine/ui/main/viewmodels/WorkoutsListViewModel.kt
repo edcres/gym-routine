@@ -24,58 +24,17 @@ class WorkoutsListViewModel(
         private val repository: WorkoutRepository,
         private val application: Application) : ViewModel() {
 
-    // ViewPager2 variables
-    // Complete Lists
+    // Tab variables
+    private var currentCategoryToDisplay: String = FIRST_TAB_TITLE
+    private var currentWorkoutToEdit: String = FIRST_TAB_TITLE
+    val tabTitles: MutableList<String> = mutableListOf(FIRST_TAB_TITLE)
+    val tabTitlesOrdinals: MutableMap<String, Int> = mutableMapOf(FIRST_TAB_TITLE to 0)
+    private var activityViewPager2Adapter: TabsViewPager2Adapter? = null
+
+    // Get Complete Lists from Repo (these should happen when the viewmodel is called)
     val allWorkoutGroups: LiveData<List<WorkoutGroup>> = repository.allWorkoutGroups.asLiveData()
     val allWorkouts: LiveData<List<Workout>> = repository.allWorkouts.asLiveData()
     val allWorkoutSets: LiveData<List<WorkoutSet>> = repository.allWorkoutSets.asLiveData()
-
-//    private val currentCategoryFragment: WorkoutsGroupListFragment? = null
-    val tabTitles: MutableList<String> = mutableListOf(FIRST_TAB_TITLE)
-    val tabTitlesOrdinals: MutableMap<String, Int> = mutableMapOf(FIRST_TAB_TITLE to 0)
-    var activityViewPager2Adapter: TabsViewPager2Adapter? = null
-
-
-    // DataBound Variables ()
-    // In the future, user can add maybe infinite sets and these variables will be lists: sets, reps, weight
-    private val _set1 = MutableLiveData<String>()
-    val set1: MutableLiveData<String> = _set1
-    private val _set2 = MutableLiveData<String>()
-    val set2: MutableLiveData<String> = _set2
-    private val _set3 = MutableLiveData<String>()
-    val set3: MutableLiveData<String> = _set3
-    private val _set4 = MutableLiveData<String>()
-    val set4: MutableLiveData<String> = _set4
-    private val _set5 = MutableLiveData<String>()
-    val set5: MutableLiveData<String> = _set5
-    private val _set6 = MutableLiveData<String>()
-    val set6: MutableLiveData<String> = _set6
-    // Reps
-    private val _set1Reps = MutableLiveData<String>()
-    val set1Reps: MutableLiveData<String> = _set1Reps
-    private val _set2Reps = MutableLiveData<String>()
-    val set2Reps: MutableLiveData<String> = _set2Reps
-    private val _set3Reps = MutableLiveData<String>()
-    val set3Reps: MutableLiveData<String> = _set3Reps
-    private val _set4Reps = MutableLiveData<String>()
-    val set4Reps: MutableLiveData<String> = _set4Reps
-    private val _set5Reps = MutableLiveData<String>()
-    val set5Reps: MutableLiveData<String> = _set5Reps
-    private val _set6Reps = MutableLiveData<String>()
-    val set6Reps: MutableLiveData<String> = _set5Reps
-    // Weight
-    private val _set1Weight = MutableLiveData<String>()
-    val set1Weight: MutableLiveData<String> = _set1Weight
-    private val _set2Weight = MutableLiveData<String>()
-    val set2Weight: MutableLiveData<String> = _set2Weight
-    private val _set3Weight = MutableLiveData<String>()
-    val set3Weight: MutableLiveData<String> = _set3Weight
-    private val _set4Weight = MutableLiveData<String>()
-    val set4Weight: MutableLiveData<String> = _set4Weight
-    private val _set5Weight = MutableLiveData<String>()
-    val set5Weight: MutableLiveData<String> = _set5Weight
-    private val _set6Weight = MutableLiveData<String>()
-    val set6Weight: MutableLiveData<String> = _set6Weight
 
     // DATABASE QUERIES //
     // Workout Group //
@@ -94,16 +53,7 @@ class WorkoutsListViewModel(
         repository.insert(workoutSet)
     }
 
-    // HELPER FUNCTIONS //
-    fun setViewPager2Adapter(context: Context) {
-        // todo: possible bug: context might not turn into FragmentActivity
-        activityViewPager2Adapter = TabsViewPager2Adapter(context as FragmentActivity)
-    }
-    fun getViewPager2Adapter(): TabsViewPager2Adapter {
-        return activityViewPager2Adapter!!
-    }
-
-    // QUERY TABS //
+    // MANAGE TABS //
     private fun addTab(titleToAdd: String) {
         val nextTitlePosition = tabTitles.size - 1
         val nextOrdinalId = tabTitlesOrdinals.size - 1
@@ -123,12 +73,59 @@ class WorkoutsListViewModel(
             activityViewPager2Adapter!!.removeTab(titleToRemove)
         }
     }
+
+    // HELPER FUNCTIONS //
+    fun setViewPager2Adapter(context: Context) {
+        // todo: possible bug: context might not turn into FragmentActivity
+        activityViewPager2Adapter = TabsViewPager2Adapter(context as FragmentActivity)
+    }
+    fun getViewPager2Adapter(): TabsViewPager2Adapter {
+        return activityViewPager2Adapter!!
+    }
 }
 
-// get data from database concurrently
-// ( from '3(RecyclerViewClickHandler)_SleepQuality' in the 'SleepTrackerViewModel' )
-//private fun initializeTonight() {
-//    viewModelScope.launch {
-//        tonight.value = getTonightFromDatabase()
+
+
+
+//    //this was supposed to store all the workout reps from all the workouts, but i don't think i need it anymore
+//    val viewModelWorkoutReps: LiveData<MutableList<MutableList<Int>>> =
+//        MutableLiveData<MutableList<MutableList<Int>>>()
+
+// probably get rid of these
+// These are commented out bc I will use lists instead, and maybe not connect them to livedata
+//    // In the future, user can add maybe infinite sets and these variables will be lists: sets, reps, weight
+//    private val _set1 = MutableLiveData<String>(); val set1: MutableLiveData<String> = _set1
+//    private val _set2 = MutableLiveData<String>(); val set2: MutableLiveData<String> = _set2
+//    private val _set3 = MutableLiveData<String>(); val set3: MutableLiveData<String> = _set3
+//    private val _set4 = MutableLiveData<String>(); val set4: MutableLiveData<String> = _set4
+//    private val _set5 = MutableLiveData<String>(); val set5: MutableLiveData<String> = _set5
+//    private val _set6 = MutableLiveData<String>(); val set6: MutableLiveData<String> = _set6
+//    // Reps
+//    private val _set1Reps = MutableLiveData<String>(); val set1Reps: MutableLiveData<String> = _set1Reps
+//    private val _set2Reps = MutableLiveData<String>(); val set2Reps: MutableLiveData<String> = _set2Reps
+//    private val _set3Reps = MutableLiveData<String>(); val set3Reps: MutableLiveData<String> = _set3Reps
+//    private val _set4Reps = MutableLiveData<String>(); val set4Reps: MutableLiveData<String> = _set4Reps
+//    private val _set5Reps = MutableLiveData<String>(); val set5Reps: MutableLiveData<String> = _set5Reps
+//    private val _set6Reps = MutableLiveData<String>(); val set6Reps: MutableLiveData<String> = _set6Reps
+//    // Weight
+//    private val _set1Weight = MutableLiveData<String>(); val set1Weight: MutableLiveData<String> = _set1Weight
+//    private val _set2Weight = MutableLiveData<String>(); val set2Weight: MutableLiveData<String> = _set2Weight
+//    private val _set3Weight = MutableLiveData<String>(); val set3Weight: MutableLiveData<String> = _set3Weight
+//    private val _set4Weight = MutableLiveData<String>(); val set4Weight: MutableLiveData<String> = _set4Weight
+//    private val _set5Weight = MutableLiveData<String>(); val set5Weight: MutableLiveData<String> = _set5Weight
+//    private val _set6Weight = MutableLiveData<String>(); val set6Weight: MutableLiveData<String> = _set6Weight
+
+
+//probably get rid of this, will be replaced by binding utils
+//    // return the position of the current workout in the 'allWorkouts'
+//    fun getCurrentWorkoutPosition(currentWorkoutName: String): Int {
+//        var workoutPosition = 0
+//        // add each workout name to a list of workout names
+//        allWorkouts.value!!.forEach { v ->
+//            if (currentWorkoutName == v.thisWorkoutName) {
+//                return workoutPosition
+//            }
+//            workoutPosition ++
+//        }
+//        return workoutPosition
 //    }
-//}

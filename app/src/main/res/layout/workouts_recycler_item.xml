@@ -43,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textSize="18sp"
-                    workoutGroupName="@{workoutEntity}"
+                    workoutName="@{workoutEntity}"
                     android:inputType="text|number" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -109,14 +109,14 @@
 
                 <EditText
                     android:id="@+id/set_1_reps_text"
+                    workoutReps="@{workoutSetEntity}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:importantForAutofill="no"
                     android:inputType="number"
-                    tools:text="10"
-                    workoutReps="@{workoutSetEntity}"
-                    android:importantForAutofill="no" />
+                    tools:text="10" />
 
                 <EditText
                     android:id="@+id/set_1_weight_text"

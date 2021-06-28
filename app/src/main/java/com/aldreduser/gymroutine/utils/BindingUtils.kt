@@ -8,10 +8,14 @@ import com.aldreduser.gymroutine.data.model.entities.WorkoutGroup
 
 // possible bug: maybe these shouldn't be TextViews
 
-@BindingAdapter("workoutGroupName")
+//todo: learn about sqlite relationships and display the correct weights and reps
+// per workout -> workout set -> reps
+// per workout -> workout set -> weight
+
+@BindingAdapter("workoutName")
 fun TextView.setWorkoutGroupName(item: Workout) {
     item?.let{
-        text = item.workoutGroup
+        text = item.thisWorkoutName
     }
 }
 
@@ -28,10 +32,3 @@ fun TextView.setWorkoutWeight(item: WorkoutSet) {
         text = item.weight.toString()
     }
 }
-
-//@BindingAdapter("setWorkoutGroupName")
-//fun TextView.setWorkoutGroupName(item: WorkoutGroup) {
-//    item?.let{
-//        text = convertToString(item.groupName)
-//    }
-//}

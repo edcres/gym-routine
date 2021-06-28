@@ -15,9 +15,15 @@ import kotlinx.coroutines.flow.Flow
 class WorkoutRepository(private val database: WorkoutsRoomDatabase)
 {
     // todo: Add all the other DAOs with all their query functions. ()
-    // WORKOUT GROUP //
-    // getAlphabetizedWorkoutGroups
+
+    // get names from repository
+    //names of WorkoutGroups
     val allWorkoutGroups: Flow<List<WorkoutGroup>> = database.workoutGroupDao().getAlphabetizedWorkoutGroups()
+    //names of Workouts
+    val allWorkouts: Flow<List<Workout>> = database.workoutDao().getAlphabetizedWorkouts()
+    //names of WorkoutSets
+    val allWorkoutSets: Flow<List<WorkoutSet>> = database.workoutSetDao().getAlphabetizedSets()
+
     // insert
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
@@ -28,8 +34,6 @@ class WorkoutRepository(private val database: WorkoutsRoomDatabase)
     // workoutGroup+workout relationship (maybe, idk how this would work)
 
     // WORKOUT
-    // getAlphabetizedWorkouts
-    val allWorkouts: Flow<List<Workout>> = database.workoutDao().getAlphabetizedWorkouts()
     // insert
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
@@ -41,8 +45,6 @@ class WorkoutRepository(private val database: WorkoutsRoomDatabase)
     // workout+workoutSet relationship (maybe, idk how this would work)
 
     // WORKOUT SET
-    // getAlphabetizedSets
-    val allWorkoutSets: Flow<List<WorkoutSet>> = database.workoutSetDao().getAlphabetizedSets()
     // insert
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
