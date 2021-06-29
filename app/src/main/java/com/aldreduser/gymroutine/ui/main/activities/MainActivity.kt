@@ -19,9 +19,16 @@ import kotlinx.android.synthetic.main.activity_main.*
 // todo: delete 'EditWorkoutFragment.kt'
 // todo: delete 'fragment_edit_workout_fragment.xml'
 
+// had to take out ="@=
+// need to find a way to send the value to the repository
+
+// 2 way databinding might be buggy in the views, check =@=
+
 // todo: Room Database
-// learn about databases multiple entities with relations
-// todo: set up all the queries
+// set up all the queries
+// todo: learn about sqlite relationships and display the correct weights and reps
+// per workout -> workout set -> reps
+// per workout -> workout set -> weight
 
 // todo: every time the activity is created, populate 'tabTitles' and 'titlesOrdinals' (located in the viewModel) with each workout group
 // todo: when the app is started, if 'allWorkoutGroups' in the database is empty: add 'All Workouts'
