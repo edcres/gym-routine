@@ -1,4 +1,4 @@
 package com.aldreduser.gymroutine.utils
 
-const val MY_LOG = "MY_LOG"
+const val GLOBAL_TAG = "Global TAG"
 const val FIRST_TAB_TITLE = "All Workouts"

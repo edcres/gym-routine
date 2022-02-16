@@ -12,23 +12,22 @@ import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutsListViewModelFactory
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
 
-// todo: edit viewModel and fragment views connected to it
-// - each viewModel variable will correspond to each view widget (make more variables)
-// - make livedata lists. Hold sets, reps, and weight (maybe look at old app for reference)
-
-// todo: delete 'EditWorkoutFragment.kt'
-// todo: delete 'fragment_edit_workout_fragment.xml'
-
+// todo: need to find a way to send xml widget values to the repository
 // had to take out ="@=
-// need to find a way to send the value to the repository
-
-// 2 way databinding might be buggy in the views, check =@=
+// there is a way to do 2-way databinding with binding adapters, but i rather not
+//  example: 'TwoWaySample' app -> 'interval-timer.xml' -> 'numberOfSets' property (has getter and setter)
 
 // todo: Room Database
 // set up all the queries
 // todo: learn about sqlite relationships and display the correct weights and reps
 // per workout -> workout set -> reps
 // per workout -> workout set -> weight
+
+// todo: Might have to get rid of WorkoutGroup Entity
+// bc i don't think the table columns can be added and removed dynamically
+//      (also the column 'group_name' is wrong, should be the names of the workout groups which are added at runtime)
+// also get rid of workoutGroup and Workout
+// maybe have it stored some other way so the app makes the tabs and ots contents faster
 
 // todo: every time the activity is created, populate 'tabTitles' and 'titlesOrdinals' (located in the viewModel) with each workout group
 // todo: when the app is started, if 'allWorkoutGroups' in the database is empty: add 'All Workouts'
@@ -39,6 +38,10 @@ import kotlinx.android.synthetic.main.activity_main.*
 // Codelabs https://developer.android.com/codelabs/kotlin-android-training-recyclerview-fundamentals#0
 // Display workouts by categories (or all) in the recyclerViews.
 // add workout to recyclerview and refresh list
+
+// todo: the viewModel might not be connected to the edit activity
+// maybe use the app context instead of the main activity context
+//  -to do this, extend 'AndroidViewModel()' instead of 'ViewModel()'
 
 // todo: navigation (edit)
 // (make sure this is good) navigation and arrow icon in all activities (except the one that opens when the app opens)

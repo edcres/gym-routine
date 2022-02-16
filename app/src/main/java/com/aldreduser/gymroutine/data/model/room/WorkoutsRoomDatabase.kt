@@ -9,10 +9,7 @@ import com.aldreduser.gymroutine.data.model.entities.WorkoutGroup
 import com.aldreduser.gymroutine.data.model.entities.WorkoutSet
 
 // Creates the database: Annotates class to be a Room Database with a table (entity) of the Word class
-@Database(entities = arrayOf(
-    WorkoutGroup::class,
-    Workout::class,
-    WorkoutSet::class),
+@Database(entities = [WorkoutGroup::class, Workout::class, WorkoutSet::class],
     version = 1,
     exportSchema = false)
 abstract class WorkoutsRoomDatabase: RoomDatabase() {
@@ -22,7 +19,6 @@ abstract class WorkoutsRoomDatabase: RoomDatabase() {
     abstract fun workoutSetDao(): WorkoutSetDao
 
     companion object {
-        // Singleton prevents multiple instances of database opening at the same time.
         @Volatile
         private var INSTANCE: WorkoutsRoomDatabase? = null
         private const val DATABASE_NAME = "workouts_database"
@@ -37,7 +33,6 @@ abstract class WorkoutsRoomDatabase: RoomDatabase() {
                     DATABASE_NAME
                 ).fallbackToDestructiveMigration().build()
                 INSTANCE = instance
-                // return instance
                 instance
             }
         }
