@@ -5,21 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
-import com.aldreduser.gymroutine.R
 import com.aldreduser.gymroutine.data.WorkoutRepository
 import com.aldreduser.gymroutine.data.model.room.WorkoutsRoomDatabase
 import com.aldreduser.gymroutine.databinding.FragmentWorkoutsGroupListBinding
 import com.aldreduser.gymroutine.ui.main.activities.MainActivity
-import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutsListViewModel
-import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutsListViewModelFactory
+import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutListViewModel
+import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutListViewModelFactory
 import com.aldreduser.gymroutine.utils.FIRST_TAB_TITLE
 
 class WorkoutsGroupListFragment : Fragment() {
 
     private var binding: FragmentWorkoutsGroupListBinding? = null
-    private lateinit var workoutsListViewModel: WorkoutsListViewModel
+    private lateinit var workoutListViewModel: WorkoutListViewModel
     private var tabWorkoutGroup = FIRST_TAB_TITLE
 //    private val recyclerviewAdapter: //todo: instantiate the list recyclerview adapter here
 
@@ -37,7 +35,7 @@ class WorkoutsGroupListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding?.apply {
             lifecycleOwner = viewLifecycleOwner
-            viewModel = workoutsListViewModel
+            viewModel = workoutListViewModel
         }
     }
 
@@ -51,9 +49,9 @@ class WorkoutsGroupListFragment : Fragment() {
         val application = requireNotNull(this.activity).application
         val database = WorkoutsRoomDatabase.getInstance(application)
         val repository = WorkoutRepository(database)
-        val viewModelFactory = WorkoutsListViewModelFactory(repository, application)
-        workoutsListViewModel = ViewModelProvider(
-                this, viewModelFactory).get(WorkoutsListViewModel::class.java)
+        val viewModelFactory = WorkoutListViewModelFactory(repository, application)
+        workoutListViewModel = ViewModelProvider(
+                this, viewModelFactory).get(WorkoutListViewModel::class.java)
     }
 
     companion object{

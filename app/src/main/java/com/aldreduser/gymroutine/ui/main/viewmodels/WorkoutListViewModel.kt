@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
 
 // The ViewModel will transform the data from the Repository,
 //  from Flow to LiveData and exposes the list of words as LiveData to the UI.
-class WorkoutsListViewModel(
+class WorkoutListViewModel(
         private val repository: WorkoutRepository,
         private val application: Application) : ViewModel() {
 

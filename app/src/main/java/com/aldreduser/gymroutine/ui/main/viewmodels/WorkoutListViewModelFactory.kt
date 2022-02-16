@@ -8,13 +8,13 @@ import java.lang.IllegalArgumentException
 
 // 'WorkoutsListViewModelFactory' returns an instance of the 'WorkoutsListViewModel' class
 // the viewModelFactory will be responsible for instantiating the ScoreViewModel object.
-class WorkoutsListViewModelFactory(
+class WorkoutListViewModelFactory(
         private val repository: WorkoutRepository,
         private val application: Application) : ViewModelProvider.Factory{
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(WorkoutsListViewModel::class.java)) {
-            val mainActivityViewModel = WorkoutsListViewModel(repository, application)
+        if (modelClass.isAssignableFrom(WorkoutListViewModel::class.java)) {
+            val mainActivityViewModel = WorkoutListViewModel(repository, application)
             return mainActivityViewModel as T
         } else { throw IllegalArgumentException("Unknown ViewModel class") }
     }

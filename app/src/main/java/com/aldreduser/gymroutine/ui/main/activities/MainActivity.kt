@@ -6,9 +6,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.aldreduser.gymroutine.data.WorkoutRepository
 import com.aldreduser.gymroutine.data.model.room.WorkoutsRoomDatabase
 import com.aldreduser.gymroutine.databinding.ActivityMainBinding
-import com.aldreduser.gymroutine.ui.main.adapters.TabsViewPager2Adapter
-import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutsListViewModel
-import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutsListViewModelFactory
+import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutListViewModel
+import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutListViewModelFactory
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -71,7 +70,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private var binding: ActivityMainBinding? = null
-    private lateinit var workoutsListViewModel: WorkoutsListViewModel
+    private lateinit var workoutListViewModel: WorkoutListViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,7 +80,7 @@ class MainActivity : AppCompatActivity() {
         setUpViewModel()
         binding?.apply {
             lifecycleOwner = this@MainActivity
-            viewModel = workoutsListViewModel
+            viewModel = workoutListViewModel
             // bug cause: ViewModel is expecting arguments (copy them from the other app, I forgot which one, maybe two-way-databinding)
             addWorkoutFab.setOnClickListener { fabOnClick() }
         }
@@ -105,9 +104,9 @@ class MainActivity : AppCompatActivity() {
         val application = requireNotNull(this).application
         val database = WorkoutsRoomDatabase.getInstance(this)    // maybe not 'this', 'application' instead
         val repository = WorkoutRepository.getInstance(database)
-        val viewModelFactory = WorkoutsListViewModelFactory(repository, application)
-        workoutsListViewModel = ViewModelProvider(
-                this, viewModelFactory).get(WorkoutsListViewModel::class.java)
+        val viewModelFactory = WorkoutListViewModelFactory(repository, application)
+        workoutListViewModel = ViewModelProvider(
+                this, viewModelFactory).get(WorkoutListViewModel::class.java)
     }
 
     private fun setUpAppBar() {
@@ -119,16 +118,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpTabs() {
-        workoutsListViewModel.setViewPager2Adapter(this)
-        binding!!.workoutsListViewPager2.adapter = workoutsListViewModel.getViewPager2Adapter()
+        workoutListViewModel.setViewPager2Adapter(this)
+        binding!!.workoutsListViewPager2.adapter = workoutListViewModel.getViewPager2Adapter()
 
         TabLayoutMediator(binding!!.mainTabLayout, binding!!.workoutsListViewPager2) { tab, position ->
-            tab.text = workoutsListViewModel.tabTitles[position]
+            tab.text = workoutListViewModel.tabTitles[position]
         }.attach()
     }
 
     // HELPER FUNCTIONS //
-    fun getViewModel(): WorkoutsListViewModel {
-        return workoutsListViewModel
+    fun getViewModel(): WorkoutListViewModel {
+        return workoutListViewModel
     }
 }
