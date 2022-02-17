@@ -1,4 +1,4 @@
-package com.aldreduser.gymroutine.ui.main.viewmodels
+package com.aldreduser.gymroutine.ui.main.viewmodel
 
 import android.app.Application
 import android.content.Context
@@ -9,9 +9,7 @@ import com.aldreduser.gymroutine.data.WorkoutRepository
 import com.aldreduser.gymroutine.data.model.entities.Workout
 import com.aldreduser.gymroutine.data.model.entities.WorkoutGroup
 import com.aldreduser.gymroutine.data.model.entities.WorkoutSet
-import com.aldreduser.gymroutine.ui.main.activities.MainActivity
 import com.aldreduser.gymroutine.ui.main.adapters.TabsViewPager2Adapter
-import com.aldreduser.gymroutine.ui.main.fragments.WorkoutsGroupListFragment
 import com.aldreduser.gymroutine.utils.FIRST_TAB_TITLE
 import com.aldreduser.gymroutine.utils.MY_LOG
 import kotlinx.coroutines.launch

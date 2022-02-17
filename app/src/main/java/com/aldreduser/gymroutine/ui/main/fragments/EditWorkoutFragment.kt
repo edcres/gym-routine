@@ -8,12 +8,11 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
-import com.aldreduser.gymroutine.R
 import com.aldreduser.gymroutine.data.WorkoutRepository
 import com.aldreduser.gymroutine.data.model.room.WorkoutsRoomDatabase
 import com.aldreduser.gymroutine.databinding.FragmentEditWorkoutBinding
-import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutListViewModel
-import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutListViewModelFactory
+import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
+import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModelFactory
 
 class EditWorkoutFragment : Fragment() {
 

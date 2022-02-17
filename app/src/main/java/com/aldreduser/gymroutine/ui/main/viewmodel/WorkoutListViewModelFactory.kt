@@ -1,4 +1,4 @@
-package com.aldreduser.gymroutine.ui.main.viewmodels
+package com.aldreduser.gymroutine.ui.main.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.ViewModel

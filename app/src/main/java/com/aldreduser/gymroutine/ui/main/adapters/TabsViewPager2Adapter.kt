@@ -4,14 +4,14 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.aldreduser.gymroutine.ui.main.activities.MainActivity
+import com.aldreduser.gymroutine.ui.main.MainActivity
 import com.aldreduser.gymroutine.ui.main.fragments.WorkoutsGroupListFragment
 import com.aldreduser.gymroutine.utils.MY_LOG
 
 class TabsViewPager2Adapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
 
     private val thisHolderActivity = MainActivity()
-    private val listsViewModel = thisHolderActivity.getViewModel()
+    private val listsViewModel = ;
     private val tabTitles = listsViewModel.tabTitles
     private val tabTitlesOrdinals = listsViewModel.tabTitlesOrdinals
 

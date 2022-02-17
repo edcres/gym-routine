@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GymRoutine">
         <activity android:name=".ui.main.activities.EditWorkoutActivity"></activity>
-        <activity android:name=".ui.main.activities.MainActivity">
+        <activity android:name=".ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

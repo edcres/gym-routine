@@ -9,9 +9,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.aldreduser.gymroutine.data.WorkoutRepository
 import com.aldreduser.gymroutine.data.model.room.WorkoutsRoomDatabase
 import com.aldreduser.gymroutine.databinding.FragmentWorkoutsGroupListBinding
-import com.aldreduser.gymroutine.ui.main.activities.MainActivity
-import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutListViewModel
-import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutListViewModelFactory
+import com.aldreduser.gymroutine.ui.main.MainActivity
+import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
+import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModelFactory
 import com.aldreduser.gymroutine.utils.FIRST_TAB_TITLE
 
 class WorkoutsGroupListFragment : Fragment() {

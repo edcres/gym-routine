@@ -1,15 +1,8 @@
-package com.aldreduser.gymroutine.ui.main.activities
+package com.aldreduser.gymroutine.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
-import com.aldreduser.gymroutine.data.WorkoutRepository
-import com.aldreduser.gymroutine.data.model.room.WorkoutsRoomDatabase
-import com.aldreduser.gymroutine.databinding.ActivityMainBinding
-import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutListViewModel
-import com.aldreduser.gymroutine.ui.main.viewmodels.WorkoutListViewModelFactory
-import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.android.synthetic.main.activity_main.*
+import com.aldreduser.gymroutine.R
 
 // todo: need to find a way to send xml widget values to the repository
 // had to take out ="@=
@@ -68,66 +61,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 // reuse the same fragment to add more tabs, maybe cap the maxNumOfTabs
 
 class MainActivity : AppCompatActivity() {
-
-    private var binding: ActivityMainBinding? = null
-    private lateinit var workoutListViewModel: WorkoutListViewModel
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding?.root)
-
-        setUpViewModel()
-        binding?.apply {
-            lifecycleOwner = this@MainActivity
-            viewModel = workoutListViewModel
-            // bug cause: ViewModel is expecting arguments (copy them from the other app, I forgot which one, maybe two-way-databinding)
-            addWorkoutFab.setOnClickListener { fabOnClick() }
-        }
-        setUpAppBar()
-        setUpTabs()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        binding = null
-    }
-
-    // CLICK HANDLERS //
-    private fun fabOnClick() {
-        // add workout
-        // todo: handle click
-    }
-
-    // SETUP FUNCTIONS //
-    private fun setUpViewModel() {
-        val application = requireNotNull(this).application
-        val database = WorkoutsRoomDatabase.getInstance(this)    // maybe not 'this', 'application' instead
-        val repository = WorkoutRepository.getInstance(database)
-        val viewModelFactory = WorkoutListViewModelFactory(repository, application)
-        workoutListViewModel = ViewModelProvider(
-                this, viewModelFactory).get(WorkoutListViewModel::class.java)
-    }
-
-    private fun setUpAppBar() {
-        binding?.mainActivityTopAppbar?.title = "Workouts"
-
-        binding?.mainActivityTopAppbar?.setNavigationOnClickListener {
-            // todo: handle navigation icon press
-        }
-    }
-
-    private fun setUpTabs() {
-        workoutListViewModel.setViewPager2Adapter(this)
-        binding!!.workoutsListViewPager2.adapter = workoutListViewModel.getViewPager2Adapter()
-
-        TabLayoutMediator(binding!!.mainTabLayout, binding!!.workoutsListViewPager2) { tab, position ->
-            tab.text = workoutListViewModel.tabTitles[position]
-        }.attach()
-    }
-
-    // HELPER FUNCTIONS //
-    fun getViewModel(): WorkoutListViewModel {
-        return workoutListViewModel
+        setContentView(R.layout.activity_main)
     }
 }
