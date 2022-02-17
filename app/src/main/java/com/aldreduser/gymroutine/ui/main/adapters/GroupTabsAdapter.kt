@@ -5,18 +5,18 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.aldreduser.gymroutine.ui.main.MainActivity
-import com.aldreduser.gymroutine.ui.main.fragments.WorkoutsGroupListFragment
-import com.aldreduser.gymroutine.utils.MY_LOG
+import com.aldreduser.gymroutine.ui.main.fragments.WorkoutListFragment
 
 class TabsViewPager2Adapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
 
+    // TODO: do not instantiate the main activity here
     private val thisHolderActivity = MainActivity()
-    private val listsViewModel = ;
+    private val listsViewModel = thisHolderActivity.getViewModel()
     private val tabTitles = listsViewModel.tabTitles
     private val tabTitlesOrdinals = listsViewModel.tabTitlesOrdinals
 
     override fun createFragment(position: Int): Fragment {
-        return WorkoutsGroupListFragment.getInstance(tabTitles.size-1)
+        return WorkoutListFragment.getInstance(tabTitles.size-1)        // todo: do not do this
     }
 
     override fun getItemCount(): Int {

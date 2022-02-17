@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
-import com.aldreduser.gymroutine.data.WorkoutRepository
+import com.aldreduser.gymroutine.data.WorkoutsRepository
 import com.aldreduser.gymroutine.data.model.room.WorkoutsRoomDatabase
 import com.aldreduser.gymroutine.databinding.FragmentEditWorkoutBinding
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
@@ -27,7 +27,7 @@ class EditWorkoutFragment : Fragment() {
         val fragmentBinding = FragmentEditWorkoutBinding
             .inflate(inflater, container, false)
         binding = fragmentBinding
-        return return fragmentBinding.root
+        return fragmentBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -91,7 +91,7 @@ class EditWorkoutFragment : Fragment() {
     private fun setUpViewModel() {
         val application = requireActivity().application
         val database = WorkoutsRoomDatabase.getInstance(application)
-        val repository = WorkoutRepository.getInstance(database)
+        val repository = WorkoutsRepository.getInstance(database)
         val viewModelFactory = WorkoutListViewModelFactory(repository, application)
         workoutListViewModel = ViewModelProvider(
             this, viewModelFactory).get(WorkoutListViewModel::class.java)

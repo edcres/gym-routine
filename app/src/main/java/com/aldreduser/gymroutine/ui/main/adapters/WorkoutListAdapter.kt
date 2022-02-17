@@ -2,15 +2,20 @@ package com.aldreduser.gymroutine.ui.main.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.aldreduser.gymroutine.data.model.entities.Workout
 import com.aldreduser.gymroutine.databinding.WorkoutsRecyclerItemBinding
+import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
 
 // todo: bind all other entities, not just 'Workout' entity
 
-class WorkoutCategoryListAdapter() :
+class WorkoutCategoryListAdapter(
+    val listsViewModel: WorkoutListViewModel,
+    private val fragLifecycleOwner: LifecycleOwner
+) :
     ListAdapter<Workout, WorkoutCategoryListAdapter.ViewHolder>(WorkoutDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) =
