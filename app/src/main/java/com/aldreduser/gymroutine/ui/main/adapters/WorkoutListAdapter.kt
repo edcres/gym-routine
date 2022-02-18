@@ -7,48 +7,53 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.aldreduser.gymroutine.data.model.entities.Workout
-import com.aldreduser.gymroutine.databinding.WorkoutsRecyclerItemBinding
+import com.aldreduser.gymroutine.databinding.WorkoutItemBinding
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
 
-// todo: bind all other entities, not just 'Workout' entity
-
-class WorkoutCategoryListAdapter(
-    val listsViewModel: WorkoutListViewModel,
+class WorkoutListAdapter(
+    private val workoutsViewModel: WorkoutListViewModel,
     private val fragLifecycleOwner: LifecycleOwner
 ) :
-    ListAdapter<Workout, WorkoutCategoryListAdapter.ViewHolder>(WorkoutDiffCallback()) {
+    ListAdapter<Workout, WorkoutListAdapter.WorkoutsViewHolder>(WorkoutDiffCallback()) {
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) =
-        holder.bind(getItem(position)!!)
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.from(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkoutsViewHolder {
+        return WorkoutsViewHolder.from(workoutsViewModel, fragLifecycleOwner, parent)
     }
 
-    class ViewHolder private constructor(val binding: WorkoutsRecyclerItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    override fun onBindViewHolder(holderWorkouts: WorkoutsViewHolder, position: Int) =
+        holderWorkouts.bind(getItem(position))
+
+    class WorkoutsViewHolder private constructor(
+        val workoutsViewModel: WorkoutListViewModel,
+        private val fragLifecycleOwner: LifecycleOwner,
+        val binding: WorkoutItemBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Workout) {
-            binding.workoutEntity = item
-            binding.executePendingBindings()    // idk what this is for
+            binding.apply {
+
+                binding.executePendingBindings()
+            }
         }
 
         companion object {
-            fun from(parent: ViewGroup): ViewHolder {
+            fun from(
+                workoutsViewModel: WorkoutListViewModel,
+                fragLifecycleOwner: LifecycleOwner,
+                parent: ViewGroup
+            ): WorkoutsViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = WorkoutsRecyclerItemBinding.inflate(layoutInflater, parent, false)
-                return ViewHolder(binding)
+                val binding = WorkoutItemBinding.inflate(layoutInflater, parent, false)
+                return WorkoutsViewHolder(workoutsViewModel, fragLifecycleOwner, binding)
             }
         }
     }
 }
 
 class WorkoutDiffCallback : DiffUtil.ItemCallback<Workout>() {
-
     override fun areItemsTheSame(oldItem: Workout, newItem: Workout): Boolean {
         return oldItem.thisWorkoutName == newItem.thisWorkoutName
     }
-
     override fun areContentsTheSame(oldItem: Workout, newItem: Workout): Boolean {
         return oldItem == newItem
     }

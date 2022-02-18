@@ -1,17 +1,16 @@
 package com.aldreduser.gymroutine.ui.main.viewmodel
 
 import android.app.Application
-import android.content.Context
 import android.util.Log
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.*
 import com.aldreduser.gymroutine.data.WorkoutsRepository
 import com.aldreduser.gymroutine.data.model.entities.Workout
 import com.aldreduser.gymroutine.data.model.entities.WorkoutGroup
 import com.aldreduser.gymroutine.data.model.entities.WorkoutSet
 import com.aldreduser.gymroutine.data.model.room.WorkoutsRoomDatabase
-import com.aldreduser.gymroutine.ui.main.adapters.TabsViewPager2Adapter
+import com.aldreduser.gymroutine.ui.main.adapters.GroupTabsAdapter
 import com.aldreduser.gymroutine.utils.FIRST_TAB_TITLE
+import com.aldreduser.gymroutine.utils.GLOBAL_TAG
 import kotlinx.coroutines.launch
 
 // The ViewModel will transform the data from the Repository,
@@ -23,9 +22,6 @@ class WorkoutListViewModel : ViewModel() {
 
     var groupToDisplay: String = FIRST_TAB_TITLE
     val groupsOrdinals: MutableMap<String, Int> = mutableMapOf(FIRST_TAB_TITLE to 0)
-
-    private lateinit var activityViewPager2Adapter: TabsViewPager2Adapter
-    // Get Complete Lists from Repo (these should happen when the viewmodel is called)
 
     // todo: merge 'groups' with 'workoutGroups' and make all of these observable liveData
     private val _groups = MutableLiveData<MutableList<WorkoutGroup>>()  // repository.allWorkoutGroups.asLiveData()
@@ -62,31 +58,28 @@ class WorkoutListViewModel : ViewModel() {
     }
     // DATABASE QUERIES //
 
-    // TABS //
-    fun setViewPager2Adapter(context: Context) {
-        // todo: possible bug: context might not turn into FragmentActivity
-        activityViewPager2Adapter = TabsViewPager2Adapter(context as FragmentActivity)
-    }
-    fun getViewPager2Adapter(): TabsViewPager2Adapter {
-        return activityViewPager2Adapter
-    }
-    private fun addTab(titleToAdd: String) {
+
+    // todo: have an observer in startFragment for when a group is added/removed.
+    //      and call this function from the view
+    private fun addTab(titleToAdd: String, groupTabsAdapter: GroupTabsAdapter) {
         val nextTitlePosition = groupNames.size - 1
         val nextOrdinalId = groupsOrdinals.size - 1
 
-        // todo: if 'tabTitles' contains 'nextTitle', don't add it, pop-up dialog to replace the title
-
         if(!groupNames.contains(titleToAdd)) {
-            activityViewPager2Adapter.addTab(nextOrdinalId+1, titleToAdd)
+            // todo: possible bug: idk if this 'groupTabsAdapter' might be the same
+            //      instance as the one being passes from the view
+            //      -- If it doesn't work, try returning the ordinal
+            groupTabsAdapter.addTab(nextOrdinalId+1, titleToAdd)
         } else {
-            Log.d("${MY_LOG}Activity", "\t\t titles contains next title " +
+            Log.d("${GLOBAL_TAG}Activity", "\t\t titles contains next title " +
                     "\t\t \${$groupNames} $titleToAdd")
         }
     }
-    private fun removeTab(titleToRemove: String) {
+
+    private fun removeTab(titleToRemove: String, groupTabsAdapter: GroupTabsAdapter) {
         val numOfTabs = groupNames.size
         if (numOfTabs > 1 && titleToRemove != FIRST_TAB_TITLE) {
-            activityViewPager2Adapter.removeTab(titleToRemove)
+            groupTabsAdapter.removeTab(titleToRemove)
         }
     }
     // TABS //

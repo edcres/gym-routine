@@ -6,20 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
-import com.aldreduser.gymroutine.data.WorkoutsRepository
-import com.aldreduser.gymroutine.data.model.room.WorkoutsRoomDatabase
+import androidx.recyclerview.widget.GridLayoutManager
 import com.aldreduser.gymroutine.databinding.FragmentWorkoutListBinding
-import com.aldreduser.gymroutine.ui.main.adapters.WorkoutCategoryListAdapter
+import com.aldreduser.gymroutine.ui.main.adapters.WorkoutListAdapter
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
-import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModelFactory
 
 class WorkoutListFragment : Fragment() {
 
-    private val fragmentTAG = "WorkoutListFragmentTAG"
+    private val fragmentTAG = "Workout List FragmentTAG"
     private var binding: FragmentWorkoutListBinding? = null
-    private val workoutListViewModel: WorkoutListViewModel by activityViewModels()
-    private lateinit var recyclerviewAdapter: WorkoutCategoryListAdapter
+    private val viewModel: WorkoutListViewModel by activityViewModels()
+    private lateinit var recyclerAdapter: WorkoutListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,6 +24,7 @@ class WorkoutListFragment : Fragment() {
     ): View? {
         val fragmentBinding = FragmentWorkoutListBinding.inflate(inflater ,container, false)
         binding = fragmentBinding
+        recyclerAdapter = WorkoutListAdapter(viewModel, viewLifecycleOwner)
         return fragmentBinding.root
     }
 
@@ -34,6 +32,8 @@ class WorkoutListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding?.apply {
             lifecycleOwner = viewLifecycleOwner
+            workoutListRecycler.adapter = recyclerAdapter
+            workoutListRecycler.layoutManager = GridLayoutManager(requireContext(), 2)
         }
     }
 
@@ -41,17 +41,4 @@ class WorkoutListFragment : Fragment() {
         super.onDestroyView()
         binding = null
     }
-
-    // SET UP FUNCTIONS //
-
-//    companion object{
-//        // The Fragment retrieves the Item from the List and sets the group category for this tab
-//        fun getInstance(titleId: Int): WorkoutListFragment {
-//            val thisHolderActivity = MainActivity()
-//            val thisWorkoutListFragment = WorkoutListFragment()
-//            val categoryToSet = thisHolderActivity.getViewModel().tabTitles[titleId]
-//            thisWorkoutListFragment.tabWorkoutGroup = categoryToSet
-//            return thisWorkoutListFragment
-//        }
-//    }
 }

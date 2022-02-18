@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.aldreduser.gymroutine.databinding.FragmentStartBinding
+import com.aldreduser.gymroutine.ui.main.adapters.GroupTabsAdapter
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -15,6 +16,7 @@ class StartFragment : Fragment() {
     private val fragmentTAG = "StartFragmentTAG"
     private var binding: FragmentStartBinding? = null
     private val workoutListViewModel: WorkoutListViewModel by activityViewModels()
+    private lateinit var groupTabsAdapter: GroupTabsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,9 +34,8 @@ class StartFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
             addWorkoutFab.setOnClickListener { addWorkout() }
         }
+        groupTabsAdapter = GroupTabsAdapter(this)
         workoutListViewModel.startApplication(requireNotNull(this.activity).application)
-
-
         setUpAppBar()
         setUpTabs()
         setObservers()
@@ -59,7 +60,8 @@ class StartFragment : Fragment() {
     private fun setUpTabs() {
         workoutListViewModel.setViewPager2Adapter(requireContext())
         binding?.apply {
-            workoutsListViewPager2.adapter = workoutListViewModel.getViewPager2Adapter()
+//            workoutsListViewPager2.adapter = workoutListViewModel.getViewPager2Adapter()
+            workoutsListViewPager2.adapter = groupTabsAdapter
             TabLayoutMediator(
                 mainTabLayout,
                 workoutsListViewPager2

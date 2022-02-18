@@ -7,12 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.lifecycle.ViewModelProvider
-import com.aldreduser.gymroutine.data.WorkoutsRepository
-import com.aldreduser.gymroutine.data.model.room.WorkoutsRoomDatabase
 import com.aldreduser.gymroutine.databinding.FragmentEditWorkoutBinding
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
-import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModelFactory
 
 class EditWorkoutFragment : Fragment() {
 
@@ -32,10 +28,9 @@ class EditWorkoutFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setUpViewModel()
         binding?.apply {
             lifecycleOwner = viewLifecycleOwner
-            chooseCategorySpinner.setOnClickListener { spinnerOnClick() }
+            categorySpinner.setOnClickListener { spinnerOnClick() }
             editWorkoutDoneFab.setOnClickListener { doneFabOnClick() }
         }
         setUpAppBar()
@@ -52,8 +47,8 @@ class EditWorkoutFragment : Fragment() {
         // todo: change these items and make them the workout categories
         val categories = arrayOf("Choose Department", "Pro Desk", "Flooring",
             "Customer Service", "Appliances", "Millwork")
-        binding?.chooseCategorySpinner?.adapter = ArrayAdapter<String>(this, simpleSpinnerItem, categories)
-        binding?.chooseCategorySpinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        binding!!.categorySpinner.adapter = ArrayAdapter<String>(this, simpleSpinnerItem, categories)
+        binding!!.categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 //textForSpinner.text = "Choose Department"
             }
@@ -86,16 +81,4 @@ class EditWorkoutFragment : Fragment() {
             //todo: handle navigation icon press
         }
     }
-
-    // SET UP FUNCTIONS //
-    private fun setUpViewModel() {
-        val application = requireActivity().application
-        val database = WorkoutsRoomDatabase.getInstance(application)
-        val repository = WorkoutsRepository.getInstance(database)
-        val viewModelFactory = WorkoutListViewModelFactory(repository, application)
-        workoutListViewModel = ViewModelProvider(
-            this, viewModelFactory).get(WorkoutListViewModel::class.java)
-    }
-
-    // HELPER FUNCTIONS //
 }

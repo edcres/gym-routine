@@ -2,21 +2,22 @@ package com.aldreduser.gymroutine.ui.main.adapters
 
 import android.util.Log
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.aldreduser.gymroutine.ui.main.MainActivity
 import com.aldreduser.gymroutine.ui.main.fragments.WorkoutListFragment
+import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
 
-class TabsViewPager2Adapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
+class GroupTabsAdapter(
+    fragment: Fragment,
+    private val listsViewModel: WorkoutListViewModel
+    ) : FragmentStateAdapter(fragment) {
 
-    // TODO: do not instantiate the main activity here
-    private val thisHolderActivity = MainActivity()
-    private val listsViewModel = thisHolderActivity.getViewModel()
+    private val TAG = "Tabs Adapter TAG"
     private val tabTitles = listsViewModel.tabTitles
     private val tabTitlesOrdinals = listsViewModel.tabTitlesOrdinals
 
+    // todo: what is this?
     override fun createFragment(position: Int): Fragment {
-        return WorkoutListFragment.getInstance(tabTitles.size-1)        // todo: do not do this
+        return WorkoutListFragment.getInstance(tabTitles.size-1)
     }
 
     override fun getItemCount(): Int {
@@ -29,7 +30,7 @@ class TabsViewPager2Adapter(fragmentActivity: FragmentActivity) : FragmentStateA
 
     override fun containsItem(itemId: Long): Boolean {
         var thisTitle = "No Title"
-        tabTitlesOrdinals.forEach{ (k,v) ->
+        tabTitlesOrdinals.forEach { (k,v) ->
             if(v == itemId.toInt()) {
                 thisTitle = k
             }
@@ -45,13 +46,13 @@ class TabsViewPager2Adapter(fragmentActivity: FragmentActivity) : FragmentStateA
             tabTitlesOrdinals[title] = ordinal
         }
         notifyDataSetChanged()
-        Log.d("${MY_LOG}created", "\t\t\t $tabTitles")
-        Log.d("${MY_LOG}created", "\t\t\t $tabTitlesOrdinals")
+        Log.d(TAG, "created\t\t\t $tabTitles")
+        Log.d(TAG, "created\t\t\t $tabTitlesOrdinals")
     }
 
     fun removeTab(title: String) {
         tabTitles.remove(title)
         notifyDataSetChanged()
-        Log.d("${MY_LOG}removeTab", "----------------")
+        Log.d(TAG, "remove tab:  ----------------")
     }
 }
