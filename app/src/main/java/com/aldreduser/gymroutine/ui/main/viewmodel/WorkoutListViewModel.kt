@@ -55,7 +55,6 @@ class WorkoutListViewModel : ViewModel() {
     }
     // DATABASE QUERIES //
 
-
     // TABS //
     // todo: have an observer in startFragment for when a group is added/removed.
     //      and call this function from the view
@@ -63,21 +62,16 @@ class WorkoutListViewModel : ViewModel() {
         val nextOrdinalId = groupsOrdinals.size - 1
 
         if(!groupNames.contains(titleToAdd)) {
-            // todo: possible bug: idk if this 'groupTabsAdapter' might be the same
-            //      instance as the one being passes from the view
-            //      -- If it doesn't work, try returning the ordinal
-            //          (or pass the entire instance to the viewModel)
             groupTabsAdapter.addTab(nextOrdinalId+1, titleToAdd)
         } else {
-            Log.d("${GLOBAL_TAG}Activity", "\t\t titles contains next title " +
-                    "\t\t \${$groupNames} $titleToAdd")
+            Log.e(GLOBAL_TAG, "\t\ttitles contains next title " +
+                    "\t\t $groupNames\n$titleToAdd")
         }
     }
 
     fun removeTab(titleToRemove: String, groupTabsAdapter: GroupTabsAdapter) {
         val numOfTabs = groupNames.size
         if (numOfTabs > 1 && titleToRemove != FIRST_TAB_TITLE) {
-            // todo: I'm not sure if I passed the correct ordinal
             groupTabsAdapter.removeTab(groupsOrdinals[titleToRemove]!!, titleToRemove)
         }
     }

@@ -1,6 +1,7 @@
 package com.aldreduser.gymroutine.ui.main.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import com.aldreduser.gymroutine.databinding.FragmentStartBinding
 import com.aldreduser.gymroutine.ui.main.adapters.GroupTabsAdapter
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlin.math.log
 
 class StartFragment : Fragment() {
 
@@ -46,16 +48,12 @@ class StartFragment : Fragment() {
         binding = null
     }
 
-    // todo: delete this test
     private fun addTab() {
-        workoutsViewModel.addTab(binding!!.testTabNameEt.text.toString(), groupTabsAdapter)
+//        workoutsViewModel.addTab(titleToAdd = , groupTabsAdapter)
     }
     private fun removeTab() {
-        workoutsViewModel.removeTab(binding!!.testTabNameEt.text.toString(), groupTabsAdapter)
+//        workoutsViewModel.removeTab(titleToRemove = , groupTabsAdapter)
     }
-
-
-
 
     // CLICK HANDLERS //
     private fun addWorkout() {

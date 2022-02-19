@@ -1,6 +1,5 @@
 package com.aldreduser.gymroutine.ui.main.adapters
 
-import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.aldreduser.gymroutine.ui.main.fragments.WorkoutListFragment
@@ -10,8 +9,6 @@ class GroupTabsAdapter(
     fragment: Fragment,
     private val viewModel: WorkoutListViewModel
 ) : FragmentStateAdapter(fragment) {
-
-    private val TAG = "Tabs Adapter TAG"
 
     override fun createFragment(position: Int): Fragment {
         return WorkoutListFragment.getInstance(viewModel.groupNames.last())
@@ -41,14 +38,12 @@ class GroupTabsAdapter(
         if(!viewModel.groupsOrdinals.containsKey(title)) {
             viewModel.groupsOrdinals[title] = ordinal
         }
-        notifyItemInserted(ordinal)     // todo: I'm not sure if 'ordinal' is the correct parameter
-        Log.d(TAG, "created. name:\t\t\t ${viewModel.groupNames}")
-        Log.d(TAG, "created. ordinals:\t\t\t ${viewModel.groupsOrdinals}")
+        notifyItemInserted(ordinal)
     }
 
     fun removeTab(ordinal: Int, title: String) {
         viewModel.groupNames.remove(title)
-        notifyItemRemoved(ordinal)     // todo: I'm not sure if 'ordinal' is the correct parameter
-        Log.d(TAG, "removed tab:  ---------------- $title")
+        viewModel.groupsOrdinals.remove(title)
+        notifyItemRemoved(ordinal)
     }
 }
