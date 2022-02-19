@@ -59,6 +59,29 @@
             android:layout_margin="16dp"
             android:src="@drawable/ic_add_24" />
 
+<!--        todo: remove these 3-->
+        <EditText
+            android:id="@+id/test_tab_name_et"
+            android:layout_gravity="center"
+            android:layout_marginBottom="150dp"
+            android:hint="text here"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/add_tab_btn"
+            android:backgroundTint="@color/black"
+            android:text="add tab"
+            android:layout_gravity="center|end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/remove_tab_btn"
+            android:backgroundTint="@color/black"
+            android:text="remove tab"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

@@ -59,7 +59,7 @@ class WorkoutListViewModel : ViewModel() {
     // TABS //
     // todo: have an observer in startFragment for when a group is added/removed.
     //      and call this function from the view
-    private fun addTab(titleToAdd: String, groupTabsAdapter: GroupTabsAdapter) {
+    fun addTab(titleToAdd: String, groupTabsAdapter: GroupTabsAdapter) {
         val nextOrdinalId = groupsOrdinals.size - 1
 
         if(!groupNames.contains(titleToAdd)) {
@@ -74,7 +74,7 @@ class WorkoutListViewModel : ViewModel() {
         }
     }
 
-    private fun removeTab(titleToRemove: String, groupTabsAdapter: GroupTabsAdapter) {
+    fun removeTab(titleToRemove: String, groupTabsAdapter: GroupTabsAdapter) {
         val numOfTabs = groupNames.size
         if (numOfTabs > 1 && titleToRemove != FIRST_TAB_TITLE) {
             // todo: I'm not sure if I passed the correct ordinal

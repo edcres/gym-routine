@@ -15,7 +15,7 @@ class StartFragment : Fragment() {
 
     private val fragmentTAG = "StartFragmentTAG"
     private var binding: FragmentStartBinding? = null
-    private val workoutListViewModel: WorkoutListViewModel by activityViewModels()
+    private val workoutsViewModel: WorkoutListViewModel by activityViewModels()
     private lateinit var groupTabsAdapter: GroupTabsAdapter
 
     override fun onCreateView(
@@ -34,8 +34,8 @@ class StartFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
             addWorkoutFab.setOnClickListener { addWorkout() }
         }
-        groupTabsAdapter = GroupTabsAdapter(this, workoutListViewModel)
-        workoutListViewModel.startApplication(requireNotNull(this.activity).application)
+        groupTabsAdapter = GroupTabsAdapter(this, workoutsViewModel)
+        workoutsViewModel.startApplication(requireNotNull(this.activity).application)
         setUpAppBar()
         setUpTabs()
         setObservers()
@@ -45,6 +45,17 @@ class StartFragment : Fragment() {
         super.onDestroy()
         binding = null
     }
+
+    // todo: delete this test
+    private fun addTab() {
+        workoutsViewModel.addTab(binding!!.testTabNameEt.text.toString(), groupTabsAdapter)
+    }
+    private fun removeTab() {
+        workoutsViewModel.removeTab(binding!!.testTabNameEt.text.toString(), groupTabsAdapter)
+    }
+
+
+
 
     // CLICK HANDLERS //
     private fun addWorkout() {
@@ -64,7 +75,7 @@ class StartFragment : Fragment() {
                 mainTabLayout,
                 workoutsListViewPager2
             ) { tab, position ->
-                tab.text = workoutListViewModel.groupNames[position]
+                tab.text = workoutsViewModel.groupNames[position]
             }.attach()
         }
     }
