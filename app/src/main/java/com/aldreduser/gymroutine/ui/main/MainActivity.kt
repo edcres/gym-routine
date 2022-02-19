@@ -11,9 +11,10 @@ import com.aldreduser.gymroutine.R
 // (make sure this is good) navigation and arrow icon in all activities (except the one
 //      that opens when the app opens)
 
-// todo: clean up unused imports
+// todo: take care of todos
 // todo: take care of warnings
 // todo: clean up comments
+// todo: clean up unused imports
 
 // Future
 // have a history of previous workouts

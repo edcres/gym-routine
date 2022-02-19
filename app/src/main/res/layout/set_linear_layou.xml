@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/workout_set_1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <ImageButton
+        android:id="@+id/remove_set_btn"
+        tools:ignore="UnusedAttribute"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:padding="8dp"
+        android:visibility="gone"
+        android:src="@drawable/ic_remove_24" />
+
+    <EditText
+        android:id="@+id/set_1_text"
+        tools:text="2"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:clickable="false"
+        android:gravity="center"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        android:text="@string/one" />
+
+    <EditText
+        android:id="@+id/set_1_reps_text"
+        tools:text="8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:importantForAutofill="no"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/set_1_weight_text"
+        tools:text="40"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:importantForAutofill="no"
+        android:inputType="numberDecimal" />
+
+    <Space
+        android:id="@+id/spacer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_weight="0.2" />
+</LinearLayout>

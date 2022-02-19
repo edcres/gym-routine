@@ -34,7 +34,7 @@ class StartFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
             addWorkoutFab.setOnClickListener { addWorkout() }
         }
-        groupTabsAdapter = GroupTabsAdapter(this)
+        groupTabsAdapter = GroupTabsAdapter(this, workoutListViewModel)
         workoutListViewModel.startApplication(requireNotNull(this.activity).application)
         setUpAppBar()
         setUpTabs()
@@ -58,9 +58,7 @@ class StartFragment : Fragment() {
     }
 
     private fun setUpTabs() {
-        workoutListViewModel.setViewPager2Adapter(requireContext())
         binding?.apply {
-//            workoutsListViewPager2.adapter = workoutListViewModel.getViewPager2Adapter()
             workoutsListViewPager2.adapter = groupTabsAdapter
             TabLayoutMediator(
                 mainTabLayout,

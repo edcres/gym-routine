@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -17,7 +16,6 @@
             android:orientation="vertical"
             android:padding="8dp">
 
-<!--            if this doesn't render in the app, ,ake it an edit text-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/specific_workout"
                 android:layout_width="match_parent"
@@ -77,229 +75,10 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <LinearLayout
-                android:id="@+id/set_1_line"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/set_list_recycler"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/set_1_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:gravity="center"
-                    android:inputType="number"
-                    android:text="@string/one"
-                    android:importantForAutofill="no" />
-
-                <EditText
-                    android:id="@+id/set_1_reps_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:importantForAutofill="no"
-                    android:inputType="number"
-                    tools:text="10" />
-
-                <EditText
-                    android:id="@+id/set_1_weight_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:inputType="numberDecimal"
-                    tools:text="30"
-                    android:importantForAutofill="no" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/set_2_line"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/set_2_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:gravity="center"
-                    android:inputType="number"
-                    android:text="@string/two"
-                    android:importantForAutofill="no" />
-
-                <EditText
-                    android:id="@+id/set_2_reps_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:inputType="number"
-                    tools:text="8"
-                    android:importantForAutofill="no" />
-
-                <EditText
-                    android:id="@+id/set_2_weight_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:inputType="numberDecimal"
-                    tools:text="40"
-                    android:importantForAutofill="no" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/set_3_line"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/set_3_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:gravity="center"
-                    android:inputType="number"
-                    android:text="@string/three"
-                    android:importantForAutofill="no" />
-
-                <EditText
-                    android:id="@+id/set_3_reps_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:inputType="number"
-                    tools:text="8"
-                    android:importantForAutofill="no" />
-
-                <EditText
-                    android:id="@+id/set_3_weight_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:inputType="numberDecimal"
-                    tools:text="50"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/set_4_line"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:visibility="gone">
-
-                <EditText
-                    android:id="@+id/set_4_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:gravity="center"
-                    android:inputType="number"
-                    android:text="@string/four"
-                    android:importantForAutofill="no" />
-
-                <EditText
-                    android:id="@+id/set_4_reps_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:inputType="number"
-                    android:importantForAutofill="no" />
-
-                <EditText
-                    android:id="@+id/set_4_weight_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:inputType="numberDecimal"
-                    android:importantForAutofill="no" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/set_5_line"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:visibility="gone">
-
-                <EditText
-                    android:id="@+id/set_5_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:gravity="center"
-                    android:inputType="number"
-                    android:text="@string/five"
-                    android:importantForAutofill="no" />
-
-                <EditText
-                    android:id="@+id/set_5_reps_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:inputType="number"
-                    android:importantForAutofill="no" />
-
-                <EditText
-                    android:id="@+id/set_5_weight_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:inputType="numberDecimal"
-                    android:importantForAutofill="no" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/set_6_line"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:visibility="gone">
-
-                <EditText
-                    android:id="@+id/set_6_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:gravity="center"
-                    android:inputType="number"
-                    android:text="@string/six"
-                    android:importantForAutofill="no" />
-
-                <EditText
-                    android:id="@+id/set_6_reps_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:inputType="number"
-                    android:importantForAutofill="no" />
-
-                <EditText
-                    android:id="@+id/set_6_weight_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:inputType="numberDecimal"
-                    android:importantForAutofill="no" />
-            </LinearLayout>
+                android:layout_height="wrap_content"/>
 
         </LinearLayout>
 

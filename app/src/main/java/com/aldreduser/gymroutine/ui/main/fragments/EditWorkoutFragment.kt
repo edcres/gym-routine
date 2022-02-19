@@ -9,9 +9,11 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.aldreduser.gymroutine.databinding.FragmentEditWorkoutBinding
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
+import kotlinx.android.synthetic.main.workout_item.*
 
 class EditWorkoutFragment : Fragment() {
 
+    private val fragmentTAG = "EditFragmentTAG"
     private var binding: FragmentEditWorkoutBinding? = null
     private lateinit var workoutListViewModel: WorkoutListViewModel
     private val simpleSpinnerItem = android.R.layout.simple_spinner_item

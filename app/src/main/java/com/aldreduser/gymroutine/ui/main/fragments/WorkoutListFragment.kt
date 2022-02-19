@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.aldreduser.gymroutine.databinding.FragmentWorkoutListBinding
 import com.aldreduser.gymroutine.ui.main.adapters.WorkoutListAdapter
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
+import com.aldreduser.gymroutine.utils.FIRST_TAB_TITLE
 
 class WorkoutListFragment : Fragment() {
 
@@ -17,6 +18,7 @@ class WorkoutListFragment : Fragment() {
     private var binding: FragmentWorkoutListBinding? = null
     private val viewModel: WorkoutListViewModel by activityViewModels()
     private lateinit var recyclerAdapter: WorkoutListAdapter
+    private var groupToDisplay = FIRST_TAB_TITLE
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,5 +42,13 @@ class WorkoutListFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
+    }
+
+    companion object{
+        fun getInstance(titleToDisplay: String): WorkoutListFragment {
+            val thisFragment = WorkoutListFragment()
+            thisFragment.groupToDisplay = titleToDisplay
+            return thisFragment
+        }
     }
 }

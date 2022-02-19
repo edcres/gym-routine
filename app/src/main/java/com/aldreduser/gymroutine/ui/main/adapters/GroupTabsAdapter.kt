@@ -8,51 +8,47 @@ import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
 
 class GroupTabsAdapter(
     fragment: Fragment,
-    private val listsViewModel: WorkoutListViewModel
-    ) : FragmentStateAdapter(fragment) {
+    private val viewModel: WorkoutListViewModel
+) : FragmentStateAdapter(fragment) {
 
     private val TAG = "Tabs Adapter TAG"
-    private val tabTitles = listsViewModel.tabTitles
-    private val tabTitlesOrdinals = listsViewModel.tabTitlesOrdinals
 
-    // todo: what is this?
     override fun createFragment(position: Int): Fragment {
-        return WorkoutListFragment.getInstance(tabTitles.size-1)
+        return WorkoutListFragment.getInstance(viewModel.groupNames.last())
     }
 
     override fun getItemCount(): Int {
-        return listsViewModel.tabTitles.size
+        return viewModel.groupNames.size
     }
 
     override fun getItemId(position: Int): Long {
-        return tabTitlesOrdinals[tabTitles[position]]!!.toLong()
+        return viewModel.groupsOrdinals[viewModel.groupNames[position]]!!.toLong()
     }
 
     override fun containsItem(itemId: Long): Boolean {
-        var thisTitle = "No Title"
-        tabTitlesOrdinals.forEach { (k,v) ->
+        var thisTitle = ""
+        viewModel.groupsOrdinals.forEach { (k,v) ->
             if(v == itemId.toInt()) {
                 thisTitle = k
             }
         }
-        return tabTitles.contains(thisTitle)
+        return viewModel.groupNames.contains(thisTitle)
     }
 
     fun addTab(ordinal: Int, title: String) {
-        tabTitles.add(title)
+        viewModel.groupNames.add(title)
 
-        // don't rewrite an ordinal
-        if(!tabTitlesOrdinals.containsKey(title)) {
-            tabTitlesOrdinals[title] = ordinal
+        if(!viewModel.groupsOrdinals.containsKey(title)) {
+            viewModel.groupsOrdinals[title] = ordinal
         }
-        notifyDataSetChanged()
-        Log.d(TAG, "created\t\t\t $tabTitles")
-        Log.d(TAG, "created\t\t\t $tabTitlesOrdinals")
+        notifyItemInserted(ordinal)     // todo: I'm not sure if 'ordinal' is the correct parameter
+        Log.d(TAG, "created\t\t\t ${viewModel.groupNames}")
+        Log.d(TAG, "created\t\t\t ${viewModel.groupsOrdinals}")
     }
 
-    fun removeTab(title: String) {
-        tabTitles.remove(title)
-        notifyDataSetChanged()
-        Log.d(TAG, "remove tab:  ----------------")
+    fun removeTab(ordinal: Int, title: String) {
+        viewModel.groupNames.remove(title)
+        notifyItemRemoved(ordinal)     // todo: I'm not sure if 'ordinal' is the correct parameter
+        Log.d(TAG, "removed tab:  ---------------- $title")
     }
 }
