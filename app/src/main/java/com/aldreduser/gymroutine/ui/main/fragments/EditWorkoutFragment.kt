@@ -49,7 +49,7 @@ class EditWorkoutFragment : Fragment() {
         // todo: change these items and make them the workout categories
         val categories = arrayOf("Choose Department", "Pro Desk", "Flooring",
             "Customer Service", "Appliances", "Millwork")
-        binding!!.categorySpinner.adapter = ArrayAdapter<String>(this, simpleSpinnerItem, categories)
+        binding!!.categorySpinner.adapter = ArrayAdapter<String>(requireContext(), simpleSpinnerItem, categories)
         binding!!.categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 //textForSpinner.text = "Choose Department"

@@ -14,6 +14,7 @@ import com.aldreduser.gymroutine.R
 // todo: take care of todos
 // todo: take care of warnings
 // todo: clean up comments
+// todo: clean up logs
 // todo: clean up unused imports
 
 // Future

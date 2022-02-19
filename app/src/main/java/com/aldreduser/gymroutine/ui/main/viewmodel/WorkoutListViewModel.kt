@@ -60,7 +60,6 @@ class WorkoutListViewModel : ViewModel() {
     // todo: have an observer in startFragment for when a group is added/removed.
     //      and call this function from the view
     private fun addTab(titleToAdd: String, groupTabsAdapter: GroupTabsAdapter) {
-        val nextTitlePosition = groupNames.size - 1
         val nextOrdinalId = groupsOrdinals.size - 1
 
         if(!groupNames.contains(titleToAdd)) {

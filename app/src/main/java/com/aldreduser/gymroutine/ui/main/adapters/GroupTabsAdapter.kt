@@ -42,8 +42,8 @@ class GroupTabsAdapter(
             viewModel.groupsOrdinals[title] = ordinal
         }
         notifyItemInserted(ordinal)     // todo: I'm not sure if 'ordinal' is the correct parameter
-        Log.d(TAG, "created\t\t\t ${viewModel.groupNames}")
-        Log.d(TAG, "created\t\t\t ${viewModel.groupsOrdinals}")
+        Log.d(TAG, "created. name:\t\t\t ${viewModel.groupNames}")
+        Log.d(TAG, "created. ordinals:\t\t\t ${viewModel.groupsOrdinals}")
     }
 
     fun removeTab(ordinal: Int, title: String) {
