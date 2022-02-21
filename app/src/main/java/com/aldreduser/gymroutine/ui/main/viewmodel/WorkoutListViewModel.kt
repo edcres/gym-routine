@@ -32,13 +32,19 @@ class WorkoutListViewModel : ViewModel() {
     val groupNames: MutableList<String> = mutableListOf(FIRST_TAB_TITLE)
     private var tabWorkoutGroup = FIRST_TAB_TITLE
 
+    // HELPERS //
+    fun addNewGroup(name: String) {
+        _groups.value!!.add(WorkoutGroup(name))
+        // todo: add group to db
+    }
+    // HELPERS //
+
     // SETUP //
     fun startApplication(application: Application) {
         roomDb = WorkoutsRoomDatabase.getInstance(application)
         repository = WorkoutsRepository(roomDb)
     }
     // SETUP //
-
 
     // DATABASE QUERIES //
     // Workout Group //
@@ -59,16 +65,14 @@ class WorkoutListViewModel : ViewModel() {
     // todo: have an observer in startFragment for when a group is added/removed.
     //      and call this function from the view
     fun addTab(titleToAdd: String, groupTabsAdapter: GroupTabsAdapter) {
-        val nextOrdinalId = groupsOrdinals.size - 1
-
         if(!groupNames.contains(titleToAdd)) {
+            val nextOrdinalId = groupsOrdinals.size - 1
             groupTabsAdapter.addTab(nextOrdinalId+1, titleToAdd)
         } else {
             Log.e(GLOBAL_TAG, "\t\ttitles contains next title " +
                     "\t\t $groupNames\n$titleToAdd")
         }
     }
-
     fun removeTab(titleToRemove: String, groupTabsAdapter: GroupTabsAdapter) {
         val numOfTabs = groupNames.size
         if (numOfTabs > 1 && titleToRemove != FIRST_TAB_TITLE) {

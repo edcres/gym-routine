@@ -10,8 +10,9 @@ import androidx.fragment.app.activityViewModels
 import com.aldreduser.gymroutine.databinding.FragmentStartBinding
 import com.aldreduser.gymroutine.ui.main.adapters.GroupTabsAdapter
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
+import com.aldreduser.gymroutine.utils.findDifferentGroup
+import com.aldreduser.gymroutine.utils.findDifferentName
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlin.math.log
 
 class StartFragment : Fragment() {
 
@@ -79,7 +80,23 @@ class StartFragment : Fragment() {
     }
 
     private fun setObservers() {
-        // todo:
+        workoutsViewModel.groups.observe(viewLifecycleOwner) {
+            when {
+                workoutsViewModel.groups.value!!.size > workoutsViewModel.groupNames.size -> {
+                    // new group was added
+                    val newGroupName = findDifferentGroup(it, workoutsViewModel.groupNames)
+                    workoutsViewModel.addTab(newGroupName, groupTabsAdapter)
+                }
+                workoutsViewModel.groups.value!!.size < workoutsViewModel.groupNames.size -> {
+                    // a group was removed
+                    val removedGroupName = findDifferentName(workoutsViewModel.groupNames, it)
+                    workoutsViewModel.removeTab(removedGroupName, groupTabsAdapter)
+                }
+                else -> {
+                    Log.i(fragmentTAG, "setObservers: no group was added or removed")
+                }
+            }
+        }
     }
     // SETUP //
 }

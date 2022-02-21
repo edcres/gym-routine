@@ -32,7 +32,7 @@ class EditWorkoutFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding?.apply {
             lifecycleOwner = viewLifecycleOwner
-            categorySpinner.setOnClickListener { spinnerOnClick() }
+            groupSpinner.setOnClickListener { spinnerOnClick() }
             editWorkoutDoneFab.setOnClickListener { doneFabOnClick() }
         }
         setUpAppBar()
@@ -49,8 +49,8 @@ class EditWorkoutFragment : Fragment() {
         // todo: change these items and make them the workout categories
         val categories = arrayOf("Choose Department", "Pro Desk", "Flooring",
             "Customer Service", "Appliances", "Millwork")
-        binding!!.categorySpinner.adapter = ArrayAdapter<String>(requireContext(), simpleSpinnerItem, categories)
-        binding!!.categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        binding!!.groupSpinner.adapter = ArrayAdapter<String>(requireContext(), simpleSpinnerItem, categories)
+        binding!!.groupSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 //textForSpinner.text = "Choose Department"
             }

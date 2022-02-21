@@ -24,9 +24,9 @@ class WorkoutListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val fragmentBinding = FragmentWorkoutListBinding.inflate(inflater ,container, false)
+        val fragmentBinding = FragmentWorkoutListBinding.inflate(inflater, container,false)
         binding = fragmentBinding
-        recyclerAdapter = WorkoutListAdapter(viewModel, viewLifecycleOwner)
+        recyclerAdapter = WorkoutListAdapter(viewModel, requireContext(), viewLifecycleOwner)
         return fragmentBinding.root
     }
 
