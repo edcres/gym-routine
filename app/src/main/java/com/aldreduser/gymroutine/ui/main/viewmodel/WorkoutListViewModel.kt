@@ -19,8 +19,9 @@ class WorkoutListViewModel : ViewModel() {
 
     private lateinit var roomDb: WorkoutsRoomDatabase
     private lateinit var repository: WorkoutsRepository
-    var groupToDisplay: String = FIRST_TAB_TITLE
+    var currentGroup: String = FIRST_TAB_TITLE
     val groupsOrdinals: MutableMap<String, Int> = mutableMapOf(FIRST_TAB_TITLE to 0)
+    val groupNames: MutableList<String> = mutableListOf(FIRST_TAB_TITLE)
 
     private val _groups = MutableLiveData<MutableList<WorkoutGroup>>()  // repository.allWorkoutGroups.asLiveData()
     val groups: LiveData<MutableList<WorkoutGroup>> get() = _groups
@@ -29,13 +30,14 @@ class WorkoutListViewModel : ViewModel() {
     private val _sets = MutableLiveData<MutableList<WorkoutSet>>()  // repository.allWorkoutSets.asLiveData()
     val sets: LiveData<MutableList<WorkoutSet>> get() = _sets
 
-    val groupNames: MutableList<String> = mutableListOf(FIRST_TAB_TITLE)
-    private var tabWorkoutGroup = FIRST_TAB_TITLE
-
     // HELPERS //
     fun addNewGroup(name: String) {
         _groups.value!!.add(WorkoutGroup(name))
         // todo: add group to db
+    }
+    fun addGroupToWorkout(workout: Workout, groupName: String) {
+        // todo: add the 'groupSelected' to the workout_group in Workout Entity in the database
+        //    (watch out for concurrency issues)
     }
     // HELPERS //
 

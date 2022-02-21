@@ -40,8 +40,7 @@ class WorkoutListAdapter(
 
         fun bind(item: Workout) {
             binding.apply {
-
-                // choose whether the spinner shows up or not
+                if(item.workoutGroup.isNotEmpty()) chooseGroupBtn.visibility = View.VISIBLE
                 val spinnerList = workoutsViewModel.groupNames
                 spinnerList.add(NEW_GROUP)
                 chooseGroupBtn.adapter = ArrayAdapter(
@@ -56,24 +55,22 @@ class WorkoutListAdapter(
                         position: Int,
                         id: Long
                     ) {
-                        val groupName = workoutsViewModel.groupNames[position]
-                        if(groupName == NEW_GROUP) {
-                            // todo: hide the spinner and show an editText for user to type the new group name
-
-                            // todo: when user click on editText
-                            workoutsViewModel.addNewGroup(newName)
-                            // todo: also add the workout to the group name in the database
-                            //    (watch out for concurrency issues)
+                        val groupSelected = workoutsViewModel.groupNames[position]
+                        chooseGroupBtn.visibility = View.GONE
+                        if(groupSelected == NEW_GROUP) {
+                            groupEtContainer.visibility = View.VISIBLE
+                            newGroupDoneBtn.setOnClickListener {
+                                workoutsViewModel.addNewGroup(newGroupEt.text.toString())
+                                workoutsViewModel.addGroupToWorkout(item, groupSelected)
+                            }
                         } else {
-                            // todo: add the workout to the group name in the database
-                            //    (watch out for concurrency issues)
+                            workoutsViewModel.addGroupToWorkout(item, groupSelected)
                         }
                     }
                     override fun onNothingSelected(parent: AdapterView<*>?) {
                         Log.i(GLOBAL_TAG, "Nothing was clicked.")
                     }
                 }
-
                 binding.executePendingBindings()
             }
         }

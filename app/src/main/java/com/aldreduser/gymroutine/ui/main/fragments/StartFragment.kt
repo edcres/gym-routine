@@ -82,12 +82,13 @@ class StartFragment : Fragment() {
     private fun setObservers() {
         workoutsViewModel.groups.observe(viewLifecycleOwner) {
             when {
-                workoutsViewModel.groups.value!!.size > workoutsViewModel.groupNames.size -> {
+                // '+1' because groupNames start out with FIRST_TAB_TITLE
+                workoutsViewModel.groups.value!!.size+1 > workoutsViewModel.groupNames.size -> {
                     // new group was added
                     val newGroupName = findDifferentGroup(it, workoutsViewModel.groupNames)
                     workoutsViewModel.addTab(newGroupName, groupTabsAdapter)
                 }
-                workoutsViewModel.groups.value!!.size < workoutsViewModel.groupNames.size -> {
+                workoutsViewModel.groups.value!!.size+1 < workoutsViewModel.groupNames.size -> {
                     // a group was removed
                     val removedGroupName = findDifferentName(workoutsViewModel.groupNames, it)
                     workoutsViewModel.removeTab(removedGroupName, groupTabsAdapter)
