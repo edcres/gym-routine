@@ -39,6 +39,13 @@ class WorkoutListAdapter(
 
         fun bind(item: Workout) {
             binding.apply {
+
+                // SETS //
+                setListRecycler.adapter = SetsAdapter(workoutsViewModel)
+                // todo: maybe observe a change in the sets in the database
+                // SETS //
+
+                // SPINNER //
                 if(item.workoutGroup.isNotEmpty()) chooseGroupBtn.visibility = View.VISIBLE
                 val spinnerList = workoutsViewModel.groupNames
                 spinnerList.add(NEW_GROUP)
@@ -70,6 +77,8 @@ class WorkoutListAdapter(
                         Log.i(GLOBAL_TAG, "Nothing was clicked.")
                     }
                 }
+                // SPINNER //
+
                 binding.executePendingBindings()
             }
         }

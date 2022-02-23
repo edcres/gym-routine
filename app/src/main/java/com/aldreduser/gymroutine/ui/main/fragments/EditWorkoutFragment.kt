@@ -8,15 +8,15 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.aldreduser.gymroutine.databinding.FragmentEditWorkoutBinding
+import com.aldreduser.gymroutine.ui.main.adapters.SetsAdapter
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
-import kotlinx.android.synthetic.main.workout_item.*
 
 class EditWorkoutFragment : Fragment() {
 
     private val fragmentTAG = "EditFragmentTAG"
     private var binding: FragmentEditWorkoutBinding? = null
-    private lateinit var workoutListViewModel: WorkoutListViewModel
-    private val simpleSpinnerItem = android.R.layout.simple_spinner_item
+    private lateinit var viewModel: WorkoutListViewModel
+    private lateinit var setsAdapter: SetsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,6 +25,7 @@ class EditWorkoutFragment : Fragment() {
         val fragmentBinding = FragmentEditWorkoutBinding
             .inflate(inflater, container, false)
         binding = fragmentBinding
+        setsAdapter = SetsAdapter(viewModel)
         return fragmentBinding.root
     }
 
@@ -34,6 +35,7 @@ class EditWorkoutFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
             groupSpinner.setOnClickListener { spinnerOnClick() }
             editWorkoutDoneFab.setOnClickListener { doneFabOnClick() }
+            editSetListRecycler.adapter = setsAdapter
         }
         setUpAppBar()
     }
@@ -49,7 +51,8 @@ class EditWorkoutFragment : Fragment() {
         // todo: change these items and make them the workout categories
         val categories = arrayOf("Choose Department", "Pro Desk", "Flooring",
             "Customer Service", "Appliances", "Millwork")
-        binding!!.groupSpinner.adapter = ArrayAdapter<String>(requireContext(), simpleSpinnerItem, categories)
+        val simpleSpinnerItem = android.R.layout.simple_spinner_item
+        binding!!.groupSpinner.adapter = ArrayAdapter   (requireContext(), simpleSpinnerItem, categories)
         binding!!.groupSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 //textForSpinner.text = "Choose Department"
