@@ -21,8 +21,7 @@ class WorkoutListAdapter(
     private val workoutsViewModel: WorkoutListViewModel,
     private val context: Context,
     private val fragLifecycleOwner: LifecycleOwner
-) :
-    ListAdapter<Workout, WorkoutListAdapter.WorkoutsViewHolder>(WorkoutDiffCallback()) {
+) : ListAdapter<Workout, WorkoutListAdapter.WorkoutsViewHolder>(WorkoutDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkoutsViewHolder {
         return WorkoutsViewHolder.from(workoutsViewModel, context, fragLifecycleOwner, parent)

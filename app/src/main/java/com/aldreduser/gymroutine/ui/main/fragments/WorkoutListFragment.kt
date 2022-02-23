@@ -52,7 +52,6 @@ class WorkoutListFragment : Fragment() {
 
     private fun setObservers() {
         viewModel.workouts.observe(viewLifecycleOwner) {
-            // todo: only send workouts of the same group
             if(groupToDisplay == FIRST_TAB_TITLE) {
                 recyclerAdapter.submitList(it)
             } else {
