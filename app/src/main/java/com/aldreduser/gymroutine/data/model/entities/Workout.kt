@@ -12,7 +12,7 @@ data class Workout (
     @ColumnInfo(name = "workout_group")  // relation to workout group table
     val workoutGroup: String = "",
     @ColumnInfo(name = "sets")
-    val sets: Int = 0
+    val sets: Int = 1
 )
 
 // this_workout_mame

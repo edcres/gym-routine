@@ -32,11 +32,6 @@
                     android:inputType="text|number" />
             </com.google.android.material.textfield.TextInputLayout>
 
-
-
-
-
-
             <LinearLayout
                 android:id="@+id/group_et_container"
                 android:layout_width="match_parent"
@@ -57,7 +52,6 @@
                     android:layout_gravity="center" />
             </LinearLayout>
 
-
             <Spinner
                 android:id="@+id/choose_group_btn"
                 android:layout_width="match_parent"
@@ -69,14 +63,6 @@
                 android:gravity="center"
                 android:visibility="gone"
                 android:background="@color/colorAccent"/>
-
-
-
-
-
-
-
-
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

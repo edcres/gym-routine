@@ -18,7 +18,7 @@ class StartFragment : Fragment() {
 
     private val fragmentTAG = "StartFragmentTAG"
     private var binding: FragmentStartBinding? = null
-    private val workoutsViewModel: WorkoutListViewModel by activityViewModels()
+    private val viewModel: WorkoutListViewModel by activityViewModels()
     private lateinit var groupTabsAdapter: GroupTabsAdapter
 
     override fun onCreateView(
@@ -37,8 +37,8 @@ class StartFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
             addWorkoutFab.setOnClickListener { addWorkout() }
         }
-        groupTabsAdapter = GroupTabsAdapter(this, workoutsViewModel)
-        workoutsViewModel.startApplication(requireNotNull(this.activity).application)
+        groupTabsAdapter = GroupTabsAdapter(this, viewModel)
+        viewModel.startApplication(requireNotNull(this.activity).application)
         setUpAppBar()
         setUpTabs()
         setObservers()
@@ -60,6 +60,17 @@ class StartFragment : Fragment() {
     private fun addWorkout() {
         // add workout
         // todo: handle click
+        //  add a workout item to the recyclerView
+
+
+        //todo:
+        // below will be called when the user types the first letter of the workout name
+        // it will be called in the adapter
+//        viewModel.insertWorkout(Workout(
+//            thisWorkoutName = specificWorkoutInput.text.toString(),
+//            workoutGroup = if(viewModel.currentGroup != FIRST_TAB_TITLE) {viewModel.currentGroup} else ""
+//            // 'sets' is one by default in the viewModel
+//        ))
     }
 
     // SETUP //
@@ -74,24 +85,26 @@ class StartFragment : Fragment() {
                 mainTabLayout,
                 workoutsListViewPager2
             ) { tab, position ->
-                tab.text = workoutsViewModel.groupNames[position]
+                tab.text = viewModel.groupNames[position]
             }.attach()
         }
     }
 
     private fun setObservers() {
-        workoutsViewModel.groups.observe(viewLifecycleOwner) {
+        // todo: i think i need to use this observer to set the tabs in the beginning
+        // Observer for adding or removing tabs
+        viewModel.groups.observe(viewLifecycleOwner) {
             when {
                 // '+1' because groupNames start out with FIRST_TAB_TITLE
-                workoutsViewModel.groups.value!!.size+1 > workoutsViewModel.groupNames.size -> {
+                viewModel.groups.value!!.size+1 > viewModel.groupNames.size -> {
                     // new group was added
-                    val newGroupName = findDifferentGroup(it, workoutsViewModel.groupNames)
-                    workoutsViewModel.addTab(newGroupName, groupTabsAdapter)
+                    val newGroupName = findDifferentGroup(it, viewModel.groupNames)
+                    viewModel.addTab(newGroupName, groupTabsAdapter)
                 }
-                workoutsViewModel.groups.value!!.size+1 < workoutsViewModel.groupNames.size -> {
+                viewModel.groups.value!!.size+1 < viewModel.groupNames.size -> {
                     // a group was removed
-                    val removedGroupName = findDifferentName(workoutsViewModel.groupNames, it)
-                    workoutsViewModel.removeTab(removedGroupName, groupTabsAdapter)
+                    val removedGroupName = findDifferentName(viewModel.groupNames, it)
+                    viewModel.removeTab(removedGroupName, groupTabsAdapter)
                 }
                 else -> {
                     Log.i(fragmentTAG, "setObservers: no group was added or removed")

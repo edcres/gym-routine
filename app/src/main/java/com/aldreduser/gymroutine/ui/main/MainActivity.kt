@@ -4,6 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.aldreduser.gymroutine.R
 
+// todo: a goal is to display all the items in their appropriate groups
+//      using a query that gets all the items using that are part of that group.
+//      this is why I have the Group entity
+
 // todo: Room Database
 // set up all the queries
 

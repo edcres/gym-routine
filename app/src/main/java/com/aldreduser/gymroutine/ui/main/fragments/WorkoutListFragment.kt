@@ -37,11 +37,30 @@ class WorkoutListFragment : Fragment() {
             workoutListRecycler.adapter = recyclerAdapter
             workoutListRecycler.layoutManager = GridLayoutManager(requireContext(), 2)
         }
+        setObservers()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.currentGroup = groupToDisplay
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
+    }
+
+    private fun setObservers() {
+        viewModel.workouts.observe(viewLifecycleOwner) {
+            // todo: only send workouts of the same group
+            if(groupToDisplay == FIRST_TAB_TITLE) {
+                recyclerAdapter.submitList(it)
+            } else {
+                // todo: do a query that gets all the workouts that are part of the group
+                //      group = 'groupToDisplay'
+                // then recyclerAdapter.submitList(groupedWorkouts)
+            }
+        }
     }
 
     companion object{

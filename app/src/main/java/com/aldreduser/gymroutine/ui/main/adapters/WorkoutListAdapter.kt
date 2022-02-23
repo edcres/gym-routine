@@ -33,9 +33,9 @@ class WorkoutListAdapter(
 
     class WorkoutsViewHolder private constructor(
         val workoutsViewModel: WorkoutListViewModel,
-        val context: Context,
+        private val context: Context,
         private val fragLifecycleOwner: LifecycleOwner,
-        val binding: WorkoutItemBinding
+        private val binding: WorkoutItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Workout) {
