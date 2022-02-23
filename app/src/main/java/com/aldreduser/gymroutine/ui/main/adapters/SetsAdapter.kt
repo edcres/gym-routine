@@ -12,11 +12,12 @@ import com.aldreduser.gymroutine.databinding.SetLinearLayouBinding
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
 
 class SetsAdapter(
-    private val viewModel: WorkoutListViewModel
+    private val viewModel: WorkoutListViewModel,
+    private val setAreRemoved: Boolean
 ) : ListAdapter<WorkoutSet, SetsAdapter.SetsViewHolder>(SetDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SetsViewHolder {
-        return SetsViewHolder.from(viewModel, parent)
+        return SetsViewHolder.from(viewModel, setAreRemoved, parent)
     }
 
     override fun onBindViewHolder(holderWorkouts: SetsViewHolder, position: Int) =
@@ -24,6 +25,7 @@ class SetsAdapter(
 
     class SetsViewHolder private constructor(
         val viewModel: WorkoutListViewModel,
+        val setAreRemoved: Boolean,
         private val binding: SetLinearLayouBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
@@ -34,8 +36,13 @@ class SetsAdapter(
                 // todo:
 
                 // todo: choose whether these should be gone or visible
-                removeSetBtn.visibility = View.GONE
-                spacer.visibility = View.GONE
+                if(setAreRemoved) {
+                    removeSetBtn.visibility = View.VISIBLE
+                    spacer.visibility = View.VISIBLE
+                    removeSetBtn.setOnClickListener {
+                        // todo
+                    }
+                }
 
                 setText.setText(item.set.toString())
                 repsText.setText(item.reps.toString())
@@ -52,12 +59,13 @@ class SetsAdapter(
         companion object {
             fun from(
                 viewModel: WorkoutListViewModel,
+                setAreRemoved: Boolean,
                 parent: ViewGroup
             ): SetsViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = SetLinearLayouBinding
                     .inflate(layoutInflater, parent, false)
-                return SetsViewHolder(viewModel, binding)
+                return SetsViewHolder(viewModel, setAreRemoved, binding)
             }
         }
     }
