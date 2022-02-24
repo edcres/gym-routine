@@ -20,7 +20,6 @@
                 style="@style/Widget.MaterialComponents.Toolbar.Primary"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:menu="@menu/edit_workout_activity_top_app_bar"
                 app:navigationIcon="@drawable/ic_navigation_24dp"
                 app:titleTextColor="@color/black" />
 

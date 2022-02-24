@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.navigation.Navigation
 import com.aldreduser.gymroutine.databinding.FragmentEditWorkoutBinding
 import com.aldreduser.gymroutine.ui.main.adapters.SetsAdapter
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
@@ -25,7 +26,7 @@ class EditWorkoutFragment : Fragment() {
         val fragmentBinding = FragmentEditWorkoutBinding
             .inflate(inflater, container, false)
         binding = fragmentBinding
-        setsAdapter = SetsAdapter(viewModel)
+        setsAdapter = SetsAdapter(viewModel, true)
         return fragmentBinding.root
     }
 
@@ -83,7 +84,8 @@ class EditWorkoutFragment : Fragment() {
         binding?.editWorkoutTopAppbar?.title = "Name of workout"
 
         binding?.editWorkoutTopAppbar?.setNavigationOnClickListener {
-            //todo: handle navigation icon press
+            val navController = Navigation.findNavController(requireParentFragment().requireView())
+            navController.navigateUp()
         }
     }
 }

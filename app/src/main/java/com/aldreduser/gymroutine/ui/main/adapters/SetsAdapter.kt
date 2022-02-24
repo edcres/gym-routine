@@ -11,6 +11,7 @@ import com.aldreduser.gymroutine.data.model.entities.WorkoutSet
 import com.aldreduser.gymroutine.databinding.SetLinearLayouBinding
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
 
+// This adapter will be used in 2 places: WorkoutListAdapter, EditWorkoutFragment
 class SetsAdapter(
     private val viewModel: WorkoutListViewModel,
     private val setAreRemoved: Boolean
@@ -25,22 +26,18 @@ class SetsAdapter(
 
     class SetsViewHolder private constructor(
         val viewModel: WorkoutListViewModel,
-        val setAreRemoved: Boolean,
+        private val setAreRemoved: Boolean,
         private val binding: SetLinearLayouBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: WorkoutSet) {
             binding.apply {
-                // todo: this adapter will be used in 2 places:
-                //      workoutItem Adapter, EditWorkoutFragment
-                // todo:
-
                 // todo: choose whether these should be gone or visible
                 if(setAreRemoved) {
                     removeSetBtn.visibility = View.VISIBLE
                     spacer.visibility = View.VISIBLE
                     removeSetBtn.setOnClickListener {
-                        // todo
+                        // todo: remove the set from the db
                     }
                 }
 

@@ -41,7 +41,10 @@ class WorkoutListAdapter(
             binding.apply {
 
                 // SETS //
-                setListRecycler.adapter = SetsAdapter(workoutsViewModel)
+                val setsAdapter = SetsAdapter(workoutsViewModel, false)
+                setListRecycler.adapter = setsAdapter
+                // todo: submit list when a set is removed (maybe not necessary here)
+//                setsAdapter.submitList(listOfSets)
                 // todo: maybe observe a change in the sets in the database
                 // SETS //
 

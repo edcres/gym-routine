@@ -10,12 +10,18 @@
       <map>
         <entry key="../../../../../Library/Android/sdk/platforms/android-30/data/res/layout/simple_list_item_1.xml" value="0.1" />
         <entry key="../../../../../Library/Android/sdk/platforms/android-30/data/res/layout/simple_spinner_item.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/drawable-anydpi/ic_delete_24dp.xml" value="0.1075" />
+        <entry key="app/src/main/res/drawable-anydpi/ic_duplicate_24dp.xml" value="0.1075" />
+        <entry key="app/src/main/res/drawable-anydpi/ic_navigation_24dp.xml" value="0.1075" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_add_24.xml" value="0.1075" />
         <entry key="app/src/main/res/drawable/ic_baseline_hourglass_full_24.xml" value="0.138" />
+        <entry key="app/src/main/res/drawable/ic_baseline_removesds_24.xml" value="0.1075" />
         <entry key="app/src/main/res/drawable/ic_check_mark_24.xml" value="0.13" />
         <entry key="app/src/main/res/drawable/ic_done_24.xml" value="0.13" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.165" />
+        <entry key="app/src/main/res/drawable/ic_remove_24.xml" value="0.1075" />
         <entry key="app/src/main/res/layout/activity_edit_workout.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/fragment_edit_workout.xml" value="0.25" />
@@ -26,6 +32,7 @@
         <entry key="app/src/main/res/layout/workout_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/workouts_recycler_item.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/menu/edit_workout_activity_top_app_bar.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/menu/edit_workout_app_bar.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/menu/main_activity_top_app_bar.xml" value="0.3098958333333333" />
       </map>
     </option>

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import com.aldreduser.gymroutine.R
 import com.aldreduser.gymroutine.databinding.FragmentStartBinding
 import com.aldreduser.gymroutine.ui.main.adapters.GroupTabsAdapter
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
@@ -75,7 +76,19 @@ class StartFragment : Fragment() {
 
     // SETUP //
     private fun setUpAppBar() {
-        binding?.mainActivityTopAppbar?.title = "Workouts"
+        binding?.apply {
+            mainActivityTopAppbar.title = "Workouts"
+            mainActivityTopAppbar.setOnMenuItemClickListener { menuItem ->
+                val itemListEdit = R.id.edit_workout_btn
+                when (menuItem.itemId) {
+                    itemListEdit -> {
+                        // todo: viewModel.toggleEditBtn()
+                        true
+                    }
+                    else -> false
+                }
+            }
+        }
     }
 
     private fun setUpTabs() {

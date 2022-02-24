@@ -3,6 +3,7 @@
 
     <string name="toolbar_icon_duplicate">Duplicate</string>
     <string name="toolbar_icon_delete">Delete</string>
+    <string name="toolbar_icon_edit">Edit</string>
 
     <string name="tab_label_all">All</string>
 
