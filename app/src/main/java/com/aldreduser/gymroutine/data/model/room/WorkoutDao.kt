@@ -5,8 +5,6 @@ import com.aldreduser.gymroutine.data.model.entities.Workout
 import com.aldreduser.gymroutine.data.model.entities.WorkoutAndSets
 import kotlinx.coroutines.flow.Flow
 
-// todo: make these suspend functions, probably unless it uses livedata
-
 @Dao
 interface WorkoutDao {
 

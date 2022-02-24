@@ -11,6 +11,9 @@ import com.aldreduser.gymroutine.data.model.room.WorkoutsRoomDatabase
 import com.aldreduser.gymroutine.ui.main.adapters.GroupTabsAdapter
 import com.aldreduser.gymroutine.utils.FIRST_TAB_TITLE
 import com.aldreduser.gymroutine.utils.GLOBAL_TAG
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 // The ViewModel will transform the data from the Repository,
@@ -45,10 +48,24 @@ class WorkoutListViewModel : ViewModel() {
     fun startApplication(application: Application) {
         roomDb = WorkoutsRoomDatabase.getInstance(application)
         repository = WorkoutsRepository(roomDb)
+        fetchAllWorkouts()
     }
     // SETUP //
 
     // DATABASE QUERIES //
+    fun fetchAllWorkouts() {
+        CoroutineScope(Dispatchers.IO).launch {
+            repository.allWorkoutGroups.collect {
+                _groups.postValue(it.toMutableList())
+            }
+            repository.allWorkouts.collect {
+                _workouts.postValue(it.toMutableList())
+            }
+            repository.allWorkoutSets.collect {
+                _sets.postValue(it.toMutableList())
+            }
+        }
+    }
     // Workout Group //
     fun insertWorkoutGroup(workoutGroup: WorkoutGroup) = viewModelScope.launch {
         repository.insert(workoutGroup)
