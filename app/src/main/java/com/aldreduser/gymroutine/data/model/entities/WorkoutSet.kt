@@ -14,7 +14,7 @@ data class WorkoutSet (
     @ColumnInfo(name = "set")
     val set: Int = 1,
     @ColumnInfo(name = "reps")
-    val reps: Int = 0,
+    var reps: Int = 0,
     @ColumnInfo(name = "weight")
-    val weight: Double = 0.0,
+    var weight: Double = 0.0,
 )

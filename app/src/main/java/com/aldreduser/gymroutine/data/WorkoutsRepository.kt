@@ -12,7 +12,7 @@ class WorkoutsRepository(private val database: WorkoutsRoomDatabase) {
 
     // get names from repository
     //names of WorkoutGroups
-    // todo: might have to make these functions so they are refreshed every time they are called
+    // todo: might have to make these vars into functions so they are refreshed every time they are called
     val allWorkoutGroups: Flow<List<WorkoutGroup>> =
         database.workoutGroupDao().getAlphabetizedWorkoutGroups()
     //names of Workouts

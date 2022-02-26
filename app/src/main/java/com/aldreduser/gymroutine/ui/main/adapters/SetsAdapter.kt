@@ -32,12 +32,12 @@ class SetsAdapter(
 
         fun bind(item: WorkoutSet) {
             binding.apply {
-                // todo: choose whether these should be gone or visible
                 if(setAreRemoved) {
                     removeSetBtn.visibility = View.VISIBLE
                     spacer.visibility = View.VISIBLE
                     removeSetBtn.setOnClickListener {
-                        // todo: remove the set from the db
+                        viewModel.currentWorkoutName = item.workoutName
+                        viewModel.removeSet(item)
                     }
                 }
 
@@ -45,10 +45,15 @@ class SetsAdapter(
                 repsText.setText(item.reps.toString())
                 weightText.setText(item.weight.toString())
 
-                // todo: when user types in a text box, send the data to the db
                 repsText.doAfterTextChanged {
+                    viewModel.currentWorkoutName = item.workoutName
+                    item.reps = it.toString().toInt()
+                    viewModel.updateRep(item)
                 }
                 weightText.doAfterTextChanged {
+                    viewModel.currentWorkoutName = item.workoutName
+                    item.weight = it.toString().toDouble()
+                    viewModel.updateWeight(item)
                 }
             }
         }

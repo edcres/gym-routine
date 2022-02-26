@@ -33,14 +33,15 @@ class WorkoutListViewModel : ViewModel() {
     private val _sets = MutableLiveData<MutableList<WorkoutSet>>()  // repository.allWorkoutSets.asLiveData()
     val sets: LiveData<MutableList<WorkoutSet>> get() = _sets
 
+    private var _itemToEdit = MutableLiveData<Any?>()
+    val itemToEdit: LiveData<Any?> get() = _itemToEdit
+
+    // Used to update the sets that were edited
+    var currentWorkoutName: String? = null
+
     // HELPERS //
-    fun addNewGroup(name: String) {
-        _groups.value!!.add(WorkoutGroup(name))
-        // todo: add group to db
-    }
-    fun addGroupToWorkout(workout: Workout, groupName: String) {
-        // todo: add the 'groupSelected' to the workout_group in Workout Entity in the database
-        //    (watch out for concurrency issues)
+    fun setItemToEdit(chosenItem: Any?) {
+        _itemToEdit.value = chosenItem
     }
     // HELPERS //
 
@@ -52,6 +53,9 @@ class WorkoutListViewModel : ViewModel() {
     }
     // SETUP //
 
+    // todo: I don't know if the workout variables in the repo are updated automatically.
+    //      test that in the test app
+    //      if they are then i don't need to update the livedata variables from here
     // DATABASE QUERIES //
     fun fetchAllWorkouts() {
         CoroutineScope(Dispatchers.IO).launch {
@@ -68,21 +72,45 @@ class WorkoutListViewModel : ViewModel() {
     }
     // Workout Group //
     fun insertWorkoutGroup(workoutGroup: WorkoutGroup) = viewModelScope.launch {
+        _groups.value!!.add(workoutGroup)
         repository.insert(workoutGroup)
     }
     // Workout //
     fun insertWorkout(workout: Workout) = viewModelScope.launch {
+        _workouts.value!!.add(workout)
         repository.insert(workout)
     }
     // Workout Set //
     fun insertWorkoutSet(workoutSet: WorkoutSet) = viewModelScope.launch {
+        _sets.value!!.add(workoutSet)
         repository.insert(workoutSet)
+    }
+
+    fun updateTitle(workout: Workout) {
+        // todo:
+        // update workout Workout entity and  WorkoutSet entity
+    }
+    // todo: consider turning these 2 into one function
+    fun updateRep(set: WorkoutSet) {
+        // todo:
+    }
+    fun updateWeight(set: WorkoutSet) {
+        // todo:
+    }
+    fun removeSet(set: WorkoutSet) {
+        // todo:
+    }
+    fun getSetsOfThisWorkout(workoutName: String): List<WorkoutSet> {
+        // todo
+        return mutableListOf()
+    }
+    fun addGroupToWorkout(workout: Workout) {
+        // todo: add the 'groupSelected' to the workout_group in Workout Entity in the database
+        //    (watch out for concurrency issues)
     }
     // DATABASE QUERIES //
 
     // TABS //
-    // todo: have an observer in startFragment for when a group is added/removed.
-    //      and call this function from the view
     fun addTab(titleToAdd: String, groupTabsAdapter: GroupTabsAdapter) {
         if(!groupNames.contains(titleToAdd)) {
             val nextOrdinalId = groupsOrdinals.size - 1

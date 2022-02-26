@@ -7,13 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.aldreduser.gymroutine.data.model.entities.Workout
+import com.aldreduser.gymroutine.data.model.entities.WorkoutGroup
 import com.aldreduser.gymroutine.databinding.WorkoutItemBinding
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
+import com.aldreduser.gymroutine.utils.FIRST_TAB_TITLE
 import com.aldreduser.gymroutine.utils.GLOBAL_TAG
 import com.aldreduser.gymroutine.utils.NEW_GROUP
 
@@ -31,7 +34,7 @@ class WorkoutListAdapter(
         holderWorkouts.bind(getItem(position))
 
     class WorkoutsViewHolder private constructor(
-        val workoutsViewModel: WorkoutListViewModel,
+        val viewModel: WorkoutListViewModel,
         private val context: Context,
         private val fragLifecycleOwner: LifecycleOwner,
         private val binding: WorkoutItemBinding
@@ -40,17 +43,27 @@ class WorkoutListAdapter(
         fun bind(item: Workout) {
             binding.apply {
 
-                // SETS //
-                val setsAdapter = SetsAdapter(workoutsViewModel, false)
+                // TITLE //
+                specificWorkoutInput.doAfterTextChanged {
+                    item.thisWorkoutName = it.toString()
+                    viewModel.updateTitle(item)
+                }
+                // TITLE //
+
+                // GROUP SETS //
+                val setsAdapter = SetsAdapter(viewModel, false)
                 setListRecycler.adapter = setsAdapter
-                // todo: submit list when a set is removed (maybe not necessary here)
-//                setsAdapter.submitList(listOfSets)
-                // todo: maybe observe a change in the sets in the database
+                viewModel.sets.observe(fragLifecycleOwner) {
+                    // Only call submitList() on the workout being edited
+                    if(item.thisWorkoutName == viewModel.currentWorkoutName) {
+                        setsAdapter.submitList(viewModel.getSetsOfThisWorkout(item.thisWorkoutName))
+                    }
+                }
                 // SETS //
 
                 // SPINNER //
-                if(item.workoutGroup.isNotEmpty()) chooseGroupBtn.visibility = View.VISIBLE
-                val spinnerList = workoutsViewModel.groupNames
+                if(item.workoutGroup != FIRST_TAB_TITLE) chooseGroupBtn.visibility = View.VISIBLE
+                val spinnerList = viewModel.groupNames
                 spinnerList.add(NEW_GROUP)
                 chooseGroupBtn.adapter = ArrayAdapter(
                     context,
@@ -64,24 +77,32 @@ class WorkoutListAdapter(
                         position: Int,
                         id: Long
                     ) {
-                        val groupSelected = workoutsViewModel.groupNames[position]
+                        val groupSelected = viewModel.groupNames[position]
                         chooseGroupBtn.visibility = View.GONE
                         if(groupSelected == NEW_GROUP) {
                             groupEtContainer.visibility = View.VISIBLE
                             newGroupDoneBtn.setOnClickListener {
-                                workoutsViewModel.addNewGroup(newGroupEt.text.toString())
-                                workoutsViewModel.addGroupToWorkout(item, groupSelected)
+                                viewModel.insertWorkoutGroup(
+                                    WorkoutGroup(newGroupEt.text.toString())
+                                )
+                                item.workoutGroup = groupSelected
+                                viewModel.addGroupToWorkout(item)
                             }
                         } else {
-                            workoutsViewModel.addGroupToWorkout(item, groupSelected)
+                            item.workoutGroup = groupSelected
+                            viewModel.addGroupToWorkout(item)
                         }
                     }
                     override fun onNothingSelected(parent: AdapterView<*>?) {
                         Log.i(GLOBAL_TAG, "Nothing was clicked.")
                     }
                 }
-                // SPINNER //
+                // GROUP SPINNER //
 
+                editItemBtn.setOnClickListener {
+                    viewModel.currentWorkoutName = item.thisWorkoutName
+                    viewModel.setItemToEdit(item)
+                }
                 binding.executePendingBindings()
             }
         }

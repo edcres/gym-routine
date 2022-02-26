@@ -11,10 +11,6 @@ import com.aldreduser.gymroutine.R
 // todo: Room Database
 // set up all the queries
 
-// todo: navigation
-// (make sure this is good) navigation and arrow icon in all activities (except the one
-//      that opens when the app opens)
-
 // todo: cap the workout groups at maybe 30
 
 // todo: take care of todos

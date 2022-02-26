@@ -7,10 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
 import com.aldreduser.gymroutine.R
+import com.aldreduser.gymroutine.data.model.entities.Workout
 import com.aldreduser.gymroutine.databinding.FragmentStartBinding
 import com.aldreduser.gymroutine.ui.main.adapters.GroupTabsAdapter
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
+import com.aldreduser.gymroutine.utils.FIRST_TAB_TITLE
 import com.aldreduser.gymroutine.utils.findDifferentGroup
 import com.aldreduser.gymroutine.utils.findDifferentName
 import com.google.android.material.tabs.TabLayoutMediator
@@ -45,33 +48,24 @@ class StartFragment : Fragment() {
         setObservers()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.setItemToEdit(null)
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         binding = null
     }
 
-    private fun addTab() {
-//        workoutsViewModel.addTab(titleToAdd = , groupTabsAdapter)
-    }
-    private fun removeTab() {
-//        workoutsViewModel.removeTab(titleToRemove = , groupTabsAdapter)
-    }
-
     // CLICK HANDLERS //
     private fun addWorkout() {
-        // add workout
-        // todo: handle click
-        //  add a workout item to the recyclerView
-
-
-        //todo:
-        // below will be called when the user types the first letter of the workout name
-        // it will be called in the adapter
-//        viewModel.insertWorkout(Workout(
-//            thisWorkoutName = specificWorkoutInput.text.toString(),
-//            workoutGroup = if(viewModel.currentGroup != FIRST_TAB_TITLE) {viewModel.currentGroup} else ""
-//            // 'sets' is one by default in the viewModel
-//        ))
+        // add a workout with an empty title to the db .then when the user types the title it
+            // will be updated. Careful there are not 2 workouts with empty titles
+        viewModel.insertWorkout(Workout(
+            thisWorkoutName = "",
+            workoutGroup = viewModel.currentGroup
+        ))
     }
 
     // SETUP //
@@ -122,6 +116,13 @@ class StartFragment : Fragment() {
                 else -> {
                     Log.i(fragmentTAG, "setObservers: no group was added or removed")
                 }
+            }
+        }
+        viewModel.itemToEdit.observe(viewLifecycleOwner) {
+            if(viewModel.itemToEdit.value != null) {
+                val navController =
+                    Navigation.findNavController(requireParentFragment().requireView())
+                navController.navigate(R.id.action_startFragment_to_editWorkoutFragment)
             }
         }
     }
