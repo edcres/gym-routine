@@ -59,7 +59,7 @@ class WorkoutListAdapter(
                         setsAdapter.submitList(viewModel.getSetsOfThisWorkout(item.thisWorkoutName))
                     }
                 }
-                // SETS //
+                // GROUP SETS //
 
                 // SPINNER //
                 if(item.workoutGroup != FIRST_TAB_TITLE) chooseGroupBtn.visibility = View.VISIBLE
@@ -97,8 +97,14 @@ class WorkoutListAdapter(
                         Log.i(GLOBAL_TAG, "Nothing was clicked.")
                     }
                 }
-                // GROUP SPINNER //
+                // SPINNER //
 
+                viewModel.menuEditIsOn.observe(fragLifecycleOwner) { result ->
+                    when (result) {
+                        true -> editItemBtn.visibility = View.VISIBLE
+                        false -> editItemBtn.visibility = View.GONE
+                    }
+                }
                 editItemBtn.setOnClickListener {
                     viewModel.currentWorkoutName = item.thisWorkoutName
                     viewModel.setItemToEdit(item)

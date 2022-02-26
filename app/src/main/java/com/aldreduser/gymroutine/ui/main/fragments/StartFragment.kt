@@ -76,7 +76,7 @@ class StartFragment : Fragment() {
                 val itemListEdit = R.id.edit_workout_btn
                 when (menuItem.itemId) {
                     itemListEdit -> {
-                        // todo: viewModel.toggleEditBtn()
+                        viewModel.toggleEditBtn()
                         true
                     }
                     else -> false

@@ -33,6 +33,8 @@ class WorkoutListViewModel : ViewModel() {
     private val _sets = MutableLiveData<MutableList<WorkoutSet>>()  // repository.allWorkoutSets.asLiveData()
     val sets: LiveData<MutableList<WorkoutSet>> get() = _sets
 
+    private var _menuEditIsOn = MutableLiveData(false)
+    val menuEditIsOn: LiveData<Boolean> get() = _menuEditIsOn
     private var _itemToEdit = MutableLiveData<Any?>()
     val itemToEdit: LiveData<Any?> get() = _itemToEdit
 
@@ -40,6 +42,9 @@ class WorkoutListViewModel : ViewModel() {
     var currentWorkoutName: String? = null
 
     // HELPERS //
+    fun toggleEditBtn() {
+        _menuEditIsOn.value = !_menuEditIsOn.value!!
+    }
     fun setItemToEdit(chosenItem: Any?) {
         _itemToEdit.value = chosenItem
     }
