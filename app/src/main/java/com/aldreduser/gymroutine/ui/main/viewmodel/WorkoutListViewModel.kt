@@ -105,6 +105,11 @@ class WorkoutListViewModel : ViewModel() {
     fun removeSet(set: WorkoutSet) {
         // todo:
     }
+    fun getWorkoutsOfThisGroup(group: WorkoutGroup): List<Workout> {
+        // todo: do a query that gets all the workouts that are part of the group
+        //      group = 'groupToDisplay'
+        return mutableListOf()
+    }
     fun getSetsOfThisWorkout(workoutName: String): List<WorkoutSet> {
         // todo
         return mutableListOf()

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import com.aldreduser.gymroutine.data.model.entities.WorkoutGroup
 import com.aldreduser.gymroutine.databinding.FragmentWorkoutListBinding
 import com.aldreduser.gymroutine.ui.main.adapters.WorkoutListAdapter
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
@@ -55,9 +56,8 @@ class WorkoutListFragment : Fragment() {
             if(groupToDisplay == FIRST_TAB_TITLE) {
                 recyclerAdapter.submitList(it)
             } else {
-                // todo: do a query that gets all the workouts that are part of the group
-                //      group = 'groupToDisplay'
-                // then recyclerAdapter.submitList(groupedWorkouts)
+                val groupedWorkouts = viewModel.getWorkoutsOfThisGroup(WorkoutGroup(groupToDisplay))
+                recyclerAdapter.submitList(groupedWorkouts)
             }
         }
     }
