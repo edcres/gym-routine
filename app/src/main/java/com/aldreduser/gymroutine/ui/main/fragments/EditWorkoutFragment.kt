@@ -10,6 +10,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.navigation.Navigation
 import com.aldreduser.gymroutine.data.model.entities.Workout
+import com.aldreduser.gymroutine.data.model.entities.WorkoutSet
 import com.aldreduser.gymroutine.databinding.FragmentEditWorkoutBinding
 import com.aldreduser.gymroutine.ui.main.adapters.SetsAdapter
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
@@ -20,6 +21,7 @@ class EditWorkoutFragment : Fragment() {
     private var binding: FragmentEditWorkoutBinding? = null
     private lateinit var viewModel: WorkoutListViewModel
     private lateinit var setsAdapter: SetsAdapter
+    private lateinit var workoutName: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,10 +39,13 @@ class EditWorkoutFragment : Fragment() {
         binding?.apply {
             lifecycleOwner = viewLifecycleOwner
             groupSpinner.setOnClickListener { spinnerOnClick() }
+            addSetButton.setOnClickListener { addSetClick() }
             editWorkoutDoneFab.setOnClickListener { doneFabOnClick() }
             editSetListRecycler.adapter = setsAdapter
         }
         setUpAppBar()
+        workoutName = viewModel.currentWorkoutName!!
+        setsAdapter.submitList(viewModel.getSetsOfThisWorkout(workoutName))
     }
 
     override fun onDestroy() {
@@ -73,11 +78,25 @@ class EditWorkoutFragment : Fragment() {
             }
         }
     }
-
+    private fun addSetClick() {
+        // todo: maybe have to wait for the result of 'nextSet' to insert workout
+        val nextSet = viewModel.getNextSetNum(workoutName)
+        val workoutPlusSet = "$workoutName$nextSet"
+        viewModel.insertWorkoutSet(WorkoutSet(
+            workoutPlusSet,
+            workoutName,
+            nextSet,
+            0,
+            0.0
+        ))
+        // todo: maybe have to wait for the result of the insert query to submitList()
+        setsAdapter.submitList(viewModel.getSetsOfThisWorkout(workoutName))
+    }
     private fun doneFabOnClick() {
         val navController = Navigation.findNavController(requireParentFragment().requireView())
         navController.navigateUp()
     }
+    // CLICK LISTENERS //
 
     // SETUP FUNCTIONS //
     private fun setUpAppBar() {

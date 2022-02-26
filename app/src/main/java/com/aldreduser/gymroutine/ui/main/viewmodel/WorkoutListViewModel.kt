@@ -26,11 +26,11 @@ class WorkoutListViewModel : ViewModel() {
     val groupsOrdinals: MutableMap<String, Int> = mutableMapOf(FIRST_TAB_TITLE to 0)
     val groupNames: MutableList<String> = mutableListOf(FIRST_TAB_TITLE)
 
-    private val _groups = MutableLiveData<MutableList<WorkoutGroup>>()  // repository.allWorkoutGroups.asLiveData()
+    private val _groups = MutableLiveData<MutableList<WorkoutGroup>>()
     val groups: LiveData<MutableList<WorkoutGroup>> get() = _groups
-    private val _workouts = MutableLiveData<MutableList<Workout>>()  // repository.allWorkouts.asLiveData()
+    private val _workouts = MutableLiveData<MutableList<Workout>>()
     val workouts: LiveData<MutableList<Workout>> get() = _workouts
-    private val _sets = MutableLiveData<MutableList<WorkoutSet>>()  // repository.allWorkoutSets.asLiveData()
+    private val _sets = MutableLiveData<MutableList<WorkoutSet>>()
     val sets: LiveData<MutableList<WorkoutSet>> get() = _sets
 
     private var _menuEditIsOn = MutableLiveData(false)
@@ -62,7 +62,7 @@ class WorkoutListViewModel : ViewModel() {
     //      test that in the test app
     //      if they are then i don't need to update the livedata variables from here
     // DATABASE QUERIES //
-    fun fetchAllWorkouts() {
+    private fun fetchAllWorkouts() {
         CoroutineScope(Dispatchers.IO).launch {
             repository.allWorkoutGroups.collect {
                 _groups.postValue(it.toMutableList())
@@ -75,27 +75,22 @@ class WorkoutListViewModel : ViewModel() {
             }
         }
     }
-    // Workout Group //
     fun insertWorkoutGroup(workoutGroup: WorkoutGroup) = viewModelScope.launch {
         _groups.value!!.add(workoutGroup)
         repository.insert(workoutGroup)
     }
-    // Workout //
     fun insertWorkout(workout: Workout) = viewModelScope.launch {
         _workouts.value!!.add(workout)
         repository.insert(workout)
     }
-    // Workout Set //
     fun insertWorkoutSet(workoutSet: WorkoutSet) = viewModelScope.launch {
         _sets.value!!.add(workoutSet)
         repository.insert(workoutSet)
     }
-
     fun updateTitle(workout: Workout) {
         // todo:
         // update workout Workout entity and  WorkoutSet entity
     }
-    // todo: consider turning these 2 into one function
     fun updateRep(set: WorkoutSet) {
         // todo:
     }
@@ -114,9 +109,20 @@ class WorkoutListViewModel : ViewModel() {
         // todo
         return mutableListOf()
     }
+    fun getNextSetNum(workoutName: String): Int {
+        // todo: do a query that gets the next set in that workout
+        //  check how many sets are part of that workout
+        return 2
+    }
     fun addGroupToWorkout(workout: Workout) {
         // todo: add the 'groupSelected' to the workout_group in Workout Entity in the database
         //    (watch out for concurrency issues)
+    }
+    fun groupHasWorkouts(group: WorkoutGroup): Boolean {
+        // todo: call this function
+        // todo: check if this group has any workouts
+        // if not then delete group
+        return true
     }
     // DATABASE QUERIES //
 

@@ -13,5 +13,5 @@ data class Workout (
     @ColumnInfo(name = "workout_group")  // relation to workout group table
     var workoutGroup: String = FIRST_TAB_TITLE
 //    @ColumnInfo(name = "sets")
-//    val sets: Int = 1
+//    var sets: Int = 1
 )
