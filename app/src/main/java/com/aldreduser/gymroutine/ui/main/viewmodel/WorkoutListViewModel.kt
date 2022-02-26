@@ -116,13 +116,14 @@ class WorkoutListViewModel : ViewModel() {
     // DATABASE QUERIES //
 
     // TABS //
-    fun addTab(titleToAdd: String, groupTabsAdapter: GroupTabsAdapter) {
-        if(!groupNames.contains(titleToAdd)) {
-            val nextOrdinalId = groupsOrdinals.size - 1
-            groupTabsAdapter.addTab(nextOrdinalId+1, titleToAdd)
-        } else {
-            Log.e(GLOBAL_TAG, "\t\ttitles contains next title " +
-                    "\t\t $groupNames\n$titleToAdd")
+    fun addTab(titlesToAdd: List<String>, groupTabsAdapter: GroupTabsAdapter) {
+        titlesToAdd.forEach { title ->
+            if (!groupNames.contains(title)) {
+                val nextOrdinalId = groupsOrdinals.size - 1
+                groupTabsAdapter.addTab(nextOrdinalId + 1, title)
+            } else {
+                Log.e(GLOBAL_TAG, "\t\ttitles contains next title \t\t $groupNames\n$title")
+            }
         }
     }
     fun removeTab(titleToRemove: String, groupTabsAdapter: GroupTabsAdapter) {

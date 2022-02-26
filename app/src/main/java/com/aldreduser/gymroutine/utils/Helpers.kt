@@ -1,17 +1,15 @@
 package com.aldreduser.gymroutine.utils
 
 import com.aldreduser.gymroutine.data.model.entities.WorkoutGroup
-import com.aldreduser.gymroutine.data.model.entities.WorkoutSet
 
 const val GLOBAL_TAG = "Global TAG"
 const val FIRST_TAB_TITLE = "All Workouts"
 const val NEW_GROUP = "New Group"
 
-fun findDifferentGroup(groups: List<WorkoutGroup>, groupNames: List<String>): String {
+fun findDifferentGroups(groups: List<WorkoutGroup>, groupNames: List<String>): List<String> {
     // more groups than groupNames
-    val difference = groupsToStrings(groups).minus(groupNames)
     // it should only be one item
-    return difference[0]
+    return groupsToStrings(groups).minus(groupNames)
 }
 
 fun findDifferentName(groupNames: List<String>, groups: List<WorkoutGroup>): String {

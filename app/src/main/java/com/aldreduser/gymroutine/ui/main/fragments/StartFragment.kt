@@ -13,8 +13,7 @@ import com.aldreduser.gymroutine.data.model.entities.Workout
 import com.aldreduser.gymroutine.databinding.FragmentStartBinding
 import com.aldreduser.gymroutine.ui.main.adapters.GroupTabsAdapter
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
-import com.aldreduser.gymroutine.utils.FIRST_TAB_TITLE
-import com.aldreduser.gymroutine.utils.findDifferentGroup
+import com.aldreduser.gymroutine.utils.findDifferentGroups
 import com.aldreduser.gymroutine.utils.findDifferentName
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -98,18 +97,17 @@ class StartFragment : Fragment() {
     }
 
     private fun setObservers() {
-        // todo: i think i need to use this observer to set the tabs in the beginning
         // Observer for adding or removing tabs
         viewModel.groups.observe(viewLifecycleOwner) {
             when {
                 // '+1' because groupNames start out with FIRST_TAB_TITLE
                 viewModel.groups.value!!.size+1 > viewModel.groupNames.size -> {
-                    // new group was added
-                    val newGroupName = findDifferentGroup(it, viewModel.groupNames)
-                    viewModel.addTab(newGroupName, groupTabsAdapter)
+                    // New group(s) are added
+                    val newGroupNames = findDifferentGroups(it, viewModel.groupNames)
+                    viewModel.addTab(newGroupNames, groupTabsAdapter)
                 }
                 viewModel.groups.value!!.size+1 < viewModel.groupNames.size -> {
-                    // a group was removed
+                    // A group was removed
                     val removedGroupName = findDifferentName(viewModel.groupNames, it)
                     viewModel.removeTab(removedGroupName, groupTabsAdapter)
                 }
