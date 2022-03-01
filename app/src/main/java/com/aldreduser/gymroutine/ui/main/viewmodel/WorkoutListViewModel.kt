@@ -67,9 +67,13 @@ class WorkoutListViewModel : ViewModel() {
             repository.allWorkoutGroups.collect {
                 _groups.postValue(it.toMutableList())
             }
+        }
+        CoroutineScope(Dispatchers.IO).launch {
             repository.allWorkouts.collect {
                 _workouts.postValue(it.toMutableList())
             }
+        }
+        CoroutineScope(Dispatchers.IO).launch {
             repository.allWorkoutSets.collect {
                 _sets.postValue(it.toMutableList())
             }

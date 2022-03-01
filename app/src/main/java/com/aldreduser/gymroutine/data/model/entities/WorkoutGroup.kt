@@ -4,9 +4,6 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-// relationship between entities
-// https://developer.android.com/training/data-storage/room/relationships
-
 @Entity(tableName = "workout_group_table")
 data class WorkoutGroup (
     @PrimaryKey

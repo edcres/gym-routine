@@ -25,7 +25,7 @@ class SetsAdapter(
         holderWorkouts.bind(getItem(position))
 
     class SetsViewHolder private constructor(
-        val viewModel: WorkoutListViewModel,
+        private val viewModel: WorkoutListViewModel,
         private val setAreRemoved: Boolean,
         private val binding: SetLinearLayouBinding
     ) : RecyclerView.ViewHolder(binding.root) {
