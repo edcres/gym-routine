@@ -58,9 +58,6 @@ class WorkoutListViewModel : ViewModel() {
     }
     // SETUP //
 
-    // todo: I don't know if the workout variables in the repo are updated automatically.
-    //      test that in the test app
-    //      if they are then i don't need to update the livedata variables from here
     // DATABASE QUERIES //
     private fun fetchAllWorkouts() {
         CoroutineScope(Dispatchers.IO).launch {
@@ -80,15 +77,12 @@ class WorkoutListViewModel : ViewModel() {
         }
     }
     fun insertWorkoutGroup(workoutGroup: WorkoutGroup) = viewModelScope.launch {
-        _groups.value!!.add(workoutGroup)
         repository.insert(workoutGroup)
     }
     fun insertWorkout(workout: Workout) = viewModelScope.launch {
-        _workouts.value!!.add(workout)
         repository.insert(workout)
     }
     fun insertWorkoutSet(workoutSet: WorkoutSet) = viewModelScope.launch {
-        _sets.value!!.add(workoutSet)
         repository.insert(workoutSet)
     }
     fun updateTitle(workout: Workout) {

@@ -24,8 +24,6 @@ data class Workout (
     var id: Long = 0,
     @ColumnInfo(name = "workout_name")
     var workoutName: String = "",
-    @ColumnInfo(name = "workout_group")  // relation to workout group table
+    @ColumnInfo(name = "workout_group")
     var workoutGroup: String = FIRST_TAB_TITLE
-//    @ColumnInfo(name = "sets")
-//    var sets: Int = 1
 )
