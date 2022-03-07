@@ -1,5 +1,6 @@
 package com.aldreduser.gymroutine.data
 
+import android.util.Log
 import androidx.annotation.WorkerThread
 import com.aldreduser.gymroutine.data.model.entities.Workout
 import com.aldreduser.gymroutine.data.model.entities.WorkoutGroup
@@ -10,42 +11,79 @@ import kotlinx.coroutines.flow.Flow
 // Repo only has access to the DAOs, not the database.
 class WorkoutsRepository(private val database: WorkoutsRoomDatabase) {
 
-    // get names from repository
-    //names of WorkoutGroups
+    private val tag = "WRepository TAG"
     val allWorkoutGroups: Flow<List<WorkoutGroup>> =
         database.workoutGroupDao().getAlphabetizedWorkoutGroups()
-    //names of Workouts
     val allWorkouts: Flow<List<Workout>> = database.workoutDao().getAlphabetizedWorkouts()
-    //names of WorkoutSets
     val allWorkoutSets: Flow<List<WorkoutSet>> = database.workoutSetDao().getAlphabetizedSets()
 
-    // insert
-    @Suppress("RedundantSuspendModifier")
     @WorkerThread
     suspend fun insert(workoutGroup: WorkoutGroup) {
         database.workoutGroupDao().insert(workoutGroup)
     }
-    // delete (probably similar to insert)
-    // workoutGroup+workout relationship (maybe, idk how this would work)
-
-    // WORKOUT
-    // insert
-    @Suppress("RedundantSuspendModifier")
     @WorkerThread
     suspend fun insert(workout: Workout) {
         database.workoutDao().insert(workout)
     }
-    // update
-    // delete
-    // workout+workoutSet relationship (maybe, idk how this would work)
-
-    // WORKOUT SET
-    // insert
-    @Suppress("RedundantSuspendModifier")
     @WorkerThread
     suspend fun insert(workoutSet: WorkoutSet) {
         database.workoutSetDao().insert(workoutSet)
     }
-    // update
-    // delete
+
+    @WorkerThread
+    suspend fun update(workout: Workout) {
+        database.workoutDao().update(workout)
+    }
+    @WorkerThread
+    suspend fun update(set: WorkoutSet) {
+        database.workoutSetDao().update(set)
+    }
+    @WorkerThread
+    suspend fun updateSetOnSets(startingSet: Int, setsOfThisWorkout: List<WorkoutSet>) {
+        if(setsOfThisWorkout.isNotEmpty()) {
+            for (i in 1..setsOfThisWorkout.size) {
+                val thisSet = setsOfThisWorkout[i - 1].set
+                if (startingSet <= thisSet) {
+                    database.workoutSetDao().updateSetOnSets(thisSet, thisSet)
+                }
+            }
+        } else {
+            Log.i(tag, "There are no more sets to update.")
+        }
+    }
+    @WorkerThread
+    suspend fun updateWorkoutOnSets(oldWorkout: String, newWorkout: String) {
+        database.workoutSetDao().updateWorkoutOnSets(oldWorkout, newWorkout)
+    }
+
+    @WorkerThread
+    suspend fun deleteGroup(group: WorkoutGroup) {
+        database.workoutGroupDao().delete(group)
+    }
+    @WorkerThread
+    suspend fun deleteWorkout(workout: Workout) {
+        database.workoutDao().delete(workout)
+    }
+    @WorkerThread
+    suspend fun deleteSet(set: WorkoutSet) {
+        database.workoutSetDao().delete(set)
+    }
+
+    @WorkerThread
+    suspend fun getWorkoutsOfThisGroup(groupName: String): List<WST1Workout> {
+        return database.workoutDao().getWorkoutsOfThisGroup(groupName)
+    }
+    @WorkerThread
+    suspend fun getSetsOfWorkout(workoutId: Long): List<WST1Set> {
+        return database.workoutSetDao().getSetsOfWorkout(workoutId)
+    }
+    @WorkerThread
+    suspend fun getNextSetNum(workoutId: Long): Int {
+        return database.workoutSetDao().getSetNumList(workoutId).size
+    }
+    @WorkerThread
+    suspend fun groupHasWorkouts(groupName: String): Boolean {
+        // If list is empty, returns false, else return true
+        return database.workoutDao().getWorkoutsOfThisGroup(groupName).isNotEmpty()
+    }
 }
