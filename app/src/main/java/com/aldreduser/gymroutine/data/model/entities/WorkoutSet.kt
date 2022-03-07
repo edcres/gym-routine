@@ -21,8 +21,6 @@ data class WorkoutSet (
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     var id: Long = 0,
-    @ColumnInfo(name = "workout_plus_set_id")
-    val workoutPlusSetId: String = "", //"1-1"
     @ColumnInfo(name = "workout_id")
     val workoutId: Long,
     @ColumnInfo(name = "workout_name")

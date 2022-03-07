@@ -22,8 +22,8 @@ data class Workout (
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     var id: Long = 0,
-    @ColumnInfo(name = "this_workout_name")
-    var thisWorkoutName: String = "",
+    @ColumnInfo(name = "workout_name")
+    var workoutName: String = "",
     @ColumnInfo(name = "workout_group")  // relation to workout group table
     var workoutGroup: String = FIRST_TAB_TITLE
 //    @ColumnInfo(name = "sets")

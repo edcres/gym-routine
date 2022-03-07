@@ -45,7 +45,7 @@ class WorkoutListAdapter(
 
                 // TITLE //
                 specificWorkoutInput.doAfterTextChanged {
-                    item.thisWorkoutName = it.toString()
+                    item.workoutName = it.toString()
                     viewModel.updateTitle(item)
                 }
                 // TITLE //
@@ -55,8 +55,8 @@ class WorkoutListAdapter(
                 setListRecycler.adapter = setsAdapter
                 viewModel.sets.observe(fragLifecycleOwner) {
                     // Only call submitList() on the workout being edited
-                    if(item.thisWorkoutName == viewModel.currentWorkoutName) {
-                        setsAdapter.submitList(viewModel.getSetsOfThisWorkout(item.thisWorkoutName))
+                    if(item.workoutName == viewModel.currentWorkoutName) {
+                        setsAdapter.submitList(viewModel.getSetsOfThisWorkout(item.workoutName))
                     }
                 }
                 // GROUP SETS //
@@ -106,7 +106,7 @@ class WorkoutListAdapter(
                     }
                 }
                 editItemBtn.setOnClickListener {
-                    viewModel.currentWorkoutName = item.thisWorkoutName
+                    viewModel.currentWorkoutName = item.workoutName
                     viewModel.setItemToEdit(item)
                 }
                 binding.executePendingBindings()
@@ -130,7 +130,7 @@ class WorkoutListAdapter(
 
 class WorkoutDiffCallback : DiffUtil.ItemCallback<Workout>() {
     override fun areItemsTheSame(oldItem: Workout, newItem: Workout): Boolean {
-        return oldItem.thisWorkoutName == newItem.thisWorkoutName
+        return oldItem.workoutName == newItem.workoutName
     }
     override fun areContentsTheSame(oldItem: Workout, newItem: Workout): Boolean {
         return oldItem == newItem
