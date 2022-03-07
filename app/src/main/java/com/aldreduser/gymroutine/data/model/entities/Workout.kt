@@ -19,7 +19,9 @@ import com.aldreduser.gymroutine.utils.FIRST_TAB_TITLE
     ]
 )
 data class Workout (
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    var id: Long = 0,
     @ColumnInfo(name = "this_workout_name")
     var thisWorkoutName: String = "",
     @ColumnInfo(name = "workout_group")  // relation to workout group table
