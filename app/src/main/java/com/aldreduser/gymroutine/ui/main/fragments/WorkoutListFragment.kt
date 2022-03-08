@@ -56,7 +56,7 @@ class WorkoutListFragment : Fragment() {
             if(groupToDisplay == FIRST_TAB_TITLE) {
                 recyclerAdapter.submitList(it)
             } else {
-                val groupedWorkouts = viewModel.getWorkoutsOfThisGroup(WorkoutGroup(groupToDisplay))
+                val groupedWorkouts = viewModel.getWorkoutsOfGroup(WorkoutGroup(groupToDisplay))
                 recyclerAdapter.submitList(groupedWorkouts)
             }
         }

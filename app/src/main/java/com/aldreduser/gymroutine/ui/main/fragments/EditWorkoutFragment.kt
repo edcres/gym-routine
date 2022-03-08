@@ -45,7 +45,7 @@ class EditWorkoutFragment : Fragment() {
         }
         setUpAppBar()
         workoutName = viewModel.currentWorkoutName!!
-        setsAdapter.submitList(viewModel.getSetsOfThisWorkout(workoutName))
+        setsAdapter.submitList(viewModel.getSetsOfWorkout(workoutName))
     }
 
     override fun onDestroy() {
@@ -67,11 +67,13 @@ class EditWorkoutFragment : Fragment() {
                     id: Long
                 ) {
                     val groupSelected = viewModel.groupNames[position]
-                    viewModel.addGroupToWorkout(
-                        Workout(viewModel.currentWorkoutName!!, groupSelected)
+                    viewModel.updateGroupOnWorkout(
+                        Workout(
+                            workoutName = viewModel.currentWorkoutName!!,
+                            workoutGroup = groupSelected
+                        )
                     )
                 }
-
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     Log.i(fragmentTAG, "Nothing selected.")
                 }
@@ -90,7 +92,7 @@ class EditWorkoutFragment : Fragment() {
             0.0
         ))
         // todo: maybe have to wait for the result of the insert query to submitList()
-        setsAdapter.submitList(viewModel.getSetsOfThisWorkout(workoutName))
+        setsAdapter.submitList(viewModel.getSetsOfWorkout(workoutName))
     }
     private fun doneFabOnClick() {
         val navController = Navigation.findNavController(requireParentFragment().requireView())

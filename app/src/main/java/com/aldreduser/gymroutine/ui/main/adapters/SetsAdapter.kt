@@ -48,12 +48,12 @@ class SetsAdapter(
                 repsText.doAfterTextChanged {
                     viewModel.currentWorkoutName = item.workoutName
                     item.reps = it.toString().toInt()
-                    viewModel.updateRep(item)
+                    viewModel.updateSet(item)
                 }
                 weightText.doAfterTextChanged {
                     viewModel.currentWorkoutName = item.workoutName
                     item.weight = it.toString().toDouble()
-                    viewModel.updateWeight(item)
+                    viewModel.updateSet(item)
                 }
             }
         }

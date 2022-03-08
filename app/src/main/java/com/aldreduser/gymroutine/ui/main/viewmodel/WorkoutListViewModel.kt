@@ -20,6 +20,7 @@ import kotlinx.coroutines.launch
 //  from Flow to LiveData and exposes the list of words as LiveData to the UI.
 class WorkoutListViewModel : ViewModel() {
 
+    private val tag = "ViewModel TAG"
     private lateinit var roomDb: WorkoutsRoomDatabase
     private lateinit var repository: WorkoutsRepository
     var currentGroup: String = FIRST_TAB_TITLE
@@ -76,51 +77,73 @@ class WorkoutListViewModel : ViewModel() {
             }
         }
     }
-    fun insertWorkoutGroup(workoutGroup: WorkoutGroup) = viewModelScope.launch {
+    fun insertWorkoutGroup(workoutGroup: WorkoutGroup) = CoroutineScope(Dispatchers.IO).launch {
         repository.insert(workoutGroup)
     }
-    fun insertWorkout(workout: Workout) = viewModelScope.launch {
-        repository.insert(workout)
+    fun insertWorkout(workout: Workout): MutableLiveData<Long> {
+        val itemId = MutableLiveData<Long>()
+        CoroutineScope(Dispatchers.IO).launch {
+            itemId.postValue(repository.insert(workout))
+        }
+        return itemId
     }
-    fun insertWorkoutSet(workoutSet: WorkoutSet) = viewModelScope.launch {
+    fun insertWorkoutSet(workoutSet: WorkoutSet) = CoroutineScope(Dispatchers.IO).launch  {
         repository.insert(workoutSet)
     }
-    fun updateTitle(workout: Workout) {
-        // todo:
-        // update workout Workout entity and  WorkoutSet entity
+    fun updateGroupOnWorkout(workout: Workout) = CoroutineScope(Dispatchers.IO).launch {
+        // todo: use this function
+        repository.update(workout)
     }
-    fun updateRep(set: WorkoutSet) {
-        // todo:
+    fun updateWorkoutName(workout: Workout) = CoroutineScope(Dispatchers.IO).launch  {
+        repository.update(workout)
+        repository.updateWorkoutOnSets(workout.id, workout.workoutName)
     }
-    fun updateWeight(set: WorkoutSet) {
-        // todo:
+    fun updateSet(set: WorkoutSet) = CoroutineScope(Dispatchers.IO).launch {
+        repository.update(set)
     }
-    fun removeSet(set: WorkoutSet) {
-        // todo:
+    fun maybeRemoveGroup(group: WorkoutGroup) {
+        // todo: Call this function
+        // If the group has no workouts, remove it from db.
+        CoroutineScope(Dispatchers.IO).launch {
+            if(repository.groupHasWorkouts(group.groupName)) {
+                Log.i(tag, "Group ${group.groupName} still has workouts.")
+            } else {
+                repository.deleteGroup(group)
+                Log.i(tag, "Group ${group.groupName} removed.")
+            }
+        }
     }
-    fun getWorkoutsOfThisGroup(group: WorkoutGroup): List<Workout> {
-        // todo: do a query that gets all the workouts that are part of the group
-        //      group = 'groupToDisplay'
-        return mutableListOf()
-    }
-    fun getSetsOfThisWorkout(workoutName: String): List<WorkoutSet> {
-        // todo
-        return mutableListOf()
-    }
-    fun getNextSetNum(workoutName: String): Int {
-        // todo: do a query that gets the next set in that workout
-        //  check how many sets are part of that workout
-        return 2
-    }
-    fun addGroupToWorkout(workout: Workout) {
-        // todo: add the 'groupSelected' to the workout_group in Workout Entity in the database
-        //    (watch out for concurrency issues)
-    }
-    fun groupHasWorkouts(group: WorkoutGroup): Boolean {
+    fun removeWorkout(workout: Workout) = CoroutineScope(Dispatchers.IO).launch {
         // todo: call this function
-        // todo: check if this group has any workouts
-        // if not then delete group
-        return true
+        repository.deleteWorkout(workout)
+    }
+    fun removeSet(set: WorkoutSet) = CoroutineScope(Dispatchers.IO).launch {
+        repository.deleteSet(set)
+        if (sets.value != null) repository.updateSetOnSets(
+            set.set,
+            repository.getSetsOfWorkout(set.workoutId)
+        )
+    }
+    fun getWorkoutsOfGroup(group: String): MutableLiveData<List<Workout>> {
+        val workoutsOfGroup = MutableLiveData<List<Workout>>()
+        CoroutineScope(Dispatchers.IO).launch {
+            workoutsOfGroup.postValue(repository.getWorkoutsOfThisGroup(group))
+        }
+        return workoutsOfGroup
+    }
+    fun getSetsOfWorkout(workoutId: Long): MutableLiveData<List<WorkoutSet>> {
+        val setsOfWorkout = MutableLiveData<List<WorkoutSet>>()
+        CoroutineScope(Dispatchers.IO).launch {
+            setsOfWorkout.postValue(repository.getSetsOfWorkout(workoutId))
+        }
+        return setsOfWorkout
+    }
+    fun getNextSetNum(workoutId: Long): MutableLiveData<Int> {
+        val nextNum = MutableLiveData<Int>()
+        CoroutineScope(Dispatchers.IO).launch {
+            nextNum.postValue(repository.getNextSetNum(workoutId) + 1)
+        }
+        return nextNum
     }
     // DATABASE QUERIES //
 
@@ -131,7 +154,7 @@ class WorkoutListViewModel : ViewModel() {
                 val nextOrdinalId = groupsOrdinals.size - 1
                 groupTabsAdapter.addTab(nextOrdinalId + 1, title)
             } else {
-                Log.e(GLOBAL_TAG, "\t\ttitles contains next title \t\t $groupNames\n$title")
+                Log.e(tag, "\t\ttitles contains next title \t\t $groupNames\n$title")
             }
         }
     }

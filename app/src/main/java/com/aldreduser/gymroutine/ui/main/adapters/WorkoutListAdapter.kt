@@ -46,7 +46,7 @@ class WorkoutListAdapter(
                 // TITLE //
                 specificWorkoutInput.doAfterTextChanged {
                     item.workoutName = it.toString()
-                    viewModel.updateTitle(item)
+                    viewModel.updateWorkoutName(item)
                 }
                 // TITLE //
 
@@ -56,7 +56,7 @@ class WorkoutListAdapter(
                 viewModel.sets.observe(fragLifecycleOwner) {
                     // Only call submitList() on the workout being edited
                     if(item.workoutName == viewModel.currentWorkoutName) {
-                        setsAdapter.submitList(viewModel.getSetsOfThisWorkout(item.workoutName))
+                        setsAdapter.submitList(viewModel.getSetsOfWorkout(item.workoutName))
                     }
                 }
                 // GROUP SETS //
@@ -86,11 +86,13 @@ class WorkoutListAdapter(
                                     WorkoutGroup(newGroupEt.text.toString())
                                 )
                                 item.workoutGroup = groupSelected
-                                viewModel.addGroupToWorkout(item)
+
+
+                                viewModel.updateGroupOnWorkout(item)
                             }
                         } else {
                             item.workoutGroup = groupSelected
-                            viewModel.addGroupToWorkout(item)
+                            viewModel.updateGroupOnWorkout(item)
                         }
                     }
                     override fun onNothingSelected(parent: AdapterView<*>?) {

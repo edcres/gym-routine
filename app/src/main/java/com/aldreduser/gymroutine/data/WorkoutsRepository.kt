@@ -22,7 +22,7 @@ class WorkoutsRepository(private val database: WorkoutsRoomDatabase) {
         database.workoutGroupDao().insert(workoutGroup)
     }
     @WorkerThread
-    suspend fun insert(workout: Workout) {
+    suspend fun insert(workout: Workout): Long {
         database.workoutDao().insert(workout)
     }
     @WorkerThread
@@ -52,8 +52,8 @@ class WorkoutsRepository(private val database: WorkoutsRoomDatabase) {
         }
     }
     @WorkerThread
-    suspend fun updateWorkoutOnSets(oldWorkout: String, newWorkout: String) {
-        database.workoutSetDao().updateWorkoutOnSets(oldWorkout, newWorkout)
+    suspend fun updateWorkoutOnSets(workoutId: Long, newWorkout: String) {
+        database.workoutSetDao().updateWorkoutOnSets(workoutId, newWorkout)
     }
 
     @WorkerThread
