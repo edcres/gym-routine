@@ -40,13 +40,13 @@ class WorkoutListAdapter(
         private val binding: WorkoutItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Workout) {
+        fun bind(workout: Workout) {
             binding.apply {
 
                 // TITLE //
                 specificWorkoutInput.doAfterTextChanged {
-                    item.workoutName = it.toString()
-                    viewModel.updateWorkoutName(item)
+                    workout.workoutName = it.toString()
+                    viewModel.updateWorkoutName(workout)
                 }
                 // TITLE //
 
@@ -55,14 +55,18 @@ class WorkoutListAdapter(
                 setListRecycler.adapter = setsAdapter
                 viewModel.sets.observe(fragLifecycleOwner) {
                     // Only call submitList() on the workout being edited
-                    if(item.workoutName == viewModel.currentWorkoutName) {
-                        setsAdapter.submitList(viewModel.getSetsOfWorkout(item.workoutName))
-                    }
+
+                    // todo: maybe set an observer (). It's already inside another observer
+                    if (viewModel.workoutIdToEdit != null) {
+                        if (workout.id == viewModel.workoutIdToEdit) {
+                            setsAdapter.submitList(viewModel.getSetsOfWorkout(workout.workoutName))
+                        }
+                    } else Log.e(GLOBAL_TAG, "workoutIdToEdit is null")
                 }
                 // GROUP SETS //
 
                 // SPINNER //
-                if(item.workoutGroup != FIRST_TAB_TITLE) chooseGroupBtn.visibility = View.VISIBLE
+                if(workout.workoutGroup != FIRST_TAB_TITLE) chooseGroupBtn.visibility = View.VISIBLE
                 val spinnerList = viewModel.groupNames
                 spinnerList.add(NEW_GROUP)
                 chooseGroupBtn.adapter = ArrayAdapter(
@@ -85,14 +89,14 @@ class WorkoutListAdapter(
                                 viewModel.insertWorkoutGroup(
                                     WorkoutGroup(newGroupEt.text.toString())
                                 )
-                                item.workoutGroup = groupSelected
+                                workout.workoutGroup = groupSelected
 
 
-                                viewModel.updateGroupOnWorkout(item)
+                                viewModel.updateGroupOnWorkout(workout)
                             }
                         } else {
-                            item.workoutGroup = groupSelected
-                            viewModel.updateGroupOnWorkout(item)
+                            workout.workoutGroup = groupSelected
+                            viewModel.updateGroupOnWorkout(workout)
                         }
                     }
                     override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -108,8 +112,8 @@ class WorkoutListAdapter(
                     }
                 }
                 editItemBtn.setOnClickListener {
-                    viewModel.currentWorkoutName = item.workoutName
-                    viewModel.setItemToEdit(item)
+                    viewModel.workoutIdToEdit = workout.id
+                    viewModel.setItemToEdit(workout)
                 }
                 binding.executePendingBindings()
             }

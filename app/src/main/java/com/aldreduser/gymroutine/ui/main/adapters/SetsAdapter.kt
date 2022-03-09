@@ -30,30 +30,31 @@ class SetsAdapter(
         private val binding: SetLinearLayouBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: WorkoutSet) {
+        fun bind(workoutSet: WorkoutSet) {
             binding.apply {
                 if(setAreRemoved) {
+                    // If sets can be removed
                     removeSetBtn.visibility = View.VISIBLE
                     spacer.visibility = View.VISIBLE
                     removeSetBtn.setOnClickListener {
-                        viewModel.currentWorkoutName = item.workoutName
-                        viewModel.removeSet(item)
+                         viewModel.workoutIdToEdit = workoutSet.workoutId
+                        viewModel.removeSet(workoutSet)
                     }
                 }
 
-                setText.setText(item.set.toString())
-                repsText.setText(item.reps.toString())
-                weightText.setText(item.weight.toString())
+                setText.setText(workoutSet.set.toString())
+                repsText.setText(workoutSet.reps.toString())
+                weightText.setText(workoutSet.weight.toString())
 
                 repsText.doAfterTextChanged {
-                    viewModel.currentWorkoutName = item.workoutName
-                    item.reps = it.toString().toInt()
-                    viewModel.updateSet(item)
+                    viewModel.workoutIdToEdit = workoutSet.workoutId
+                    workoutSet.reps = it.toString().toInt()
+                    viewModel.updateSet(workoutSet)
                 }
                 weightText.doAfterTextChanged {
-                    viewModel.currentWorkoutName = item.workoutName
-                    item.weight = it.toString().toDouble()
-                    viewModel.updateSet(item)
+                    viewModel.workoutIdToEdit = workoutSet.workoutId
+                    workoutSet.weight = it.toString().toDouble()
+                    viewModel.updateSet(workoutSet)
                 }
             }
         }
@@ -75,7 +76,7 @@ class SetsAdapter(
 
 class SetDiffCallback : DiffUtil.ItemCallback<WorkoutSet>() {
     override fun areItemsTheSame(oldItem: WorkoutSet, newItem: WorkoutSet): Boolean {
-        return oldItem.workoutPlusSet == newItem.workoutPlusSet
+        return oldItem.id == newItem.id
     }
     override fun areContentsTheSame(oldItem: WorkoutSet, newItem: WorkoutSet): Boolean {
         return oldItem == newItem

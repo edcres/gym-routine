@@ -38,10 +38,10 @@ interface WorkoutSetDao {
     )
     suspend fun getSetsOfWorkout(workoutId: Long): List<WorkoutSet>
 
-    @Query(
-        "SELECT `set` FROM set_table " +
-                "WHERE workout_id = :workoutId " +
-                "ORDER BY `set` ASC"
-    )
-    suspend fun getSetNumList(workoutId: Long): List<Int>
+//    @Query(
+//        "SELECT `set` FROM set_table " +
+//                "WHERE workout_id = :workoutId " +
+//                "ORDER BY `set` ASC"
+//    )
+//    suspend fun getSetNumList(workoutId: Long): List<Int>
 }

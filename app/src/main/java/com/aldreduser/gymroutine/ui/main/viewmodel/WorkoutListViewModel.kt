@@ -10,7 +10,6 @@ import com.aldreduser.gymroutine.data.model.entities.WorkoutSet
 import com.aldreduser.gymroutine.data.model.room.WorkoutsRoomDatabase
 import com.aldreduser.gymroutine.ui.main.adapters.GroupTabsAdapter
 import com.aldreduser.gymroutine.utils.FIRST_TAB_TITLE
-import com.aldreduser.gymroutine.utils.GLOBAL_TAG
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -40,7 +39,7 @@ class WorkoutListViewModel : ViewModel() {
     val itemToEdit: LiveData<Any?> get() = _itemToEdit
 
     // Used to update the sets that were edited
-    var currentWorkoutName: String? = null
+    var workoutIdToEdit: Long? = null
 
     // HELPERS //
     fun toggleEditBtn() {
@@ -91,8 +90,10 @@ class WorkoutListViewModel : ViewModel() {
         repository.insert(workoutSet)
     }
     fun updateGroupOnWorkout(workout: Workout) = CoroutineScope(Dispatchers.IO).launch {
-        // todo: use this function
         repository.update(workout)
+    }
+    fun updateGroupOnWorkout(workoutId: Long, groupSelected: String) = CoroutineScope(Dispatchers.IO).launch {
+        repository.updateWorkout(workoutId, groupSelected)
     }
     fun updateWorkoutName(workout: Workout) = CoroutineScope(Dispatchers.IO).launch  {
         repository.update(workout)
@@ -101,7 +102,7 @@ class WorkoutListViewModel : ViewModel() {
     fun updateSet(set: WorkoutSet) = CoroutineScope(Dispatchers.IO).launch {
         repository.update(set)
     }
-    fun maybeRemoveGroup(group: WorkoutGroup) {
+    fun possiblyRemoveGroup(group: WorkoutGroup) {
         // todo: Call this function
         // If the group has no workouts, remove it from db.
         CoroutineScope(Dispatchers.IO).launch {
@@ -138,12 +139,27 @@ class WorkoutListViewModel : ViewModel() {
         }
         return setsOfWorkout
     }
-    fun getNextSetNum(workoutId: Long): MutableLiveData<Int> {
-        val nextNum = MutableLiveData<Int>()
+//    fun getNextSetNum(workoutId: Long): MutableLiveData<Int> {
+//        // todo: Probably get rid of this
+//        val nextNum = MutableLiveData<Int>()
+//        CoroutineScope(Dispatchers.IO).launch {
+//            nextNum.postValue(repository.getNextSetNum(workoutId) + 1)
+//        }
+//        return nextNum
+//    }
+//    fun getWorkout(workoutId: Long): MutableLiveData<Workout> {
+//        val thisWorkout = MutableLiveData<Workout>()
+//        CoroutineScope(Dispatchers.IO).launch {
+//            thisWorkout.postValue(repository.getWorkout(workoutId))
+//        }
+//        return thisWorkout
+//    }
+    fun getLastSet(workoutId: Long): MutableLiveData<WorkoutSet> {
+        val lastSet = MutableLiveData<WorkoutSet>()
         CoroutineScope(Dispatchers.IO).launch {
-            nextNum.postValue(repository.getNextSetNum(workoutId) + 1)
+            lastSet.postValue(repository.getLastSet(workoutId))
         }
-        return nextNum
+        return lastSet
     }
     // DATABASE QUERIES //
 

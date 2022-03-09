@@ -35,6 +35,10 @@ class WorkoutsRepository(private val database: WorkoutsRoomDatabase) {
         database.workoutDao().update(workout)
     }
     @WorkerThread
+    suspend fun updateWorkout(workoutId: Long, groupSelected: String) {
+        database.workoutDao().updateWorkout(workoutId, groupSelected)
+    }
+    @WorkerThread
     suspend fun update(set: WorkoutSet) {
         database.workoutSetDao().update(set)
     }
@@ -77,13 +81,18 @@ class WorkoutsRepository(private val database: WorkoutsRoomDatabase) {
     suspend fun getSetsOfWorkout(workoutId: Long): List<WorkoutSet> {
         return database.workoutSetDao().getSetsOfWorkout(workoutId)
     }
-    @WorkerThread
-    suspend fun getNextSetNum(workoutId: Long): Int {
-        return database.workoutSetDao().getSetNumList(workoutId).size
-    }
+//    @WorkerThread
+    // todo: probably delete this
+//    suspend fun getNextSetNum(workoutId: Long): Int {
+//        return database.workoutSetDao().getSetNumList(workoutId).size
+//    }
     @WorkerThread
     suspend fun groupHasWorkouts(groupName: String): Boolean {
-        // If list is empty, returns false, else return true
-        return database.workoutDao().getWorkoutsOfThisGroup(groupName).isNotEmpty()
+        // If the list is empty, returns false, else return true
+        return database.workoutDao().getWorkoutNamesOfThisGroup(groupName).isNotEmpty()
+    }
+    @WorkerThread
+    suspend fun getLastSet(workoutId: Long): WorkoutSet {
+        return database.workoutSetDao().getSetsOfWorkout(workoutId).last()
     }
 }

@@ -21,7 +21,7 @@ class EditWorkoutFragment : Fragment() {
     private var binding: FragmentEditWorkoutBinding? = null
     private lateinit var viewModel: WorkoutListViewModel
     private lateinit var setsAdapter: SetsAdapter
-    private lateinit var workoutName: String
+    private var currentWorkoutId: Long? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,8 +44,11 @@ class EditWorkoutFragment : Fragment() {
             editSetListRecycler.adapter = setsAdapter
         }
         setUpAppBar()
-        workoutName = viewModel.currentWorkoutName!!
-        setsAdapter.submitList(viewModel.getSetsOfWorkout(workoutName))
+
+        currentWorkoutId = viewModel.workoutIdToEdit
+        setsAdapter.submitList(viewModel.getSetsOfWorkout(currentWorkoutId))
+
+        // todo: set an observer for when sets are added or removed
     }
 
     override fun onDestroy() {
@@ -67,12 +70,7 @@ class EditWorkoutFragment : Fragment() {
                     id: Long
                 ) {
                     val groupSelected = viewModel.groupNames[position]
-                    viewModel.updateGroupOnWorkout(
-                        Workout(
-                            workoutName = viewModel.currentWorkoutName!!,
-                            workoutGroup = groupSelected
-                        )
-                    )
+                    viewModel.updateGroupOnWorkout(currentWorkoutId!!, groupSelected)
                 }
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     Log.i(fragmentTAG, "Nothing selected.")
@@ -81,18 +79,17 @@ class EditWorkoutFragment : Fragment() {
         }
     }
     private fun addSetClick() {
-        // todo: maybe have to wait for the result of 'nextSet' to insert workout
-        val nextSet = viewModel.getNextSetNum(workoutName)
-        val workoutPlusSet = "$workoutName$nextSet"
-        viewModel.insertWorkoutSet(WorkoutSet(
-            workoutPlusSet,
-            workoutName,
-            nextSet,
-            0,
-            0.0
-        ))
-        // todo: maybe have to wait for the result of the insert query to submitList()
-        setsAdapter.submitList(viewModel.getSetsOfWorkout(workoutName))
+        viewModel.getLastSet(currentWorkoutId!!).observe(viewLifecycleOwner) { lastSet ->
+            viewModel.insertWorkoutSet(
+                WorkoutSet(
+                    workoutId = lastSet.workoutId,
+                    workoutName = lastSet.workoutName,
+                    set = lastSet.set + 1,
+                    reps = 0,
+                    weight = 0.0
+                )
+            )
+        }
     }
     private fun doneFabOnClick() {
         val navController = Navigation.findNavController(requireParentFragment().requireView())
@@ -103,7 +100,7 @@ class EditWorkoutFragment : Fragment() {
     // SETUP FUNCTIONS //
     private fun setUpAppBar() {
         binding?.apply {
-            editWorkoutTopAppbar.title = viewModel.currentWorkoutName
+            editWorkoutTopAppbar.title = viewModel.workoutIdToEdit
             editWorkoutTopAppbar.setNavigationOnClickListener {
                 val navController =
                     Navigation.findNavController(requireParentFragment().requireView())
