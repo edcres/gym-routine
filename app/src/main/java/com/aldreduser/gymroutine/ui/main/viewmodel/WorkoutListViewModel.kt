@@ -147,13 +147,13 @@ class WorkoutListViewModel : ViewModel() {
 //        }
 //        return nextNum
 //    }
-//    fun getWorkout(workoutId: Long): MutableLiveData<Workout> {
-//        val thisWorkout = MutableLiveData<Workout>()
-//        CoroutineScope(Dispatchers.IO).launch {
-//            thisWorkout.postValue(repository.getWorkout(workoutId))
-//        }
-//        return thisWorkout
-//    }
+    fun getWorkoutName(workoutId: Long): MutableLiveData<String> {
+        val workoutName = MutableLiveData<String>()
+        CoroutineScope(Dispatchers.IO).launch {
+            workoutName.postValue(repository.getWorkoutName(workoutId))
+        }
+        return workoutName
+    }
     fun getLastSet(workoutId: Long): MutableLiveData<WorkoutSet> {
         val lastSet = MutableLiveData<WorkoutSet>()
         CoroutineScope(Dispatchers.IO).launch {

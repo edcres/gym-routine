@@ -44,16 +44,24 @@ class EditWorkoutFragment : Fragment() {
             editSetListRecycler.adapter = setsAdapter
         }
         setUpAppBar()
-
         currentWorkoutId = viewModel.workoutIdToEdit
-        setsAdapter.submitList(viewModel.getSetsOfWorkout(currentWorkoutId))
-
-        // todo: set an observer for when sets are added or removed
+        submitsSetsOfWorkout()
+        viewModel.sets.observe(viewLifecycleOwner) {
+            // Observer for when set is added or removed.
+            submitsSetsOfWorkout()
+        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
         binding = null
+    }
+
+    // HELPERS //
+    private fun submitsSetsOfWorkout() {
+        viewModel.getSetsOfWorkout(currentWorkoutId!!).observe(viewLifecycleOwner) { sets ->
+            setsAdapter.submitList(sets)
+        }
     }
 
     // CLICK LISTENERS //
@@ -100,7 +108,9 @@ class EditWorkoutFragment : Fragment() {
     // SETUP FUNCTIONS //
     private fun setUpAppBar() {
         binding?.apply {
-            editWorkoutTopAppbar.title = viewModel.workoutIdToEdit
+            viewModel.getWorkoutName(currentWorkoutId!!).observe(viewLifecycleOwner) {
+                editWorkoutTopAppbar.title = it
+            }
             editWorkoutTopAppbar.setNavigationOnClickListener {
                 val navController =
                     Navigation.findNavController(requireParentFragment().requireView())

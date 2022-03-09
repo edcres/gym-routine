@@ -37,4 +37,9 @@ interface WorkoutDao {
                 "ORDER BY id ASC"
     )
     suspend fun  getWorkoutNamesOfThisGroup(group: String): List<String>
+    @Query(
+        "SELECT workout_name FROM workout_table " +
+                "WHERE id = :workoutId"
+    )
+    suspend fun  getWorkoutName(workoutId: Long): String
 }
