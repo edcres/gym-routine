@@ -12,7 +12,7 @@ interface WorkoutDao {
     fun getAlphabetizedWorkouts(): Flow<List<Workout>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(workout: Workout)
+    suspend fun insert(workout: Workout): Long
     @Update
     suspend fun update(workout: Workout)
     @Delete

@@ -20,9 +20,9 @@ interface WorkoutSetDao {
     @Query(
         "UPDATE set_table " +
                 "SET workout_name = :newWorkout " +
-                "WHERE workout_name = :oldWorkout"
+                "WHERE workout_id = :workoutId"
     )
-    suspend fun updateWorkoutOnSets(oldWorkout: String, newWorkout: String)
+    suspend fun updateWorkoutOnSets(workoutId: Long, newWorkout: String)
 
     @Query(
         "UPDATE set_table " +

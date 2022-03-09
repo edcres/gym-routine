@@ -23,7 +23,7 @@ class WorkoutsRepository(private val database: WorkoutsRoomDatabase) {
     }
     @WorkerThread
     suspend fun insert(workout: Workout): Long {
-        database.workoutDao().insert(workout)
+        return database.workoutDao().insert(workout)
     }
     @WorkerThread
     suspend fun insert(workoutSet: WorkoutSet) {
@@ -70,11 +70,11 @@ class WorkoutsRepository(private val database: WorkoutsRoomDatabase) {
     }
 
     @WorkerThread
-    suspend fun getWorkoutsOfThisGroup(groupName: String): List<WST1Workout> {
+    suspend fun getWorkoutsOfThisGroup(groupName: String): List<Workout> {
         return database.workoutDao().getWorkoutsOfThisGroup(groupName)
     }
     @WorkerThread
-    suspend fun getSetsOfWorkout(workoutId: Long): List<WST1Set> {
+    suspend fun getSetsOfWorkout(workoutId: Long): List<WorkoutSet> {
         return database.workoutSetDao().getSetsOfWorkout(workoutId)
     }
     @WorkerThread
