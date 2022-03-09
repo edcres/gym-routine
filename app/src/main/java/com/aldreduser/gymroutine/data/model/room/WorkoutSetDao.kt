@@ -10,15 +10,38 @@ interface WorkoutSetDao {
     @Query("SELECT * FROM set_table ORDER BY id ASC")
     fun getAlphabetizedSets(): Flow<List<WorkoutSet>>
 
-    // Insert
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(set: WorkoutSet)
-
-    // Update Item
     @Update
-    suspend fun updateSet(set: WorkoutSet)
-
-    // Delete Item
+    suspend fun update(set: WorkoutSet)
     @Delete
-    suspend fun deleteSet(set: WorkoutSet)
+    suspend fun delete(set: WorkoutSet)
+
+    @Query(
+        "UPDATE set_table " +
+                "SET workout_name = :newWorkout " +
+                "WHERE workout_name = :oldWorkout"
+    )
+    suspend fun updateWorkoutOnSets(oldWorkout: String, newWorkout: String)
+
+    @Query(
+        "UPDATE set_table " +
+                "SET `set` = :newSetNum " +
+                "WHERE `set` = :oldSetNum"
+    )
+    suspend fun updateSetOnSets(oldSetNum: Int, newSetNum: Int)
+
+    @Query(
+        "SELECT * FROM set_table " +
+                "WHERE workout_id = :workoutId " +
+                "ORDER BY `set` ASC"
+    )
+    suspend fun getSetsOfWorkout(workoutId: Long): List<WorkoutSet>
+
+    @Query(
+        "SELECT `set` FROM set_table " +
+                "WHERE workout_id = :workoutId " +
+                "ORDER BY `set` ASC"
+    )
+    suspend fun getSetNumList(workoutId: Long): List<Int>
 }
