@@ -54,12 +54,13 @@ class WorkoutListAdapter(
                 val setsAdapter = SetsAdapter(viewModel, false)
                 setListRecycler.adapter = setsAdapter
                 viewModel.sets.observe(fragLifecycleOwner) {
-                    // Only call submitList() on the workout being edited
-
-                    // todo: maybe set an observer (). It's already inside another observer
                     if (viewModel.workoutIdToEdit != null) {
+                        // Only call submitList() on the workout being edited
                         if (workout.id == viewModel.workoutIdToEdit) {
-                            setsAdapter.submitList(viewModel.getSetsOfWorkout(workout.workoutName))
+                            viewModel.getSetsOfWorkout(workout.id)
+                                .observe(fragLifecycleOwner) { theseSets ->
+                                    setsAdapter.submitList(theseSets)
+                                }
                         }
                     } else Log.e(GLOBAL_TAG, "workoutIdToEdit is null")
                 }
@@ -90,8 +91,6 @@ class WorkoutListAdapter(
                                     WorkoutGroup(newGroupEt.text.toString())
                                 )
                                 workout.workoutGroup = groupSelected
-
-
                                 viewModel.updateGroupOnWorkout(workout)
                             }
                         } else {
