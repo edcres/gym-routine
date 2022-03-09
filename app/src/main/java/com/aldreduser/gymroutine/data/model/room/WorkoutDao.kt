@@ -8,24 +8,20 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface WorkoutDao {
 
-    // getting workout names alphabetically
     @Query("SELECT * FROM workout_table ORDER BY id ASC")
     fun getAlphabetizedWorkouts(): Flow<List<Workout>>
 
-    // Insert
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(workout: Workout)
-
-    // Update Item
     @Update
-    suspend fun updateWorkout(workout: Workout)
-
-    // Delete item
+    suspend fun update(workout: Workout)
     @Delete
-    suspend fun deleteWorkout(workout: Workout)
+    suspend fun delete(workout: Workout)
 
-    // relationship between workout and set
-    @Transaction
-    @Query("SELECT * FROM workout_table")
-    suspend fun getWorkoutWithSets(): List<WorkoutAndSets>
+    @Query(
+        "SELECT * FROM workout_table " +
+                "WHERE workout_group = :group " +
+                "ORDER BY id ASC"
+    )
+    suspend fun getWorkoutsOfThisGroup(group: String): List<Workout>
 }
