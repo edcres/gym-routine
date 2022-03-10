@@ -115,7 +115,6 @@ class WorkoutListViewModel : ViewModel() {
         }
     }
     fun removeWorkout(workout: Workout) = CoroutineScope(Dispatchers.IO).launch {
-        // todo: call this function
         repository.deleteWorkout(workout)
     }
     fun removeSet(set: WorkoutSet) = CoroutineScope(Dispatchers.IO).launch {

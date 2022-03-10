@@ -42,14 +42,12 @@ class WorkoutListAdapter(
 
         fun bind(workout: Workout) {
             binding.apply {
-
                 // TITLE //
                 specificWorkoutInput.doAfterTextChanged {
                     workout.workoutName = it.toString()
                     viewModel.updateWorkoutName(workout)
                 }
                 // TITLE //
-
                 // GROUP SETS //
                 val setsAdapter = SetsAdapter(viewModel, false)
                 setListRecycler.adapter = setsAdapter
@@ -65,7 +63,6 @@ class WorkoutListAdapter(
                     } else Log.e(GLOBAL_TAG, "workoutIdToEdit is null")
                 }
                 // GROUP SETS //
-
                 // SPINNER //
                 if(workout.workoutGroup != FIRST_TAB_TITLE) chooseGroupBtn.visibility = View.VISIBLE
                 val spinnerList = viewModel.groupNames
@@ -106,13 +103,22 @@ class WorkoutListAdapter(
 
                 viewModel.menuEditIsOn.observe(fragLifecycleOwner) { result ->
                     when (result) {
-                        true -> editItemBtn.visibility = View.VISIBLE
-                        false -> editItemBtn.visibility = View.GONE
+                        true -> {
+                            editItemBtn.visibility = View.VISIBLE
+                            removeItemBtn.visibility = View.VISIBLE
+                        }
+                        false -> {
+                            editItemBtn.visibility = View.GONE
+                            removeItemBtn.visibility = View.GONE
+                        }
                     }
                 }
                 editItemBtn.setOnClickListener {
                     viewModel.workoutIdToEdit = workout.id
                     viewModel.setItemToEdit(workout)
+                }
+                removeItemBtn.setOnClickListener {
+                    viewModel.removeWorkout(workout)
                 }
                 binding.executePendingBindings()
             }

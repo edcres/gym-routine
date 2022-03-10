@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import com.aldreduser.gymroutine.data.model.entities.WorkoutGroup
 import com.aldreduser.gymroutine.databinding.FragmentWorkoutListBinding
 import com.aldreduser.gymroutine.ui.main.adapters.WorkoutListAdapter
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
@@ -25,7 +24,7 @@ class WorkoutListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val fragmentBinding = FragmentWorkoutListBinding.inflate(inflater, container,false)
+        val fragmentBinding = FragmentWorkoutListBinding.inflate(inflater, container, false)
         binding = fragmentBinding
         recyclerAdapter = WorkoutListAdapter(viewModel, requireContext(), viewLifecycleOwner)
         return fragmentBinding.root
@@ -52,17 +51,19 @@ class WorkoutListFragment : Fragment() {
     }
 
     private fun setObservers() {
-        viewModel.workouts.observe(viewLifecycleOwner) {
-            if(groupToDisplay == FIRST_TAB_TITLE) {
-                recyclerAdapter.submitList(it)
+        viewModel.workouts.observe(viewLifecycleOwner) { allWorkouts ->
+            if (groupToDisplay == FIRST_TAB_TITLE) {
+                recyclerAdapter.submitList(allWorkouts)
             } else {
-                val groupedWorkouts = viewModel.getWorkoutsOfGroup(WorkoutGroup(groupToDisplay))
-                recyclerAdapter.submitList(groupedWorkouts)
+                viewModel.getWorkoutsOfGroup(groupToDisplay)
+                    .observe(viewLifecycleOwner) { groupedWorkouts ->
+                        recyclerAdapter.submitList(groupedWorkouts)
+                    }
             }
         }
     }
 
-    companion object{
+    companion object {
         fun getInstance(titleToDisplay: String): WorkoutListFragment {
             val thisFragment = WorkoutListFragment()
             thisFragment.groupToDisplay = titleToDisplay
