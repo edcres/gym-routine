@@ -102,20 +102,14 @@ class WorkoutListViewModel : ViewModel() {
     fun updateSet(set: WorkoutSet) = CoroutineScope(Dispatchers.IO).launch {
         repository.update(set)
     }
-    fun possiblyRemoveGroup(group: WorkoutGroup) {
-        // todo: Call this function
-        // If the group has no workouts, remove it from db.
-        CoroutineScope(Dispatchers.IO).launch {
-            if(repository.groupHasWorkouts(group.groupName)) {
-                Log.i(tag, "Group ${group.groupName} still has workouts.")
-            } else {
-                repository.deleteGroup(group)
-                Log.i(tag, "Group ${group.groupName} removed.")
-            }
-        }
-    }
-    fun removeWorkout(workout: Workout) = CoroutineScope(Dispatchers.IO).launch {
+    fun removeWorkout(workout: Workout, group: String) = CoroutineScope(Dispatchers.IO).launch {
         repository.deleteWorkout(workout)
+        if(repository.groupHasWorkouts(group)) {
+            Log.i(tag, "Group $group still has workouts.")
+        } else {
+            repository.deleteGroup(group)
+            Log.i(tag, "Group $group removed.")
+        }
     }
     fun removeSet(set: WorkoutSet) = CoroutineScope(Dispatchers.IO).launch {
         repository.deleteSet(set)

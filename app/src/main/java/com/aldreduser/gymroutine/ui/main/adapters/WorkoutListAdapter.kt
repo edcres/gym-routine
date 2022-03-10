@@ -118,7 +118,7 @@ class WorkoutListAdapter(
                     viewModel.setItemToEdit(workout)
                 }
                 removeItemBtn.setOnClickListener {
-                    viewModel.removeWorkout(workout)
+                    viewModel.removeWorkout(workout, workout.workoutGroup)
                 }
                 binding.executePendingBindings()
             }

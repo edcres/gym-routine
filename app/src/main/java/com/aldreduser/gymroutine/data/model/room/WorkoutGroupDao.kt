@@ -2,7 +2,6 @@ package com.aldreduser.gymroutine.data.model.room
 
 import androidx.room.*
 import com.aldreduser.gymroutine.data.model.entities.WorkoutGroup
-import com.aldreduser.gymroutine.data.model.entities.WorkoutGroupAndWorkouts
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -14,6 +13,6 @@ interface WorkoutGroupDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(workoutGroup: WorkoutGroup)
 
-    @Delete
-    suspend fun delete(workoutGroup: WorkoutGroup)
+    @Query("DELETE FROM workout_group_table WHERE group_name = :groupName")
+    suspend fun delete(groupName: String)
 }

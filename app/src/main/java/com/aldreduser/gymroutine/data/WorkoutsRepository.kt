@@ -61,9 +61,13 @@ class WorkoutsRepository(private val database: WorkoutsRoomDatabase) {
     }
 
     @WorkerThread
-    suspend fun deleteGroup(group: WorkoutGroup) {
-        database.workoutGroupDao().delete(group)
+    suspend fun deleteGroup(groupName: String) {
+        database.workoutGroupDao().delete(groupName)
     }
+//    @WorkerThread
+//    suspend fun deleteGroup(group: WorkoutGroup) {
+//        database.workoutGroupDao().delete(group)
+//    }
     @WorkerThread
     suspend fun deleteWorkout(workout: Workout) {
         database.workoutDao().delete(workout)
