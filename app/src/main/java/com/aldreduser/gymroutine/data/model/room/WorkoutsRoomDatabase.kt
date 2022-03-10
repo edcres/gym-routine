@@ -9,7 +9,7 @@ import com.aldreduser.gymroutine.data.model.entities.WorkoutGroup
 import com.aldreduser.gymroutine.data.model.entities.WorkoutSet
 
 @Database(entities = [WorkoutGroup::class, Workout::class, WorkoutSet::class],
-    version = 1,
+    version = 2,
     exportSchema = false)
 abstract class WorkoutsRoomDatabase: RoomDatabase() {
 

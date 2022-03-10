@@ -55,6 +55,7 @@ class WorkoutListViewModel : ViewModel() {
         roomDb = WorkoutsRoomDatabase.getInstance(application)
         repository = WorkoutsRepository(roomDb)
         fetchAllWorkouts()
+        insertWorkoutGroup(WorkoutGroup(FIRST_TAB_TITLE))
     }
     // SETUP //
 
@@ -80,6 +81,7 @@ class WorkoutListViewModel : ViewModel() {
         repository.insert(workoutGroup)
     }
     fun insertWorkout(workout: Workout): MutableLiveData<Long> {
+        Log.d(tag, "insertWorkout: $workout")
         val itemId = MutableLiveData<Long>()
         CoroutineScope(Dispatchers.IO).launch {
             itemId.postValue(repository.insert(workout))
@@ -92,10 +94,11 @@ class WorkoutListViewModel : ViewModel() {
     fun updateGroupOnWorkout(workout: Workout) = CoroutineScope(Dispatchers.IO).launch {
         repository.update(workout)
     }
-    fun updateGroupOnWorkout(workoutId: Long, groupSelected: String) = CoroutineScope(Dispatchers.IO).launch {
-        repository.updateWorkout(workoutId, groupSelected)
-    }
-    fun updateWorkoutName(workout: Workout) = CoroutineScope(Dispatchers.IO).launch  {
+    fun updateGroupOnWorkout(workoutId: Long, groupSelected: String) =
+        CoroutineScope(Dispatchers.IO).launch {
+            repository.updateWorkout(workoutId, groupSelected)
+        }
+    fun updateWorkoutName(workout: Workout) = CoroutineScope(Dispatchers.IO).launch {
         repository.update(workout)
         repository.updateWorkoutOnSets(workout.id, workout.workoutName)
     }

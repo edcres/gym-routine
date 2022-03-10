@@ -59,12 +59,12 @@ class StartFragment : Fragment() {
 
     // CLICK HANDLERS //
     private fun addWorkout() {
-        // add a workout with an empty title to the db .then when the user types the title it
-            // will be updated. Careful there are not 2 workouts with empty titles
-        viewModel.insertWorkout(Workout(
-            workoutName = "",
-            workoutGroup = viewModel.currentGroup
-        ))
+        viewModel.insertWorkout(
+            Workout(
+                workoutName = "",
+                workoutGroup = viewModel.currentGroup
+            )
+        )
     }
 
     // SETUP //
