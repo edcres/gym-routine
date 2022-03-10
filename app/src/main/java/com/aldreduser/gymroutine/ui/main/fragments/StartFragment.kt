@@ -45,6 +45,7 @@ class StartFragment : Fragment() {
         setUpAppBar()
         setUpTabs()
         setObservers()
+        setUpObservers()
     }
 
     override fun onResume() {
@@ -125,4 +126,23 @@ class StartFragment : Fragment() {
         }
     }
     // SETUP //
+
+    // todo: delete this
+    private fun setUpObservers() {
+        viewModel.groups.observe(viewLifecycleOwner) {
+            var groupsString = ""
+            it.forEach { group -> groupsString = "$groupsString\n$group" }
+            Log.d(fragmentTAG, "groups observed: ${it.size}$groupsString\n.")
+        }
+        viewModel.workouts.observe(viewLifecycleOwner) {
+            var workoutsString = ""
+            it.forEach { workout -> workoutsString = "$workoutsString\n$workout" }
+            Log.d(fragmentTAG, "workouts observed: ${it.size}$workoutsString\n.")
+        }
+        viewModel.sets.observe(viewLifecycleOwner) {
+            var setsString = ""
+            it.forEach { set -> setsString = "$setsString\n$set" }
+            Log.d(fragmentTAG, "sets observed: ${it.size}$setsString\n.")
+        }
+    }
 }

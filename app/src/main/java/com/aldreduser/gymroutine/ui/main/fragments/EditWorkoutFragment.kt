@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.aldreduser.gymroutine.data.model.entities.Workout
 import com.aldreduser.gymroutine.data.model.entities.WorkoutSet
@@ -19,7 +20,7 @@ class EditWorkoutFragment : Fragment() {
 
     private val fragmentTAG = "EditFragmentTAG"
     private var binding: FragmentEditWorkoutBinding? = null
-    private lateinit var viewModel: WorkoutListViewModel
+    private val viewModel: WorkoutListViewModel by activityViewModels()
     private lateinit var setsAdapter: SetsAdapter
     private var currentWorkoutId: Long? = null
 
@@ -38,13 +39,14 @@ class EditWorkoutFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding?.apply {
             lifecycleOwner = viewLifecycleOwner
-            groupSpinner.setOnClickListener { spinnerOnClick() }
+            spinnerOnClick()
             addSetButton.setOnClickListener { addSetClick() }
             editWorkoutDoneFab.setOnClickListener { doneFabOnClick() }
             editSetListRecycler.adapter = setsAdapter
         }
-        setUpAppBar()
         currentWorkoutId = viewModel.workoutIdToEdit
+        Log.d(tag, "onViewCreated: currentWorkoutId: $currentWorkoutId")
+        setUpAppBar()
         submitsSetsOfWorkout()
         viewModel.sets.observe(viewLifecycleOwner) {
             // Observer for when set is added or removed.
@@ -108,6 +110,7 @@ class EditWorkoutFragment : Fragment() {
     // SETUP FUNCTIONS //
     private fun setUpAppBar() {
         binding?.apply {
+            Log.d(fragmentTAG, "setUpAppBar: currentWorkoutId = $currentWorkoutId")
             viewModel.getWorkoutName(currentWorkoutId!!).observe(viewLifecycleOwner) {
                 editWorkoutTopAppbar.title = it
             }
