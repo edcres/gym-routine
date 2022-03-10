@@ -40,6 +40,8 @@ class WorkoutListAdapter(
         private val binding: WorkoutItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
+        private lateinit var setsAdapter: SetsAdapter
+
         fun bind(workout: Workout) {
             binding.apply {
                 // TITLE //
@@ -49,19 +51,24 @@ class WorkoutListAdapter(
                 }
                 // TITLE //
                 // GROUP SETS //
-                val setsAdapter = SetsAdapter(viewModel, false)
+                setsAdapter = SetsAdapter(viewModel, false)
                 setListRecycler.adapter = setsAdapter
-                viewModel.sets.observe(fragLifecycleOwner) {
-                    if (viewModel.workoutIdToEdit != null) {
-                        // Only call submitList() on the workout being edited
-                        if (workout.id == viewModel.workoutIdToEdit) {
-                            viewModel.getSetsOfWorkout(workout.id)
-                                .observe(fragLifecycleOwner) { theseSets ->
-                                    setsAdapter.submitList(theseSets)
-                                }
-                        }
-                    } else Log.e(GLOBAL_TAG, "workoutIdToEdit is null")
-                }
+                viewModel.getSetsOfWorkout(workout.id)
+                    .observe(fragLifecycleOwner) { theseSets ->
+                        Log.d(GLOBAL_TAG, "WorkoutListAdapter observed:\n$theseSets")
+                        setsAdapter.submitList(theseSets)
+                    }
+
+                // todo: I don't know what this code is for. I think it was a mistake.
+//                viewModel.sets.observe(fragLifecycleOwner) {
+//                    if (viewModel.workoutIdToEdit != null) {
+//                        // Only call submitList() on the workout being edited
+//                        if (workout.id == viewModel.workoutIdToEdit) {
+//                            submitSets(workout, setsAdapter)
+//                        }
+//                    } else Log.e(GLOBAL_TAG, "workoutIdToEdit is null")
+//                }
+
                 // GROUP SETS //
                 // SPINNER //
                 if(workout.workoutGroup != FIRST_TAB_TITLE) chooseGroupBtn.visibility = View.VISIBLE
@@ -115,11 +122,12 @@ class WorkoutListAdapter(
                 }
                 editItemBtn.setOnClickListener {
                     viewModel.workoutIdToEdit = workout.id
-                    Log.d(GLOBAL_TAG, "editCLick: ${viewModel.workoutIdToEdit}")
                     viewModel.setItemToEdit(workout)
                 }
                 removeItemBtn.setOnClickListener {
-                    viewModel.removeWorkout(workout, workout.workoutGroup)
+                    setsAdapter.submitList(viewModel.sets.value)
+                    Log.d(GLOBAL_TAG, "submit clicked\n${viewModel.sets.value}")
+//                    viewModel.removeWorkout(workout, workout.workoutGroup)
                 }
                 binding.executePendingBindings()
             }

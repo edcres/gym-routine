@@ -45,7 +45,6 @@ class EditWorkoutFragment : Fragment() {
             editSetListRecycler.adapter = setsAdapter
         }
         currentWorkoutId = viewModel.workoutIdToEdit
-        Log.d(tag, "onViewCreated: currentWorkoutId: $currentWorkoutId")
         setUpAppBar()
         submitsSetsOfWorkout()
         viewModel.sets.observe(viewLifecycleOwner) {
@@ -110,7 +109,6 @@ class EditWorkoutFragment : Fragment() {
     // SETUP FUNCTIONS //
     private fun setUpAppBar() {
         binding?.apply {
-            Log.d(fragmentTAG, "setUpAppBar: currentWorkoutId = $currentWorkoutId")
             viewModel.getWorkoutName(currentWorkoutId!!).observe(viewLifecycleOwner) {
                 editWorkoutTopAppbar.title = it
             }

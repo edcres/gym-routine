@@ -1,5 +1,6 @@
 package com.aldreduser.gymroutine.ui.main.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,29 +9,39 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.aldreduser.gymroutine.data.model.entities.WorkoutSet
-import com.aldreduser.gymroutine.databinding.SetLinearLayouBinding
+import com.aldreduser.gymroutine.databinding.SetLinearLayoutBinding
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
-
+import com.aldreduser.gymroutine.utils.GLOBAL_TAG
 // This adapter will be used in 2 places: WorkoutListAdapter, EditWorkoutFragment
 class SetsAdapter(
     private val viewModel: WorkoutListViewModel,
     private val setAreRemoved: Boolean
 ) : ListAdapter<WorkoutSet, SetsAdapter.SetsViewHolder>(SetDiffCallback()) {
 
+    init {
+        Log.d(GLOBAL_TAG, "SetsAdapter initialized")
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SetsViewHolder {
+        Log.d(GLOBAL_TAG, "onCreateViewHolder: called")
         return SetsViewHolder.from(viewModel, setAreRemoved, parent)
     }
 
-    override fun onBindViewHolder(holderWorkouts: SetsViewHolder, position: Int) =
-        holderWorkouts.bind(getItem(position))
+    //    override fun onBindViewHolder(holderWorkouts: SetsViewHolder, position: Int) =
+    //        holderWorkouts.bind(getItem(position))
+    override fun onBindViewHolder(holderWorkouts: SetsViewHolder, position: Int) {
+        Log.d(GLOBAL_TAG, "onBindViewHolder: called")
+        return holderWorkouts.bind(getItem(position))
+    }
 
     class SetsViewHolder private constructor(
         private val viewModel: WorkoutListViewModel,
         private val setAreRemoved: Boolean,
-        private val binding: SetLinearLayouBinding
+        private val binding: SetLinearLayoutBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(workoutSet: WorkoutSet) {
+            Log.d(GLOBAL_TAG, "set ${workoutSet.set} called from setsAdapter.")
             binding.apply {
                 if(setAreRemoved) {
                     // If sets can be removed
@@ -65,14 +76,16 @@ class SetsAdapter(
                 setAreRemoved: Boolean,
                 parent: ViewGroup
             ): SetsViewHolder {
+                Log.d(GLOBAL_TAG, "sets adapter companion object: called")
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = SetLinearLayouBinding
+                val binding = SetLinearLayoutBinding
                     .inflate(layoutInflater, parent, false)
                 return SetsViewHolder(viewModel, setAreRemoved, binding)
             }
         }
     }
 }
+
 
 class SetDiffCallback : DiffUtil.ItemCallback<WorkoutSet>() {
     override fun areItemsTheSame(oldItem: WorkoutSet, newItem: WorkoutSet): Boolean {
