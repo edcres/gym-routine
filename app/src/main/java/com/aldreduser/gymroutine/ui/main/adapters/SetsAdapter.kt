@@ -86,7 +86,6 @@ class SetsAdapter(
     }
 }
 
-
 class SetDiffCallback : DiffUtil.ItemCallback<WorkoutSet>() {
     override fun areItemsTheSame(oldItem: WorkoutSet, newItem: WorkoutSet): Boolean {
         return oldItem.id == newItem.id
