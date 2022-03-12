@@ -42,6 +42,7 @@ class SetsAdapter(
                     spacer.visibility = View.VISIBLE
                     removeSetBtn.setOnClickListener {
                         viewModel.workoutIdToEdit = workoutSet.workoutId
+                        workoutSet.set = setText.text.toString().toInt()
                         viewModel.removeSet(workoutSet)
                     }
                 }

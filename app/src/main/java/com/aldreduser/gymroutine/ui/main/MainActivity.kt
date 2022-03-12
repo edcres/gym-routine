@@ -28,6 +28,10 @@ todo:
 // todo: clean up logs
 // todo: clean up unused imports
 
+/* Bugs
+    1 - The sets numbers are often not updated correctly.
+ */
+
 // Future
 // Have a history of previous workouts
 // Section for maxes and history of maxes
