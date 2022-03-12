@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.aldreduser.gymroutine.databinding.FragmentWorkoutListBinding
 import com.aldreduser.gymroutine.ui.main.adapters.WorkoutListAdapter
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
@@ -37,7 +38,8 @@ class WorkoutListFragment : Fragment() {
         binding?.apply {
             lifecycleOwner = viewLifecycleOwner
             workoutListRecycler.adapter = recyclerAdapter
-            workoutListRecycler.layoutManager = GridLayoutManager(requireContext(), 2)
+
+            workoutListRecycler.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         }
         populateWorkoutsList()
         setObservers()
