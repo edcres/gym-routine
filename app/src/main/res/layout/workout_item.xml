@@ -35,7 +35,7 @@
                         android:id="@+id/specific_workout_input"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="text|number"
+                        android:inputType="textPersonName"
                         android:textSize="18sp"
                         android:textStyle="bold" />
                 </com.google.android.material.textfield.TextInputLayout>

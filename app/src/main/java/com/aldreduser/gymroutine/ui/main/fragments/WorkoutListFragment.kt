@@ -1,6 +1,7 @@
 package com.aldreduser.gymroutine.ui.main.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +15,7 @@ import com.aldreduser.gymroutine.utils.FIRST_TAB_TITLE
 
 class WorkoutListFragment : Fragment() {
 
-    private val fragmentTAG = "Workout List FragmentTAG"
+    private val fragmentTAG = "Workout List TAG"
     private var binding: FragmentWorkoutListBinding? = null
     private val viewModel: WorkoutListViewModel by activityViewModels()
     private lateinit var recyclerAdapter: WorkoutListAdapter
@@ -51,16 +52,21 @@ class WorkoutListFragment : Fragment() {
     }
 
     private fun setObservers() {
-        viewModel.workouts.observe(viewLifecycleOwner) { allWorkouts ->
-            if (groupToDisplay == FIRST_TAB_TITLE) {
-                recyclerAdapter.submitList(allWorkouts)
-            } else {
-                viewModel.getWorkoutsOfGroup(groupToDisplay)
-                    .observe(viewLifecycleOwner) { groupedWorkouts ->
-                        recyclerAdapter.submitList(groupedWorkouts)
-                    }
+        viewModel.getWorkoutsOfGroup(groupToDisplay)
+            .observe(viewLifecycleOwner) { groupedWorkouts ->
+                recyclerAdapter.submitList(groupedWorkouts)
             }
-        }
+//        viewModel.workouts.observe(viewLifecycleOwner) { allWorkouts ->
+//            if (groupToDisplay == FIRST_TAB_TITLE) {
+//                Log.d(fragmentTAG, "setObservers: called")
+//                recyclerAdapter.submitList(viewModel.workouts.value)
+//            } else {
+//                viewModel.getWorkoutsOfGroup(groupToDisplay)
+//                    .observe(viewLifecycleOwner) { groupedWorkouts ->
+//                        recyclerAdapter.submitList(groupedWorkouts)
+//                    }
+//            }
+//        }
     }
 
     companion object {

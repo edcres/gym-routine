@@ -45,19 +45,25 @@ class WorkoutListAdapter(
 
         fun bind(workout: Workout) {
             binding.apply {
+
+                if (specificWorkoutInput.text.isNullOrEmpty()) {
+                    Log.d(GLOBAL_TAG, "workout ET is refreshed to ${workout.workoutName}")
+                    specificWorkoutInput.setText(workout.workoutName)
+                }
+
                 // TITLE //
                 specificWorkoutInput.doAfterTextChanged {
                     workout.workoutName = it.toString()
                     viewModel.updateWorkoutName(workout)
                 }
                 // TITLE //
+
                 // GROUP SETS //
                 setsAdapter = SetsAdapter(viewModel, false)
                 setListRecycler.adapter = setsAdapter
                 setListRecycler.layoutManager = CustomLinearLayoutManager(context)
                 viewModel.getSetsOfWorkout(workout.id)
                     .observe(fragLifecycleOwner) { theseSets ->
-                        Log.d(GLOBAL_TAG, "WorkoutListAdapter observed:\n$theseSets")
                         setsAdapter.submitList(theseSets)
                     }
 
@@ -150,7 +156,7 @@ class WorkoutListAdapter(
 
 class WorkoutDiffCallback : DiffUtil.ItemCallback<Workout>() {
     override fun areItemsTheSame(oldItem: Workout, newItem: Workout): Boolean {
-        return oldItem.workoutName == newItem.workoutName
+        return oldItem.id == newItem.id
     }
     override fun areContentsTheSame(oldItem: Workout, newItem: Workout): Boolean {
         return oldItem == newItem
