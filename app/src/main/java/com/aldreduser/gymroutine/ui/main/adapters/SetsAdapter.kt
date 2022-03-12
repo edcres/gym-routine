@@ -48,14 +48,18 @@ class SetsAdapter(
                 weightText.setText(workoutSet.weight.toString())
 
                 repsText.doAfterTextChanged {
-                    viewModel.workoutIdToEdit = workoutSet.workoutId
-                    workoutSet.reps = it.toString().toInt()
-                    viewModel.updateSet(workoutSet)
+                    if(!it.toString().isNullOrEmpty()) {
+                        viewModel.workoutIdToEdit = workoutSet.workoutId
+                        workoutSet.reps = it.toString().toInt()
+                        viewModel.updateSet(workoutSet)
+                    }
                 }
                 weightText.doAfterTextChanged {
-                    viewModel.workoutIdToEdit = workoutSet.workoutId
-                    workoutSet.weight = it.toString().toDouble()
-                    viewModel.updateSet(workoutSet)
+                    if(!it.toString().isNullOrEmpty()) {
+                        viewModel.workoutIdToEdit = workoutSet.workoutId
+                        workoutSet.weight = it.toString().toDouble()
+                        viewModel.updateSet(workoutSet)
+                    }
                 }
             }
         }

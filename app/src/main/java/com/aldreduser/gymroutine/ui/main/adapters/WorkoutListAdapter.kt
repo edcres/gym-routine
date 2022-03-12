@@ -46,10 +46,8 @@ class WorkoutListAdapter(
         fun bind(workout: Workout) {
             binding.apply {
 
-                if (specificWorkoutInput.text.isNullOrEmpty()) {
-                    Log.d(GLOBAL_TAG, "workout ET is refreshed to ${workout.workoutName}")
+                if (specificWorkoutInput.text.isNullOrEmpty())
                     specificWorkoutInput.setText(workout.workoutName)
-                }
 
                 // TITLE //
                 specificWorkoutInput.doAfterTextChanged {

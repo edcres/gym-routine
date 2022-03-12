@@ -20,6 +20,7 @@ class WorkoutListFragment : Fragment() {
     private val viewModel: WorkoutListViewModel by activityViewModels()
     private lateinit var recyclerAdapter: WorkoutListAdapter
     private var groupToDisplay = FIRST_TAB_TITLE
+    private var workoutsPreviousSize: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +39,11 @@ class WorkoutListFragment : Fragment() {
             workoutListRecycler.adapter = recyclerAdapter
             workoutListRecycler.layoutManager = GridLayoutManager(requireContext(), 2)
         }
+        viewModel.getWorkoutsOfGroup(groupToDisplay)
+            .observe(viewLifecycleOwner) { groupedWorkouts ->
+                recyclerAdapter.submitList(groupedWorkouts)
+                workoutsPreviousSize = groupedWorkouts.size
+            }
         setObservers()
     }
 
@@ -52,21 +58,15 @@ class WorkoutListFragment : Fragment() {
     }
 
     private fun setObservers() {
-        viewModel.getWorkoutsOfGroup(groupToDisplay)
-            .observe(viewLifecycleOwner) { groupedWorkouts ->
-                recyclerAdapter.submitList(groupedWorkouts)
-            }
-//        viewModel.workouts.observe(viewLifecycleOwner) { allWorkouts ->
-//            if (groupToDisplay == FIRST_TAB_TITLE) {
-//                Log.d(fragmentTAG, "setObservers: called")
-//                recyclerAdapter.submitList(viewModel.workouts.value)
-//            } else {
-//                viewModel.getWorkoutsOfGroup(groupToDisplay)
-//                    .observe(viewLifecycleOwner) { groupedWorkouts ->
-//                        recyclerAdapter.submitList(groupedWorkouts)
-//                    }
-//            }
-//        }
+        viewModel.workouts.observe(viewLifecycleOwner) {
+            // Only update the list when a workout is added or deleted.
+            viewModel.getWorkoutsOfGroup(groupToDisplay)
+                .observe(viewLifecycleOwner) { groupedWorkouts ->
+                    if (workoutsPreviousSize != groupedWorkouts.size) {
+                        recyclerAdapter.submitList(groupedWorkouts)
+                    }
+                }
+        }
     }
 
     companion object {
