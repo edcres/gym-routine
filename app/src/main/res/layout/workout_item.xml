@@ -5,7 +5,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:cardElevation="5dp"
         android:orientation="vertical"
         app:cardBackgroundColor="@color/cardviewBackground"

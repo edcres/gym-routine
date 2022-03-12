@@ -16,6 +16,7 @@ import com.aldreduser.gymroutine.data.model.entities.Workout
 import com.aldreduser.gymroutine.data.model.entities.WorkoutGroup
 import com.aldreduser.gymroutine.databinding.WorkoutItemBinding
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
+import com.aldreduser.gymroutine.utils.CustomLinearLayoutManager
 import com.aldreduser.gymroutine.utils.FIRST_TAB_TITLE
 import com.aldreduser.gymroutine.utils.GLOBAL_TAG
 import com.aldreduser.gymroutine.utils.NEW_GROUP
@@ -53,6 +54,7 @@ class WorkoutListAdapter(
                 // GROUP SETS //
                 setsAdapter = SetsAdapter(viewModel, false)
                 setListRecycler.adapter = setsAdapter
+                setListRecycler.layoutManager = CustomLinearLayoutManager(context)
                 viewModel.getSetsOfWorkout(workout.id)
                     .observe(fragLifecycleOwner) { theseSets ->
                         Log.d(GLOBAL_TAG, "WorkoutListAdapter observed:\n$theseSets")
@@ -125,9 +127,7 @@ class WorkoutListAdapter(
                     viewModel.setItemToEdit(workout)
                 }
                 removeItemBtn.setOnClickListener {
-                    setsAdapter.submitList(viewModel.sets.value)
-                    Log.d(GLOBAL_TAG, "submit clicked\n${viewModel.sets.value}")
-//                    viewModel.removeWorkout(workout, workout.workoutGroup)
+                    viewModel.removeWorkout(workout, workout.workoutGroup)
                 }
                 binding.executePendingBindings()
             }
