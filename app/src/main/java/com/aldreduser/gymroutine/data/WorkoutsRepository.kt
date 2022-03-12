@@ -44,11 +44,12 @@ class WorkoutsRepository(private val database: WorkoutsRoomDatabase) {
     }
     @WorkerThread
     suspend fun updateSetOnSets(startingSet: Int, setsOfThisWorkout: List<WorkoutSet>) {
+        Log.d(tag, "updateSetOnSets: called. Starting set = $startingSet\nsetsOfThisWorkout")
         if(setsOfThisWorkout.isNotEmpty()) {
             for (i in 1..setsOfThisWorkout.size) {
                 val thisSet = setsOfThisWorkout[i - 1].set
                 if (startingSet <= thisSet) {
-                    database.workoutSetDao().updateSetOnSets(thisSet, thisSet)
+                    database.workoutSetDao().updateSetOnSets(thisSet, thisSet-1)
                 }
             }
         } else {
