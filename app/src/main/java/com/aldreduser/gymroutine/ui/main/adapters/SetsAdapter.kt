@@ -36,7 +36,6 @@ class SetsAdapter(
 
         fun bind(workoutSet: WorkoutSet) {
             binding.apply {
-                Log.d(GLOBAL_TAG, "bind called")
                 if(setAreRemoved) {
                     // If sets can be removed
                     removeSetBtn.visibility = View.VISIBLE

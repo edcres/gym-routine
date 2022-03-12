@@ -126,6 +126,7 @@ class WorkoutListViewModel : ViewModel() {
     fun removeSet(set: WorkoutSet) = CoroutineScope(Dispatchers.IO).launch {
         repository.deleteSet(set)
         if (sets.value != null) repository.updateSetOnSets(
+            set.workoutId,
             set.set,
             repository.getSetsOfWorkout(set.workoutId)
         )

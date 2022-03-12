@@ -26,7 +26,7 @@ data class WorkoutSet (
     @ColumnInfo(name = "workout_name")
     val workoutName: String = "",
     @ColumnInfo(name = "set")
-    val set: Int = 1,
+    var set: Int = 1,
     @ColumnInfo(name = "reps")
     var reps: Int = 0,
     @ColumnInfo(name = "weight")

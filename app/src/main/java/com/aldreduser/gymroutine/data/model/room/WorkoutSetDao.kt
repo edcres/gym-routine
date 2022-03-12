@@ -14,6 +14,8 @@ interface WorkoutSetDao {
     suspend fun insert(set: WorkoutSet)
     @Update
     suspend fun update(set: WorkoutSet)
+    @Update
+    suspend fun update(sets: List<WorkoutSet>)
     @Delete
     suspend fun delete(set: WorkoutSet)
 
@@ -24,12 +26,12 @@ interface WorkoutSetDao {
     )
     suspend fun updateWorkoutOnSets(workoutId: Long, newWorkout: String)
 
-    @Query(
-        "UPDATE set_table " +
-                "SET `set` = :newSetNum " +
-                "WHERE `set` = :oldSetNum"
-    )
-    suspend fun updateSetOnSets(oldSetNum: Int, newSetNum: Int)
+//    @Query(
+//        "UPDATE set_table " +
+//                "SET `set` = :newSetNum " +
+//                "WHERE `set` = :oldSetNum"
+//    )
+//    suspend fun updateSetOnSet(oldSetNum: Int, newSetNum: Int)
 
     @Query(
         "SELECT * FROM set_table " +
@@ -37,6 +39,13 @@ interface WorkoutSetDao {
                 "ORDER BY `set` ASC"
     )
     suspend fun getSetsOfWorkout(workoutId: Long): List<WorkoutSet>
+
+    @Query(
+        "SELECT * FROM set_table " +
+                "WHERE workout_id = :workoutId AND `set` > :setNum " +
+                "ORDER BY `set` ASC"
+    )
+    suspend fun getSetsProceedingSetNum(workoutId: Long, setNum: Int): List<WorkoutSet>
 
 //    @Query(
 //        "SELECT `set` FROM set_table " +
