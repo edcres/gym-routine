@@ -56,14 +56,11 @@ class WorkoutListFragment : Fragment() {
     private fun setObservers() {
         viewModel.workouts.observe(viewLifecycleOwner) {
             // Only update the list when a workout is added or deleted.
-            Log.d(fragmentTAG, "setObservers: workouts observed")
             viewModel.getWorkoutsOfGroup(groupToDisplay)
                 .observe(viewLifecycleOwner) { groupedWorkouts ->
-                    Log.d(fragmentTAG, "setObservers: groupedWorkouts observed")
                     if (workoutsPreviousSize != groupedWorkouts.size) {
                         recyclerAdapter.submitList(groupedWorkouts)
                         workoutsPreviousSize = groupedWorkouts.size
-                        Log.d(fragmentTAG, "setObservers: groupedWorkouts submitted")
                     }
                 }
         }

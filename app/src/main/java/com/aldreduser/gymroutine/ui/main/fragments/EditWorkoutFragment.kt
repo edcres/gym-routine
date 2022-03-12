@@ -10,6 +10,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.aldreduser.gymroutine.data.model.entities.Workout
 import com.aldreduser.gymroutine.data.model.entities.WorkoutSet
 import com.aldreduser.gymroutine.databinding.FragmentEditWorkoutBinding
@@ -43,6 +44,7 @@ class EditWorkoutFragment : Fragment() {
             addSetButton.setOnClickListener { addSetClick() }
             editWorkoutDoneFab.setOnClickListener { doneFabOnClick() }
             editSetListRecycler.adapter = setsAdapter
+            editSetListRecycler.layoutManager = LinearLayoutManager(requireContext())
         }
         currentWorkoutId = viewModel.workoutIdToEdit
         setUpAppBar()
@@ -61,6 +63,7 @@ class EditWorkoutFragment : Fragment() {
     // HELPERS //
     private fun submitsSetsOfWorkout() {
         viewModel.getSetsOfWorkout(currentWorkoutId!!).observe(viewLifecycleOwner) { sets ->
+            Log.d(fragmentTAG, "submitsSetsOfWorkout: sets = $sets")
             setsAdapter.submitList(sets)
         }
     }

@@ -18,12 +18,21 @@ class SetsAdapter(
     private val setAreRemoved: Boolean
 ) : ListAdapter<WorkoutSet, SetsAdapter.SetsViewHolder>(SetDiffCallback()) {
 
+    init {
+        Log.d(GLOBAL_TAG, "SetsAdapter initialized")
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SetsViewHolder {
+        Log.d(GLOBAL_TAG, "onCreateViewHolder called")
         return SetsViewHolder.from(viewModel, setAreRemoved, parent)
     }
 
-    override fun onBindViewHolder(holderWorkouts: SetsViewHolder, position: Int) =
-        holderWorkouts.bind(getItem(position))
+//    override fun onBindViewHolder(holderWorkouts: SetsViewHolder, position: Int) =
+//        holderWorkouts.bind(getItem(position))
+    override fun onBindViewHolder(holderWorkouts: SetsViewHolder, position: Int) {
+        Log.d(GLOBAL_TAG, "onBindViewHolder: called")
+        return holderWorkouts.bind(getItem(position))
+    }
 
     class SetsViewHolder private constructor(
         private val viewModel: WorkoutListViewModel,
@@ -31,8 +40,13 @@ class SetsAdapter(
         private val binding: SetLinearLayoutBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
+        init {
+            Log.d(GLOBAL_TAG, "SetsViewHolder initialized")
+        }
+
         fun bind(workoutSet: WorkoutSet) {
             binding.apply {
+                Log.d(GLOBAL_TAG, "bind called")
                 if(setAreRemoved) {
                     // If sets can be removed
                     removeSetBtn.visibility = View.VISIBLE
