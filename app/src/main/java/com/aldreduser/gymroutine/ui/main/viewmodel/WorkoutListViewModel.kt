@@ -10,6 +10,7 @@ import com.aldreduser.gymroutine.data.model.entities.WorkoutSet
 import com.aldreduser.gymroutine.data.model.room.WorkoutsRoomDatabase
 import com.aldreduser.gymroutine.ui.main.adapters.GroupTabsAdapter
 import com.aldreduser.gymroutine.utils.FIRST_TAB_TITLE
+import com.aldreduser.gymroutine.utils.GLOBAL_TAG
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -81,19 +82,21 @@ class WorkoutListViewModel : ViewModel() {
         repository.insert(workoutGroup)
     }
     fun insertWorkout(workout: Workout): MutableLiveData<Long> {
+        Log.d(GLOBAL_TAG, "vm: insertWorkout: called")
         val itemId = MutableLiveData<Long>()
         CoroutineScope(Dispatchers.IO).launch {
             val workoutId = repository.insert(workout)
-            itemId.postValue(workoutId)
-            repository.insert(
-                WorkoutSet(
-                    workoutId = workoutId,
-                    workoutName = workout.workoutName,
-                    set = 1,
-                    reps = 0,
-                    weight = 0.0
-                )
-            )
+//            itemId.postValue(workoutId)
+//            Log.d(GLOBAL_TAG, "\nvm: workoutId: $workoutId\t${workout.workoutName}")
+//            repository.insert(
+//                WorkoutSet(
+//                    workoutId = workoutId,
+//                    workoutName = workout.workoutName,
+//                    set = 1,
+//                    reps = 0,
+//                    weight = 0.0
+//                )
+//            )
         }
         return itemId
     }
@@ -119,8 +122,10 @@ class WorkoutListViewModel : ViewModel() {
         if(repository.groupHasWorkouts(group)) {
             Log.i(tag, "Group $group still has workouts.")
         } else {
-            repository.deleteGroup(group)
-            Log.i(tag, "Group $group removed.")
+            if (group != FIRST_TAB_TITLE) {
+                repository.deleteGroup(group)
+                Log.i(tag, "Group $group removed.")
+            }
         }
     }
     fun removeSet(set: WorkoutSet) = CoroutineScope(Dispatchers.IO).launch {

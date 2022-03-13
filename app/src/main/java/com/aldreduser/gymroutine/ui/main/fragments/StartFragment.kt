@@ -60,6 +60,7 @@ class StartFragment : Fragment() {
 
     // CLICK HANDLERS //
     private fun addWorkout() {
+        Log.d(fragmentTAG, "addWorkout: called")
         viewModel.insertWorkout(
             Workout(
                 workoutName = "",

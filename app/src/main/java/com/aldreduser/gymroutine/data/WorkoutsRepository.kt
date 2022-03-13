@@ -2,6 +2,8 @@ package com.aldreduser.gymroutine.data
 
 import android.util.Log
 import androidx.annotation.WorkerThread
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.asFlow
 import com.aldreduser.gymroutine.data.model.entities.Workout
 import com.aldreduser.gymroutine.data.model.entities.WorkoutGroup
 import com.aldreduser.gymroutine.data.model.entities.WorkoutSet
@@ -23,10 +25,12 @@ class WorkoutsRepository(private val database: WorkoutsRoomDatabase) {
     }
     @WorkerThread
     suspend fun insert(workout: Workout): Long {
+        Log.d(tag, "insert workout: called")
         return database.workoutDao().insert(workout)
     }
     @WorkerThread
     suspend fun insert(workoutSet: WorkoutSet) {
+        Log.d(tag, "insert set: called")
         database.workoutSetDao().insert(workoutSet)
     }
 
