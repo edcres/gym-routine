@@ -128,7 +128,14 @@ class WorkoutsRepository(private val database: WorkoutsRoomDatabase) {
     }
     @WorkerThread
     suspend fun getLastSet(workoutId: Long): WorkoutSet {
-        return database.workoutSetDao().getSetsOfWorkout(workoutId).last()
+        val setsOfWorkout = database.workoutSetDao().getSetsOfWorkout(workoutId)
+        return if (setsOfWorkout.isNotEmpty()) {
+            setsOfWorkout.last()
+        } else WorkoutSet(
+            workoutId = workoutId,
+            workoutName = database.workoutDao().getWorkoutName(workoutId),
+            set = 0,
+        )
     }
     @WorkerThread
     suspend fun getWorkoutName(workoutId: Long): String {

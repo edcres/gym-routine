@@ -86,17 +86,17 @@ class WorkoutListViewModel : ViewModel() {
         val itemId = MutableLiveData<Long>()
         CoroutineScope(Dispatchers.IO).launch {
             val workoutId = repository.insert(workout)
-//            itemId.postValue(workoutId)
-//            Log.d(GLOBAL_TAG, "\nvm: workoutId: $workoutId\t${workout.workoutName}")
-//            repository.insert(
-//                WorkoutSet(
-//                    workoutId = workoutId,
-//                    workoutName = workout.workoutName,
-//                    set = 1,
-//                    reps = 0,
-//                    weight = 0.0
-//                )
-//            )
+            itemId.postValue(workoutId)
+            Log.d(GLOBAL_TAG, "\nvm: workoutId: $workoutId\t${workout.workoutName}")
+            repository.insert(
+                WorkoutSet(
+                    workoutId = workoutId,
+                    workoutName = workout.workoutName,
+                    set = 1,
+                    reps = 0,
+                    weight = 0.0
+                )
+            )
         }
         return itemId
     }
