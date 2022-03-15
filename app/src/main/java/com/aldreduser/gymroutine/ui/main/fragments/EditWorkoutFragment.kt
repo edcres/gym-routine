@@ -106,20 +106,25 @@ class EditWorkoutFragment : Fragment() {
                     position: Int,
                     id: Long
                 ) {
-                    if (position + 1 == viewModel.groupNames.size) {
-                        Log.d(fragmentTAG, "onItemSelected: groupNames: position =$position\n${viewModel.groupNames}\n")
-                        val groupSelected = viewModel.groupNames[position]
-                        viewModel.updateGroupOnWorkout(currentWorkoutId!!, groupSelected)
-                    } else {
-                        // todo: say what happens when new group is clicked
+                    Log.d(fragmentTAG, "item clicked: position = $position")
+                    Log.d(fragmentTAG, "item clicked: groupNames: ${viewModel.groupNames.size}\n${viewModel.groupNames}")
+                    if (viewModel.groupNames.size == position) {
+                        // If user clicks new group
+                        Log.d(fragmentTAG, "New Group Clicked")
                         groupEtContainer.visibility = View.VISIBLE
                         newGroupDoneBtn.setOnClickListener {
+                            Log.d(fragmentTAG, "top check clicked: currentWorkoutId = $currentWorkoutId")
                             viewModel.insertWorkoutGroup(
                                 WorkoutGroup(newGroupEt.text.toString()),
                                 currentWorkoutId!!
                             )
+                            groupEtContainer.visibility = View.GONE
                         }
-                        Log.d(fragmentTAG, NEW_GROUP)
+                    } else if (position > 0 && position < viewModel.groupNames.size) {
+                        // If it's not the first item and not the last one
+                        Log.d(fragmentTAG, "position > 0 and not the last one")
+                        val groupSelected = viewModel.groupNames[position]
+                        viewModel.updateGroupOnWorkout(currentWorkoutId!!, groupSelected)
                     }
                 }
                 override fun onNothingSelected(parent: AdapterView<*>?) {

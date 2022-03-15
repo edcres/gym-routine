@@ -99,10 +99,9 @@ class WorkoutListAdapter(
                             groupEtContainer.visibility = View.VISIBLE
                             newGroupDoneBtn.setOnClickListener {
                                 viewModel.insertWorkoutGroup(
-                                    WorkoutGroup(newGroupEt.text.toString())
+                                    WorkoutGroup(newGroupEt.text.toString()),
+                                    workout.id
                                 )
-                                workout.workoutGroup = groupSelected
-                                viewModel.updateGroupOnWorkout(workout)
                             }
                         } else {
                             workout.workoutGroup = groupSelected

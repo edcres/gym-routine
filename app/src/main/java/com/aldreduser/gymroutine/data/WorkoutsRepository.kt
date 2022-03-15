@@ -23,8 +23,10 @@ class WorkoutsRepository(private val database: WorkoutsRoomDatabase) {
     suspend fun insert(workoutGroup: WorkoutGroup, workoutId: Long?) {
         // Inserts a WorkoutGroup
         database.workoutGroupDao().insert(workoutGroup)
-        if (workoutId != null)
+        if (workoutId != null) {
+            Log.d(tag, "insert group: workout id is null")
             database.workoutDao().updateWorkout(workoutId, workoutGroup.groupName)
+        }
     }
     @WorkerThread
     suspend fun insert(workout: Workout): Long {
