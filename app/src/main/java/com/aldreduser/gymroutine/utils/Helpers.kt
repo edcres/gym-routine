@@ -1,10 +1,21 @@
 package com.aldreduser.gymroutine.utils
 
+import android.util.Log
 import com.aldreduser.gymroutine.data.model.entities.WorkoutGroup
 
 const val GLOBAL_TAG = "Global TAG"
 const val FIRST_TAB_TITLE = "All Workouts"
 const val NEW_GROUP = "New Group"
+
+fun getChooseGroupList(groups: List<String>): List<String> {
+    val spinnerList = mutableListOf<String>()
+    groups.forEach {
+        spinnerList.add(it)
+    }
+    spinnerList.add(NEW_GROUP)
+    Log.d(GLOBAL_TAG, "getChooseGroupList: spinner list: $spinnerList")
+    return spinnerList
+}
 
 fun findDifferentGroups(groups: List<WorkoutGroup>, groupNames: List<String>): List<String> {
     // more groups than groupNames

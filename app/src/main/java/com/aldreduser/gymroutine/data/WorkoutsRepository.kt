@@ -20,8 +20,11 @@ class WorkoutsRepository(private val database: WorkoutsRoomDatabase) {
     val allWorkoutSets: Flow<List<WorkoutSet>> = database.workoutSetDao().getAlphabetizedSets()
 
     @WorkerThread
-    suspend fun insert(workoutGroup: WorkoutGroup) {
+    suspend fun insert(workoutGroup: WorkoutGroup, workoutId: Long?) {
+        // Inserts a WorkoutGroup
         database.workoutGroupDao().insert(workoutGroup)
+        if (workoutId != null)
+            database.workoutDao().updateWorkout(workoutId, workoutGroup.groupName)
     }
     @WorkerThread
     suspend fun insert(workout: Workout): Long {

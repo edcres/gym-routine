@@ -43,6 +43,9 @@ class WorkoutListViewModel : ViewModel() {
     var workoutIdToEdit: Long? = null
 
     // HELPERS //
+    fun getTheGroupNames(): List<String> {
+        return groupNames as List<String>
+    }
     fun toggleEditBtn() {
         _menuEditIsOn.value = !_menuEditIsOn.value!!
     }
@@ -56,7 +59,7 @@ class WorkoutListViewModel : ViewModel() {
         roomDb = WorkoutsRoomDatabase.getInstance(application)
         repository = WorkoutsRepository(roomDb)
         fetchAllWorkouts()
-        insertWorkoutGroup(WorkoutGroup(FIRST_TAB_TITLE))
+        insertWorkoutGroup(WorkoutGroup(FIRST_TAB_TITLE), null)
     }
     // SETUP //
 
@@ -78,8 +81,8 @@ class WorkoutListViewModel : ViewModel() {
             }
         }
     }
-    fun insertWorkoutGroup(workoutGroup: WorkoutGroup) = CoroutineScope(Dispatchers.IO).launch {
-        repository.insert(workoutGroup)
+    fun insertWorkoutGroup(workoutGroup: WorkoutGroup, workoutId: Long?) = CoroutineScope(Dispatchers.IO).launch {
+        repository.insert(workoutGroup, workoutId)
     }
     fun insertWorkout(workout: Workout): MutableLiveData<Long> {
         Log.d(GLOBAL_TAG, "vm: insertWorkout: called")
@@ -188,6 +191,8 @@ class WorkoutListViewModel : ViewModel() {
     fun removeTab(titleToRemove: String, groupTabsAdapter: GroupTabsAdapter) {
         val numOfTabs = groupNames.size
         if (numOfTabs > 1 && titleToRemove != FIRST_TAB_TITLE) {
+            Log.d(GLOBAL_TAG, "titleToRemove = $titleToRemove")
+            Log.d(GLOBAL_TAG, "group ordinals: $groupsOrdinals")
             groupTabsAdapter.removeTab(groupsOrdinals[titleToRemove]!!, titleToRemove)
         }
     }

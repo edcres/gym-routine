@@ -13,6 +13,7 @@ import com.aldreduser.gymroutine.data.model.entities.Workout
 import com.aldreduser.gymroutine.databinding.FragmentStartBinding
 import com.aldreduser.gymroutine.ui.main.adapters.GroupTabsAdapter
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
+import com.aldreduser.gymroutine.utils.GLOBAL_TAG
 import com.aldreduser.gymroutine.utils.findDifferentGroups
 import com.aldreduser.gymroutine.utils.findDifferentName
 import com.google.android.material.tabs.TabLayoutMediator
@@ -77,6 +78,7 @@ class StartFragment : Fragment() {
                 val itemListEdit = R.id.edit_workout_btn
                 when (menuItem.itemId) {
                     itemListEdit -> {
+                        Log.d(GLOBAL_TAG, "setUpAppBar: group names = ${viewModel.groupNames}")
                         viewModel.toggleEditBtn()
                         true
                     }
@@ -111,6 +113,7 @@ class StartFragment : Fragment() {
                 viewModel.groups.value!!.size+1 < viewModel.groupNames.size -> {
                     // A group was removed
                     val removedGroupName = findDifferentName(viewModel.groupNames, it)
+                    Log.d(GLOBAL_TAG, "observe groups: ${viewModel.groupNames}")
                     viewModel.removeTab(removedGroupName, groupTabsAdapter)
                 }
                 else -> {

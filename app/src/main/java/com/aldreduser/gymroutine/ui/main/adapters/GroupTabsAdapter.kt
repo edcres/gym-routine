@@ -1,9 +1,11 @@
 package com.aldreduser.gymroutine.ui.main.adapters
 
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.aldreduser.gymroutine.ui.main.fragments.WorkoutListFragment
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
+import com.aldreduser.gymroutine.utils.GLOBAL_TAG
 
 class GroupTabsAdapter(
     fragment: Fragment,

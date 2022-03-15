@@ -12,10 +12,15 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aldreduser.gymroutine.data.model.entities.Workout
+import com.aldreduser.gymroutine.data.model.entities.WorkoutGroup
 import com.aldreduser.gymroutine.data.model.entities.WorkoutSet
 import com.aldreduser.gymroutine.databinding.FragmentEditWorkoutBinding
 import com.aldreduser.gymroutine.ui.main.adapters.SetsAdapter
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
+import com.aldreduser.gymroutine.utils.FIRST_TAB_TITLE
+import com.aldreduser.gymroutine.utils.NEW_GROUP
+import com.aldreduser.gymroutine.utils.getChooseGroupList
+import kotlin.math.log
 
 class EditWorkoutFragment : Fragment() {
 
@@ -88,10 +93,12 @@ class EditWorkoutFragment : Fragment() {
 
     // CLICK LISTENERS //
     private fun spinnerOnClick() {
-        val simpleSpinnerItem = android.R.layout.simple_spinner_item
         binding?.apply {
-            groupSpinner.adapter =
-                ArrayAdapter(requireContext(), simpleSpinnerItem, viewModel.groupNames)
+            groupSpinner.adapter = ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_spinner_item,
+                getChooseGroupList(viewModel.groupNames)
+            )
             groupSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
                     parent: AdapterView<*>?,
@@ -99,8 +106,21 @@ class EditWorkoutFragment : Fragment() {
                     position: Int,
                     id: Long
                 ) {
-                    val groupSelected = viewModel.groupNames[position]
-                    viewModel.updateGroupOnWorkout(currentWorkoutId!!, groupSelected)
+                    if (position + 1 == viewModel.groupNames.size) {
+                        Log.d(fragmentTAG, "onItemSelected: groupNames: position =$position\n${viewModel.groupNames}\n")
+                        val groupSelected = viewModel.groupNames[position]
+                        viewModel.updateGroupOnWorkout(currentWorkoutId!!, groupSelected)
+                    } else {
+                        // todo: say what happens when new group is clicked
+                        groupEtContainer.visibility = View.VISIBLE
+                        newGroupDoneBtn.setOnClickListener {
+                            viewModel.insertWorkoutGroup(
+                                WorkoutGroup(newGroupEt.text.toString()),
+                                currentWorkoutId!!
+                            )
+                        }
+                        Log.d(fragmentTAG, NEW_GROUP)
+                    }
                 }
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     Log.i(fragmentTAG, "Nothing selected.")

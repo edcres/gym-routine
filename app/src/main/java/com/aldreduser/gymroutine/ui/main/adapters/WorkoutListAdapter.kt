@@ -16,10 +16,7 @@ import com.aldreduser.gymroutine.data.model.entities.Workout
 import com.aldreduser.gymroutine.data.model.entities.WorkoutGroup
 import com.aldreduser.gymroutine.databinding.WorkoutItemBinding
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
-import com.aldreduser.gymroutine.utils.CustomLinearLayoutManager
-import com.aldreduser.gymroutine.utils.FIRST_TAB_TITLE
-import com.aldreduser.gymroutine.utils.GLOBAL_TAG
-import com.aldreduser.gymroutine.utils.NEW_GROUP
+import com.aldreduser.gymroutine.utils.*
 
 class WorkoutListAdapter(
     private val workoutsViewModel: WorkoutListViewModel,
@@ -78,12 +75,16 @@ class WorkoutListAdapter(
                 // GROUP SETS //
                 // SPINNER //
                 if(workout.workoutGroup != FIRST_TAB_TITLE) chooseGroupBtn.visibility = View.VISIBLE
-                val spinnerList = viewModel.groupNames
-                spinnerList.add(NEW_GROUP)
+
+
+                // todo: uncomment this
+//                val spinnerList = getChooseGroupList(viewModel.groupNames)
+//                val spinnerList = listOf<String>("One", "Two", "Three" , "Four")
+//                Log.d(GLOBAL_TAG, "list adapter: spinner list: $spinnerList")
                 chooseGroupBtn.adapter = ArrayAdapter(
                     context,
                     android.R.layout.simple_list_item_1,
-                    spinnerList
+                    viewModel.groupNames
                 )
                 chooseGroupBtn.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
                     override fun onItemSelected(
