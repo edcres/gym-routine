@@ -50,8 +50,6 @@ class WorkoutListViewModel : ViewModel() {
         _menuEditIsOn.value = !_menuEditIsOn.value!!
     }
     fun setItemToEdit(chosenItem: Any?) {
-        // todo: the bug is probably caused bc this is being called twice when navigateUp()
-        Log.d(tag, "setItemToEdit: set item to edit")
         _itemToEdit.value = chosenItem
     }
     private suspend fun checkIfDeleteGroup(groupName: String) {
@@ -196,8 +194,10 @@ class WorkoutListViewModel : ViewModel() {
         }
     }
     fun removeTab(titleToRemove: String, groupTabsAdapter: GroupTabsAdapter) {
+        Log.d(tag, "removeTab: called")
         val numOfTabs = groupNames.size
         if (numOfTabs > 1 && titleToRemove != FIRST_TAB_TITLE) {
+            Log.d(tag, "removeTab: true activated")
             Log.d(GLOBAL_TAG, "titleToRemove = $titleToRemove")
             Log.d(GLOBAL_TAG, "group ordinals: $groupsOrdinals")
             groupTabsAdapter.removeTab(groupsOrdinals[titleToRemove]!!, titleToRemove)

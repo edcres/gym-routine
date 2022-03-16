@@ -1,6 +1,5 @@
 package com.aldreduser.gymroutine.ui.main.adapters
 
-import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.aldreduser.gymroutine.ui.main.fragments.WorkoutListFragment
