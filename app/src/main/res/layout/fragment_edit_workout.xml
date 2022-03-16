@@ -45,6 +45,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="8dp"
                         android:orientation="horizontal">
 
                         <Space
@@ -89,6 +91,7 @@
                         android:id="@+id/add_set_button"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginTop="8dp"
                         android:layout_marginStart="32dp"
                         android:layout_marginLeft="32dp"
                         android:layout_marginEnd="32dp"
@@ -97,7 +100,7 @@
                         android:textAllCaps="false"
                         android:textColor="@color/black"
                         android:textSize="18sp"
-                        app:backgroundTint="@color/colorSecondary" />
+                        app:backgroundTint="@color/colorHighlight" />
 
                     <LinearLayout
                         android:id="@+id/group_et_container"
@@ -131,7 +134,8 @@
                         android:layout_marginEnd="36dp"
                         android:layout_marginRight="36dp"
                         android:layout_marginBottom="16dp"
-                        android:background="@color/colorSecondary"
+                        android:backgroundTint="@color/colorHighlight"
+                        android:background="@color/colorHighlight"
                         android:gravity="center" />
 
                 </LinearLayout>
@@ -147,7 +151,7 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
             android:src="@drawable/ic_check_mark_24"
-            app:backgroundTint="@color/colorSecondary" />
+            app:backgroundTint="@color/colorHighlight" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

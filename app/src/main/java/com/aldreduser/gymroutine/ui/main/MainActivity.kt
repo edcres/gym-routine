@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.aldreduser.gymroutine.R
 
-// todo: Room Database
-// set up all the queries
-
 // todo: Image to cancel edit mode
+
+// todo: Display the workouts in a custom position
+//   have a position attribute for the workout entities
+
+// todo: make the spinner pretty
 
 /*
 todo:
@@ -33,6 +35,7 @@ todo:
  */
 
 // Future
+// Ask the user before deleting an item
 // Cap the groups at about 30
 // When editing a new group, have the group name show up on the spinner
 // Have a history of previous workouts

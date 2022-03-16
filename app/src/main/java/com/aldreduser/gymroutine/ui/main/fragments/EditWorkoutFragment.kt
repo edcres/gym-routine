@@ -81,7 +81,7 @@ class EditWorkoutFragment : Fragment() {
         binding?.apply {
             groupSpinner.adapter = ArrayAdapter(
                 requireContext(),
-                android.R.layout.simple_spinner_item,
+                android.R.layout.simple_spinner_dropdown_item,
                 getChooseGroupList(viewModel.groupNames)
             )
             groupSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {

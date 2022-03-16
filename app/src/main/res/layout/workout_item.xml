@@ -6,10 +6,10 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardElevation="5dp"
+        app:cardElevation="10dp"
         android:orientation="vertical"
         app:cardBackgroundColor="@color/cardviewBackground"
-        android:layout_margin="2dp">
+        android:layout_margin="6dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,6 +28,18 @@
                     android:textColor="#00000000"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/specific_workout" />
+
+<!--                <EditText-->
+<!--                    android:id="@+id/specific_workout_input"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:hint="@string/workout_name_hint"-->
+<!--                    android:inputType="textPersonName"-->
+<!--                    android:textSize="18sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintEnd_toStartOf="@+id/edit_item_btn"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"/>-->
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/specific_workout"
