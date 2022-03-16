@@ -41,13 +41,13 @@ class WorkoutListFragment : Fragment() {
 
             workoutListRecycler.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         }
-        populateWorkoutsList()
         setObservers()
     }
 
     override fun onResume() {
         super.onResume()
         viewModel.currentGroup = groupToDisplay
+        populateWorkoutsList()
     }
 
     override fun onDestroyView() {
@@ -80,22 +80,22 @@ class WorkoutListFragment : Fragment() {
 
     private fun populateWorkoutsList() {
         Log.d(fragmentTAG, "populateWorkoutsList: groupToDisplay = $groupToDisplay")
-//        if (groupToDisplay == FIRST_TAB_TITLE) {
-//            Log.d(fragmentTAG, "groupToDisplay == FIRST_TAB_TITLE")
-//            Log.d(fragmentTAG, "viewModel.workouts size = ${viewModel.workouts.value}")
-//
-//            // todo: fix this
-//            viewModel.getAllWorkouts().observe(viewLifecycleOwner) { allWorkouts ->
-//                recyclerAdapter.submitList(allWorkouts)
-//            }
-//        } else {
-//            viewModel.getWorkoutsOfGroup(groupToDisplay)
-//                .observe(viewLifecycleOwner) { groupedWorkouts ->
-//                    Log.d(fragmentTAG, "populateWorkoutsList: size ${groupedWorkouts.size}")
-//                    recyclerAdapter.submitList(groupedWorkouts)
-//                    workoutsPreviousSize = groupedWorkouts.size
-//                }
-//        }
+        if (groupToDisplay == FIRST_TAB_TITLE) {
+            Log.d(fragmentTAG, "groupToDisplay == FIRST_TAB_TITLE")
+            Log.d(fragmentTAG, "viewModel.workouts size = ${viewModel.workouts.value}")
+
+            // todo: fix this
+            viewModel.getAllWorkouts().observe(viewLifecycleOwner) { allWorkouts ->
+                recyclerAdapter.submitList(allWorkouts)
+            }
+        } else {
+            viewModel.getWorkoutsOfGroup(groupToDisplay)
+                .observe(viewLifecycleOwner) { groupedWorkouts ->
+                    Log.d(fragmentTAG, "populateWorkoutsList: size ${groupedWorkouts.size}")
+                    recyclerAdapter.submitList(groupedWorkouts)
+                    workoutsPreviousSize = groupedWorkouts.size
+                }
+        }
     }
 
     companion object {
