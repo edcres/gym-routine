@@ -141,10 +141,5 @@ class StartFragment : Fragment() {
             it.forEach { workout -> workoutsString = "$workoutsString\n$workout" }
             Log.d(fragmentTAG, "workouts observed: ${it.size}$workoutsString\n.")
         }
-        viewModel.sets.observe(viewLifecycleOwner) {
-            var setsString = ""
-            it.forEach { set -> setsString = "$setsString\n$set" }
-            Log.d(fragmentTAG, "sets observed: ${it.size}$setsString\n.")
-        }
     }
 }

@@ -12,6 +12,7 @@ import com.aldreduser.gymroutine.databinding.FragmentWorkoutListBinding
 import com.aldreduser.gymroutine.ui.main.adapters.WorkoutListAdapter
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
 import com.aldreduser.gymroutine.utils.FIRST_TAB_TITLE
+import com.aldreduser.gymroutine.utils.GLOBAL_TAG
 
 class WorkoutListFragment : Fragment() {
 
@@ -46,6 +47,11 @@ class WorkoutListFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+
+        // todo: bug: this is displaying group 2 for all custom tabs
+        Log.d(fragmentTAG, "onResume: this group = $groupToDisplay")
+
+
         viewModel.currentGroup = groupToDisplay
         viewModel.toggleHiddenTxt()
     }
@@ -60,7 +66,6 @@ class WorkoutListFragment : Fragment() {
             // Only update the list when a workout is added or deleted.
             if (groupToDisplay == FIRST_TAB_TITLE) {
                 viewModel.getAllWorkouts().observe(viewLifecycleOwner) { allWorkouts ->
-                    Log.d(fragmentTAG, "$workoutsPreviousSize <> ${allWorkouts.size}")
                     if (workoutsPreviousSize != allWorkouts.size) {
                         recyclerAdapter.submitList(allWorkouts)
                         workoutsPreviousSize = allWorkouts.size
@@ -79,19 +84,13 @@ class WorkoutListFragment : Fragment() {
     }
 
     private fun populateWorkoutsList() {
-        Log.d(fragmentTAG, "populateWorkoutsList: groupToDisplay = $groupToDisplay")
         if (groupToDisplay == FIRST_TAB_TITLE) {
-            Log.d(fragmentTAG, "groupToDisplay == FIRST_TAB_TITLE")
-            Log.d(fragmentTAG, "viewModel.workouts size = ${viewModel.workouts.value}")
-
-            // todo: fix this
             viewModel.getAllWorkouts().observe(viewLifecycleOwner) { allWorkouts ->
                 recyclerAdapter.submitList(allWorkouts)
             }
         } else {
             viewModel.getWorkoutsOfGroup(groupToDisplay)
                 .observe(viewLifecycleOwner) { groupedWorkouts ->
-                    Log.d(fragmentTAG, "populateWorkoutsList: size ${groupedWorkouts.size}")
                     recyclerAdapter.submitList(groupedWorkouts)
                     workoutsPreviousSize = groupedWorkouts.size
                 }
@@ -102,6 +101,7 @@ class WorkoutListFragment : Fragment() {
         fun getInstance(titleToDisplay: String): WorkoutListFragment {
             val thisFragment = WorkoutListFragment()
             thisFragment.groupToDisplay = titleToDisplay
+            Log.d(GLOBAL_TAG, "getInstance: titleToDisplay = $titleToDisplay")
             return thisFragment
         }
     }
