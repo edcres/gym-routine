@@ -63,6 +63,7 @@ class WorkoutListFragment : Fragment() {
                     Log.d(fragmentTAG, "$workoutsPreviousSize <> ${allWorkouts.size}")
                     if (workoutsPreviousSize != allWorkouts.size) {
                         recyclerAdapter.submitList(allWorkouts)
+                        workoutsPreviousSize = allWorkouts.size
                     }
                 }
             } else {
