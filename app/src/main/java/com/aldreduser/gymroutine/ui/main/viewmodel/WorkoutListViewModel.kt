@@ -68,13 +68,13 @@ class WorkoutListViewModel : ViewModel() {
     fun startApplication(application: Application) {
         roomDb = WorkoutsRoomDatabase.getInstance(application)
         repository = WorkoutsRepository(roomDb)
-        fetchAllWorkouts()
+        collectAllWorkouts()
         insertWorkoutGroup(WorkoutGroup(FIRST_TAB_TITLE), null)
     }
     // SETUP //
 
     // DATABASE QUERIES //
-    private fun fetchAllWorkouts() {
+    private fun collectAllWorkouts() {
         CoroutineScope(Dispatchers.IO).launch {
             repository.allWorkoutGroups.collect {
                 _groups.postValue(it.toMutableList())
@@ -144,6 +144,13 @@ class WorkoutListViewModel : ViewModel() {
             repository.getSetsOfWorkout(set.workoutId)
         )
     }
+    fun getAllWorkouts(): MutableLiveData<List<Workout>> {
+        val allWorkouts = MutableLiveData<List<Workout>>()
+        CoroutineScope(Dispatchers.IO).launch {
+            allWorkouts.postValue(repository.getAllWorkouts())
+        }
+        return allWorkouts
+    }
     fun getWorkoutsOfGroup(group: String): MutableLiveData<List<Workout>> {
         val workoutsOfGroup = MutableLiveData<List<Workout>>()
         CoroutineScope(Dispatchers.IO).launch {
@@ -194,12 +201,8 @@ class WorkoutListViewModel : ViewModel() {
         }
     }
     fun removeTab(titleToRemove: String, groupTabsAdapter: GroupTabsAdapter) {
-        Log.d(tag, "removeTab: called")
         val numOfTabs = groupNames.size
         if (numOfTabs > 1 && titleToRemove != FIRST_TAB_TITLE) {
-            Log.d(tag, "removeTab: true activated")
-            Log.d(GLOBAL_TAG, "titleToRemove = $titleToRemove")
-            Log.d(GLOBAL_TAG, "group ordinals: $groupsOrdinals")
             groupTabsAdapter.removeTab(groupsOrdinals[titleToRemove]!!, titleToRemove)
         }
     }

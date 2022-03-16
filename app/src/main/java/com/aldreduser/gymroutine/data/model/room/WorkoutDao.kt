@@ -27,6 +27,9 @@ interface WorkoutDao {
     @Delete
     suspend fun delete(workout: Workout)
 
+    @Query("SELECT * FROM workout_table ORDER BY id ASC")
+    suspend fun getAlphabetizedWorkoutsOnce(): List<Workout>
+
     @Query(
         "SELECT * FROM workout_table " +
                 "WHERE workout_group = :group " +

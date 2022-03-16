@@ -58,23 +58,43 @@ class WorkoutListFragment : Fragment() {
     private fun setObservers() {
         viewModel.workouts.observe(viewLifecycleOwner) {
             // Only update the list when a workout is added or deleted.
-            viewModel.getWorkoutsOfGroup(groupToDisplay)
-                .observe(viewLifecycleOwner) { groupedWorkouts ->
-                    if (workoutsPreviousSize != groupedWorkouts.size) {
-                        recyclerAdapter.submitList(groupedWorkouts)
-                        workoutsPreviousSize = groupedWorkouts.size
+            if (groupToDisplay == FIRST_TAB_TITLE) {
+                viewModel.getAllWorkouts().observe(viewLifecycleOwner) { allWorkouts ->
+                    Log.d(fragmentTAG, "$workoutsPreviousSize <> ${allWorkouts.size}")
+                    if (workoutsPreviousSize != allWorkouts.size) {
+                        recyclerAdapter.submitList(allWorkouts)
                     }
                 }
+            } else {
+                viewModel.getWorkoutsOfGroup(groupToDisplay)
+                    .observe(viewLifecycleOwner) { groupedWorkouts ->
+                        if (workoutsPreviousSize != groupedWorkouts.size) {
+                            recyclerAdapter.submitList(groupedWorkouts)
+                            workoutsPreviousSize = groupedWorkouts.size
+                        }
+                    }
+            }
         }
     }
 
     private fun populateWorkoutsList() {
-        viewModel.getWorkoutsOfGroup(groupToDisplay)
-            .observe(viewLifecycleOwner) { groupedWorkouts ->
-                Log.d(fragmentTAG, "populateWorkoutsList: size ${groupedWorkouts.size}")
-                recyclerAdapter.submitList(groupedWorkouts)
-                workoutsPreviousSize = groupedWorkouts.size
-            }
+        Log.d(fragmentTAG, "populateWorkoutsList: groupToDisplay = $groupToDisplay")
+//        if (groupToDisplay == FIRST_TAB_TITLE) {
+//            Log.d(fragmentTAG, "groupToDisplay == FIRST_TAB_TITLE")
+//            Log.d(fragmentTAG, "viewModel.workouts size = ${viewModel.workouts.value}")
+//
+//            // todo: fix this
+//            viewModel.getAllWorkouts().observe(viewLifecycleOwner) { allWorkouts ->
+//                recyclerAdapter.submitList(allWorkouts)
+//            }
+//        } else {
+//            viewModel.getWorkoutsOfGroup(groupToDisplay)
+//                .observe(viewLifecycleOwner) { groupedWorkouts ->
+//                    Log.d(fragmentTAG, "populateWorkoutsList: size ${groupedWorkouts.size}")
+//                    recyclerAdapter.submitList(groupedWorkouts)
+//                    workoutsPreviousSize = groupedWorkouts.size
+//                }
+//        }
     }
 
     companion object {

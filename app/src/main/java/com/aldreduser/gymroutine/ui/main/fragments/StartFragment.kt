@@ -102,9 +102,6 @@ class StartFragment : Fragment() {
     private fun setObservers() {
         // Observer for adding or removing tabs
         viewModel.groups.observe(viewLifecycleOwner) {
-            Log.d(fragmentTAG, "group changed observed")
-            Log.d(fragmentTAG, "${viewModel.groups.value!!.size+1} <" +
-                    " ${viewModel.groupNames.size}")
             when {
                 // '+1' because groupNames start out with FIRST_TAB_TITLE
                 viewModel.groups.value!!.size+1 > viewModel.groupNames.size -> {
@@ -113,10 +110,8 @@ class StartFragment : Fragment() {
                     viewModel.addTab(newGroupNames, groupTabsAdapter)
                 }
                 viewModel.groups.value!!.size < viewModel.groupNames.size -> {
-                    Log.d(fragmentTAG, "tab remove observed")
                     // A group was removed
                     val removedGroupName = findDifferentName(viewModel.groupNames, it)
-                    // todo: bug: this is not called to remove a tab
                     viewModel.removeTab(removedGroupName, groupTabsAdapter)
                 }
                 else -> {

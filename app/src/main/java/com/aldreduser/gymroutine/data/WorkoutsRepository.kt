@@ -114,6 +114,10 @@ class WorkoutsRepository(private val database: WorkoutsRoomDatabase) {
     }
 
     @WorkerThread
+    suspend fun getAllWorkouts(): List<Workout> {
+        return database.workoutDao().getAlphabetizedWorkoutsOnce()
+    }
+    @WorkerThread
     suspend fun getWorkoutsOfThisGroup(groupName: String): List<Workout> {
         return database.workoutDao().getWorkoutsOfThisGroup(groupName)
     }
