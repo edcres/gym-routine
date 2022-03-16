@@ -112,7 +112,6 @@ class StartFragment : Fragment() {
                 viewModel.groups.value!!.size+1 < viewModel.groupNames.size -> {
                     // A group was removed
                     val removedGroupName = findDifferentName(viewModel.groupNames, it)
-                    Log.d(GLOBAL_TAG, "observe groups: ${viewModel.groupNames}")
                     viewModel.removeTab(removedGroupName, groupTabsAdapter)
                 }
                 else -> {
@@ -121,9 +120,7 @@ class StartFragment : Fragment() {
             }
         }
         viewModel.itemToEdit.observe(viewLifecycleOwner) {
-            Log.d(fragmentTAG, "itemToEdit observed = $it")
             if(viewModel.itemToEdit.value != null) {
-                Log.d(fragmentTAG, "Navigate to edit frag.")
                 val navController =
                     Navigation.findNavController(requireParentFragment().requireView())
                 navController.navigate(R.id.action_startFragment_to_editWorkoutFragment)

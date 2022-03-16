@@ -54,6 +54,16 @@ class WorkoutListViewModel : ViewModel() {
         Log.d(tag, "setItemToEdit: set item to edit")
         _itemToEdit.value = chosenItem
     }
+    private suspend fun checkIfDeleteGroup(groupName: String) {
+        if(repository.groupHasWorkouts(groupName)) {
+            Log.i(tag, "Group $groupName still has workouts.")
+        } else {
+            if (groupName != FIRST_TAB_TITLE) {
+                repository.deleteGroup(groupName)
+                Log.i(tag, "Group $groupName removed.")
+            }
+        }
+    }
     // HELPERS //
 
     // SETUP //
@@ -113,7 +123,9 @@ class WorkoutListViewModel : ViewModel() {
     }
     fun updateGroupOnWorkout(workoutId: Long, groupSelected: String) =
         CoroutineScope(Dispatchers.IO).launch {
+            val oldGroupName = repository.getGroupOfWorkout(workoutId)
             repository.updateWorkout(workoutId, groupSelected)
+            checkIfDeleteGroup(oldGroupName)
         }
     fun updateWorkoutName(workout: Workout) = CoroutineScope(Dispatchers.IO).launch {
         repository.update(workout)
@@ -122,16 +134,9 @@ class WorkoutListViewModel : ViewModel() {
     fun updateSet(set: WorkoutSet) = CoroutineScope(Dispatchers.IO).launch {
         repository.update(set)
     }
-    fun removeWorkout(workout: Workout, group: String) = CoroutineScope(Dispatchers.IO).launch {
+    fun removeWorkout(workout: Workout, groupName: String) = CoroutineScope(Dispatchers.IO).launch {
         repository.deleteWorkout(workout)
-        if(repository.groupHasWorkouts(group)) {
-            Log.i(tag, "Group $group still has workouts.")
-        } else {
-            if (group != FIRST_TAB_TITLE) {
-                repository.deleteGroup(group)
-                Log.i(tag, "Group $group removed.")
-            }
-        }
+        checkIfDeleteGroup(groupName)
     }
     fun removeSet(set: WorkoutSet) = CoroutineScope(Dispatchers.IO).launch {
         repository.deleteSet(set)

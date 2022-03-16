@@ -146,4 +146,8 @@ class WorkoutsRepository(private val database: WorkoutsRoomDatabase) {
     suspend fun getWorkoutName(workoutId: Long): String {
         return database.workoutDao().getWorkoutName(workoutId)
     }
+    @WorkerThread
+    suspend fun getGroupOfWorkout(workoutId: Long): String {
+        return database.workoutDao().getGroupOfThisWorkout(workoutId)
+    }
 }

@@ -47,6 +47,12 @@ interface WorkoutDao {
     )
     suspend fun getWorkoutName(workoutId: Long): String
 
+    @Query(
+        "SELECT workout_group FROM workout_table " +
+                "WHERE id = :workoutId"
+    )
+    suspend fun getGroupOfThisWorkout(workoutId: Long): String
+
 //    @Transaction
 //    @Query("SELECT * FROM workout_table")
 //    suspend fun getWorkoutWithSets(): List<WorkoutAndSets>

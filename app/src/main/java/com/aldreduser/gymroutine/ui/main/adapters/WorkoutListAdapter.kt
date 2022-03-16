@@ -128,7 +128,6 @@ class WorkoutListAdapter(
                 }
                 editItemBtn.setOnClickListener {
                     viewModel.workoutIdToEdit = workout.id
-                    Log.d(GLOBAL_TAG, "list adapter edit clicked")
                     viewModel.setItemToEdit(workout)
                 }
                 removeItemBtn.setOnClickListener {
