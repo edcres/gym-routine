@@ -3,12 +3,13 @@ package com.aldreduser.gymroutine.utils
 import android.util.Log
 import com.aldreduser.gymroutine.data.model.entities.WorkoutGroup
 
-const val GLOBAL_TAG = "Global TAG"
+const val GLOBAL_TAG = "Global_TAG"
 const val FIRST_TAB_TITLE = "All Workouts"
 const val NEW_GROUP = "New Group"
+const val CHOOSE_GROUP = "Choose Group"
 
 fun getChooseGroupList(groups: List<String>): List<String> {
-    val spinnerList = mutableListOf<String>()
+    val spinnerList = mutableListOf(CHOOSE_GROUP)
     groups.forEach {
         spinnerList.add(it)
     }

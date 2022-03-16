@@ -16,7 +16,7 @@ import com.aldreduser.gymroutine.utils.FIRST_TAB_TITLE
 
 class WorkoutListFragment : Fragment() {
 
-    private val fragmentTAG = "Workout List TAG"
+    private val fragmentTAG = "Workout_List_TAG"
     private var binding: FragmentWorkoutListBinding? = null
     private val viewModel: WorkoutListViewModel by activityViewModels()
     private lateinit var recyclerAdapter: WorkoutListAdapter
@@ -41,13 +41,13 @@ class WorkoutListFragment : Fragment() {
 
             workoutListRecycler.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         }
+        populateWorkoutsList()
         setObservers()
     }
 
     override fun onResume() {
         super.onResume()
         viewModel.currentGroup = groupToDisplay
-        populateWorkoutsList()
     }
 
     override fun onDestroyView() {

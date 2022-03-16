@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
 //  from Flow to LiveData and exposes the list of words as LiveData to the UI.
 class WorkoutListViewModel : ViewModel() {
 
-    private val tag = "ViewModel TAG"
+    private val tag = "ViewModel_TAG"
     private lateinit var roomDb: WorkoutsRoomDatabase
     private lateinit var repository: WorkoutsRepository
     var currentGroup: String = FIRST_TAB_TITLE

@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.Flow
 // Repo only has access to the DAOs, not the database.
 class WorkoutsRepository(private val database: WorkoutsRoomDatabase) {
 
-    private val tag = "WRepository TAG"
+    private val tag = "WRepo_TAG"
     val allWorkoutGroups: Flow<List<WorkoutGroup>> =
         database.workoutGroupDao().getAlphabetizedWorkoutGroups()
     val allWorkouts: Flow<List<Workout>> = database.workoutDao().getAlphabetizedWorkouts()

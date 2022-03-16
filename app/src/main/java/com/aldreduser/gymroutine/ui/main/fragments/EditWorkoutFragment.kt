@@ -21,7 +21,7 @@ import com.aldreduser.gymroutine.utils.getChooseGroupList
 
 class EditWorkoutFragment : Fragment() {
 
-    private val fragmentTAG = "EditFragmentTAG"
+    private val fragmentTAG = "EditFrag_TAG"
     private var binding: FragmentEditWorkoutBinding? = null
     private val viewModel: WorkoutListViewModel by activityViewModels()
     private lateinit var setsAdapter: SetsAdapter
@@ -92,19 +92,21 @@ class EditWorkoutFragment : Fragment() {
                     position: Int,
                     id: Long
                 ) {
-                    if (viewModel.groupNames.size == position) {
+                    if (viewModel.groupNames.size == position-1) {
                         // If user clicks new group
+                        groupSpinner.visibility = View.GONE
                         groupEtContainer.visibility = View.VISIBLE
                         newGroupDoneBtn.setOnClickListener {
                             viewModel.insertWorkoutGroup(
                                 WorkoutGroup(newGroupEt.text.toString()),
                                 currentWorkoutId!!
                             )
+                            groupSpinner.visibility = View.VISIBLE
                             groupEtContainer.visibility = View.GONE
                         }
-                    } else if (position > 0 && position < viewModel.groupNames.size) {
+                    } else if (position > 0 && position-1 < viewModel.groupNames.size) {
                         // If it's not the first item and not the last one
-                        val groupSelected = viewModel.groupNames[position]
+                        val groupSelected = viewModel.groupNames[position-1]
                         viewModel.updateGroupOnWorkout(currentWorkoutId!!, groupSelected)
                     }
                 }

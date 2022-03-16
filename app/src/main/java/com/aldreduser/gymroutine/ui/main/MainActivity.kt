@@ -33,10 +33,11 @@ todo:
  */
 
 // Future
+// Cap the groups at about 30
+// When editing a new group, have the group name show up on the spinner
 // Have a history of previous workouts
 // Section for maxes and history of maxes
 // Content descriptors
-// Cap the groups at about 30
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -20,7 +20,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class StartFragment : Fragment() {
 
-    private val fragmentTAG = "StartFragmentTAG"
+    private val fragmentTAG = "StartFrag_TAG"
     private var binding: FragmentStartBinding? = null
     private val viewModel: WorkoutListViewModel by activityViewModels()
     private lateinit var groupTabsAdapter: GroupTabsAdapter
