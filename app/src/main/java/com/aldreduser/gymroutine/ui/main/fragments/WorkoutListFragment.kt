@@ -47,11 +47,6 @@ class WorkoutListFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-
-        // todo: bug: this is displaying group 2 for all custom tabs
-        Log.d(fragmentTAG, "onResume: this group = $groupToDisplay")
-
-
         viewModel.currentGroup = groupToDisplay
         viewModel.toggleHiddenTxt()
     }
@@ -101,7 +96,6 @@ class WorkoutListFragment : Fragment() {
         fun getInstance(titleToDisplay: String): WorkoutListFragment {
             val thisFragment = WorkoutListFragment()
             thisFragment.groupToDisplay = titleToDisplay
-            Log.d(GLOBAL_TAG, "getInstance: titleToDisplay = $titleToDisplay")
             return thisFragment
         }
     }

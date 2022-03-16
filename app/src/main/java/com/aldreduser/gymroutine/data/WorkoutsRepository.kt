@@ -51,43 +51,16 @@ class WorkoutsRepository(private val database: WorkoutsRoomDatabase) {
     }
     @WorkerThread
     suspend fun updateSetOnSets(workoutId: Long, startingSet: Int, setsOfThisWorkout: List<WorkoutSet>) {
-        Log.d(tag, "updateSetOnSets: called. Starting set = $startingSet\nsetsOfThisWorkout")
-
-
-
-
-        // todo: 2 queries:
-        //      - get the sets of this workout after the starting set.
-        //      - make sure the sets are of this workout
-        //      - update all those sets
         val setsToUpdate =
             database.workoutSetDao().getSetsProceedingSetNum(workoutId, startingSet).toMutableList()
         setsToUpdate.forEach {
             it.set--
         }
         database.workoutSetDao().update(setsToUpdate)
-
-
         var setsToUpdateString = ""
         setsToUpdate.forEach {
             setsToUpdateString = "$setsToUpdateString\n${it.id}\t${it.set}"
         }
-        Log.d(tag, "sets to update:\n$setsToUpdateString")
-
-
-
-
-        // todo: maybe get rid of this
-//        if(setsOfThisWorkout.isNotEmpty()) {
-//            for (i in 1..setsOfThisWorkout.size) {
-//                val thisSet = setsOfThisWorkout[i - 1].set
-//                if (startingSet <= thisSet) {
-//                    database.workoutSetDao().updateSetOnSets(thisSet, thisSet-1)
-//                }
-//            }
-//        } else {
-//            Log.i(tag, "There are no more sets to update.")
-//        }
     }
     @WorkerThread
     suspend fun updateWorkoutOnSets(workoutId: Long, newWorkout: String) {
@@ -98,10 +71,6 @@ class WorkoutsRepository(private val database: WorkoutsRoomDatabase) {
     suspend fun deleteGroup(groupName: String) {
         database.workoutGroupDao().delete(groupName)
     }
-//    @WorkerThread
-//    suspend fun deleteGroup(group: WorkoutGroup) {
-//        database.workoutGroupDao().delete(group)
-//    }
     @WorkerThread
     suspend fun deleteWorkout(workout: Workout) {
         database.workoutDao().delete(workout)
@@ -123,11 +92,6 @@ class WorkoutsRepository(private val database: WorkoutsRoomDatabase) {
     suspend fun getSetsOfWorkout(workoutId: Long): List<WorkoutSet> {
         return database.workoutSetDao().getSetsOfWorkout(workoutId)
     }
-//    @WorkerThread
-    // todo: probably delete this
-//    suspend fun getNextSetNum(workoutId: Long): Int {
-//        return database.workoutSetDao().getSetNumList(workoutId).size
-//    }
     @WorkerThread
     suspend fun groupHasWorkouts(groupName: String): Boolean {
         // If the list is empty, returns false, else return true

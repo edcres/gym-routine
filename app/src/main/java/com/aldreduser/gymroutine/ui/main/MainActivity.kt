@@ -32,6 +32,8 @@ todo:
 
 /* Bugs
     1 - The sets numbers are often not updated correctly.
+            - when deleting a set in the middle, the database is updated but the
+                view is not with the correct set numbers.
  */
 
 // Future

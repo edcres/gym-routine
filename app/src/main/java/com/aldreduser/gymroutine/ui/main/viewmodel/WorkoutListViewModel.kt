@@ -16,8 +16,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-// The ViewModel will transform the data from the Repository,
-//  from Flow to LiveData and exposes the list of words as LiveData to the UI.
 class WorkoutListViewModel : ViewModel() {
 
     private val tag = "ViewModel_TAG"
@@ -45,9 +43,6 @@ class WorkoutListViewModel : ViewModel() {
     var workoutIdToEdit: Long? = null
 
     // HELPERS //
-    fun getTheGroupNames(): List<String> {
-        return groupNames as List<String>
-    }
     fun toggleEditBtn() {
         _menuEditIsOn.value = !_menuEditIsOn.value!!
     }
@@ -101,12 +96,10 @@ class WorkoutListViewModel : ViewModel() {
         repository.insert(workoutGroup, workoutId)
     }
     fun insertWorkout(workout: Workout): MutableLiveData<Long> {
-        Log.d(GLOBAL_TAG, "vm: insertWorkout: called")
         val itemId = MutableLiveData<Long>()
         CoroutineScope(Dispatchers.IO).launch {
             val workoutId = repository.insert(workout)
             itemId.postValue(workoutId)
-            Log.d(GLOBAL_TAG, "\nvm: workoutId: $workoutId\t${workout.workoutName}")
             repository.insert(
                 WorkoutSet(
                     workoutId = workoutId,
@@ -121,9 +114,6 @@ class WorkoutListViewModel : ViewModel() {
     }
     fun insertWorkoutSet(workoutSet: WorkoutSet) = CoroutineScope(Dispatchers.IO).launch  {
         repository.insert(workoutSet)
-    }
-    fun updateGroupOnWorkout(workout: Workout) = CoroutineScope(Dispatchers.IO).launch {
-        repository.update(workout)
     }
     fun updateGroupOnWorkout(workoutId: Long, groupSelected: String) =
         CoroutineScope(Dispatchers.IO).launch {
@@ -173,14 +163,6 @@ class WorkoutListViewModel : ViewModel() {
         }
         return setsOfWorkout
     }
-//    fun getNextSetNum(workoutId: Long): MutableLiveData<Int> {
-//        // todo: Probably get rid of this
-//        val nextNum = MutableLiveData<Int>()
-//        CoroutineScope(Dispatchers.IO).launch {
-//            nextNum.postValue(repository.getNextSetNum(workoutId) + 1)
-//        }
-//        return nextNum
-//    }
     fun getWorkoutName(workoutId: Long): MutableLiveData<String> {
         val workoutName = MutableLiveData<String>()
         CoroutineScope(Dispatchers.IO).launch {

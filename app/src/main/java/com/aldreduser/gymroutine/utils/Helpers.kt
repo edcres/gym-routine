@@ -1,6 +1,5 @@
 package com.aldreduser.gymroutine.utils
 
-import android.util.Log
 import com.aldreduser.gymroutine.data.model.entities.WorkoutGroup
 
 const val GLOBAL_TAG = "Global_TAG"

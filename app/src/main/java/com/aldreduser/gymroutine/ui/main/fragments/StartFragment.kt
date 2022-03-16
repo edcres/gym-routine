@@ -13,7 +13,6 @@ import com.aldreduser.gymroutine.data.model.entities.Workout
 import com.aldreduser.gymroutine.databinding.FragmentStartBinding
 import com.aldreduser.gymroutine.ui.main.adapters.GroupTabsAdapter
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
-import com.aldreduser.gymroutine.utils.GLOBAL_TAG
 import com.aldreduser.gymroutine.utils.findDifferentGroups
 import com.aldreduser.gymroutine.utils.findDifferentName
 import com.google.android.material.tabs.TabLayoutMediator
@@ -47,11 +46,6 @@ class StartFragment : Fragment() {
         setUpTabs()
         setObservers()
         viewModel.setItemToEdit(null)
-        setUpObservers()
-    }
-
-    override fun onResume() {
-        super.onResume()
     }
 
     override fun onDestroy() {
@@ -128,18 +122,4 @@ class StartFragment : Fragment() {
         }
     }
     // SETUP //
-
-    // todo: delete this
-    private fun setUpObservers() {
-        viewModel.groups.observe(viewLifecycleOwner) {
-            var groupsString = ""
-            it.forEach { group -> groupsString = "$groupsString\n$group" }
-            Log.d(fragmentTAG, "groups observed: ${it.size}$groupsString\n.")
-        }
-        viewModel.workouts.observe(viewLifecycleOwner) {
-            var workoutsString = ""
-            it.forEach { workout -> workoutsString = "$workoutsString\n$workout" }
-            Log.d(fragmentTAG, "workouts observed: ${it.size}$workoutsString\n.")
-        }
-    }
 }
