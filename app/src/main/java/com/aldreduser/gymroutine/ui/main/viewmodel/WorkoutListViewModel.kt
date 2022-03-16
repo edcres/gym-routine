@@ -38,6 +38,8 @@ class WorkoutListViewModel : ViewModel() {
     val menuEditIsOn: LiveData<Boolean> get() = _menuEditIsOn
     private var _itemToEdit = MutableLiveData<Any?>()
     val itemToEdit: LiveData<Any?> get() = _itemToEdit
+    private var _hiddenTxt = MutableLiveData(false)
+    val hiddenTxt: LiveData<Boolean> get() = _hiddenTxt
 
     // Used to update the sets that were edited
     var workoutIdToEdit: Long? = null
@@ -48,6 +50,10 @@ class WorkoutListViewModel : ViewModel() {
     }
     fun toggleEditBtn() {
         _menuEditIsOn.value = !_menuEditIsOn.value!!
+    }
+    fun toggleHiddenTxt() {
+        // This is a work around a bug. The purpose is for the recyclerview to get resized.
+        _hiddenTxt.value = !_hiddenTxt.value!!
     }
     fun setItemToEdit(chosenItem: Any?) {
         _itemToEdit.value = chosenItem
@@ -130,6 +136,8 @@ class WorkoutListViewModel : ViewModel() {
         repository.updateWorkoutOnSets(workout.id, workout.workoutName)
     }
     fun updateSet(set: WorkoutSet) = CoroutineScope(Dispatchers.IO).launch {
+        Log.d(GLOBAL_TAG, "updateSet: set sent to update")
+        Log.d(GLOBAL_TAG, "set = $set")
         repository.update(set)
     }
     fun removeWorkout(workout: Workout, groupName: String) = CoroutineScope(Dispatchers.IO).launch {

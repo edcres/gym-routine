@@ -4,7 +4,6 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.aldreduser.gymroutine.ui.main.fragments.WorkoutListFragment
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
-import com.aldreduser.gymroutine.utils.GLOBAL_TAG
 
 class GroupTabsAdapter(
     fragment: Fragment,
@@ -35,7 +34,6 @@ class GroupTabsAdapter(
 
     fun addTab(ordinal: Int, title: String) {
         viewModel.groupNames.add(title)
-
         if(!viewModel.groupsOrdinals.containsKey(title)) {
             viewModel.groupsOrdinals[title] = ordinal
         }

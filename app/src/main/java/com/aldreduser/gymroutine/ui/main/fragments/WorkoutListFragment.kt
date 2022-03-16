@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.aldreduser.gymroutine.databinding.FragmentWorkoutListBinding
 import com.aldreduser.gymroutine.ui.main.adapters.WorkoutListAdapter
@@ -48,6 +47,7 @@ class WorkoutListFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         viewModel.currentGroup = groupToDisplay
+        viewModel.toggleHiddenTxt()
     }
 
     override fun onDestroyView() {

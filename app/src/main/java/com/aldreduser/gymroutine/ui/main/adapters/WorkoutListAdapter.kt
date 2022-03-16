@@ -1,19 +1,15 @@
 package com.aldreduser.gymroutine.ui.main.adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.aldreduser.gymroutine.data.model.entities.Workout
-import com.aldreduser.gymroutine.data.model.entities.WorkoutGroup
 import com.aldreduser.gymroutine.databinding.WorkoutItemBinding
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
 import com.aldreduser.gymroutine.utils.*
@@ -32,7 +28,7 @@ class WorkoutListAdapter(
         holderWorkouts.bind(getItem(position))
 
     class WorkoutsViewHolder private constructor(
-        val viewModel: WorkoutListViewModel,
+        private val viewModel: WorkoutListViewModel,
         private val context: Context,
         private val fragLifecycleOwner: LifecycleOwner,
         private val binding: WorkoutItemBinding
@@ -42,7 +38,6 @@ class WorkoutListAdapter(
 
         fun bind(workout: Workout) {
             binding.apply {
-
                 if (specificWorkoutInput.text.isNullOrEmpty())
                     specificWorkoutInput.setText(workout.workoutName)
 
@@ -113,6 +108,14 @@ class WorkoutListAdapter(
 //                    }
 //                }
 //                // SPINNER //
+                
+                viewModel.hiddenTxt.observe(fragLifecycleOwner) {
+                    when (dummyTxt.text.toString()) {
+                        "a" -> dummyTxt.text = "a"
+                        "b" -> dummyTxt.text = "b"
+                        else -> dummyTxt.text = "a"
+                    }
+                }
 
                 viewModel.menuEditIsOn.observe(fragLifecycleOwner) { result ->
                     when (result) {

@@ -52,7 +52,9 @@ class SetsAdapter(
                 weightText.setText(workoutSet.weight.toString())
 
                 repsText.doAfterTextChanged {
+                    Log.d(GLOBAL_TAG, "bind: reps checked")
                     if(!it.toString().isNullOrEmpty()) {
+                        Log.d(GLOBAL_TAG, "bind: if is true")
                         viewModel.workoutIdToEdit = workoutSet.workoutId
                         workoutSet.reps = it.toString().toInt()
                         viewModel.updateSet(workoutSet)
