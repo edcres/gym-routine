@@ -73,46 +73,46 @@ class WorkoutListAdapter(
 //                }
 
                 // GROUP SETS //
-                // SPINNER //
-                if(workout.workoutGroup != FIRST_TAB_TITLE) chooseGroupBtn.visibility = View.VISIBLE
-
-
-                // todo: uncomment this
-//                val spinnerList = getChooseGroupList(viewModel.groupNames)
-//                val spinnerList = listOf<String>("One", "Two", "Three" , "Four")
-//                Log.d(GLOBAL_TAG, "list adapter: spinner list: $spinnerList")
-                chooseGroupBtn.adapter = ArrayAdapter(
-                    context,
-                    android.R.layout.simple_list_item_1,
-                    viewModel.groupNames
-                )
-                chooseGroupBtn.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-                    override fun onItemSelected(
-                        parent: AdapterView<*>?,
-                        view: View?,
-                        position: Int,
-                        id: Long
-                    ) {
-                        val groupSelected = viewModel.groupNames[position]
-                        chooseGroupBtn.visibility = View.GONE
-                        if(groupSelected == NEW_GROUP) {
-                            groupEtContainer.visibility = View.VISIBLE
-                            newGroupDoneBtn.setOnClickListener {
-                                viewModel.insertWorkoutGroup(
-                                    WorkoutGroup(newGroupEt.text.toString()),
-                                    workout.id
-                                )
-                            }
-                        } else {
-                            workout.workoutGroup = groupSelected
-                            viewModel.updateGroupOnWorkout(workout)
-                        }
-                    }
-                    override fun onNothingSelected(parent: AdapterView<*>?) {
-                        Log.i(GLOBAL_TAG, "Nothing was clicked.")
-                    }
-                }
-                // SPINNER //
+//                // SPINNER //
+//                if(workout.workoutGroup != FIRST_TAB_TITLE) chooseGroupBtn.visibility = View.VISIBLE
+//
+//
+//                // todo: uncomment this
+////                val spinnerList = getChooseGroupList(viewModel.groupNames)
+////                val spinnerList = listOf<String>("One", "Two", "Three" , "Four")
+////                Log.d(GLOBAL_TAG, "list adapter: spinner list: $spinnerList")
+//                chooseGroupBtn.adapter = ArrayAdapter(
+//                    context,
+//                    android.R.layout.simple_list_item_1,
+//                    viewModel.groupNames
+//                )
+//                chooseGroupBtn.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+//                    override fun onItemSelected(
+//                        parent: AdapterView<*>?,
+//                        view: View?,
+//                        position: Int,
+//                        id: Long
+//                    ) {
+//                        val groupSelected = viewModel.groupNames[position]
+//                        chooseGroupBtn.visibility = View.GONE
+//                        if(groupSelected == NEW_GROUP) {
+//                            groupEtContainer.visibility = View.VISIBLE
+//                            newGroupDoneBtn.setOnClickListener {
+//                                viewModel.insertWorkoutGroup(
+//                                    WorkoutGroup(newGroupEt.text.toString()),
+//                                    workout.id
+//                                )
+//                            }
+//                        } else {
+//                            workout.workoutGroup = groupSelected
+//                            viewModel.updateGroupOnWorkout(workout)
+//                        }
+//                    }
+//                    override fun onNothingSelected(parent: AdapterView<*>?) {
+//                        Log.i(GLOBAL_TAG, "Nothing was clicked.")
+//                    }
+//                }
+//                // SPINNER //
 
                 viewModel.menuEditIsOn.observe(fragLifecycleOwner) { result ->
                     when (result) {
@@ -128,6 +128,7 @@ class WorkoutListAdapter(
                 }
                 editItemBtn.setOnClickListener {
                     viewModel.workoutIdToEdit = workout.id
+                    Log.d(GLOBAL_TAG, "list adapter edit clicked")
                     viewModel.setItemToEdit(workout)
                 }
                 removeItemBtn.setOnClickListener {

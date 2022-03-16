@@ -46,12 +46,12 @@ class StartFragment : Fragment() {
         setUpAppBar()
         setUpTabs()
         setObservers()
+        viewModel.setItemToEdit(null)
         setUpObservers()
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.setItemToEdit(null)
     }
 
     override fun onDestroy() {
@@ -78,7 +78,6 @@ class StartFragment : Fragment() {
                 val itemListEdit = R.id.edit_workout_btn
                 when (menuItem.itemId) {
                     itemListEdit -> {
-                        Log.d(GLOBAL_TAG, "setUpAppBar: group names = ${viewModel.groupNames}")
                         viewModel.toggleEditBtn()
                         true
                     }
@@ -122,7 +121,9 @@ class StartFragment : Fragment() {
             }
         }
         viewModel.itemToEdit.observe(viewLifecycleOwner) {
+            Log.d(fragmentTAG, "itemToEdit observed = $it")
             if(viewModel.itemToEdit.value != null) {
+                Log.d(fragmentTAG, "Navigate to edit frag.")
                 val navController =
                     Navigation.findNavController(requireParentFragment().requireView())
                 navController.navigate(R.id.action_startFragment_to_editWorkoutFragment)

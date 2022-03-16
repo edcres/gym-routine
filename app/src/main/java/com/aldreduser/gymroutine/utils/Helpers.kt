@@ -13,7 +13,6 @@ fun getChooseGroupList(groups: List<String>): List<String> {
         spinnerList.add(it)
     }
     spinnerList.add(NEW_GROUP)
-    Log.d(GLOBAL_TAG, "getChooseGroupList: spinner list: $spinnerList")
     return spinnerList
 }
 

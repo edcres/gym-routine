@@ -17,10 +17,7 @@ import com.aldreduser.gymroutine.data.model.entities.WorkoutSet
 import com.aldreduser.gymroutine.databinding.FragmentEditWorkoutBinding
 import com.aldreduser.gymroutine.ui.main.adapters.SetsAdapter
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
-import com.aldreduser.gymroutine.utils.FIRST_TAB_TITLE
-import com.aldreduser.gymroutine.utils.NEW_GROUP
 import com.aldreduser.gymroutine.utils.getChooseGroupList
-import kotlin.math.log
 
 class EditWorkoutFragment : Fragment() {
 
@@ -58,7 +55,6 @@ class EditWorkoutFragment : Fragment() {
         viewModel.sets.observe(viewLifecycleOwner) {
             // Observer for when set is added or removed.
             if(setsPreviousSize != it.size) {
-                Log.d(fragmentTAG, "sets observed")
                 submitsSetsOfWorkout()
                 setsPreviousSize = it.size
             }
@@ -73,20 +69,10 @@ class EditWorkoutFragment : Fragment() {
     // HELPERS //
     private fun submitsSetsOfWorkout() {
         viewModel.getSetsOfWorkout(currentWorkoutId!!).observe(viewLifecycleOwner) { sets ->
-
-
-
-            // todo: make this pretty
             val submitsSetsOfWorkout = mutableListOf<String>()
             sets.forEach {
                 submitsSetsOfWorkout.add("${it.id}\t${it.set}\n")
             }
-//            Log.d(fragmentTAG, "submitsSetsOfWorkout: sets = $sets")
-            Log.d(fragmentTAG, "submitsSetsOfWorkout: sets = \n$submitsSetsOfWorkout")
-
-
-
-
             setsAdapter.submitList(sets)
         }
     }
@@ -106,14 +92,10 @@ class EditWorkoutFragment : Fragment() {
                     position: Int,
                     id: Long
                 ) {
-                    Log.d(fragmentTAG, "item clicked: position = $position")
-                    Log.d(fragmentTAG, "item clicked: groupNames: ${viewModel.groupNames.size}\n${viewModel.groupNames}")
                     if (viewModel.groupNames.size == position) {
                         // If user clicks new group
-                        Log.d(fragmentTAG, "New Group Clicked")
                         groupEtContainer.visibility = View.VISIBLE
                         newGroupDoneBtn.setOnClickListener {
-                            Log.d(fragmentTAG, "top check clicked: currentWorkoutId = $currentWorkoutId")
                             viewModel.insertWorkoutGroup(
                                 WorkoutGroup(newGroupEt.text.toString()),
                                 currentWorkoutId!!
@@ -122,7 +104,6 @@ class EditWorkoutFragment : Fragment() {
                         }
                     } else if (position > 0 && position < viewModel.groupNames.size) {
                         // If it's not the first item and not the last one
-                        Log.d(fragmentTAG, "position > 0 and not the last one")
                         val groupSelected = viewModel.groupNames[position]
                         viewModel.updateGroupOnWorkout(currentWorkoutId!!, groupSelected)
                     }

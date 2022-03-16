@@ -50,6 +50,8 @@ class WorkoutListViewModel : ViewModel() {
         _menuEditIsOn.value = !_menuEditIsOn.value!!
     }
     fun setItemToEdit(chosenItem: Any?) {
+        // todo: the bug is probably caused bc this is being called twice when navigateUp()
+        Log.d(tag, "setItemToEdit: set item to edit")
         _itemToEdit.value = chosenItem
     }
     // HELPERS //
@@ -82,7 +84,6 @@ class WorkoutListViewModel : ViewModel() {
         }
     }
     fun insertWorkoutGroup(workoutGroup: WorkoutGroup, workoutId: Long?) = CoroutineScope(Dispatchers.IO).launch {
-        Log.d(tag, "workoutId = $workoutId")
         repository.insert(workoutGroup, workoutId)
     }
     fun insertWorkout(workout: Workout): MutableLiveData<Long> {
