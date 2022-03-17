@@ -25,7 +25,6 @@ class EditWorkoutFragment : Fragment() {
     private val viewModel: WorkoutListViewModel by activityViewModels()
     private lateinit var setsAdapter: SetsAdapter
     private var currentWorkoutId: Long? = null
-    private var setsPreviousSize: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,12 +51,9 @@ class EditWorkoutFragment : Fragment() {
         setUpAppBar()
         submitsSetsOfWorkout()
         viewModel.sets.observe(viewLifecycleOwner) {
-            // Observe when a set is added or removed.
-
-            Log.d(fragmentTAG, "setsPreviousSize = $setsPreviousSize --- nowSize = ${it.size}")
-            if(setsPreviousSize != it.size) {
+            if(viewModel.editWorkoutSetsPreviousSize != it.size) {
                 submitsSetsOfWorkout()
-                setsPreviousSize = it.size
+                viewModel.editWorkoutSetsPreviousSize = it.size
             }
         }
         viewModel.toggleEditBtn()
@@ -66,18 +62,12 @@ class EditWorkoutFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         binding = null
+        viewModel.editWorkoutSetsPreviousSize = 0
     }
 
     // HELPERS //
     private fun submitsSetsOfWorkout() {
         viewModel.getSetsOfWorkout(currentWorkoutId!!).observe(viewLifecycleOwner) { sets ->
-//             todo: i don't think this does anything
-            val submitsSetsOfWorkout = mutableListOf<String>()
-            sets.forEach {
-                submitsSetsOfWorkout.add("${it.id}\t${it.set}\n")
-            }
-            Log.d(fragmentTAG, "submitsSetsOfWorkout: \n$submitsSetsOfWorkout")
-
             setsAdapter.submitList(sets)
         }
     }

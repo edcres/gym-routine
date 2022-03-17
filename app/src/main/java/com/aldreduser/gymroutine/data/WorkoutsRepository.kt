@@ -48,40 +48,13 @@ class WorkoutsRepository(private val database: WorkoutsRoomDatabase) {
         database.workoutSetDao().update(set)
     }
     @WorkerThread
-    suspend fun updateSetOnSets(workoutId: Long, startingSet: Int, setsOfThisWorkout: List<WorkoutSet>) {
-        Log.d(tag, "updateSetOnSets: startingSet = $startingSet")
+    suspend fun updateSetOnSets(workoutId: Long, startingSet: Int) {
         val setsToUpdate =
             database.workoutSetDao().getSetsProceedingSetNum(workoutId, startingSet).toMutableList()
         setsToUpdate.forEach {
             it.set--
         }
-
-        for (i in 0 until setsToUpdate.size){
-            Log.d(tag, "Repo: sets to update = id=${setsToUpdate[i].id}, set=${setsToUpdate[i].set}")
-        }
-
         database.workoutSetDao().update(setsToUpdate)
-        Log.d(tag, "updateSetOnSets: DONE")
-
-
-
-
-//        var setsToUpdateString = ""
-//        setsToUpdate.forEach {
-//            setsToUpdateString = "$setsToUpdateString\n${it.id}\t${it.set}"
-//        }
-
-        // todo: maybe get rid of this
-//        if(setsOfThisWorkout.isNotEmpty()) {
-//            for (i in 1..setsOfThisWorkout.size) {
-//                val thisSet = setsOfThisWorkout[i - 1].set
-//                if (startingSet <= thisSet) {
-//                    database.workoutSetDao().updateSetOnSets(thisSet, thisSet-1)
-//                }
-//            }
-//        } else {
-//            Log.i(tag, "There are no more sets to update.")
-//        }
     }
     @WorkerThread
     suspend fun updateWorkoutOnSets(workoutId: Long, newWorkout: String) {

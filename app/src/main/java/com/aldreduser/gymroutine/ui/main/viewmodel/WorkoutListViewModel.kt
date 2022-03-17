@@ -10,7 +10,6 @@ import com.aldreduser.gymroutine.data.model.entities.WorkoutSet
 import com.aldreduser.gymroutine.data.model.room.WorkoutsRoomDatabase
 import com.aldreduser.gymroutine.ui.main.adapters.GroupTabsAdapter
 import com.aldreduser.gymroutine.utils.FIRST_TAB_TITLE
-import com.aldreduser.gymroutine.utils.GLOBAL_TAG
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -41,6 +40,7 @@ class WorkoutListViewModel : ViewModel() {
 
     // Used to update the sets that were edited
     var workoutIdToEdit: Long? = null
+    var editWorkoutSetsPreviousSize: Int = 0
 
     // HELPERS //
     fun toggleEditBtn() {
@@ -126,8 +126,6 @@ class WorkoutListViewModel : ViewModel() {
         repository.updateWorkoutOnSets(workout.id, workout.workoutName)
     }
     fun updateSet(set: WorkoutSet) = CoroutineScope(Dispatchers.IO).launch {
-        Log.d(tag, "updateSet: set sent to update")
-        Log.d(tag, "set = $set")
         repository.update(set)
     }
     fun removeWorkout(workout: Workout, groupName: String) = CoroutineScope(Dispatchers.IO).launch {
@@ -135,15 +133,12 @@ class WorkoutListViewModel : ViewModel() {
         checkIfDeleteGroup(groupName)
     }
     fun removeSet(set: WorkoutSet) = CoroutineScope(Dispatchers.IO).launch {
-
         if (sets.value != null) {
-            Log.d(tag, "set to remove = \n$set")
             repository.updateSetOnSets(
                 set.workoutId,
-                set.set,
-                repository.getSetsOfWorkout(set.workoutId)
+                set.set
             )
-        } else Log.d(tag, "sets.value = ${sets.value}")
+        }
         repository.deleteSet(set)
     }
     fun getAllWorkouts(): MutableLiveData<List<Workout>> {
