@@ -93,7 +93,7 @@ class WorkoutListViewModel : ViewModel() {
         }
     }
     fun insertWorkoutGroup(workoutGroup: WorkoutGroup, workoutId: Long?) = CoroutineScope(Dispatchers.IO).launch {
-        repository.insert(workoutGroup, workoutId)
+        repository.insertGroup(workoutGroup, workoutId)
     }
     fun insertWorkout(workout: Workout): MutableLiveData<Long> {
         val itemId = MutableLiveData<Long>()

@@ -12,7 +12,6 @@ class GroupTabsAdapter(
 
     override fun createFragment(position: Int): Fragment {
         return WorkoutListFragment.getInstance(viewModel.groupNames[position])
-//        return WorkoutListFragment.getInstance(viewModel.groupNames.last())
     }
 
     override fun getItemCount(): Int {

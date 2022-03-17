@@ -52,12 +52,13 @@ class EditWorkoutFragment : Fragment() {
         setUpAppBar()
         submitsSetsOfWorkout()
         viewModel.sets.observe(viewLifecycleOwner) {
-            // Observer for when set is added or removed.
+            // Observe when a set is added or removed.
             if(setsPreviousSize != it.size) {
                 submitsSetsOfWorkout()
                 setsPreviousSize = it.size
             }
         }
+        viewModel.toggleEditBtn()
     }
 
     override fun onDestroy() {
@@ -68,10 +69,11 @@ class EditWorkoutFragment : Fragment() {
     // HELPERS //
     private fun submitsSetsOfWorkout() {
         viewModel.getSetsOfWorkout(currentWorkoutId!!).observe(viewLifecycleOwner) { sets ->
-            val submitsSetsOfWorkout = mutableListOf<String>()
-            sets.forEach {
-                submitsSetsOfWorkout.add("${it.id}\t${it.set}\n")
-            }
+            // todo: i don't think this does anything
+//            val submitsSetsOfWorkout = mutableListOf<String>()
+//            sets.forEach {
+//                submitsSetsOfWorkout.add("${it.id}\t${it.set}\n")
+//            }
             setsAdapter.submitList(sets)
         }
     }

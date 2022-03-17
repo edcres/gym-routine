@@ -1,7 +1,6 @@
 package com.aldreduser.gymroutine.ui.main.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +11,6 @@ import com.aldreduser.gymroutine.databinding.FragmentWorkoutListBinding
 import com.aldreduser.gymroutine.ui.main.adapters.WorkoutListAdapter
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
 import com.aldreduser.gymroutine.utils.FIRST_TAB_TITLE
-import com.aldreduser.gymroutine.utils.GLOBAL_TAG
 
 class WorkoutListFragment : Fragment() {
 
@@ -38,8 +36,8 @@ class WorkoutListFragment : Fragment() {
         binding?.apply {
             lifecycleOwner = viewLifecycleOwner
             workoutListRecycler.adapter = recyclerAdapter
-
-            workoutListRecycler.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            workoutListRecycler.layoutManager =
+                StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         }
         populateWorkoutsList()
         setObservers()

@@ -18,22 +18,19 @@ class WorkoutsRepository(private val database: WorkoutsRoomDatabase) {
     val allWorkoutSets: Flow<List<WorkoutSet>> = database.workoutSetDao().getAlphabetizedSets()
 
     @WorkerThread
-    suspend fun insert(workoutGroup: WorkoutGroup, workoutId: Long?) {
+    suspend fun insertGroup(workoutGroup: WorkoutGroup, workoutId: Long?) {
         // Inserts a WorkoutGroup
         database.workoutGroupDao().insert(workoutGroup)
         if (workoutId != null) {
-            Log.d(tag, "insert group: workout id is null")
             database.workoutDao().updateWorkout(workoutId, workoutGroup.groupName)
         }
     }
     @WorkerThread
     suspend fun insert(workout: Workout): Long {
-        Log.d(tag, "insert workout: called")
         return database.workoutDao().insert(workout)
     }
     @WorkerThread
     suspend fun insert(workoutSet: WorkoutSet) {
-        Log.d(tag, "insert set: called")
         database.workoutSetDao().insert(workoutSet)
     }
 
@@ -61,6 +58,21 @@ class WorkoutsRepository(private val database: WorkoutsRoomDatabase) {
         setsToUpdate.forEach {
             setsToUpdateString = "$setsToUpdateString\n${it.id}\t${it.set}"
         }
+
+
+
+
+        // todo: maybe get rid of this
+//        if(setsOfThisWorkout.isNotEmpty()) {
+//            for (i in 1..setsOfThisWorkout.size) {
+//                val thisSet = setsOfThisWorkout[i - 1].set
+//                if (startingSet <= thisSet) {
+//                    database.workoutSetDao().updateSetOnSets(thisSet, thisSet-1)
+//                }
+//            }
+//        } else {
+//            Log.i(tag, "There are no more sets to update.")
+//        }
     }
     @WorkerThread
     suspend fun updateWorkoutOnSets(workoutId: Long, newWorkout: String) {
