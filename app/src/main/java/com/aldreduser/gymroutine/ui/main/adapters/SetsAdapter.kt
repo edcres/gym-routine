@@ -1,5 +1,6 @@
 package com.aldreduser.gymroutine.ui.main.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aldreduser.gymroutine.data.model.entities.WorkoutSet
 import com.aldreduser.gymroutine.databinding.SetLinearLayoutBinding
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
+import com.aldreduser.gymroutine.utils.GLOBAL_TAG
 
 // This adapter will be used in 2 places: WorkoutListAdapter, EditWorkoutFragment
 class SetsAdapter(
@@ -33,19 +35,26 @@ class SetsAdapter(
             binding.apply {
                 ifSetsAreRemoved(workoutSet)
 
+                val startingRepsTxt = workoutSet.reps.toString()
+                val startingWeightTxt = workoutSet.weight.toString()
+
                 setText.setText(workoutSet.set.toString())
-                repsText.setText(workoutSet.reps.toString())
-                weightText.setText(workoutSet.weight.toString())
+                repsText.setText(startingRepsTxt)
+                weightText.setText(startingWeightTxt)
 
                 repsText.doAfterTextChanged {
-                    if(!it.toString().isNullOrEmpty()) {
+                    // todo: why is this being called sometimes when I update a set
+                    Log.d(GLOBAL_TAG, "repsTxt = ${it.toString()}")
+                    if(it.toString().isNotEmpty() && it.toString() != startingRepsTxt) {
                         viewModel.workoutIdToEdit = workoutSet.workoutId
                         workoutSet.reps = it.toString().toInt()
                         viewModel.updateSet(workoutSet)
                     }
                 }
                 weightText.doAfterTextChanged {
-                    if(!it.toString().isNullOrEmpty()) {
+                    // todo: why is this being called sometimes when I update a set
+                    Log.d(GLOBAL_TAG, "weightTxt = ${it.toString()}")
+                    if(it.toString().isNotEmpty() && it.toString() != startingWeightTxt) {
                         viewModel.workoutIdToEdit = workoutSet.workoutId
                         workoutSet.weight = it.toString().toDouble()
                         viewModel.updateSet(workoutSet)
@@ -63,6 +72,7 @@ class SetsAdapter(
                     removeSetBtn.setOnClickListener {
                         viewModel.workoutIdToEdit = workoutSet.workoutId
                         workoutSet.set = setText.text.toString().toInt()
+                        Log.d(GLOBAL_TAG, "ifSetsAreRemoved: set to remove = ${workoutSet.set}")
                         viewModel.removeSet(workoutSet)
                     }
                 }

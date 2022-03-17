@@ -53,6 +53,8 @@ class EditWorkoutFragment : Fragment() {
         submitsSetsOfWorkout()
         viewModel.sets.observe(viewLifecycleOwner) {
             // Observe when a set is added or removed.
+
+            Log.d(fragmentTAG, "setsPreviousSize = $setsPreviousSize --- nowSize = ${it.size}")
             if(setsPreviousSize != it.size) {
                 submitsSetsOfWorkout()
                 setsPreviousSize = it.size
@@ -69,11 +71,13 @@ class EditWorkoutFragment : Fragment() {
     // HELPERS //
     private fun submitsSetsOfWorkout() {
         viewModel.getSetsOfWorkout(currentWorkoutId!!).observe(viewLifecycleOwner) { sets ->
-            // todo: i don't think this does anything
-//            val submitsSetsOfWorkout = mutableListOf<String>()
-//            sets.forEach {
-//                submitsSetsOfWorkout.add("${it.id}\t${it.set}\n")
-//            }
+//             todo: i don't think this does anything
+            val submitsSetsOfWorkout = mutableListOf<String>()
+            sets.forEach {
+                submitsSetsOfWorkout.add("${it.id}\t${it.set}\n")
+            }
+            Log.d(fragmentTAG, "submitsSetsOfWorkout: \n$submitsSetsOfWorkout")
+
             setsAdapter.submitList(sets)
         }
     }

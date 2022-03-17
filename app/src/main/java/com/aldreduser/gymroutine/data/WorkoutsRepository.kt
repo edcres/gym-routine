@@ -7,6 +7,7 @@ import com.aldreduser.gymroutine.data.model.entities.WorkoutGroup
 import com.aldreduser.gymroutine.data.model.entities.WorkoutSet
 import com.aldreduser.gymroutine.data.model.room.WorkoutsRoomDatabase
 import kotlinx.coroutines.flow.Flow
+import kotlin.math.log
 
 // Repo only has access to the DAOs, not the database.
 class WorkoutsRepository(private val database: WorkoutsRoomDatabase) {
@@ -48,19 +49,27 @@ class WorkoutsRepository(private val database: WorkoutsRoomDatabase) {
     }
     @WorkerThread
     suspend fun updateSetOnSets(workoutId: Long, startingSet: Int, setsOfThisWorkout: List<WorkoutSet>) {
+        Log.d(tag, "updateSetOnSets: startingSet = $startingSet")
         val setsToUpdate =
             database.workoutSetDao().getSetsProceedingSetNum(workoutId, startingSet).toMutableList()
         setsToUpdate.forEach {
             it.set--
         }
-        database.workoutSetDao().update(setsToUpdate)
-        var setsToUpdateString = ""
-        setsToUpdate.forEach {
-            setsToUpdateString = "$setsToUpdateString\n${it.id}\t${it.set}"
+
+        for (i in 0 until setsToUpdate.size){
+            Log.d(tag, "Repo: sets to update = id=${setsToUpdate[i].id}, set=${setsToUpdate[i].set}")
         }
 
+        database.workoutSetDao().update(setsToUpdate)
+        Log.d(tag, "updateSetOnSets: DONE")
 
 
+
+
+//        var setsToUpdateString = ""
+//        setsToUpdate.forEach {
+//            setsToUpdateString = "$setsToUpdateString\n${it.id}\t${it.set}"
+//        }
 
         // todo: maybe get rid of this
 //        if(setsOfThisWorkout.isNotEmpty()) {
@@ -90,6 +99,7 @@ class WorkoutsRepository(private val database: WorkoutsRoomDatabase) {
     @WorkerThread
     suspend fun deleteSet(set: WorkoutSet) {
         database.workoutSetDao().delete(set)
+        Log.d(tag, "deleteSet: DONE")
     }
 
     @WorkerThread

@@ -126,8 +126,8 @@ class WorkoutListViewModel : ViewModel() {
         repository.updateWorkoutOnSets(workout.id, workout.workoutName)
     }
     fun updateSet(set: WorkoutSet) = CoroutineScope(Dispatchers.IO).launch {
-        Log.d(GLOBAL_TAG, "updateSet: set sent to update")
-        Log.d(GLOBAL_TAG, "set = $set")
+        Log.d(tag, "updateSet: set sent to update")
+        Log.d(tag, "set = $set")
         repository.update(set)
     }
     fun removeWorkout(workout: Workout, groupName: String) = CoroutineScope(Dispatchers.IO).launch {
@@ -135,12 +135,16 @@ class WorkoutListViewModel : ViewModel() {
         checkIfDeleteGroup(groupName)
     }
     fun removeSet(set: WorkoutSet) = CoroutineScope(Dispatchers.IO).launch {
+
+        if (sets.value != null) {
+            Log.d(tag, "set to remove = \n$set")
+            repository.updateSetOnSets(
+                set.workoutId,
+                set.set,
+                repository.getSetsOfWorkout(set.workoutId)
+            )
+        } else Log.d(tag, "sets.value = ${sets.value}")
         repository.deleteSet(set)
-        if (sets.value != null) repository.updateSetOnSets(
-            set.workoutId,
-            set.set,
-            repository.getSetsOfWorkout(set.workoutId)
-        )
     }
     fun getAllWorkouts(): MutableLiveData<List<Workout>> {
         val allWorkouts = MutableLiveData<List<Workout>>()
