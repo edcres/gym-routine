@@ -5,6 +5,7 @@
     <string name="toolbar_icon_delete">Delete</string>
     <string name="toolbar_icon_edit">Edit</string>
 
+    <string name="workouts_title">Workouts</string>
     <string name="tab_label_all">All</string>
 
     <string name="sets_column_label">sets</string>

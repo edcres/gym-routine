@@ -4,37 +4,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.aldreduser.gymroutine.R
 
-// todo: Image to cancel edit mode
-
 // todo: Display the workouts in a custom position
 //   have a position attribute for the workout entities
 
 // todo: make the spinner pretty
 
-/*
-todo:
- Update the workout name as the user types it
- - update Workout and WorkoutSet
-
-- possible bug: when a user is typing a new workout and it is of the same name of a previous
-    workout, it might override the other workout. Solution: onConflict:duplicate
-	- duplicate probably wouldn't work bc name has to be unique
-	- solution: send workoutName to the db when user clicks accept
- */
-
-// -each workout must have at least 1 set, other sets can be added or deleted ()
+// todo: maybe make it so the user can't delete the last set.
 
 // todo: take care of todos
 // todo: take care of warnings
 // todo: clean up comments
 // todo: clean up logs
 // todo: clean up unused imports
-
-/* Bugs
-    1 - The sets numbers are often not updated correctly.
-            - when deleting a set in the middle, the database is updated but the
-                view is not with the correct set numbers.
- */
 
 // Future
 // Ask the user before deleting an item
@@ -43,6 +24,7 @@ todo:
 // Have a history of previous workouts
 // Section for maxes and history of maxes
 // Content descriptors
+// Image to cancel edit mode (maybe contextual action bar)
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

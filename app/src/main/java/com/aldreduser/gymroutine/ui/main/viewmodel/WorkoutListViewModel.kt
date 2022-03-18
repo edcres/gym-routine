@@ -43,8 +43,10 @@ class WorkoutListViewModel : ViewModel() {
     var editWorkoutSetsPreviousSize: Int = 0
 
     // HELPERS //
-    fun toggleEditBtn() {
-        _menuEditIsOn.value = !_menuEditIsOn.value!!
+    fun toggleEditBtn(): Boolean {
+        val newValue = !_menuEditIsOn.value!!
+        _menuEditIsOn.value = newValue
+        return newValue
     }
     fun toggleHiddenTxt() {
         // This is a work around a bug. The purpose is for the recyclerview to get resized.

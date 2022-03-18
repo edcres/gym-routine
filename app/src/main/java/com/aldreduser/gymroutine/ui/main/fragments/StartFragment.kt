@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
@@ -16,6 +17,7 @@ import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
 import com.aldreduser.gymroutine.utils.findDifferentGroups
 import com.aldreduser.gymroutine.utils.findDifferentName
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.android.synthetic.main.workout_item.view.*
 
 class StartFragment : Fragment() {
 
@@ -23,6 +25,7 @@ class StartFragment : Fragment() {
     private var binding: FragmentStartBinding? = null
     private val viewModel: WorkoutListViewModel by activityViewModels()
     private lateinit var groupTabsAdapter: GroupTabsAdapter
+    private lateinit var editWorkoutBtn: MenuItem
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -67,9 +70,8 @@ class StartFragment : Fragment() {
         binding?.apply {
             mainActivityTopAppbar.title = "Workouts"
             mainActivityTopAppbar.setOnMenuItemClickListener { menuItem ->
-                val itemListEdit = R.id.edit_workout_btn
                 when (menuItem.itemId) {
-                    itemListEdit -> {
+                    R.id.edit_workout_btn -> {
                         viewModel.toggleEditBtn()
                         true
                     }
