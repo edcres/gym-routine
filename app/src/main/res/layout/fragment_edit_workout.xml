@@ -69,7 +69,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             style="@style/Widget.TipTime.TextView"
-                            android:text="@string/reps_column_label"
+                            android:text="@string/weight_column_label"
                             android:textSize="18sp" />
 
                         <TextView
@@ -78,7 +78,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             style="@style/Widget.TipTime.TextView"
-                            android:text="@string/weight_column_label"
+                            android:text="@string/reps_column_label"
                             android:textSize="18sp" />
                     </LinearLayout>
 

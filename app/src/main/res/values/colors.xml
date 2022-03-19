@@ -14,6 +14,8 @@
     <color name="transparent">#00EDE3F1</color>
     <color name="dangerRed">#C60808</color>
     <color name="colorRemoveSet">#8C6A03</color>
+    <color name="acceptGroupCheck">#332F24</color>
+    <color name="materialEtHint">#5A5A5A</color>
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
