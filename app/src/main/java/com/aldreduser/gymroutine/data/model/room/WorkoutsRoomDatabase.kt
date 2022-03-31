@@ -8,9 +8,11 @@ import com.aldreduser.gymroutine.data.model.entities.Workout
 import com.aldreduser.gymroutine.data.model.entities.WorkoutGroup
 import com.aldreduser.gymroutine.data.model.entities.WorkoutSet
 
-@Database(entities = [WorkoutGroup::class, Workout::class, WorkoutSet::class],
+@Database(
+    entities = [WorkoutGroup::class, Workout::class, WorkoutSet::class],
     version = 2,
-    exportSchema = false)
+    exportSchema = false
+)
 abstract class WorkoutsRoomDatabase: RoomDatabase() {
 
     abstract fun workoutGroupDao(): WorkoutGroupDao

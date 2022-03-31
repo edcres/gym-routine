@@ -1,8 +1,10 @@
 package com.aldreduser.gymroutine.ui.main
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
 import com.aldreduser.gymroutine.R
 
 // - todo: major bug:
@@ -11,11 +13,13 @@ import com.aldreduser.gymroutine.R
 //      Maybe it's bc i have the custom list adapter in the edit fragment when i edit the first
 //      set weight and add another set and edit that weight, the first set weight is set
 //      to the weight of the new set.
+// make the home bar dark
 
 // todo: Display the workouts in a custom position
 //   have a position attribute for the workout entities
 
 // todo: make the spinner pretty
+//      - Maybe look at the drop down menu in the develop with freedom app.
 
 // todo: maybe make it so the user can't delete the last set.
 
@@ -24,6 +28,7 @@ import com.aldreduser.gymroutine.R
 // todo: clean up comments
 // todo: clean up logs
 // todo: clean up unused imports
+// todo: indent code correctly
 
 // Future
 // add a workout note in the edit screen (user can write notes)
@@ -40,5 +45,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.navigationBarColor = ContextCompat.getColor(this, R.color.black)
+        }
     }
 }
