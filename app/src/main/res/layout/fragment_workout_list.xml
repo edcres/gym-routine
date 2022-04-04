@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.main.fragments.WorkoutListFragment">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/workout_list_recycler"
@@ -13,6 +18,16 @@
             android:layout_height="match_parent"
             android:layout_margin="6dp"
             tools:listitem="@layout/workout_item" />
+
+            <TextView
+                android:id="@+id/place_holder"
+                android:layout_width="match_parent"
+                android:layout_height="510dp"
+                android:background="#00000000"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/workout_list_recycler" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>
 </layout>
