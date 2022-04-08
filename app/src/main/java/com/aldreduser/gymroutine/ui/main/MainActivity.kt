@@ -15,12 +15,12 @@ import com.aldreduser.gymroutine.R
 
 // todo: maybe make it so the user can't delete the last set.
 
-// todo: take care of todos
-// todo: take care of warnings
-// todo: clean up comments
-// todo: clean up logs
-// todo: clean up unused imports
-// todo: indent code correctly
+// take care of todos
+// take care of warnings
+// clean up comments
+// clean up logs
+// clean up unused imports
+// indent code correctly
 
 // Future
 // add a workout note in the edit screen (user can write notes)
