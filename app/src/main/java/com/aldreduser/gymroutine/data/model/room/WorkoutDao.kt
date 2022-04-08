@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 interface WorkoutDao {
 
     @Query("SELECT * FROM workout_table ORDER BY id ASC")
-    fun getAlphabetizedWorkouts(): Flow<List<Workout>>
+    fun getWorkoutsById(): Flow<List<Workout>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(workout: Workout): Long
@@ -28,7 +28,7 @@ interface WorkoutDao {
     suspend fun delete(workout: Workout)
 
     @Query("SELECT * FROM workout_table ORDER BY id ASC")
-    suspend fun getAlphabetizedWorkoutsOnce(): List<Workout>
+    suspend fun getWorkoutsByIdOnce(): List<Workout>
 
     @Query(
         "SELECT * FROM workout_table " +

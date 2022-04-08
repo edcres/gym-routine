@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 interface WorkoutSetDao {
     // getting set names alphabetically (ie: "incline bench 1")
     @Query("SELECT * FROM set_table ORDER BY id ASC")
-    fun getAlphabetizedSets(): Flow<List<WorkoutSet>>
+    fun getSetsById(): Flow<List<WorkoutSet>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(set: WorkoutSet)

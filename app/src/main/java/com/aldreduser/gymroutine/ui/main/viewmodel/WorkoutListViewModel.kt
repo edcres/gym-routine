@@ -15,9 +15,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
+private const val TAG = "ViewModel_TAG"
+
 class WorkoutListViewModel : ViewModel() {
 
-    private val tag = "ViewModel_TAG"
     private lateinit var roomDb: WorkoutsRoomDatabase
     private lateinit var repository: WorkoutsRepository
     var currentGroup: String = FIRST_TAB_TITLE
@@ -57,11 +58,11 @@ class WorkoutListViewModel : ViewModel() {
     }
     private suspend fun checkIfDeleteGroup(groupName: String) {
         if(repository.groupHasWorkouts(groupName)) {
-            Log.i(tag, "Group $groupName still has workouts.")
+            Log.i(TAG, "Group $groupName still has workouts.")
         } else {
             if (groupName != FIRST_TAB_TITLE) {
                 repository.deleteGroup(groupName)
-                Log.i(tag, "Group $groupName removed.")
+                Log.i(TAG, "Group $groupName removed.")
             }
         }
     }
@@ -128,6 +129,7 @@ class WorkoutListViewModel : ViewModel() {
         repository.updateWorkoutOnSets(workout.id, workout.workoutName)
     }
     fun updateSet(set: WorkoutSet) = CoroutineScope(Dispatchers.IO).launch {
+//        Log.d(TAG, "set info:\nset: ${set.set}\nweight: ${set.weight}\nreps: ${set.reps}")
         repository.update(set)
     }
     fun removeWorkout(workout: Workout, groupName: String) = CoroutineScope(Dispatchers.IO).launch {
@@ -187,7 +189,7 @@ class WorkoutListViewModel : ViewModel() {
                 val nextOrdinalId = groupsOrdinals.size - 1
                 groupTabsAdapter.addTab(nextOrdinalId + 1, title)
             } else {
-                Log.e(tag, "\t\ttitles contains next title \t\t $groupNames\n$title")
+                Log.e(TAG, "\t\ttitles contains next title \t\t $groupNames\n$title")
             }
         }
     }

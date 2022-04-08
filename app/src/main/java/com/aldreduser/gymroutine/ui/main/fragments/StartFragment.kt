@@ -19,9 +19,10 @@ import com.aldreduser.gymroutine.utils.findDifferentName
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.workout_item.view.*
 
+private const val fragmentTAG = "StartFrag_TAG"
+
 class StartFragment : Fragment() {
 
-    private val fragmentTAG = "StartFrag_TAG"
     private var binding: FragmentStartBinding? = null
     private val viewModel: WorkoutListViewModel by activityViewModels()
     private lateinit var groupTabsAdapter: GroupTabsAdapter

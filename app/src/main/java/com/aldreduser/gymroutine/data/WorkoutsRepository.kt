@@ -7,7 +7,6 @@ import com.aldreduser.gymroutine.data.model.entities.WorkoutGroup
 import com.aldreduser.gymroutine.data.model.entities.WorkoutSet
 import com.aldreduser.gymroutine.data.model.room.WorkoutsRoomDatabase
 import kotlinx.coroutines.flow.Flow
-import kotlin.math.log
 
 // Repo only has access to the DAOs, not the database.
 class WorkoutsRepository(private val database: WorkoutsRoomDatabase) {
@@ -15,8 +14,8 @@ class WorkoutsRepository(private val database: WorkoutsRoomDatabase) {
     private val tag = "WRepo_TAG"
     val allWorkoutGroups: Flow<List<WorkoutGroup>> =
         database.workoutGroupDao().getAlphabetizedWorkoutGroups()
-    val allWorkouts: Flow<List<Workout>> = database.workoutDao().getAlphabetizedWorkouts()
-    val allWorkoutSets: Flow<List<WorkoutSet>> = database.workoutSetDao().getAlphabetizedSets()
+    val allWorkouts: Flow<List<Workout>> = database.workoutDao().getWorkoutsById()
+    val allWorkoutSets: Flow<List<WorkoutSet>> = database.workoutSetDao().getSetsById()
 
     @WorkerThread
     suspend fun insertGroup(workoutGroup: WorkoutGroup, workoutId: Long?) {
@@ -77,7 +76,7 @@ class WorkoutsRepository(private val database: WorkoutsRoomDatabase) {
 
     @WorkerThread
     suspend fun getAllWorkouts(): List<Workout> {
-        return database.workoutDao().getAlphabetizedWorkoutsOnce()
+        return database.workoutDao().getWorkoutsByIdOnce()
     }
     @WorkerThread
     suspend fun getWorkoutsOfThisGroup(groupName: String): List<Workout> {

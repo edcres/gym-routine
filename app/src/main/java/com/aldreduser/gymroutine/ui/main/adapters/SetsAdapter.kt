@@ -1,5 +1,6 @@
 package com.aldreduser.gymroutine.ui.main.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aldreduser.gymroutine.data.model.entities.WorkoutSet
 import com.aldreduser.gymroutine.databinding.SetLinearLayoutBinding
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
+
+private const val TAG = "Sets_TAG"
 
 // This adapter will be used in 2 places: WorkoutListAdapter, EditWorkoutFragment
 class SetsAdapter(
@@ -36,21 +39,29 @@ class SetsAdapter(
                 val startingRepsTxt = workoutSet.reps.toString()
                 val startingWeightTxt = workoutSet.weight.toString()
 
+//                Log.d(TAG, "set info:\nset: ${workoutSet.set}\nweight: ${workoutSet.weight}\nreps: ${workoutSet.reps}")
+
                 setText.setText(workoutSet.set.toString())
-                repsText.setText(startingRepsTxt)
-                weightText.setText(startingWeightTxt)
+
+                if (repsText.text.isEmpty() && weightText.text.isEmpty()) {
+                    repsText.setText(startingRepsTxt)
+                    weightText.setText(startingWeightTxt)
+                }
+
+                weightText.doAfterTextChanged {
+                    if(it.toString().isNotEmpty() && it.toString() != startingWeightTxt) {
+                        viewModel.workoutIdToEdit = workoutSet.workoutId
+                        workoutSet.weight = it.toString().toDouble()
+                        viewModel.updateSet(workoutSet)
+                    }
+                }
 
                 repsText.doAfterTextChanged {
                     if(it.toString().isNotEmpty() && it.toString() != startingRepsTxt) {
                         viewModel.workoutIdToEdit = workoutSet.workoutId
                         workoutSet.reps = it.toString().toInt()
-                        viewModel.updateSet(workoutSet)
-                    }
-                }
-                weightText.doAfterTextChanged {
-                    if(it.toString().isNotEmpty() && it.toString() != startingWeightTxt) {
-                        viewModel.workoutIdToEdit = workoutSet.workoutId
-                        workoutSet.weight = it.toString().toDouble()
+//                        Log.d(TAG, "set info:\nset: ${workoutSet.set}\nweight: ${workoutSet.weight}\nreps: ${workoutSet.reps}")
+                        Log.d(TAG, "set: ${workoutSet.set}\nweight change triggered")
                         viewModel.updateSet(workoutSet)
                     }
                 }
