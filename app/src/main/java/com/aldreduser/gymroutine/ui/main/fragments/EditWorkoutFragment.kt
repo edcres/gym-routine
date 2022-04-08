@@ -56,7 +56,7 @@ class EditWorkoutFragment : Fragment() {
                 viewModel.editWorkoutSetsPreviousSize = it.size
             }
         }
-        viewModel.toggleEditBtn()
+        viewModel.turnOffEditMode()
     }
 
     override fun onDestroy() {

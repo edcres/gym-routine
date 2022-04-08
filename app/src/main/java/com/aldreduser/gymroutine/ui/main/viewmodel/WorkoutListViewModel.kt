@@ -49,6 +49,10 @@ class WorkoutListViewModel : ViewModel() {
         _menuEditIsOn.value = newValue
         return newValue
     }
+    fun turnOffEditMode(): Boolean {
+        _menuEditIsOn.postValue(false)
+        return false
+    }
     fun toggleHiddenTxt() {
         // This is a work around a bug. The purpose is for the recyclerview to get resized.
         _hiddenTxt.value = !_hiddenTxt.value!!
@@ -129,7 +133,6 @@ class WorkoutListViewModel : ViewModel() {
         repository.updateWorkoutOnSets(workout.id, workout.workoutName)
     }
     fun updateSet(set: WorkoutSet) = CoroutineScope(Dispatchers.IO).launch {
-//        Log.d(TAG, "set info:\nset: ${set.set}\nweight: ${set.weight}\nreps: ${set.reps}")
         repository.update(set)
     }
     fun removeWorkout(workout: Workout, groupName: String) = CoroutineScope(Dispatchers.IO).launch {

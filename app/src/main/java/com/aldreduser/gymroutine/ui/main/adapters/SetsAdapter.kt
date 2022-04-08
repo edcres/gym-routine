@@ -1,6 +1,5 @@
 package com.aldreduser.gymroutine.ui.main.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,10 +38,7 @@ class SetsAdapter(
                 val startingRepsTxt = workoutSet.reps.toString()
                 val startingWeightTxt = workoutSet.weight.toString()
 
-//                Log.d(TAG, "set info:\nset: ${workoutSet.set}\nweight: ${workoutSet.weight}\nreps: ${workoutSet.reps}")
-
                 setText.setText(workoutSet.set.toString())
-
                 if (repsText.text.isEmpty() && weightText.text.isEmpty()) {
                     repsText.setText(startingRepsTxt)
                     weightText.setText(startingWeightTxt)
@@ -60,8 +56,6 @@ class SetsAdapter(
                     if(it.toString().isNotEmpty() && it.toString() != startingRepsTxt) {
                         viewModel.workoutIdToEdit = workoutSet.workoutId
                         workoutSet.reps = it.toString().toInt()
-//                        Log.d(TAG, "set info:\nset: ${workoutSet.set}\nweight: ${workoutSet.weight}\nreps: ${workoutSet.reps}")
-                        Log.d(TAG, "set: ${workoutSet.set}\nweight change triggered")
                         viewModel.updateSet(workoutSet)
                     }
                 }

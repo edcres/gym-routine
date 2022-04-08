@@ -7,14 +7,6 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import com.aldreduser.gymroutine.R
 
-// - todo: major bug:
-//      when updating reps and weight in a workout in workouts list fragment. all reps and weight
-//      in that workout are updated to the same in that set. This works fine in edit screen.
-//      Maybe it's bc i have the custom list adapter in the edit fragment when i edit the first
-//      set weight and add another set and edit that weight, the first set weight is set
-//      to the weight of the new set.
-// make the home bar dark
-
 // todo: Display the workouts in a custom position
 //   have a position attribute for the workout entities
 
