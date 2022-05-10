@@ -12,9 +12,10 @@ import com.aldreduser.gymroutine.ui.main.adapters.WorkoutListAdapter
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
 import com.aldreduser.gymroutine.utils.FIRST_TAB_TITLE
 
+private const val fragmentTAG = "Workout_List_TAG"
+
 class WorkoutListFragment : Fragment() {
 
-    private val fragmentTAG = "Workout_List_TAG"
     private var binding: FragmentWorkoutListBinding? = null
     private val viewModel: WorkoutListViewModel by activityViewModels()
     private lateinit var recyclerAdapter: WorkoutListAdapter
