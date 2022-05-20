@@ -59,6 +59,7 @@ class WorkoutListFragment : Fragment() {
         viewModel.workouts.observe(viewLifecycleOwner) {
             // Only update the list when a workout is added or deleted.
             if (groupToDisplay == FIRST_TAB_TITLE) {
+                // todo: maybe this observer is redundant bc I can just get the list from the viewModel instead of doing an entire db query
                 viewModel.getAllWorkouts().observe(viewLifecycleOwner) { allWorkouts ->
                     if (workoutsPreviousSize != allWorkouts.size) {
                         recyclerAdapter.submitList(allWorkouts)

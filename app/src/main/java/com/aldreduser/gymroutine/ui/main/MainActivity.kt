@@ -7,30 +7,13 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import com.aldreduser.gymroutine.R
 
-// todo: Display the workouts in a custom position
-//   have a position attribute for the workout entities
-
-// todo: make the spinner pretty
-//      - Maybe look at the drop down menu in the develop with freedom app.
-
-// todo: maybe make it so the user can't delete the last set.
-
-// take care of todos
-// take care of warnings
-// clean up comments
-// clean up logs
-// clean up unused imports
-// indent code correctly
-
-// Future
-// add a workout note in the edit screen (user can write notes)
-// Ask the user before deleting an item
-// Cap the groups at about 30
-// When editing a new group, have the group name show up on the spinner
-// Have a history of previous workouts
-// Section for maxes and history of maxes
-// Content descriptors
-// Image to cancel edit mode (maybe contextual action bar)
+/** App explanation:
+ *
+ * App displays a list of workout, one tab per workout group
+ * A workout has sets, reps and weight. Under a Workout name
+ * The user can add more workouts, add it to or create a group.
+ * To edit a workout, user can click on the edit button or edit the workout directly from the list.
+ */
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
