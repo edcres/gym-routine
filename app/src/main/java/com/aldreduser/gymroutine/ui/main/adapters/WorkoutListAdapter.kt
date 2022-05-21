@@ -15,7 +15,7 @@ import com.aldreduser.gymroutine.databinding.WorkoutItemBinding
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
 import com.aldreduser.gymroutine.utils.*
 
-private const val TAG = "W_List_TAG"
+private const val TAG = "W_List_Ad_TAG"
 
 class WorkoutListAdapter(
     private val workoutsViewModel: WorkoutListViewModel,
@@ -102,7 +102,7 @@ class WorkoutListAdapter(
             binding.setListRecycler.layoutManager = CustomLinearLayoutManager(context)
             viewModel.getSetsOfWorkout(workout.id)
                 .observe(fragLifecycleOwner) { theseSets ->
-                    Log.d(TAG, "sets Submitted")
+                    Log.d(TAG, "sets Submitted ${workout.workoutName}")
                     setsAdapter.submitList(theseSets)
                 }
         }

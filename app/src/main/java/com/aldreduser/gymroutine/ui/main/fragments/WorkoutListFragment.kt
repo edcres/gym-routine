@@ -1,6 +1,7 @@
 package com.aldreduser.gymroutine.ui.main.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +13,7 @@ import com.aldreduser.gymroutine.ui.main.adapters.WorkoutListAdapter
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
 import com.aldreduser.gymroutine.utils.FIRST_TAB_TITLE
 
-private const val fragmentTAG = "Workout_List_TAG"
+private const val TAG = "Workout_List_TAG"
 
 class WorkoutListFragment : Fragment() {
 
@@ -41,7 +42,7 @@ class WorkoutListFragment : Fragment() {
                 StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         }
         populateWorkoutsList()
-        setObservers()
+//        setObservers()
     }
 
     override fun onResume() {
@@ -59,13 +60,16 @@ class WorkoutListFragment : Fragment() {
         viewModel.workouts.observe(viewLifecycleOwner) {
             // Only update the list when a workout is added or deleted.
             if (groupToDisplay == FIRST_TAB_TITLE) {
-                // todo: maybe this observer is redundant bc I can just get the list from the viewModel instead of doing an entire db query
-                viewModel.getAllWorkouts().observe(viewLifecycleOwner) { allWorkouts ->
-                    if (workoutsPreviousSize != allWorkouts.size) {
-                        recyclerAdapter.submitList(allWorkouts)
-                        workoutsPreviousSize = allWorkouts.size
-                    }
+                if (workoutsPreviousSize != it.size) {
+                    recyclerAdapter.submitList(it)
+                    workoutsPreviousSize = it.size
                 }
+//                viewModel.getAllWorkouts().observe(viewLifecycleOwner) { allWorkouts ->
+//                    if (workoutsPreviousSize != allWorkouts.size) {
+//                        recyclerAdapter.submitList(allWorkouts)
+//                        workoutsPreviousSize = allWorkouts.size
+//                    }
+//                }
             } else {
                 viewModel.getWorkoutsOfGroup(groupToDisplay)
                     .observe(viewLifecycleOwner) { groupedWorkouts ->
@@ -78,19 +82,19 @@ class WorkoutListFragment : Fragment() {
         }
     }
 
-    private fun populateWorkoutsList() {
-        if (groupToDisplay == FIRST_TAB_TITLE) {
-            viewModel.getAllWorkouts().observe(viewLifecycleOwner) { allWorkouts ->
-                recyclerAdapter.submitList(allWorkouts)
-            }
-        } else {
-            viewModel.getWorkoutsOfGroup(groupToDisplay)
-                .observe(viewLifecycleOwner) { groupedWorkouts ->
-                    recyclerAdapter.submitList(groupedWorkouts)
-                    workoutsPreviousSize = groupedWorkouts.size
-                }
-        }
-    }
+//    private fun populateWorkoutsList() {
+//        if (groupToDisplay == FIRST_TAB_TITLE) {
+//            viewModel.getAllWorkouts().observe(viewLifecycleOwner) { allWorkouts ->
+//                recyclerAdapter.submitList(allWorkouts)
+//            }
+//        } else {
+//            viewModel.getWorkoutsOfGroup(groupToDisplay)
+//                .observe(viewLifecycleOwner) { groupedWorkouts ->
+//                    recyclerAdapter.submitList(groupedWorkouts)
+//                    workoutsPreviousSize = groupedWorkouts.size
+//                }
+//        }
+//    }
 
     companion object {
         fun getInstance(titleToDisplay: String): WorkoutListFragment {
