@@ -34,3 +34,14 @@ fun groupsToStrings(groups: List<WorkoutGroup>): List<String> {
     groups.forEach { groupStrings.add(it.groupName) }
     return groupStrings
 }
+
+fun takeOutZeros(num: Double): String {
+    // if it's 23.0, returns 23
+    if (num.toString().contains(".")){
+        val decimals = num.toString().split(".").last()
+        return if (decimals.length == 1 && decimals.first() == '0') num.toInt().toString()
+        else num.toString()
+    } else {
+        return num.toString()
+    }
+}

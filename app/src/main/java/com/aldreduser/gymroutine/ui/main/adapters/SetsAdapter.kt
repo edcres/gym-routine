@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aldreduser.gymroutine.data.model.entities.WorkoutSet
 import com.aldreduser.gymroutine.databinding.SetLinearLayoutBinding
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
+import com.aldreduser.gymroutine.utils.takeOutZeros
 
 private const val TAG = "Sets_TAG"
 
@@ -36,7 +37,7 @@ class SetsAdapter(
                 ifSetsAreRemoved(workoutSet)
 
                 val startingRepsTxt = workoutSet.reps.toString()
-                val startingWeightTxt = workoutSet.weight.toString()
+                val startingWeightTxt = takeOutZeros(workoutSet.weight)
 
                 setText.setText(workoutSet.set.toString())
                 if (repsText.text.isEmpty() && weightText.text.isEmpty()) {
