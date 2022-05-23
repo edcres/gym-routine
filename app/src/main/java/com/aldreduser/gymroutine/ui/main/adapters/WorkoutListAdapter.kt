@@ -102,7 +102,7 @@ class WorkoutListAdapter(
             binding.setListRecycler.layoutManager = CustomLinearLayoutManager(context)
             viewModel.getSetsOfWorkout(workout.id)
                 .observe(fragLifecycleOwner) { theseSets ->
-                    Log.d(TAG, "sets Submitted ${workout.workoutName}")
+//                    Log.d(TAG, "sets Submitted ${workout.workoutName}")
                     setsAdapter.submitList(theseSets)
                 }
         }

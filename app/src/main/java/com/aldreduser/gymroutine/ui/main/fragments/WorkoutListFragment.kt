@@ -41,8 +41,8 @@ class WorkoutListFragment : Fragment() {
             workoutListRecycler.layoutManager =
                 StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         }
-        populateWorkoutsList()
-//        setObservers()
+//        populateWorkoutsList()
+        setObservers()
     }
 
     override fun onResume() {

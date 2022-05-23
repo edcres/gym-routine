@@ -102,7 +102,7 @@ class WorkoutListViewModel : ViewModel() {
     fun insertWorkoutGroup(workoutGroup: WorkoutGroup, workoutId: Long?) = CoroutineScope(Dispatchers.IO).launch {
         repository.insertGroup(workoutGroup, workoutId)
     }
-    fun insertWorkout(workout: Workout): MutableLiveData<Long> {
+    fun insertWorkout(workout: Workout): LiveData<Long> {
         val itemId = MutableLiveData<Long>()
         CoroutineScope(Dispatchers.IO).launch {
             val workoutId = repository.insert(workout)
@@ -148,35 +148,35 @@ class WorkoutListViewModel : ViewModel() {
         }
         repository.deleteSet(set)
     }
-    fun getAllWorkouts(): MutableLiveData<List<Workout>> {
+    fun getAllWorkouts(): LiveData<List<Workout>> {
         val allWorkouts = MutableLiveData<List<Workout>>()
         CoroutineScope(Dispatchers.IO).launch {
             allWorkouts.postValue(repository.getAllWorkouts())
         }
         return allWorkouts
     }
-    fun getWorkoutsOfGroup(group: String): MutableLiveData<List<Workout>> {
+    fun getWorkoutsOfGroup(group: String): LiveData<List<Workout>> {
         val workoutsOfGroup = MutableLiveData<List<Workout>>()
         CoroutineScope(Dispatchers.IO).launch {
             workoutsOfGroup.postValue(repository.getWorkoutsOfThisGroup(group))
         }
         return workoutsOfGroup
     }
-    fun getSetsOfWorkout(workoutId: Long): MutableLiveData<List<WorkoutSet>> {
+    fun getSetsOfWorkout(workoutId: Long): LiveData<List<WorkoutSet>> {
         val setsOfWorkout = MutableLiveData<List<WorkoutSet>>()
         CoroutineScope(Dispatchers.IO).launch {
             setsOfWorkout.postValue(repository.getSetsOfWorkout(workoutId))
         }
         return setsOfWorkout
     }
-    fun getWorkoutName(workoutId: Long): MutableLiveData<String> {
+    fun getWorkoutName(workoutId: Long): LiveData<String> {
         val workoutName = MutableLiveData<String>()
         CoroutineScope(Dispatchers.IO).launch {
             workoutName.postValue(repository.getWorkoutName(workoutId))
         }
         return workoutName
     }
-    fun getLastSet(workoutId: Long): MutableLiveData<WorkoutSet> {
+    fun getLastSet(workoutId: Long): LiveData<WorkoutSet> {
         val lastSet = MutableLiveData<WorkoutSet>()
         CoroutineScope(Dispatchers.IO).launch {
             lastSet.postValue(repository.getLastSet(workoutId))
