@@ -1,5 +1,6 @@
 package com.aldreduser.gymroutine.data.model.room
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.aldreduser.gymroutine.data.model.entities.Workout
 import com.aldreduser.gymroutine.data.model.entities.WorkoutAndSets
@@ -35,7 +36,7 @@ interface WorkoutDao {
                 "WHERE workout_group = :group " +
                 "ORDER BY id ASC"
     )
-    suspend fun getWorkoutsOfThisGroup(group: String): List<Workout>
+    fun getWorkoutsOfThisGroup(group: String): LiveData<List<Workout>>
 
     @Query(
         "SELECT workout_name FROM workout_table " +

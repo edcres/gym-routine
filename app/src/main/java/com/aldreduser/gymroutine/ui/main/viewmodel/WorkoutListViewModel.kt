@@ -156,11 +156,12 @@ class WorkoutListViewModel : ViewModel() {
         return allWorkouts
     }
     fun getWorkoutsOfGroup(group: String): LiveData<List<Workout>> {
-        val workoutsOfGroup = MutableLiveData<List<Workout>>()
-        CoroutineScope(Dispatchers.IO).launch {
-            workoutsOfGroup.postValue(repository.getWorkoutsOfThisGroup(group))
-        }
-        return workoutsOfGroup
+//        val workoutsOfGroup = MutableLiveData<List<Workout>>()
+//        CoroutineScope(Dispatchers.IO).launch {
+            return repository.getWorkoutsOfThisGroup(group)
+//            workoutsOfGroup.postValue(repository.getWorkoutsOfThisGroup(group))
+//        }
+//        return workoutsOfGroup
     }
     fun getSetsOfWorkout(workoutId: Long): LiveData<List<WorkoutSet>> {
         val setsOfWorkout = MutableLiveData<List<WorkoutSet>>()
