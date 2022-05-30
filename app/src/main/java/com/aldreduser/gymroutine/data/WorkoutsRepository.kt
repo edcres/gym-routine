@@ -2,7 +2,6 @@ package com.aldreduser.gymroutine.data
 
 import android.util.Log
 import androidx.annotation.WorkerThread
-import androidx.lifecycle.LiveData
 import com.aldreduser.gymroutine.data.model.entities.Workout
 import com.aldreduser.gymroutine.data.model.entities.WorkoutGroup
 import com.aldreduser.gymroutine.data.model.entities.WorkoutSet
@@ -80,7 +79,7 @@ class WorkoutsRepository(private val database: WorkoutsRoomDatabase) {
         return database.workoutDao().getWorkoutsByIdOnce()
     }
     @WorkerThread
-    fun getWorkoutsOfThisGroup(groupName: String): LiveData<List<Workout>> {
+    suspend fun getWorkoutsOfThisGroup(groupName: String): List<Workout> {
         return database.workoutDao().getWorkoutsOfThisGroup(groupName)
     }
     @WorkerThread

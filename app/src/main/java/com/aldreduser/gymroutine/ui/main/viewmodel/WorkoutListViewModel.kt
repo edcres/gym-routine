@@ -10,8 +10,6 @@ import com.aldreduser.gymroutine.data.model.entities.WorkoutSet
 import com.aldreduser.gymroutine.data.model.room.WorkoutsRoomDatabase
 import com.aldreduser.gymroutine.ui.main.adapters.GroupTabsAdapter
 import com.aldreduser.gymroutine.utils.FIRST_TAB_TITLE
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -25,12 +23,12 @@ class WorkoutListViewModel : ViewModel() {
     val groupsOrdinals: MutableMap<String, Int> = mutableMapOf(FIRST_TAB_TITLE to 0)
     val groupNames: MutableList<String> = mutableListOf(FIRST_TAB_TITLE)
 
-    private val _groups = MutableLiveData<MutableList<WorkoutGroup>>()
-    val groups: LiveData<MutableList<WorkoutGroup>> get() = _groups
-    private val _workouts = MutableLiveData<MutableList<Workout>>()
-    val workouts: LiveData<MutableList<Workout>> get() = _workouts
-    private val _sets = MutableLiveData<MutableList<WorkoutSet>>()
-    val sets: LiveData<MutableList<WorkoutSet>> get() = _sets
+    private val _groups = MutableLiveData<List<WorkoutGroup>>()
+    val groups: LiveData<List<WorkoutGroup>> get() = _groups
+    private val _workouts = MutableLiveData<List<Workout>>()
+    val workouts: LiveData<List<Workout>> get() = _workouts
+    private val _sets = MutableLiveData<List<WorkoutSet>>()
+    val sets: LiveData<List<WorkoutSet>> get() = _sets
 
     private var _menuEditIsOn = MutableLiveData(false)
     val menuEditIsOn: LiveData<Boolean> get() = _menuEditIsOn
@@ -83,28 +81,28 @@ class WorkoutListViewModel : ViewModel() {
 
     // DATABASE QUERIES //
     private fun collectAllWorkouts() {
-        CoroutineScope(Dispatchers.IO).launch {
+        viewModelScope.launch {
             repository.allWorkoutGroups.collect {
-                _groups.postValue(it.toMutableList())
+                _groups.postValue(it)
             }
         }
-        CoroutineScope(Dispatchers.IO).launch {
+        viewModelScope.launch {
             repository.allWorkouts.collect {
-                _workouts.postValue(it.toMutableList())
+                _workouts.postValue(it)
             }
         }
-        CoroutineScope(Dispatchers.IO).launch {
+        viewModelScope.launch {
             repository.allWorkoutSets.collect {
-                _sets.postValue(it.toMutableList())
+                _sets.postValue(it)
             }
         }
     }
-    fun insertWorkoutGroup(workoutGroup: WorkoutGroup, workoutId: Long?) = CoroutineScope(Dispatchers.IO).launch {
+    fun insertWorkoutGroup(workoutGroup: WorkoutGroup, workoutId: Long?) = viewModelScope.launch {
         repository.insertGroup(workoutGroup, workoutId)
     }
     fun insertWorkout(workout: Workout): LiveData<Long> {
         val itemId = MutableLiveData<Long>()
-        CoroutineScope(Dispatchers.IO).launch {
+        viewModelScope.launch {
             val workoutId = repository.insert(workout)
             itemId.postValue(workoutId)
             repository.insert(
@@ -119,27 +117,27 @@ class WorkoutListViewModel : ViewModel() {
         }
         return itemId
     }
-    fun insertWorkoutSet(workoutSet: WorkoutSet) = CoroutineScope(Dispatchers.IO).launch  {
+    fun insertWorkoutSet(workoutSet: WorkoutSet) = viewModelScope.launch  {
         repository.insert(workoutSet)
     }
     fun updateGroupOnWorkout(workoutId: Long, groupSelected: String) =
-        CoroutineScope(Dispatchers.IO).launch {
+        viewModelScope.launch {
             val oldGroupName = repository.getGroupOfWorkout(workoutId)
             repository.updateWorkout(workoutId, groupSelected)
             checkIfDeleteGroup(oldGroupName)
         }
-    fun updateWorkoutName(workout: Workout) = CoroutineScope(Dispatchers.IO).launch {
+    fun updateWorkoutName(workout: Workout) = viewModelScope.launch {
         repository.update(workout)
         repository.updateWorkoutOnSets(workout.id, workout.workoutName)
     }
-    fun updateSet(set: WorkoutSet) = CoroutineScope(Dispatchers.IO).launch {
+    fun updateSet(set: WorkoutSet) = viewModelScope.launch {
         repository.update(set)
     }
-    fun removeWorkout(workout: Workout, groupName: String) = CoroutineScope(Dispatchers.IO).launch {
+    fun removeWorkout(workout: Workout, groupName: String) = viewModelScope.launch {
         repository.deleteWorkout(workout)
         checkIfDeleteGroup(groupName)
     }
-    fun removeSet(set: WorkoutSet) = CoroutineScope(Dispatchers.IO).launch {
+    fun removeSet(set: WorkoutSet) = viewModelScope.launch {
         if (sets.value != null) {
             repository.updateSetOnSets(
                 set.workoutId,
@@ -150,36 +148,35 @@ class WorkoutListViewModel : ViewModel() {
     }
     fun getAllWorkouts(): LiveData<List<Workout>> {
         val allWorkouts = MutableLiveData<List<Workout>>()
-        CoroutineScope(Dispatchers.IO).launch {
+        viewModelScope.launch {
             allWorkouts.postValue(repository.getAllWorkouts())
         }
         return allWorkouts
     }
     fun getWorkoutsOfGroup(group: String): LiveData<List<Workout>> {
-//        val workoutsOfGroup = MutableLiveData<List<Workout>>()
-//        CoroutineScope(Dispatchers.IO).launch {
-            return repository.getWorkoutsOfThisGroup(group)
-//            workoutsOfGroup.postValue(repository.getWorkoutsOfThisGroup(group))
-//        }
-//        return workoutsOfGroup
+        val workoutsOfGroup = MutableLiveData<List<Workout>>()
+        viewModelScope.launch {
+            workoutsOfGroup.postValue(repository.getWorkoutsOfThisGroup(group))
+        }
+        return workoutsOfGroup
     }
     fun getSetsOfWorkout(workoutId: Long): LiveData<List<WorkoutSet>> {
         val setsOfWorkout = MutableLiveData<List<WorkoutSet>>()
-        CoroutineScope(Dispatchers.IO).launch {
+        viewModelScope.launch {
             setsOfWorkout.postValue(repository.getSetsOfWorkout(workoutId))
         }
         return setsOfWorkout
     }
     fun getWorkoutName(workoutId: Long): LiveData<String> {
         val workoutName = MutableLiveData<String>()
-        CoroutineScope(Dispatchers.IO).launch {
+        viewModelScope.launch {
             workoutName.postValue(repository.getWorkoutName(workoutId))
         }
         return workoutName
     }
     fun getLastSet(workoutId: Long): LiveData<WorkoutSet> {
         val lastSet = MutableLiveData<WorkoutSet>()
-        CoroutineScope(Dispatchers.IO).launch {
+        viewModelScope.launch {
             lastSet.postValue(repository.getLastSet(workoutId))
         }
         return lastSet
