@@ -126,6 +126,10 @@ class WorkoutListViewModel : ViewModel() {
             repository.updateWorkout(workoutId, groupSelected)
             checkIfDeleteGroup(oldGroupName)
         }
+    fun updateWorkoutNotes(workoutId: Long, muscles: String, notes: String) =
+        viewModelScope.launch {
+            repository.updateWorkoutNotes(workoutId, muscles, notes)
+    }
     fun updateWorkoutName(workout: Workout) = viewModelScope.launch {
         repository.update(workout)
         repository.updateWorkoutOnSets(workout.id, workout.workoutName)

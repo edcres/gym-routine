@@ -44,6 +44,7 @@ class WorkoutsRepository(private val database: WorkoutsRoomDatabase) {
     }
     @WorkerThread
     suspend fun updateWorkoutNotes(workoutId: Long, muscles: String, notes: String) {
+        
         database.workoutDao().updateWorkoutNotes(workoutId, muscles, notes)
     }
     @WorkerThread

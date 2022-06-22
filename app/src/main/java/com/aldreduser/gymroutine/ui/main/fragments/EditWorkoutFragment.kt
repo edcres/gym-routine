@@ -74,8 +74,11 @@ class EditWorkoutFragment : Fragment() {
     private fun saveMusclesAndNotes() {
         binding!!.apply {
             // todo
-            muscleTargetedEt.text.toString()
-            workoutNotesEt.text.toString()
+            viewModel.updateWorkoutNotes(
+                currentWorkoutId ?: viewModel.workoutIdToEdit!!,
+                muscleTargetedEt.text.toString(),
+                workoutNotesEt.text.toString()
+            )
         }
     }
     // HELPERS //
