@@ -18,9 +18,10 @@ import com.aldreduser.gymroutine.ui.main.adapters.SetsAdapter
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
 import com.aldreduser.gymroutine.utils.getChooseGroupList
 
+private const val TAG = "EditFrag_TAG"
+
 class EditWorkoutFragment : Fragment() {
 
-    private val fragmentTAG = "EditFrag_TAG"
     private var binding: FragmentEditWorkoutBinding? = null
     private val viewModel: WorkoutListViewModel by activityViewModels()
     private lateinit var setsAdapter: SetsAdapter
@@ -57,10 +58,7 @@ class EditWorkoutFragment : Fragment() {
             }
         }
         viewModel.turnOffEditMode()
-
-
-        // todo: display notes
-        viewModel.getWorkoutWithId()
+        setObservers()
     }
 
     override fun onDestroy() {
@@ -77,7 +75,6 @@ class EditWorkoutFragment : Fragment() {
     }
     private fun saveMusclesAndNotes() {
         binding!!.apply {
-            // todo
             viewModel.updateWorkoutNotes(
                 currentWorkoutId ?: viewModel.workoutIdToEdit!!,
                 muscleTargetedEt.text.toString(),
@@ -121,7 +118,7 @@ class EditWorkoutFragment : Fragment() {
                     }
                 }
                 override fun onNothingSelected(parent: AdapterView<*>?) {
-                    Log.i(fragmentTAG, "Nothing selected.")
+                    Log.i(TAG, "Nothing selected.")
                 }
             }
         }
@@ -158,5 +155,18 @@ class EditWorkoutFragment : Fragment() {
                 navController.navigateUp()
             }
         }
+    }
+
+    private fun setObservers() {
+        viewModel.getWorkoutWithId(currentWorkoutId ?: viewModel.workoutIdToEdit!!)
+            .observe(viewLifecycleOwner) {
+                Log.d(TAG, "addSetClick: observed")
+                Log.d(TAG, "addSetClick: observed")
+                Log.d(TAG, "addSetClick: observed")
+                binding?.apply {
+                    muscleTargetedEt.setText(it.musclesTargeted)
+                    workoutNotesEt.setText(it.notes)
+                }
+            }
     }
 }
