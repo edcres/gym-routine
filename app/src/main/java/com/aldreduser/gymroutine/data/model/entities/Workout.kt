@@ -25,5 +25,11 @@ data class Workout (
     @ColumnInfo(name = "workout_name")
     var workoutName: String = "",
     @ColumnInfo(name = "workout_group")
-    var workoutGroup: String = FIRST_TAB_TITLE
+    var workoutGroup: String = FIRST_TAB_TITLE,
+
+    // new
+    @ColumnInfo(name = "notes")
+    var notes: String = "",
+    @ColumnInfo(name = "muscle_targeted")
+    var muscleTargeted: String = "",
 )
