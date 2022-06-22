@@ -33,7 +33,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/workout_name_hint"
-                    android:inputType="textPersonName"
+                    android:inputType="textPersonName|textMultiLine"
                     android:paddingStart="8dp"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -69,7 +69,7 @@
                     android:layout_width="32dp"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_edit_item_24"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     app:backgroundTint="#00FFFFFF"
                     app:layout_constraintEnd_toStartOf="@+id/remove_item_btn"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -79,7 +79,7 @@
                     android:layout_width="32dp"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_delete_24"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     app:backgroundTint="#00FFFFFF"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
