@@ -29,7 +29,7 @@ data class Workout (
 
     // new
     @ColumnInfo(name = "muscles_targeted")
-    var musclesTargeted: String = "",
+    var musclesTargeted: String? = "",
     @ColumnInfo(name = "notes")
-    var notes: String = ""
+    var notes: String? = ""
 )

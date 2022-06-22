@@ -57,6 +57,10 @@ class EditWorkoutFragment : Fragment() {
             }
         }
         viewModel.turnOffEditMode()
+
+
+        // todo: display notes
+        viewModel.getWorkoutWithId()
     }
 
     override fun onDestroy() {

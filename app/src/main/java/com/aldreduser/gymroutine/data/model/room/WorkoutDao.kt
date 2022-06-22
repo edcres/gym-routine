@@ -24,6 +24,9 @@ interface WorkoutDao {
     )
     suspend fun updateWorkout(workoutId: Long, groupSelected: String)
 
+    @Query("SELECT * FROM workout_table WHERE id = :id")
+    suspend fun getWorkoutWithId(id: Long): List<Workout>
+
     @Query(
         "UPDATE workout_table " +
                 "SET muscles_targeted = :muscles, notes = :notes " +
