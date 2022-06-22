@@ -43,6 +43,10 @@ class WorkoutsRepository(private val database: WorkoutsRoomDatabase) {
         database.workoutDao().updateWorkout(workoutId, groupSelected)
     }
     @WorkerThread
+    suspend fun updateWorkoutNotes(workoutId: Long, muscles: String, notes: String) {
+        database.workoutDao().updateWorkoutNotes(workoutId, muscles, notes)
+    }
+    @WorkerThread
     suspend fun update(set: WorkoutSet) {
         database.workoutSetDao().update(set)
     }
@@ -76,7 +80,7 @@ class WorkoutsRepository(private val database: WorkoutsRoomDatabase) {
 
     @WorkerThread
     suspend fun getAllWorkouts(): List<Workout> {
-        return database.workoutDao().getWorkoutsByIdOnce()
+        return database.workoutDao().getWorkoutsByNameOnce()
     }
     @WorkerThread
     suspend fun getWorkoutsOfThisGroup(groupName: String): List<Workout> {

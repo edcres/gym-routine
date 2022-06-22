@@ -71,6 +71,14 @@ class EditWorkoutFragment : Fragment() {
             setsAdapter.submitList(sets)
         }
     }
+    private fun saveMusclesAndNotes() {
+        binding!!.apply {
+            // todo
+            muscleTargetedEt.text.toString()
+            workoutNotesEt.text.toString()
+        }
+    }
+    // HELPERS //
 
     // CLICK LISTENERS //
     private fun spinnerOnClick() {
@@ -125,9 +133,9 @@ class EditWorkoutFragment : Fragment() {
         }
     }
     private fun doneFabOnClick() {
+        saveMusclesAndNotes()
         val navController = Navigation.findNavController(requireParentFragment().requireView())
         navController.navigateUp()
-        // todo: save muscles and notes.
     }
     // CLICK LISTENERS //
 

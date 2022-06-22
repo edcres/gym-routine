@@ -24,11 +24,18 @@ interface WorkoutDao {
     )
     suspend fun updateWorkout(workoutId: Long, groupSelected: String)
 
+    @Query(
+        "UPDATE workout_table " +
+                "SET muscles_targeted = :muscles, notes = :notes " +
+                "WHERE id = :workoutId"
+    )
+    suspend fun updateWorkoutNotes(workoutId: Long, muscles: String, notes: String)
+
     @Delete
     suspend fun delete(workout: Workout)
 
     @Query("SELECT * FROM workout_table ORDER BY workout_name ASC")
-    suspend fun getWorkoutsByIdOnce(): List<Workout>
+    suspend fun getWorkoutsByNameOnce(): List<Workout>
 
     @Query(
         "SELECT * FROM workout_table " +

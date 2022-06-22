@@ -28,8 +28,8 @@ data class Workout (
     var workoutGroup: String = FIRST_TAB_TITLE,
 
     // new
+    @ColumnInfo(name = "muscles_targeted")
+    var musclesTargeted: String = "",
     @ColumnInfo(name = "notes")
-    var notes: String = "",
-    @ColumnInfo(name = "muscle_targeted")
-    var muscleTargeted: String = "",
+    var notes: String = ""
 )
