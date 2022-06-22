@@ -96,6 +96,18 @@ class StartFragment : Fragment() {
 
     private fun setObservers() {
         // Observer for adding or removing tabs
+        viewModel.menuEditIsOn.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                true -> {
+                    binding!!.mainActivityTopAppbar
+                        .setBackgroundColor(resources.getColor(R.color.colorHighlight))
+                }
+                false -> {
+                    binding!!.mainActivityTopAppbar
+                        .setBackgroundColor(resources.getColor(R.color.colorPrimary))
+                }
+            }
+        }
         viewModel.groups.observe(viewLifecycleOwner) {
             when {
                 // '+1' because groupNames start out with FIRST_TAB_TITLE
