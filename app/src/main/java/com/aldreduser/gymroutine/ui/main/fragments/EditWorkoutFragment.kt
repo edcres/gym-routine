@@ -127,6 +127,7 @@ class EditWorkoutFragment : Fragment() {
     private fun doneFabOnClick() {
         val navController = Navigation.findNavController(requireParentFragment().requireView())
         navController.navigateUp()
+        // todo: save muscles and notes.
     }
     // CLICK LISTENERS //
 
