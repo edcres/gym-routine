@@ -45,12 +45,15 @@
                         android:id="@+id/group_et_container"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:orientation="horizontal"
                         android:gravity="center"
                         android:visibility="gone">
 
                         <EditText
                             android:id="@+id/new_group_et"
-                            android:layout_width="200dp"
+                            android:layout_width="250dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginLeft="16dp"
                             android:layout_height="wrap_content" />
 
                         <ImageButton
@@ -61,6 +64,7 @@
                             android:src="@drawable/ic_done_24"
                             android:tint="@color/colorHighlight"
                             app:backgroundTint="@color/cardviewBackground" />
+
                     </LinearLayout>
 
                     <Spinner
