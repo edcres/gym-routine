@@ -62,40 +62,20 @@ class WorkoutListFragment : Fragment() {
             // Only update the list when a workout is added or deleted.
             if (groupToDisplay == FIRST_TAB_TITLE) {
                 if (workoutsPreviousSize != it.size) {
-                    recyclerAdapter.submitList(it)
                     workoutsPreviousSize = it.size
                 }
-//                viewModel.getAllWorkouts().observe(viewLifecycleOwner) { allWorkouts ->
-//                    if (workoutsPreviousSize != allWorkouts.size) {
-//                        recyclerAdapter.submitList(allWorkouts)
-//                        workoutsPreviousSize = allWorkouts.size
-//                    }
-//                }
+                recyclerAdapter.submitList(it)
             } else {
                 viewModel.getWorkoutsOfGroup(groupToDisplay)
                     .observe(viewLifecycleOwner) { groupedWorkouts ->
                         if (workoutsPreviousSize != groupedWorkouts.size) {
-                            recyclerAdapter.submitList(groupedWorkouts)
                             workoutsPreviousSize = groupedWorkouts.size
                         }
+                        recyclerAdapter.submitList(groupedWorkouts)
                     }
             }
         }
     }
-
-//    private fun populateWorkoutsList() {
-//        if (groupToDisplay == FIRST_TAB_TITLE) {
-//            viewModel.getAllWorkouts().observe(viewLifecycleOwner) { allWorkouts ->
-//                recyclerAdapter.submitList(allWorkouts)
-//            }
-//        } else {
-//            viewModel.getWorkoutsOfGroup(groupToDisplay)
-//                .observe(viewLifecycleOwner) { groupedWorkouts ->
-//                    recyclerAdapter.submitList(groupedWorkouts)
-//                    workoutsPreviousSize = groupedWorkouts.size
-//                }
-//        }
-//    }
 
     companion object {
         fun getInstance(titleToDisplay: String): WorkoutListFragment {
