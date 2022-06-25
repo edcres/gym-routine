@@ -101,13 +101,9 @@ class StartFragment : Fragment() {
                 true -> {
                     binding!!.mainActivityTopAppbar
                         .setBackgroundColor(resources.getColor(R.color.colorHighlight))
-                    binding!!.mainTabLayout
-                        .setBackgroundColor(resources.getColor(R.color.colorSecondaryDark))
                 }
                 false -> {
                     binding!!.mainActivityTopAppbar
-                        .setBackgroundColor(resources.getColor(R.color.colorPrimary))
-                    binding!!.mainTabLayout
                         .setBackgroundColor(resources.getColor(R.color.colorPrimary))
                 }
             }

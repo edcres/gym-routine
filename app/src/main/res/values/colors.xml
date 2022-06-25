@@ -9,6 +9,7 @@
 
     <color name="colorAccent">#FFDC00</color>
     <color name="cardviewBackground">#B880EA</color>
+    <color name="cardviewCover">#D2B880EA</color>
 
     <color name="colorHighlight">#FFB700</color>
     <color name="transparent">#00EDE3F1</color>
