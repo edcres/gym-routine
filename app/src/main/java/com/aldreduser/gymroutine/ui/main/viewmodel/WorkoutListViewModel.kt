@@ -13,7 +13,7 @@ import com.aldreduser.gymroutine.utils.FIRST_TAB_TITLE
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-private const val TAG = "ViewModel_TAG"
+private const val TAG = "ViewModel__TAG"
 
 class WorkoutListViewModel : ViewModel() {
 

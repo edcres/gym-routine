@@ -2,7 +2,7 @@ package com.aldreduser.gymroutine.utils
 
 import com.aldreduser.gymroutine.data.model.entities.WorkoutGroup
 
-const val GLOBAL_TAG = "Global_TAG"
+const val GLOBAL_TAG = "Global__TAG"
 const val FIRST_TAB_TITLE = "All Workouts"
 const val NEW_GROUP = "New Group"
 const val CHOOSE_GROUP = "Choose Group"

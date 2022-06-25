@@ -19,7 +19,7 @@ import com.aldreduser.gymroutine.ui.main.adapters.SetsAdapter
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
 import com.aldreduser.gymroutine.utils.getChooseGroupList
 
-private const val TAG = "EditFrag_TAG"
+private const val TAG = "EditFrag__TAG"
 
 class EditWorkoutFragment : Fragment() {
 

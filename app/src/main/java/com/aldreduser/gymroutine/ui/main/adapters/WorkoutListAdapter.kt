@@ -15,7 +15,7 @@ import com.aldreduser.gymroutine.databinding.WorkoutItemBinding
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
 import com.aldreduser.gymroutine.utils.*
 
-private const val TAG = "W_List_Ad_TAG"
+private const val TAG = "WListAd__TAG"
 
 class WorkoutListAdapter(
     private val workoutsViewModel: WorkoutListViewModel,

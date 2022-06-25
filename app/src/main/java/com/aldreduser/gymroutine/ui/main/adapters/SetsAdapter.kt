@@ -12,7 +12,7 @@ import com.aldreduser.gymroutine.databinding.SetLinearLayoutBinding
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
 import com.aldreduser.gymroutine.utils.takeOutZeros
 
-private const val TAG = "Sets_TAG"
+private const val TAG = "Sets__TAG"
 
 // This adapter will be used in 2 places: WorkoutListAdapter, EditWorkoutFragment
 class SetsAdapter(

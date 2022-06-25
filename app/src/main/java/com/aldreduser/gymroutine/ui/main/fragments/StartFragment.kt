@@ -19,7 +19,7 @@ import com.aldreduser.gymroutine.utils.findDifferentName
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.workout_item.view.*
 
-private const val fragmentTAG = "StartFrag_TAG"
+private const val fragmentTAG = "StartFrag__TAG"
 
 class StartFragment : Fragment() {
 
