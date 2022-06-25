@@ -22,6 +22,7 @@ class WorkoutListFragment : Fragment() {
     private val viewModel: WorkoutListViewModel by activityViewModels()
     private lateinit var recyclerAdapter: WorkoutListAdapter
     private var groupToDisplay = FIRST_TAB_TITLE
+    private var workoutsPreviousSize: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,11 +60,17 @@ class WorkoutListFragment : Fragment() {
         viewModel.workouts.observe(viewLifecycleOwner) {
             // Only update the list when a workout is added or deleted.
             if (groupToDisplay == FIRST_TAB_TITLE) {
-                if (recyclerAdapter.itemCount == 0) recyclerAdapter.submitList(it)
+                if (workoutsPreviousSize != it.size) {
+                    workoutsPreviousSize = it.size
+                    recyclerAdapter.submitList(it)
+                } else if (recyclerAdapter.itemCount == 0) recyclerAdapter.submitList(it)
             } else {
                 viewModel.getWorkoutsOfGroup(groupToDisplay)
                     .observe(viewLifecycleOwner) { groupedWorkouts ->
-                        if (recyclerAdapter.itemCount == 0)
+                        if (workoutsPreviousSize != groupedWorkouts.size) {
+                            workoutsPreviousSize = groupedWorkouts.size
+                            recyclerAdapter.submitList(groupedWorkouts)
+                        } else if (recyclerAdapter.itemCount == 0)
                             recyclerAdapter.submitList(groupedWorkouts)
                     }
             }
