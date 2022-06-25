@@ -62,7 +62,7 @@ class WorkoutListAdapter(
         }
 
         private fun observeHiddenTxt() {
-            // this was used to cover a bug displaying recycler items
+            // This covers up a bug resizing the views in different tab fragments.
             viewModel.hiddenTxt.observe(fragLifecycleOwner) {
                 binding.apply {
                     when (dummyTxt.text.toString()) {
