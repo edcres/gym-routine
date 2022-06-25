@@ -62,6 +62,7 @@ class WorkoutListAdapter(
         }
 
         private fun observeHiddenTxt() {
+            // this was used to cover a bug displaying recycler items
             viewModel.hiddenTxt.observe(fragLifecycleOwner) {
                 binding.apply {
                     when (dummyTxt.text.toString()) {

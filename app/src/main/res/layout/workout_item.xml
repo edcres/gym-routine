@@ -26,6 +26,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#00000000"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/specific_workout" />
 
@@ -80,7 +81,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:background="@color/cardviewCover"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -91,9 +92,11 @@
                     android:layout_width="32dp"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_edit_item_24"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     app:backgroundTint="#00FFFFFF"
-                    app:layout_constraintEnd_toStartOf="@+id/remove_item_btn"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/dummy_txt"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageButton
@@ -101,9 +104,11 @@
                     android:layout_width="32dp"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_delete_24"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     app:backgroundTint="#00FFFFFF"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/dummy_txt"
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
