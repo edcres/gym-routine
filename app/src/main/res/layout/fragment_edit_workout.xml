@@ -73,8 +73,8 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:background="@color/colorHighlight"
-                        android:backgroundTint="@color/colorHighlight"
-                        android:gravity="center" />
+                        android:popupBackground="@color/spinner_items"
+                        android:spinnerMode="dropdown" />
 
                 </androidx.cardview.widget.CardView>
 

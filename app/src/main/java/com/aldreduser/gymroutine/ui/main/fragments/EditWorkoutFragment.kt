@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.aldreduser.gymroutine.R
 import com.aldreduser.gymroutine.data.model.entities.WorkoutGroup
 import com.aldreduser.gymroutine.data.model.entities.WorkoutSet
 import com.aldreduser.gymroutine.databinding.FragmentEditWorkoutBinding
@@ -89,7 +90,7 @@ class EditWorkoutFragment : Fragment() {
         binding?.apply {
             groupSpinner.adapter = ArrayAdapter(
                 requireContext(),
-                android.R.layout.simple_spinner_dropdown_item,
+                R.layout.groups_spinner_item,
                 getChooseGroupList(viewModel.groupNames)
             )
             groupSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {

@@ -33,6 +33,7 @@
         <entry key="app/src/main/res/layout/fragment_start.xml" value="0.23703703703703705" />
         <entry key="app/src/main/res/layout/fragment_workout_list.xml" value="0.22777777777777777" />
         <entry key="app/src/main/res/layout/fragment_workouts_group_list.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/groups_spinner_item.xml" value="0.21296296296296297" />
         <entry key="app/src/main/res/layout/set_linear_layou.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/set_linear_layout.xml" value="0.22758026123046876" />
         <entry key="app/src/main/res/layout/workout_item.xml" value="0.25" />
