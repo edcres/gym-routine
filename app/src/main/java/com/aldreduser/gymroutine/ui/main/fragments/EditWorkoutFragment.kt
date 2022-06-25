@@ -93,6 +93,7 @@ class EditWorkoutFragment : Fragment() {
                 R.layout.groups_spinner_item,
                 getChooseGroupList(viewModel.groupNames)
             )
+//            groupSpinner.setSelection(viewModel.groupNames)
             groupSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
                     parent: AdapterView<*>?,
@@ -109,7 +110,7 @@ class EditWorkoutFragment : Fragment() {
                                 WorkoutGroup(newGroupEt.text.toString()),
                                 currentWorkoutId!!
                             )
-                            groupSpinner.visibility = View.VISIBLE
+//                            groupSpinner.visibility = View.VISIBLE
                             groupEtContainer.visibility = View.GONE
                         }
                     } else if (position > 0 && position-1 < viewModel.groupNames.size) {
