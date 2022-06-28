@@ -103,11 +103,17 @@ class WorkoutListAdapter(
         private fun setUpSets(workout: Workout) {
             binding.setListRecycler.adapter = setsAdapter
             binding.setListRecycler.layoutManager = CustomLinearLayoutManager(context)
-            viewModel.getSetsOfWorkout(workout.id)
-                .observe(fragLifecycleOwner) { theseSets ->
-//                    Log.d(TAG, "sets Submitted ${workout.workoutName}")
-                    setsAdapter.submitList(theseSets)
-                }
+
+
+            setsAdapter
+                .submitList(viewModel.fillSets(workout.workoutName.toInt()))
+
+
+//            viewModel.getSetsOfWorkout(workout.id)
+//                .observe(fragLifecycleOwner) { theseSets ->
+////                    Log.d(TAG, "sets Submitted ${workout.workoutName}")
+//                    setsAdapter.submitList(theseSets)
+//                }
         }
 
         companion object {

@@ -79,22 +79,58 @@ class WorkoutListViewModel : ViewModel() {
     }
     // SETUP //
 
+    private fun fillGroups(): List<WorkoutGroup> {
+        return listOf(WorkoutGroup(groupName = "test"))
+    }
+    private fun fillWorkouts(): List<Workout> {
+        val workoutsList = mutableListOf<Workout>()
+        for (i in 0 until 30) {
+            workoutsList.add(
+                Workout(
+                    id = i.toLong(),
+                    workoutName = i.toString(),
+                    workoutGroup = "test",
+                )
+            )
+        }
+        return workoutsList
+    }
+    fun fillSets(workoutNum: Int): List<WorkoutSet> {
+        val setsList = mutableListOf<WorkoutSet>()
+        for (j in 0 until 1) {
+            setsList.add(
+                WorkoutSet(
+                    id = "$workoutNum$j".toLong(),
+                    workoutId = workoutNum.toLong(),
+                    workoutName = workoutNum.toString(),
+                    set = j,
+                    45,
+                    34.0
+                )
+            )
+        }
+        return setsList
+    }
+
     // DATABASE QUERIES //
     private fun collectAllWorkouts() {
         viewModelScope.launch {
-            repository.allWorkoutGroups.collect {
-                _groups.postValue(it)
-            }
+//            repository.allWorkoutGroups.collect {
+//                _groups.postValue(it)
+//            }
+            _groups.postValue(fillGroups())
         }
         viewModelScope.launch {
-            repository.allWorkouts.collect {
-                _workouts.postValue(it)
-            }
+//            repository.allWorkouts.collect {
+//                _workouts.postValue(it)
+//            }
+            _workouts.postValue(fillWorkouts())
         }
         viewModelScope.launch {
-            repository.allWorkoutSets.collect {
-                _sets.postValue(it)
-            }
+//            repository.allWorkoutSets.collect {
+//                _sets.postValue(it)
+//            }
+//            _sets.postValue(fillSets())
         }
     }
     fun insertWorkoutGroup(workoutGroup: WorkoutGroup, workoutId: Long?) = viewModelScope.launch {

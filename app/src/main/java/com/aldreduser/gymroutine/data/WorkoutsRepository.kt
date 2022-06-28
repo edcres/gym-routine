@@ -12,10 +12,10 @@ import kotlinx.coroutines.flow.Flow
 class WorkoutsRepository(private val database: WorkoutsRoomDatabase) {
 
     private val tag = "WRepo_TAG"
-    val allWorkoutGroups: Flow<List<WorkoutGroup>> =
-        database.workoutGroupDao().getAlphabetizedWorkoutGroups()
-    val allWorkouts: Flow<List<Workout>> = database.workoutDao().getWorkoutsByName()
-    val allWorkoutSets: Flow<List<WorkoutSet>> = database.workoutSetDao().getSetsById()
+//    val allWorkoutGroups: Flow<List<WorkoutGroup>> =
+//        database.workoutGroupDao().getAlphabetizedWorkoutGroups()
+//    val allWorkouts: Flow<List<Workout>> = database.workoutDao().getWorkoutsByName()
+//    val allWorkoutSets: Flow<List<WorkoutSet>> = database.workoutSetDao().getSetsById()
 
     @WorkerThread
     suspend fun insertGroup(workoutGroup: WorkoutGroup, workoutId: Long?) {
