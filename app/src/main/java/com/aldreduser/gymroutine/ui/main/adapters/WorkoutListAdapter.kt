@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.aldreduser.gymroutine.data.model.entities.Workout
+import com.aldreduser.gymroutine.data.model.entities.WorkoutSet
 import com.aldreduser.gymroutine.databinding.WorkoutItemBinding
 import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
 import com.aldreduser.gymroutine.utils.*
@@ -103,6 +104,8 @@ class WorkoutListAdapter(
         private fun setUpSets(workout: Workout) {
             binding.setListRecycler.adapter = setsAdapter
             binding.setListRecycler.layoutManager = CustomLinearLayoutManager(context)
+
+            setsAdapter.submitList(DUMMY_SETS)
             viewModel.getSetsOfWorkout(workout.id)
                 .observe(fragLifecycleOwner) { theseSets ->
 //                    Log.d(TAG, "sets Submitted ${workout.workoutName}")
