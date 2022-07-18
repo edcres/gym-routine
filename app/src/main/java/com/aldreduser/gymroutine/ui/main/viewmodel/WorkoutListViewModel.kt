@@ -23,7 +23,7 @@ class WorkoutListViewModel : ViewModel() {
     val groupsOrdinals: MutableMap<String, Int> = mutableMapOf(FIRST_TAB_TITLE to 0)
     val groupNames: MutableList<String> = mutableListOf(FIRST_TAB_TITLE)
 
-    private var applicationStarted = true
+    var applicationNotStarted = true
     private val _groups = MutableLiveData<List<WorkoutGroup>>()
     val groups: LiveData<List<WorkoutGroup>> get() = _groups
     private val _workouts = MutableLiveData<List<Workout>>()
@@ -45,13 +45,13 @@ class WorkoutListViewModel : ViewModel() {
     // SETUP //
     fun startApplication(application: Application) {
         // 'applicationStarted' is to prevent extra queries an initialization.
-        if (applicationStarted) {
-            Log.d(TAG, "startApplication: ${applicationStarted}")
+        if (applicationNotStarted) {
+            Log.d(TAG, "startApplication: ${applicationNotStarted}")
             roomDb = WorkoutsRoomDatabase.getInstance(application)
             repository = WorkoutsRepository(roomDb)
             collectAllWorkouts()
             insertWorkoutGroup(WorkoutGroup(FIRST_TAB_TITLE), null)
-            applicationStarted = false
+            applicationNotStarted = false
         }
     }
     // SETUP //
