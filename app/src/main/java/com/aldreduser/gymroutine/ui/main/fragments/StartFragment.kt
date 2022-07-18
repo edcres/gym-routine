@@ -44,7 +44,7 @@ class StartFragment : Fragment() {
             addWorkoutFab.setOnClickListener { addWorkout() }
         }
         groupTabsAdapter = GroupTabsAdapter(this, viewModel)
-        viewModel.startApplication(requireNotNull(this.activity).application)
+        viewModel.startApplication(requireActivity().application)
         setUpAppBar()
         setUpTabs()
         setObservers()
