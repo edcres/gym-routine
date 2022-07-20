@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
@@ -17,7 +16,6 @@ import com.aldreduser.gymroutine.ui.main.viewmodel.WorkoutListViewModel
 import com.aldreduser.gymroutine.utils.findDifferentGroups
 import com.aldreduser.gymroutine.utils.findDifferentName
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.android.synthetic.main.workout_item.view.*
 
 private const val fragmentTAG = "StartFrag__TAG"
 
@@ -26,12 +24,12 @@ class StartFragment : Fragment() {
     private var binding: FragmentStartBinding? = null
     private val viewModel: WorkoutListViewModel by activityViewModels()
     private lateinit var groupTabsAdapter: GroupTabsAdapter
-    private lateinit var editWorkoutBtn: MenuItem
+//    private lateinit var editWorkoutBtn: MenuItem
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val fragmentBinding = FragmentStartBinding.inflate(inflater, container, false)
         binding = fragmentBinding
         return fragmentBinding.root
@@ -98,26 +96,22 @@ class StartFragment : Fragment() {
         // Observer for adding or removing tabs
         viewModel.menuEditIsOn.observe(viewLifecycleOwner) { result ->
             when (result) {
-                true -> {
-                    binding!!.mainActivityTopAppbar
-                        .setBackgroundColor(resources.getColor(R.color.colorHighlight))
-                }
-                false -> {
-                    binding!!.mainActivityTopAppbar
-                        .setBackgroundColor(resources.getColor(R.color.colorPrimary))
-                }
+                true -> binding!!.mainActivityTopAppbar
+                    .setBackgroundColor(resources.getColor(R.color.colorHighlight))
+                false -> binding!!.mainActivityTopAppbar
+                    .setBackgroundColor(resources.getColor(R.color.colorPrimary))
             }
         }
         viewModel.groups.observe(viewLifecycleOwner) {
             when {
-                // '+1' because groupNames start out with FIRST_TAB_TITLE
-                viewModel.groups.value!!.size+1 > viewModel.groupNames.size -> {
-                    // New group(s) are added
+                // '+1' because groupNames start out with FIRST_TAB_TITLE.
+                viewModel.groups.value!!.size + 1 > viewModel.groupNames.size -> {
+                    // New group(s) are added.
                     val newGroupNames = findDifferentGroups(it, viewModel.groupNames)
                     viewModel.addTab(newGroupNames, groupTabsAdapter)
                 }
                 viewModel.groups.value!!.size < viewModel.groupNames.size -> {
-                    // A group was removed
+                    // A group was removed.
                     val removedGroupName = findDifferentName(viewModel.groupNames, it)
                     viewModel.removeTab(removedGroupName, groupTabsAdapter)
                 }
@@ -127,7 +121,7 @@ class StartFragment : Fragment() {
             }
         }
         viewModel.itemToEdit.observe(viewLifecycleOwner) {
-            if(viewModel.itemToEdit.value != null) {
+            if (viewModel.itemToEdit.value != null) {
                 val navController =
                     Navigation.findNavController(requireParentFragment().requireView())
                 navController.navigate(R.id.action_startFragment_to_editWorkoutFragment)

@@ -51,7 +51,7 @@ class EditWorkoutFragment : Fragment() {
         setUpAppBar()
         submitsSetsOfWorkout()
         vm.sets.observe(viewLifecycleOwner) {
-            if(vm.editWorkoutSetsPreviousSize != it.size) {
+            if (vm.editWorkoutSetsPreviousSize != it.size) {
                 submitsSetsOfWorkout()
                 vm.editWorkoutSetsPreviousSize = it.size
             }
@@ -72,6 +72,7 @@ class EditWorkoutFragment : Fragment() {
             setsAdapter.submitList(sets)
         }
     }
+
     private fun saveMusclesAndNotes() {
         binding!!.apply {
             vm.updateWorkoutNotes(
@@ -91,7 +92,6 @@ class EditWorkoutFragment : Fragment() {
                 R.layout.groups_spinner_item,
                 getChooseGroupList(vm.groupNames)
             )
-//            groupSpinner.setSelection(viewModel.groupNames)
             groupSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
                     parent: AdapterView<*>?,
@@ -99,8 +99,8 @@ class EditWorkoutFragment : Fragment() {
                     position: Int,
                     id: Long
                 ) {
-                    if (vm.groupNames.size == position-1) {
-                        // If user clicks new group
+                    if (vm.groupNames.size == position - 1) {
+                        // If user clicks new group.
                         groupSpinner.visibility = View.GONE
                         groupEtContainer.visibility = View.VISIBLE
                         newGroupDoneBtn.setOnClickListener {
@@ -108,21 +108,22 @@ class EditWorkoutFragment : Fragment() {
                                 WorkoutGroup(newGroupEt.text.toString()),
                                 vm.workoutIdToEdit!!
                             )
-//                            groupSpinner.visibility = View.VISIBLE
                             groupEtContainer.visibility = View.GONE
                         }
-                    } else if (position > 0 && position-1 < vm.groupNames.size) {
-                        // If it's not the first item and not the last one
-                        val groupSelected = vm.groupNames[position-1]
+                    } else if (position > 0 && position - 1 < vm.groupNames.size) {
+                        // If it's not the first item and not the last one.
+                        val groupSelected = vm.groupNames[position - 1]
                         vm.updateGroupOnWorkout(vm.workoutIdToEdit!!, groupSelected)
                     }
                 }
+
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     Log.i(TAG, "Nothing selected.")
                 }
             }
         }
     }
+
     private fun addSetClick() {
         vm.getLastSet(vm.workoutIdToEdit!!).observe(viewLifecycleOwner) { lastSet ->
             vm.insertWorkoutSet(
@@ -136,6 +137,7 @@ class EditWorkoutFragment : Fragment() {
             )
         }
     }
+
     private fun doneFabOnClick() {
         saveMusclesAndNotes()
         val navController = Navigation.findNavController(requireParentFragment().requireView())
@@ -160,13 +162,11 @@ class EditWorkoutFragment : Fragment() {
     private fun setObservers() {
         vm.getWorkoutWithId(vm.workoutIdToEdit ?: vm.workoutIdToEdit!!)
             .observe(viewLifecycleOwner) {
-                Log.d(TAG, "addSetClick: observed")
-                Log.d(TAG, "addSetClick: observed")
-                Log.d(TAG, "addSetClick: observed")
                 binding?.apply {
                     muscleTargetedEt.setText(it.musclesTargeted)
                     workoutNotesEt.setText(it.notes)
                 }
             }
     }
+    // SETUP FUNCTIONS //
 }

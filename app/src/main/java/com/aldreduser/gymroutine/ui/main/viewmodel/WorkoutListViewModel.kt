@@ -22,8 +22,8 @@ class WorkoutListViewModel : ViewModel() {
     var currentGroup: String = FIRST_TAB_TITLE
     val groupsOrdinals: MutableMap<String, Int> = mutableMapOf(FIRST_TAB_TITLE to 0)
     val groupNames: MutableList<String> = mutableListOf(FIRST_TAB_TITLE)
-
     var applicationNotStarted = true
+
     private val _groups = MutableLiveData<List<WorkoutGroup>>()
     val groups: LiveData<List<WorkoutGroup>> get() = _groups
     private val _workouts = MutableLiveData<List<Workout>>()
@@ -46,7 +46,7 @@ class WorkoutListViewModel : ViewModel() {
     fun startApplication(application: Application) {
         // 'applicationStarted' is to prevent extra queries an initialization.
         if (applicationNotStarted) {
-            Log.d(TAG, "startApplication: ${applicationNotStarted}")
+            Log.i(TAG, "startApplication: $applicationNotStarted")
             roomDb = WorkoutsRoomDatabase.getInstance(application)
             repository = WorkoutsRepository(roomDb)
             collectAllWorkouts()
@@ -62,19 +62,23 @@ class WorkoutListViewModel : ViewModel() {
         _menuEditIsOn.value = newValue
         return newValue
     }
+
     fun turnOffEditMode(): Boolean {
         _menuEditIsOn.postValue(false)
         return false
     }
+
     fun toggleHiddenTxt() {
         // This is a work around a bug. The purpose is for the recyclerview to get resized.
         _hiddenTxt.value = !_hiddenTxt.value!!
     }
+
     fun setItemToEdit(chosenItem: Any?) {
         _itemToEdit.value = chosenItem
     }
+
     private suspend fun checkIfDeleteGroup(groupName: String) {
-        if(repository.groupHasWorkouts(groupName)) {
+        if (repository.groupHasWorkouts(groupName)) {
             Log.i(TAG, "Group $groupName still has workouts.")
         } else {
             if (groupName != FIRST_TAB_TITLE) {
@@ -87,26 +91,15 @@ class WorkoutListViewModel : ViewModel() {
 
     // DATABASE QUERIES //
     private fun collectAllWorkouts() {
-        Log.d(TAG, "collectAllWorkouts: called")
-        viewModelScope.launch {
-            repository.allWorkoutGroups.collect {
-                _groups.postValue(it)
-            }
-        }
-        viewModelScope.launch {
-            repository.allWorkouts.collect {
-                _workouts.postValue(it)
-            }
-        }
-        viewModelScope.launch {
-            repository.allWorkoutSets.collect {
-                _sets.postValue(it)
-            }
-        }
+        Log.i(TAG, "collectAllWorkouts: called")
+        viewModelScope.launch { repository.allWorkoutGroups.collect { _groups.postValue(it) } }
+        viewModelScope.launch { repository.allWorkouts.collect { _workouts.postValue(it) } }
+        viewModelScope.launch { repository.allWorkoutSets.collect { _sets.postValue(it) } }
     }
-    fun insertWorkoutGroup(workoutGroup: WorkoutGroup, workoutId: Long?) = viewModelScope.launch {
-        repository.insertGroup(workoutGroup, workoutId)
-    }
+
+    fun insertWorkoutGroup(workoutGroup: WorkoutGroup, workoutId: Long?) =
+        viewModelScope.launch { repository.insertGroup(workoutGroup, workoutId) }
+
     fun insertWorkout(workout: Workout): LiveData<Long> {
         val itemId = MutableLiveData<Long>()
         viewModelScope.launch {
@@ -124,53 +117,54 @@ class WorkoutListViewModel : ViewModel() {
         }
         return itemId
     }
-    fun insertWorkoutSet(workoutSet: WorkoutSet) = viewModelScope.launch  {
+
+    fun insertWorkoutSet(workoutSet: WorkoutSet) = viewModelScope.launch {
         repository.insert(workoutSet)
     }
+
     fun updateGroupOnWorkout(workoutId: Long, groupSelected: String) =
         viewModelScope.launch {
             val oldGroupName = repository.getGroupOfWorkout(workoutId)
             repository.updateWorkout(workoutId, groupSelected)
             checkIfDeleteGroup(oldGroupName)
         }
+
     fun updateWorkoutNotes(workoutId: Long, muscles: String, notes: String) =
         viewModelScope.launch {
             repository.updateWorkoutNotes(workoutId, muscles, notes)
-    }
+        }
+
     fun updateWorkoutName(workout: Workout) = viewModelScope.launch {
         repository.update(workout)
         repository.updateWorkoutOnSets(workout.id, workout.workoutName)
     }
+
     fun updateSet(set: WorkoutSet) = viewModelScope.launch {
         repository.update(set)
     }
+
     fun removeWorkout(workout: Workout, groupName: String) = viewModelScope.launch {
         repository.deleteWorkout(workout)
         checkIfDeleteGroup(groupName)
     }
+
     fun removeSet(set: WorkoutSet) = viewModelScope.launch {
-        if (sets.value != null) {
-            repository.updateSetOnSets(
-                set.workoutId,
-                set.set
-            )
-        }
+        if (sets.value != null) repository.updateSetOnSets(set.workoutId, set.set)
         repository.deleteSet(set)
     }
+
     fun getAllWorkouts(): LiveData<List<Workout>> {
         val allWorkouts = MutableLiveData<List<Workout>>()
-        viewModelScope.launch {
-            allWorkouts.postValue(repository.getAllWorkouts())
-        }
+        viewModelScope.launch { allWorkouts.postValue(repository.getAllWorkouts()) }
         return allWorkouts
     }
+
     fun getWorkoutWithId(id: Long): LiveData<Workout> {
         val workout = MutableLiveData<Workout>()
-        viewModelScope.launch {
-            workout.postValue(repository.getWorkoutWithId(id))
-        }
+        viewModelScope.launch { workout.postValue(repository.getWorkoutWithId(id)) }
         return workout
     }
+
     fun getWorkoutsOfGroup(group: String): LiveData<List<Workout>> {
         val workoutsOfGroup = MutableLiveData<List<Workout>>()
         viewModelScope.launch {
@@ -178,25 +172,22 @@ class WorkoutListViewModel : ViewModel() {
         }
         return workoutsOfGroup
     }
+
     fun getSetsOfWorkout(workoutId: Long): LiveData<List<WorkoutSet>> {
         val setsOfWorkout = MutableLiveData<List<WorkoutSet>>()
-        viewModelScope.launch {
-            setsOfWorkout.postValue(repository.getSetsOfWorkout(workoutId))
-        }
+        viewModelScope.launch { setsOfWorkout.postValue(repository.getSetsOfWorkout(workoutId)) }
         return setsOfWorkout
     }
+
     fun getWorkoutName(workoutId: Long): LiveData<String> {
         val workoutName = MutableLiveData<String>()
-        viewModelScope.launch {
-            workoutName.postValue(repository.getWorkoutName(workoutId))
-        }
+        viewModelScope.launch { workoutName.postValue(repository.getWorkoutName(workoutId)) }
         return workoutName
     }
+
     fun getLastSet(workoutId: Long): LiveData<WorkoutSet> {
         val lastSet = MutableLiveData<WorkoutSet>()
-        viewModelScope.launch {
-            lastSet.postValue(repository.getLastSet(workoutId))
-        }
+        viewModelScope.launch { lastSet.postValue(repository.getLastSet(workoutId)) }
         return lastSet
     }
     // DATABASE QUERIES //
@@ -207,11 +198,10 @@ class WorkoutListViewModel : ViewModel() {
             if (!groupNames.contains(title)) {
                 val nextOrdinalId = groupsOrdinals.size - 1
                 groupTabsAdapter.addTab(nextOrdinalId + 1, title)
-            } else {
-                Log.e(TAG, "\t\ttitles contains next title \t\t $groupNames\n$title")
-            }
+            } else Log.e(TAG, "\t\ttitles contains next title \t\t $groupNames\n$title")
         }
     }
+
     fun removeTab(titleToRemove: String, groupTabsAdapter: GroupTabsAdapter) {
         val numOfTabs = groupNames.size
         if (numOfTabs > 1 && titleToRemove != FIRST_TAB_TITLE) {

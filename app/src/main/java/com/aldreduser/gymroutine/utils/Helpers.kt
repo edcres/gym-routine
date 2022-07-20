@@ -7,45 +7,43 @@ const val GLOBAL_TAG = "Global__TAG"
 const val FIRST_TAB_TITLE = "All Workouts"
 const val NEW_GROUP = "New Group"
 const val CHOOSE_GROUP = "Choose Group"
+
 val DUMMY_SETS = listOf(
-    WorkoutSet(0, 0),WorkoutSet(0, 0),WorkoutSet(0, 0),WorkoutSet(0, 0)
+    WorkoutSet(0, 0), WorkoutSet(0, 0),
+    WorkoutSet(0, 0), WorkoutSet(0, 0)
 )
 
 fun getChooseGroupList(groups: List<String>): List<String> {
     val spinnerList = mutableListOf(CHOOSE_GROUP)
-    groups.forEach {
-        spinnerList.add(it)
-    }
+    groups.forEach { spinnerList.add(it) }
     spinnerList.add(NEW_GROUP)
     return spinnerList
 }
 
-fun findDifferentGroups(groups: List<WorkoutGroup>, groupNames: List<String>): List<String> {
-    // more groups than groupNames
-    // it should only be one item
-    return groupsToStrings(groups).minus(groupNames)
-}
+// Check the difference between groups and group names.
+// More groups than groupNames
+// It should only be one item.
+fun findDifferentGroups(groups: List<WorkoutGroup>, groupNames: List<String>): List<String> =
+    groupsToStrings(groups).minus(groupNames)
 
-fun findDifferentName(groupNames: List<String>, groups: List<WorkoutGroup>): String {
-    // more groupNames than groups
-    val difference = groupNames.minus(groupsToStrings(groups))
-    // it should only be one item
-    return difference[0]
-}
+// Check the difference between groups and group names.
+// More groupNames than groups.
+// It should only be one item.
+fun findDifferentName(groupNames: List<String>, groups: List<WorkoutGroup>): String =
+    groupNames.minus(groupsToStrings(groups))[0]
 
 fun groupsToStrings(groups: List<WorkoutGroup>): List<String> {
+    // Return a list of group names.
     val groupStrings = mutableListOf<String>()
     groups.forEach { groupStrings.add(it.groupName) }
     return groupStrings
 }
 
 fun takeOutZeros(num: Double): String {
-    // if it's 23.0, returns 23
-    return if (num.toString().contains(".")){
+    // If it's 23.0, return 23.
+    return if (num.toString().contains(".")) {
         val decimals = num.toString().split(".").last()
         if (decimals.length == 1 && decimals.first() == '0') num.toInt().toString()
         else num.toString()
-    } else {
-        num.toString()
-    }
+    } else num.toString()
 }

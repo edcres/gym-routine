@@ -10,31 +10,25 @@ class GroupTabsAdapter(
     private val viewModel: WorkoutListViewModel
 ) : FragmentStateAdapter(fragment) {
 
-    override fun createFragment(position: Int): Fragment {
-        return WorkoutListFragment.getInstance(viewModel.groupNames[position])
-    }
+    override fun createFragment(position: Int): Fragment =
+        WorkoutListFragment.getInstance(viewModel.groupNames[position])
 
-    override fun getItemCount(): Int {
-        return viewModel.groupNames.size
-    }
+    override fun getItemCount(): Int = viewModel.groupNames.size
 
-    override fun getItemId(position: Int): Long {
-        return viewModel.groupsOrdinals[viewModel.groupNames[position]]!!.toLong()
-    }
+    override fun getItemId(position: Int): Long =
+        viewModel.groupsOrdinals[viewModel.groupNames[position]]!!.toLong()
 
     override fun containsItem(itemId: Long): Boolean {
         var thisTitle = ""
-        viewModel.groupsOrdinals.forEach { (k,v) ->
-            if(v == itemId.toInt()) {
-                thisTitle = k
-            }
+        viewModel.groupsOrdinals.forEach { (k, v) ->
+            if (v == itemId.toInt()) thisTitle = k
         }
         return viewModel.groupNames.contains(thisTitle)
     }
 
     fun addTab(ordinal: Int, title: String) {
         viewModel.groupNames.add(title)
-        if(!viewModel.groupsOrdinals.containsKey(title)) {
+        if (!viewModel.groupsOrdinals.containsKey(title)) {
             viewModel.groupsOrdinals[title] = ordinal
         }
         notifyItemInserted(ordinal)

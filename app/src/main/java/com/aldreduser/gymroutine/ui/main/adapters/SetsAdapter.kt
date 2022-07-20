@@ -46,7 +46,7 @@ class SetsAdapter(
                 }
 
                 weightText.doAfterTextChanged {
-                    if(it.toString().isNotEmpty() && it.toString() != startingWeightTxt) {
+                    if (it.toString().isNotEmpty() && it.toString() != startingWeightTxt) {
                         viewModel.workoutIdToEdit = workoutSet.workoutId
                         workoutSet.weight = it.toString().toDouble()
                         viewModel.updateSet(workoutSet)
@@ -54,7 +54,7 @@ class SetsAdapter(
                 }
 
                 repsText.doAfterTextChanged {
-                    if(it.toString().isNotEmpty() && it.toString() != startingRepsTxt) {
+                    if (it.toString().isNotEmpty() && it.toString() != startingRepsTxt) {
                         viewModel.workoutIdToEdit = workoutSet.workoutId
                         workoutSet.reps = it.toString().toInt()
                         viewModel.updateSet(workoutSet)
@@ -98,6 +98,7 @@ class SetDiffCallback : DiffUtil.ItemCallback<WorkoutSet>() {
     override fun areItemsTheSame(oldItem: WorkoutSet, newItem: WorkoutSet): Boolean {
         return oldItem.id == newItem.id
     }
+
     override fun areContentsTheSame(oldItem: WorkoutSet, newItem: WorkoutSet): Boolean {
         return oldItem == newItem
     }
