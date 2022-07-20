@@ -81,13 +81,13 @@ class WorkoutListAdapter(
                     when (result) {
                         true -> {
                             coverView.visibility = View.VISIBLE
-                            editItemBtn.visibility = View.VISIBLE
-                            removeItemBtn.visibility = View.VISIBLE
+//                            editItemBtn.visibility = View.VISIBLE
+//                            removeItemBtn.visibility = View.VISIBLE
                         }
                         false -> {
                             coverView.visibility = View.GONE
-                            editItemBtn.visibility = View.GONE
-                            removeItemBtn.visibility = View.GONE
+//                            editItemBtn.visibility = View.GONE
+//                            removeItemBtn.visibility = View.GONE
                         }
                     }
                 }

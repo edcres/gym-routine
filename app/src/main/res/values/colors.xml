@@ -8,7 +8,7 @@
 
     <color name="colorAccent">#FFDC00</color>
     <color name="cardviewBackground">#B880EA</color>
-    <color name="cardviewCover">#E2B880EA</color>
+    <color name="cardviewCover">#E28E4BCC</color>
 
     <color name="colorHighlight">#FFB700</color>
     <color name="spinner_items">#FFCB49</color>

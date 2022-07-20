@@ -10,115 +10,75 @@
         app:cardBackgroundColor="@color/cardviewBackground"
         android:layout_margin="6dp">
 
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="vertical"-->
-<!--            android:padding="8dp">-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <EditText
+                android:id="@+id/specific_workout_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/workout_name_hint"
+                android:inputType="textPersonName|textMultiLine"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="RtlSymmetry" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/set_list_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/specific_workout_input"
+                tools:listitem="@layout/set_linear_layout" />
 
-                <TextView
-                    android:id="@+id/dummy_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#00000000"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/specific_workout" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <EditText
-                    android:id="@+id/specific_workout_input"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/workout_name_hint"
-                    android:inputType="textPersonName|textMultiLine"
-                    android:paddingStart="8dp"
-                    android:paddingLeft="8dp"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="RtlSymmetry" />
-<!--                app:layout_constraintEnd_toStartOf="@+id/edit_item_btn"-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cover_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/cardviewCover"
+            android:visibility="gone">
 
-<!--                <com.google.android.material.textfield.TextInputLayout-->
-<!--                    android:id="@+id/specific_workout"-->
-<!--                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:hint="@string/workout_name_hint"-->
-<!--                    android:layout_marginRight="8dp"-->
-<!--                    android:layout_marginEnd="8dp"-->
-<!--                    app:layout_constraintEnd_toStartOf="@+id/edit_item_btn"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent">-->
+            <TextView
+                android:id="@+id/dummy_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#00000000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/specific_workout" />
 
-<!--                    <com.google.android.material.textfield.TextInputEditText-->
-<!--                        android:id="@+id/specific_workout_input"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:inputType="textPersonName"-->
-<!--                        android:textSize="16sp"-->
-<!--                        android:textStyle="bold" />-->
-<!--                </com.google.android.material.textfield.TextInputLayout>-->
+            <ImageButton
+                android:id="@+id/edit_item_btn"
+                android:layout_width="32dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_edit_item_24"
+                app:backgroundTint="#00FFFFFF"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/dummy_txt"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/set_list_recycler"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/specific_workout_input"
-                    tools:listitem="@layout/set_linear_layout" />
+            <ImageButton
+                android:id="@+id/remove_item_btn"
+                android:layout_width="32dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_delete_24"
+                app:backgroundTint="#00FFFFFF"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/dummy_txt"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/cover_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:background="@color/cardviewCover"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageButton
-                    android:id="@+id/edit_item_btn"
-                    android:layout_width="32dp"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_edit_item_24"
-                    android:visibility="visible"
-                    app:backgroundTint="#00FFFFFF"
-                    android:layout_marginEnd="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/dummy_txt"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageButton
-                    android:id="@+id/remove_item_btn"
-                    android:layout_width="32dp"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_delete_24"
-                    android:visibility="visible"
-                    app:backgroundTint="#00FFFFFF"
-                    android:layout_marginStart="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/dummy_txt"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-<!--            <androidx.recyclerview.widget.RecyclerView-->
-<!--                android:id="@+id/set_list_recycler"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                tools:listitem="@layout/set_linear_layout"/>-->
-
-<!--        </LinearLayout>-->
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>

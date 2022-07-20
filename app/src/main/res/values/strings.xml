@@ -27,4 +27,6 @@
     <string name="five">5</string>
     <string name="six">6</string>
 
+    <string name="muscle_targeted">muscle targeted</string>
+    <string name="notes">notes</string>
 </resources>
