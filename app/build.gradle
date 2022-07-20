@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-//    id 'kotlin-android-extensions'
     id 'kotlin-kapt'
     id 'org.jetbrains.kotlin.android.extensions'
 }
@@ -28,7 +27,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    // Had to add these bc 2 big views were not previewing
+    // Added VERSION_11 to display 2 views.
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
@@ -39,16 +38,12 @@ android {
         }
     }
 
-    // To exclude the atomic functions module from the package and prevent warnings.
     buildFeatures {
         dataBinding = true
-//        viewBinding = true
     }
 }
 
 dependencies {
-    //default
-//    implementation 'androidx.core:core-ktx:1.3.2'
     implementation "androidx.appcompat:appcompat:$rootProject.appCompatVersion"
     implementation "com.google.android.material:material:$rootProject.materialVersion"
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
