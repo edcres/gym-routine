@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <!--    textView-->
     <style name="Widget.TipTime.TextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textAppearance">?attr/textAppearanceBody2</item>
     </style>

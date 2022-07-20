@@ -25,10 +25,9 @@
             android:layout_weight="1"
             android:clickable="false"
             android:gravity="center"
-            android:textColor="@color/black"
             android:importantForAutofill="no"
             android:inputType="number"
-            android:text="@string/one"
+            android:textColor="@color/black"
             tools:text="2" />
 
         <EditText
@@ -37,9 +36,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:textColor="@color/black"
             android:importantForAutofill="no"
             android:inputType="numberDecimal"
+            android:textColor="@color/black"
             tools:text="40" />
 
         <EditText
@@ -48,9 +47,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:textColor="@color/black"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:textColor="@color/black"
             tools:text="8" />
 
         <Space
@@ -59,6 +58,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
             android:visibility="gone" />
-    </LinearLayout>
 
+    </LinearLayout>
 </layout>

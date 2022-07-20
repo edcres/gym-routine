@@ -2,17 +2,16 @@
 <resources>
     <color name="colorPrimary">#AB60EC</color>
     <color name="colorPrimaryDark">#67329C</color>
-
     <color name="colorSecondary">#FFB700</color>
     <color name="colorSecondaryDark">#976F09</color>
-
     <color name="colorAccent">#FFDC00</color>
+    <color name="colorHighlight">#FFB700</color>
+    <color name="transparent">#00EDE3F1</color>
+
     <color name="cardviewBackground">#B880EA</color>
     <color name="cardviewCover">#E28E4BCC</color>
 
-    <color name="colorHighlight">#FFB700</color>
-    <color name="spinner_items">#FFCB49</color>
-    <color name="transparent">#00EDE3F1</color>
+    <color name="spinnerItems">#FFCB49</color>
     <color name="dangerRed">#C60808</color>
     <color name="colorRemoveSet">#8C6A03</color>
     <color name="acceptGroupCheck">#332F24</color>

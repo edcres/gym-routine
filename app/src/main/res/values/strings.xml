@@ -13,19 +13,9 @@
     <string name="weight_column_label">weight</string>
 
     <string name="add_set_label">add set</string>
-
     <string name="workout_name_hint">name</string>
     <string name="default_workout_input">0</string>
-
     <string name="choose_group">Choose Group</string>
-
-    <!--    sets    -->
-    <string name="one">1</string>
-    <string name="two">2</string>
-    <string name="three">3</string>
-    <string name="four">4</string>
-    <string name="five">5</string>
-    <string name="six">6</string>
 
     <string name="muscle_targeted">muscle targeted</string>
     <string name="notes">notes</string>
