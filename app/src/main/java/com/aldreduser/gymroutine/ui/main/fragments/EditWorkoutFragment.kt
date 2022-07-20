@@ -24,9 +24,8 @@ private const val TAG = "EditFrag__TAG"
 class EditWorkoutFragment : Fragment() {
 
     private var binding: FragmentEditWorkoutBinding? = null
-    private val viewModel: WorkoutListViewModel by activityViewModels()
+    private val vm: WorkoutListViewModel by activityViewModels()
     private lateinit var setsAdapter: SetsAdapter
-    private var currentWorkoutId: Long? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +34,7 @@ class EditWorkoutFragment : Fragment() {
         val fragmentBinding = FragmentEditWorkoutBinding
             .inflate(inflater, container, false)
         binding = fragmentBinding
-        setsAdapter = SetsAdapter(viewModel, true)
+        setsAdapter = SetsAdapter(vm, true)
         return fragmentBinding.root
     }
 
@@ -49,35 +48,34 @@ class EditWorkoutFragment : Fragment() {
             editSetListRecycler.adapter = setsAdapter
             editSetListRecycler.layoutManager = LinearLayoutManager(requireContext())
         }
-        currentWorkoutId = viewModel.workoutIdToEdit
         setUpAppBar()
         submitsSetsOfWorkout()
-        viewModel.sets.observe(viewLifecycleOwner) {
-            if(viewModel.editWorkoutSetsPreviousSize != it.size) {
+        vm.sets.observe(viewLifecycleOwner) {
+            if(vm.editWorkoutSetsPreviousSize != it.size) {
                 submitsSetsOfWorkout()
-                viewModel.editWorkoutSetsPreviousSize = it.size
+                vm.editWorkoutSetsPreviousSize = it.size
             }
         }
-        viewModel.turnOffEditMode()
+        vm.turnOffEditMode()
         setObservers()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         binding = null
-        viewModel.editWorkoutSetsPreviousSize = 0
+        vm.editWorkoutSetsPreviousSize = 0
     }
 
     // HELPERS //
     private fun submitsSetsOfWorkout() {
-        viewModel.getSetsOfWorkout(currentWorkoutId!!).observe(viewLifecycleOwner) { sets ->
+        vm.getSetsOfWorkout(vm.workoutIdToEdit!!).observe(viewLifecycleOwner) { sets ->
             setsAdapter.submitList(sets)
         }
     }
     private fun saveMusclesAndNotes() {
         binding!!.apply {
-            viewModel.updateWorkoutNotes(
-                currentWorkoutId ?: viewModel.workoutIdToEdit!!,
+            vm.updateWorkoutNotes(
+                vm.workoutIdToEdit ?: vm.workoutIdToEdit!!,
                 muscleTargetedEt.text.toString(),
                 workoutNotesEt.text.toString()
             )
@@ -91,7 +89,7 @@ class EditWorkoutFragment : Fragment() {
             groupSpinner.adapter = ArrayAdapter(
                 requireContext(),
                 R.layout.groups_spinner_item,
-                getChooseGroupList(viewModel.groupNames)
+                getChooseGroupList(vm.groupNames)
             )
 //            groupSpinner.setSelection(viewModel.groupNames)
             groupSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -101,22 +99,22 @@ class EditWorkoutFragment : Fragment() {
                     position: Int,
                     id: Long
                 ) {
-                    if (viewModel.groupNames.size == position-1) {
+                    if (vm.groupNames.size == position-1) {
                         // If user clicks new group
                         groupSpinner.visibility = View.GONE
                         groupEtContainer.visibility = View.VISIBLE
                         newGroupDoneBtn.setOnClickListener {
-                            viewModel.insertWorkoutGroup(
+                            vm.insertWorkoutGroup(
                                 WorkoutGroup(newGroupEt.text.toString()),
-                                currentWorkoutId!!
+                                vm.workoutIdToEdit!!
                             )
 //                            groupSpinner.visibility = View.VISIBLE
                             groupEtContainer.visibility = View.GONE
                         }
-                    } else if (position > 0 && position-1 < viewModel.groupNames.size) {
+                    } else if (position > 0 && position-1 < vm.groupNames.size) {
                         // If it's not the first item and not the last one
-                        val groupSelected = viewModel.groupNames[position-1]
-                        viewModel.updateGroupOnWorkout(currentWorkoutId!!, groupSelected)
+                        val groupSelected = vm.groupNames[position-1]
+                        vm.updateGroupOnWorkout(vm.workoutIdToEdit!!, groupSelected)
                     }
                 }
                 override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -126,8 +124,8 @@ class EditWorkoutFragment : Fragment() {
         }
     }
     private fun addSetClick() {
-        viewModel.getLastSet(currentWorkoutId!!).observe(viewLifecycleOwner) { lastSet ->
-            viewModel.insertWorkoutSet(
+        vm.getLastSet(vm.workoutIdToEdit!!).observe(viewLifecycleOwner) { lastSet ->
+            vm.insertWorkoutSet(
                 WorkoutSet(
                     workoutId = lastSet.workoutId,
                     workoutName = lastSet.workoutName,
@@ -148,7 +146,7 @@ class EditWorkoutFragment : Fragment() {
     // SETUP FUNCTIONS //
     private fun setUpAppBar() {
         binding?.apply {
-            viewModel.getWorkoutName(currentWorkoutId!!).observe(viewLifecycleOwner) {
+            vm.getWorkoutName(vm.workoutIdToEdit!!).observe(viewLifecycleOwner) {
                 editWorkoutTopAppbar.title = it
             }
             editWorkoutTopAppbar.setNavigationOnClickListener {
@@ -160,7 +158,7 @@ class EditWorkoutFragment : Fragment() {
     }
 
     private fun setObservers() {
-        viewModel.getWorkoutWithId(currentWorkoutId ?: viewModel.workoutIdToEdit!!)
+        vm.getWorkoutWithId(vm.workoutIdToEdit ?: vm.workoutIdToEdit!!)
             .observe(viewLifecycleOwner) {
                 Log.d(TAG, "addSetClick: observed")
                 Log.d(TAG, "addSetClick: observed")
