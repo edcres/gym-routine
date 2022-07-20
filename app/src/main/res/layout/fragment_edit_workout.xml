@@ -194,7 +194,7 @@
                         android:layout_marginEnd="10dp"
                         android:layout_marginTop="4dp"
                         android:layout_marginBottom="10dp"
-                        android:hint="@string/muscle_targeted"
+                        android:hint="@string/notes"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                         <com.google.android.material.textfield.TextInputEditText
