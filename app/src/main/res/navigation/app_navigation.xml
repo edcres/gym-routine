@@ -14,14 +14,15 @@
             android:id="@+id/action_startFragment_to_editWorkoutFragment"
             app:destination="@id/editWorkoutFragment"
             app:enterAnim="@anim/from_right"
-            app:exitAnim="@anim/to_left" />
-<!--        app:popEnterAnim="@anim/from_left"-->
-<!--        app:popExitAnim="@anim/to_right"-->
-
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"/>
     </fragment>
+
     <fragment
         android:id="@+id/editWorkoutFragment"
         android:name="com.aldreduser.gymroutine.ui.main.fragments.EditWorkoutFragment"
         android:label="fragment_edit_workout"
         tools:layout="@layout/fragment_edit_workout" />
+
 </navigation>
