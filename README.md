@@ -37,7 +37,7 @@ Interesting Room database queries and setup are showcased
   - The user can type in the value of the reps, weight, and the name of the workout
     - User input is saved to the dabase every time the user types
 - In edit mode, workouts can be clicked to be deleted or edited in the edit screen
-- Press the floating actin button to add a new workout
+- Press the floating action button to add a new workout
 
 ---
 
@@ -47,4 +47,4 @@ Interesting Room database queries and setup are showcased
 - Can add or remove sets
 - View/edit muscle targeted and notes of the workout item
 - Can edit weights and reps
-- Press the floating actin button to save changes
+- Press the floating action button to save changes
