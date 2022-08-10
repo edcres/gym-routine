@@ -8,6 +8,7 @@ Interesting Room database queries and setup are showcased
 ### Tools and skills used:
 
 - MVVM architecture
+  - shared ViewModel
 - Material Design
 - Jetpack Navigation Component
 - View Pager 2 tabs
