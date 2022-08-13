@@ -38,7 +38,7 @@ Interesting Room database queries and setup are showcased
   - One for all workouts and the rest are added by the user
 - Each workout item displays the name, sets and reps.
   - The user can type in the value of the reps, weight, and the name of the workout
-    - User input is saved to the dabase every time the user types
+    - Input is saved to the dabase as the user types (as the EditText text changes)
 - In edit mode, workouts can be clicked to be deleted or edited in the edit screen
 - Press the floating action button to add a new workout
 
