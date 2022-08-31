@@ -1,21 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#AB60EC</color>
-    <color name="colorPrimaryDark">#67329C</color>
-    <color name="colorSecondary">#FFB700</color>
+    <color name="launcherIcon">#FCDF50</color>
+    <color name="launcherBackground">#AC3B9D</color>
+    <color name="colorPrimary">#D4ACF6</color>
+    <color name="colorPrimaryDark">#906FAD</color>
+    <color name="colorSecondary">#FFC226</color>
     <color name="colorSecondaryDark">#976F09</color>
-    <color name="colorAccent">#FFDC00</color>
-    <color name="colorHighlight">#FFB700</color>
+    <!-- <color name="colorAccent">#FFDC00</color> -->
+    <color name="colorHighlight">#FFC925</color>
+    <color name="btns">#F8D168</color>
     <color name="transparent">#00EDE3F1</color>
+    <color name="text_grey">#676767</color>
 
-    <color name="cardviewBackground">#B880EA</color>
-    <color name="cardviewCover">#E28E4BCC</color>
+    <color name="editModeIndicator">#E8C65C</color>
+    <color name="cardviewBackground">#E3BCEA</color>
+    <color name="cardviewCover">#E2B589DF</color>
 
-    <color name="spinnerItems">#FFCB49</color>
+    <color name="selectedTab">#AC7F0B</color>
+    <color name="idleTabs">#BA9B4C</color>
+
+    <color name="spinnerItems">#FFE39E</color>
     <color name="dangerRed">#C60808</color>
     <color name="colorRemoveSet">#8C6A03</color>
     <color name="acceptGroupCheck">#332F24</color>
     <color name="materialEtHint">#5A5A5A</color>
+
+    <!--    <color name="colorPrimary">#AB60EC</color>-->
+    <!--    <color name="colorPrimaryDark">#67329C</color>-->
+    <!--    <color name="colorSecondary">#FFB700</color>-->
+    <!--    <color name="colorSecondaryDark">#976F09</color>-->
+    <!--    <color name="colorAccent">#FFDC00</color>-->
+    <!--    <color name="colorHighlight">#FFB700</color>-->
+    <!--    <color name="transparent">#00EDE3F1</color>-->
+
+    <!--    <color name="cardviewBackground">#B880EA</color>-->
+    <!--    <color name="cardviewCover">#E28E4BCC</color>-->
+
+    <!--    <color name="spinnerItems">#FFCB49</color>-->
+    <!--    <color name="dangerRed">#C60808</color>-->
+    <!--    <color name="colorRemoveSet">#8C6A03</color>-->
+    <!--    <color name="acceptGroupCheck">#332F24</color>-->
+    <!--    <color name="materialEtHint">#5A5A5A</color>-->
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>

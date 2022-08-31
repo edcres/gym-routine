@@ -150,6 +150,7 @@ class EditWorkoutFragment : Fragment() {
         binding?.apply {
             vm.getWorkoutName(vm.workoutIdToEdit!!).observe(viewLifecycleOwner) {
                 editWorkoutTopAppbar.title = it
+                editWorkoutTopAppbar.setTitleTextColor(resources.getColor(R.color.text_grey))
             }
             editWorkoutTopAppbar.setNavigationOnClickListener {
                 val navController =

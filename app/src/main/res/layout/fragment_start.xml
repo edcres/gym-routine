@@ -31,10 +31,10 @@
                 android:layout_height="32dp"
                 android:background="@color/colorPrimary"
                 app:tabContentStart="56dp"
-                app:tabIndicatorColor="@color/colorSecondary"
+                app:tabIndicatorColor="@color/selectedTab"
                 app:tabMode="scrollable"
-                app:tabSelectedTextColor="@color/colorSecondary"
-                app:tabTextColor="@color/colorSecondary" />
+                app:tabSelectedTextColor="@color/selectedTab"
+                app:tabTextColor="@color/idleTabs" />
 
         </com.google.android.material.appbar.AppBarLayout>
 

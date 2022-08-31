@@ -23,6 +23,7 @@
                 android:inputType="textPersonName|textMultiLine"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
+                android:textColor="@color/text_grey"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -6,7 +6,7 @@ import com.aldreduser.gymroutine.data.model.entities.WorkoutSet
 const val GLOBAL_TAG = "Global__TAG"
 const val FIRST_TAB_TITLE = "All Workouts"
 const val NEW_GROUP = "New Group"
-const val CHOOSE_GROUP = "Choose Group"
+const val CHOOSE_GROUP = "CHOOSE GROUP"
 
 val DUMMY_SETS = listOf(
     WorkoutSet(0, 0), WorkoutSet(0, 0),
@@ -15,7 +15,7 @@ val DUMMY_SETS = listOf(
 
 fun getChooseGroupList(groups: List<String>): List<String> {
     val spinnerList = mutableListOf(CHOOSE_GROUP)
-    groups.forEach { spinnerList.add(it) }
+    groups.forEach { spinnerList.add(it.uppercase()) }
     spinnerList.add(NEW_GROUP)
     return spinnerList
 }

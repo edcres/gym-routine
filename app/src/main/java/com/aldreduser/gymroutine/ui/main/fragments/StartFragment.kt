@@ -67,6 +67,7 @@ class StartFragment : Fragment() {
     // SETUP //
     private fun setUpAppBar() {
         binding?.apply {
+            mainActivityTopAppbar.setTitleTextColor(resources.getColor(R.color.text_grey))
             mainActivityTopAppbar.title = "Workouts"
             mainActivityTopAppbar.setOnMenuItemClickListener { menuItem ->
                 when (menuItem.itemId) {
@@ -96,10 +97,18 @@ class StartFragment : Fragment() {
         // Observer for adding or removing tabs
         viewModel.menuEditIsOn.observe(viewLifecycleOwner) { result ->
             when (result) {
-                true -> binding!!.mainActivityTopAppbar
-                    .setBackgroundColor(resources.getColor(R.color.colorHighlight))
-                false -> binding!!.mainActivityTopAppbar
-                    .setBackgroundColor(resources.getColor(R.color.colorPrimary))
+                true -> {
+                    binding!!.mainActivityTopAppbar
+                        .setBackgroundColor(resources.getColor(R.color.editModeIndicator))
+//                    binding!!.mainTabLayout
+//                        .setBackgroundColor(resources.getColor(R.color.editModeIndicator))
+                }
+                false -> {
+                    binding!!.mainActivityTopAppbar
+                        .setBackgroundColor(resources.getColor(R.color.colorPrimary))
+//                    binding!!.mainTabLayout
+//                        .setBackgroundColor(resources.getColor(R.color.colorPrimary))
+                }
             }
         }
         viewModel.groups.observe(viewLifecycleOwner) {
