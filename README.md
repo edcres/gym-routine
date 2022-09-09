@@ -32,7 +32,7 @@ Interesting Room database queries and setup are showcased
 
 ### Workout List Screen:
 
-<img align="center" width=180 src="https://user-images.githubusercontent.com/79296181/184086754-cdb2ebd6-3928-4f94-84eb-e9d3fe514ef7.gif" />
+<img align="center" width=180 src="https://user-images.githubusercontent.com/79296181/189302421-fc8c3df6-0505-4036-abc6-ddf58a360b38.gif" />
 
 - There are several tabs that list workouts of a specific group
   - One for all workouts and the rest are added by the user
@@ -47,8 +47,8 @@ Interesting Room database queries and setup are showcased
 ### Edit Workout Screen:
 
 <p align="left" style="display:flex">
-  <img align="center" width=180 src="https://user-images.githubusercontent.com/79296181/184086797-79e00b1e-50f7-4379-a67f-1ada49586ac3.gif" />
-  <img align="center" width=180 src="https://user-images.githubusercontent.com/79296181/184086816-a63c0f3b-8da1-4b41-9ffc-57605e3196c7.gif" />
+  <img align="center" width=180 src="https://user-images.githubusercontent.com/79296181/189302442-84a3806a-611f-4fb6-bcd0-ea21a88b614f.gif" />
+  <img align="center" width=180 src="https://user-images.githubusercontent.com/79296181/189302452-7955f6bc-caff-4bc0-b549-91d23086b099.gif" />
 </p>
 
 - Can change the group or add a new group
