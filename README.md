@@ -13,7 +13,7 @@ Interesting Room database queries and setup are showcased
 - Jetpack Navigation Component
 - View Pager 2 tabs
   - The tabs are mutable
-    - Meaning they can be dadded or removed at runtime
+    - Meaning they can be added or removed at runtime
     - And the name can be edited
 - Standard Bottom Sheet
 - SQLite Room local storage
@@ -22,7 +22,7 @@ Interesting Room database queries and setup are showcased
 - LiveData
   - Livedata Observers
   - Kotlin Flow
-- Kotlin coroutines (for synchronous excecutions)
+- Kotlin coroutines (for synchronous executions)
 - EditText values stored in Room immediately as user types
 - RecyclerView
   - Recyclerview inside a recyclerview (the list of sets inside the list of workouts)
@@ -38,7 +38,7 @@ Interesting Room database queries and setup are showcased
   - One for all workouts and the rest are added by the user
 - Each workout item displays the name, sets and reps.
   - The user can type in the value of the reps, weight, and the name of the workout
-    - Input is saved to the dabase as the user types (as the EditText text changes)
+    - Input is saved to the database as the user types (as the EditText text changes)
 - In edit mode, workouts can be clicked to be deleted or edited in the edit screen
 - Press the floating action button to add a new workout
 
