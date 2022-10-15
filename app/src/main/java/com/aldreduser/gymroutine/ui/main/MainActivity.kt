@@ -3,6 +3,7 @@ package com.aldreduser.gymroutine.ui.main
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import com.aldreduser.gymroutine.R
@@ -18,10 +19,18 @@ import com.aldreduser.gymroutine.R
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Log.d("main__TAG", "onCreate: called\nbundle = $savedInstanceState")
+
         setContentView(R.layout.activity_main)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.navigationBarColor = ContextCompat.getColor(this, R.color.black)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("main__TAG", "onDestroy: called")
     }
 }
