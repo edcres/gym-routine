@@ -92,7 +92,7 @@ class WorkoutListAdapter(
         private fun setUpSets(workout: Workout) {
             binding.setListRecycler.adapter = setsAdapter
             binding.setListRecycler.layoutManager = CustomLinearLayoutManager(context)
-            setsAdapter.submitList(DUMMY_SETS)
+//            setsAdapter.submitList(DUMMY_SETS)     // this introduces a bug which places the third set first.
             viewModel.getSetsOfWorkout(workout.id).observe(fragLifecycleOwner) { theseSets ->
                 setsAdapter.submitList(theseSets)
             }
